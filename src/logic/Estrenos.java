@@ -9,7 +9,6 @@ public class Estrenos {
 	private DataPelicula dp;
 	
 
-	
 	public LinkedList<Pelicula>getAll() {
 		return dp.listarPeliculas();
 	}	

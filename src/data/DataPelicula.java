@@ -167,4 +167,90 @@ public class DataPelicula {
 			}
 		}
 	}
+	
+	public LinkedList<Pelicula> buscarPorGenero (String genero) {
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		LinkedList<Pelicula>peliculas= new LinkedList<>();
+		
+		try {
+		
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where genero = ? ");   //TENDRIAMOS QUE USAR LIKE PERO NO FUNCIONA
+			stmt.setString(1, genero);
+			
+			rs = stmt.executeQuery();
+			
+			if(rs!=null ) {
+				while (rs.next()) {
+					Pelicula p = new Pelicula();
+					p.setCodigo(rs.getInt("codigo"));
+					p.setNombre(rs.getString("nombre"));
+					p.setDirector(rs.getString("director"));
+					p.setGenero(rs.getString("genero"));
+					p.setCalificacion(rs.getString("calificacion"));
+					p.setDuracion(rs.getDouble("duracion"));
+					p.setSinopsis(rs.getString("sinopsis"));
+					//p.setRecuperar_Foto_Usu(rs.getBytes("Portada"));
+					//p.setRecuperar_Foto_Usu(rs.getBytes("portada"));
+					
+					peliculas.add(p);
+				}}
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return peliculas; 
+	}
+	
+	public LinkedList<Pelicula> buscarPorEdad (String edad) {
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		LinkedList<Pelicula>peliculas= new LinkedList<>();
+		
+		try {
+		
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where calificacion = ? ");   
+			stmt.setString(1, edad);
+			
+			rs = stmt.executeQuery();
+			
+			if(rs!=null ) {
+				while (rs.next()) {
+					Pelicula p = new Pelicula();
+					p.setCodigo(rs.getInt("codigo"));
+					p.setNombre(rs.getString("nombre"));
+					p.setDirector(rs.getString("director"));
+					p.setGenero(rs.getString("genero"));
+					p.setCalificacion(rs.getString("calificacion"));
+					p.setDuracion(rs.getDouble("duracion"));
+					p.setSinopsis(rs.getString("sinopsis"));
+					//p.setRecuperar_Foto_Usu(rs.getBytes("Portada"));
+					//p.setRecuperar_Foto_Usu(rs.getBytes("portada"));
+					
+					peliculas.add(p);
+				}}
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return peliculas; 
+	}
+	
+	
 }

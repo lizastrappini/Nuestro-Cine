@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -36,7 +37,60 @@ public class Cartelera extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		 String todas= "todas";
+		 //String genero = request.getParameter("genero");
+		 
+		
+		while(!(request.getParameter("genero")==(null))) {
+			String genero = request.getParameter("genero");
+		 
+		if(!(genero.equals(todas)) ) {
+			
+			DataPelicula dp= new DataPelicula();
+			
+			LinkedList<Pelicula> peliculas = dp.buscarPorGenero(genero);
+			
+			request.setAttribute("listapeliculas", peliculas);
+			request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
+		}
+		
+		if(genero.equals(todas)) {
+			
+			DataPelicula dp= new DataPelicula();
+
+			LinkedList<Pelicula> peliculas = dp.listarPeliculas();
+			
+			request.setAttribute("listapeliculas", peliculas);
+			request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
+		}}
+		
+		while(!(request.getParameter("edad")==(null))) {
+			String edad = request.getParameter("edad");
+			 
+			if (!(edad.equals(todas))) {
+				DataPelicula dp= new DataPelicula();
+				
+				LinkedList<Pelicula> peliculas = dp.buscarPorEdad(edad);
+				
+				request.setAttribute("listapeliculas", peliculas);
+				request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
+			}
+			
+			if(edad.equals(todas)) {
+				DataPelicula dp= new DataPelicula();
+
+				LinkedList<Pelicula> peliculas = dp.listarPeliculas();
+				
+				request.setAttribute("listapeliculas", peliculas);
+				request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
+			}
+		}
+		
+		
+		 
+		
+		
 	}
 
 	/**
@@ -44,17 +98,8 @@ public class Cartelera extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//Pelicula per = new Pelicula();
-		DataPelicula dp= new DataPelicula();
 		
-		
-		LinkedList<Pelicula> peliculas = dp.listarPeliculas();
-		
-		
-		request.setAttribute("listapeliculas", peliculas);
-		request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
-		
-		//doGet(request, response);
+		 
 	}
 
 }
