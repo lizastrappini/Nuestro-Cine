@@ -24,8 +24,7 @@ public class DataPelicula {
 			stmt.setString(4, nuevaPeli.getCalificacion());
 			stmt.setDouble(5, nuevaPeli.getDuracion());
 			stmt.setString(6, nuevaPeli.getSinopsis());
-			//stmt.setBlob(7, nuevaPeli.getFoto_Usu());
-			stmt.setBlob(7, nuevaPeli.getFoto_Usu());
+			stmt.setString(7, nuevaPeli.getPortada());
 			
 			stmt.executeUpdate();
 			
@@ -66,8 +65,7 @@ public class DataPelicula {
 					p.setCalificacion(rs.getString("calificacion"));
 					p.setDuracion(rs.getDouble("duracion"));
 					p.setSinopsis(rs.getString("sinopsis"));
-					//p.setRecuperar_Foto_Usu(rs.getBytes("Portada"));
-					p.setRecuperar_Foto_Usu(rs.getBytes("portada"));
+					p.setPortada(rs.getString("portada"));
 					
 					peliculas.add(p);
 				}
@@ -175,7 +173,7 @@ public class DataPelicula {
 		
 		try {
 		
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where genero = ? ");   //TENDRIAMOS QUE USAR LIKE PERO NO FUNCIONA
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where genero = ? ");   
 			stmt.setString(1, genero);
 			
 			rs = stmt.executeQuery();
@@ -190,8 +188,8 @@ public class DataPelicula {
 					p.setCalificacion(rs.getString("calificacion"));
 					p.setDuracion(rs.getDouble("duracion"));
 					p.setSinopsis(rs.getString("sinopsis"));
-					//p.setRecuperar_Foto_Usu(rs.getBytes("Portada"));
-					//p.setRecuperar_Foto_Usu(rs.getBytes("portada"));
+					p.setPortada(rs.getString("portada"));
+					
 					
 					peliculas.add(p);
 				}}
@@ -232,8 +230,8 @@ public class DataPelicula {
 					p.setCalificacion(rs.getString("calificacion"));
 					p.setDuracion(rs.getDouble("duracion"));
 					p.setSinopsis(rs.getString("sinopsis"));
-					//p.setRecuperar_Foto_Usu(rs.getBytes("Portada"));
-					//p.setRecuperar_Foto_Usu(rs.getBytes("portada"));
+					p.setPortada(rs.getString("portada"));
+					
 					
 					peliculas.add(p);
 				}}

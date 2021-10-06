@@ -60,7 +60,7 @@
 <% for (Pelicula pel : lp){ %>
 	  <!-- Content section 1-->
         <div class="pelicula">
-          					<img class="infopelicula" id="fotopelicula" src="style/fotos/elconjuro.jpg"  />
+          					<img class="infopelicula" id="fotopelicula" src="<%=pel.getPortada()%>"  />
                             <h2 class="infopelicula" id="nombrepelicula"><%=pel.getNombre() %></h2>
                             <p class="infopelicula" id="sinopsis"><%=pel.getSinopsis() %></p>
                             <br>
