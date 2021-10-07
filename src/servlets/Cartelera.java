@@ -110,6 +110,7 @@ public class Cartelera extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
 		 
 		 
+				
 		 
 	}
 
