@@ -56,9 +56,9 @@ public class IniciarSesion extends HttpServlet {
 		
 		
 		request.getSession().setAttribute("usuario", cli);
-		request.setAttribute("cliente", cli);
+		
 		request.getRequestDispatcher("WEB-INF/CliManagement.jsp").forward(request, response);
-		response.getWriter().append("Bienvenido: ").append(cli.getNombre()).append(" ").append(cli.getApellido());
+		//response.getWriter().append("Bienvenido: ").append(cli.getNombre()).append(" ").append(cli.getApellido());
 	}
 
 }

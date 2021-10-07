@@ -250,5 +250,46 @@ public class DataPelicula {
 		return peliculas; 
 	}
 	
+	public LinkedList<Pelicula> listarEstrenos () {
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		LinkedList<Pelicula>peliculas= new LinkedList<>();
+		
+		try {
+		
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where month(fecha_estreno) = month(current_date()) ");   
+			rs = stmt.executeQuery();
+			
+			if(rs!=null ) {
+				while (rs.next()) {
+					Pelicula p = new Pelicula();
+					p.setCodigo(rs.getInt("codigo"));
+					p.setNombre(rs.getString("nombre"));
+					p.setDirector(rs.getString("director"));
+					p.setGenero(rs.getString("genero"));
+					p.setCalificacion(rs.getString("calificacion"));
+					p.setDuracion(rs.getDouble("duracion"));
+					p.setSinopsis(rs.getString("sinopsis"));
+					p.setPortada(rs.getString("portada"));
+					
+					
+					peliculas.add(p);
+				}}
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return peliculas; 
+	}
+	
+	
 	
 }

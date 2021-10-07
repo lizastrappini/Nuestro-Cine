@@ -10,6 +10,7 @@ import entities.Cliente;
 
 
 
+
 public class DataCliente {
 	public LinkedList<Cliente> getAll(){
 		Statement stmt=null;
@@ -52,19 +53,23 @@ public class DataCliente {
 	}
 	
 	public Cliente getByUser(Cliente cli) {
-		Cliente c=null;
+		Cliente c = null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select nombre from cliente where email=? and contraseña=?"
-					);
+					"select nombre from cliente where email=? and contraseña=?");
 			stmt.setString(1, cli.getEmail());
 			stmt.setString(2, cli.getContraseña());
 			rs=stmt.executeQuery();
+			
 			if(rs!=null && rs.next()) {
 				c=new Cliente();
+				c.setDni(rs.getString("dni"));
 				c.setNombre(rs.getString("nombre"));
+				c.setApellido(rs.getString("apellido"));
+				c.setEmail(rs.getString("email"));
+				c.setTelefono(rs.getString("telefono"));
 				//
 				
 			}

@@ -41,6 +41,7 @@ public class Cartelera extends HttpServlet {
 		 String todas= "todas";
 		 //String genero = request.getParameter("genero");
 		 
+		 
 		
 		while(!(request.getParameter("genero")==(null))) {
 			String genero = request.getParameter("genero");
@@ -98,7 +99,17 @@ public class Cartelera extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+				
+				String estrenos="true";
 		
+			 	DataPelicula dp= new DataPelicula();
+				
+				LinkedList<Pelicula> peliculas = dp.listarEstrenos();
+				request.setAttribute("estrenos", estrenos);
+				request.setAttribute("listapeliculas", peliculas);
+				request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
+		 
+		 
 		 
 	}
 
