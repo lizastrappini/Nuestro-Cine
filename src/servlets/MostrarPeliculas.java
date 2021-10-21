@@ -12,22 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import data.DataPelicula;
 import entities.Pelicula;
+import logic.LogicPelicula;
 
 //import logic.Estrenos;
 
 
 
 /**
- * Servlet implementation class Cartelera
+ * Servlet implementation class MostrarPelicula
  */
-@WebServlet({ "/Cartelera", "/cartelera" })
-public class Cartelera extends HttpServlet {
+@WebServlet({ "/Mostrarpeliculas", "/MostrarPeliculas" })
+public class MostrarPeliculas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Cartelera() {
+    public MostrarPeliculas() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,29 +39,27 @@ public class Cartelera extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		 String todas= "todas";
-		 //String genero = request.getParameter("genero");
-		 
-		 
+		
+		
+		
 		
 		while(!(request.getParameter("genero")==(null))) {
+			
 			String genero = request.getParameter("genero");
-		 
-		if(!(genero.equals(todas)) ) {
+			LogicPelicula lp = new LogicPelicula();
+		
+			if(!(genero.equals("todas")) ) {
 			
-			DataPelicula dp= new DataPelicula();
+			LinkedList<Pelicula> peliculas = lp.buscarPorGenero(genero);
 			
-			LinkedList<Pelicula> peliculas = dp.buscarPorGenero(genero);
-			
+
 			request.setAttribute("listapeliculas", peliculas);
 			request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
 		}
 		
-		if(genero.equals(todas)) {
-			
-			DataPelicula dp= new DataPelicula();
+		if(genero.equals("todas")) {
 
-			LinkedList<Pelicula> peliculas = dp.listarPeliculas();
+			LinkedList<Pelicula> peliculas = lp.getAll();
 			
 			request.setAttribute("listapeliculas", peliculas);
 			request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
@@ -68,20 +67,20 @@ public class Cartelera extends HttpServlet {
 		
 		while(!(request.getParameter("edad")==(null))) {
 			String edad = request.getParameter("edad");
-			 
-			if (!(edad.equals(todas))) {
-				DataPelicula dp= new DataPelicula();
+			LogicPelicula lp = new LogicPelicula();
+			
+			if (!(edad.equals("todas"))) {
 				
-				LinkedList<Pelicula> peliculas = dp.buscarPorEdad(edad);
+				
+				LinkedList<Pelicula> peliculas = lp.buscarPorEdad(edad);
 				
 				request.setAttribute("listapeliculas", peliculas);
 				request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
 			}
 			
-			if(edad.equals(todas)) {
-				DataPelicula dp= new DataPelicula();
-
-				LinkedList<Pelicula> peliculas = dp.listarPeliculas();
+			if(edad.equals("todas")) {
+				
+				LinkedList<Pelicula> peliculas = lp.getAll();
 				
 				request.setAttribute("listapeliculas", peliculas);
 				request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);

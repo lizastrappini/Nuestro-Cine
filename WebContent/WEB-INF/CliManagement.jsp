@@ -1,5 +1,6 @@
 <%@page import="com.mysql.cj.xdevapi.Session"%>
-<%@page import="entities.Cliente"%>
+<%@page import="entities.Persona"%>
+<%@page import="logic.Login"%>
 <%@page import="java.util.LinkedList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -13,17 +14,21 @@
     <meta name="author" content="">
     <meta name="generator" content="">
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
-
+	<meta http-equiv="refresh" content="1; index.html">
 	<title>Bienvenido</title>
-	<% 
-	Cliente cli = (Cliente)session.getAttribute("usuario");
+	<%
+	String name=null;
+	name = request.getAttribute("nombre").toString();
 	
 	%>
 </head>
-<body>
 
-	<h1>Bienvenido </h1>
-	<h1><%=cli.getNombre() %></h1>
-
+<body >
+<%=name%>
+<div class="fondo">
+<script >
+window.alert("Bienvenido <%=name%> a nuestro sitio web"); /* //muestra BIENVENIDO null ¿¿¿?? // */
+</script>
+</div>
 </body>
 </html>

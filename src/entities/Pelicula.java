@@ -1,4 +1,5 @@
 package entities;
+import java.util.Date;
 
 public class Pelicula {
 	private Integer codigo;
@@ -9,16 +10,9 @@ public class Pelicula {
 	private double duracion;
 	private String sinopsis;
 	private String portada;
+	private Date fecha_estreno;
 	
 	
-	
-	
-	@Override
-	public String toString() {
-		return "Pelicula [codigo=" + codigo + ", nombre=" + nombre + ", director=" + director + ", genero=" + genero
-				+ ", calificacion=" + calificacion + ", duracion=" + duracion + ", sinopsis=" + sinopsis + ", portada="
-				+ portada + "]";
-	}
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -68,6 +62,18 @@ public class Pelicula {
 	}
 	public void setPortada(String portada) {
 		this.portada = portada;
+	}
+	public Date getFecha_estreno() {
+		return fecha_estreno;
+	}
+	public void setFecha_estreno(Date fecha_estreno) {
+		this.fecha_estreno = fecha_estreno;
+	}
+	@Override
+	public String toString() {
+		return "Pelicula [codigo=" + codigo + ", nombre=" + nombre + ", director=" + director + ", genero=" + genero
+				+ ", calificacion=" + calificacion + ", duracion=" + duracion + ", sinopsis=" + sinopsis + ", portada="
+				+ portada + ", fecha_estreno=" + fecha_estreno + "]";
 	}
 	
 	

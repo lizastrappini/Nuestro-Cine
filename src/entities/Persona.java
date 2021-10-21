@@ -1,6 +1,6 @@
 package entities;
 
-public class Cliente {
+public class Persona {
 	private String dni;
 	private String nombre;
 	private String apellido;

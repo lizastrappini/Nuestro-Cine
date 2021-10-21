@@ -1,30 +1,26 @@
 package servlets;
 
 import java.io.IOException;
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import entities.Persona;
-import logic.Login;
-
+import entities.Pelicula;
+import logic.LogicPelicula;
 
 /**
- * Servlet implementation class IniciarSesion
+ * Servlet implementation class BuscarPelicula
  */
-@WebServlet({ "/IniciarSesion", "/iniciarSesion", "/iniciarsesion", "/Iniciarsesion" })
-public class IniciarSesion extends HttpServlet {
+@WebServlet({ "/BuscarPelicula", "/buscarPelicula", "/Buscarpeliculas" })
+public class BuscarPelicula extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IniciarSesion() {
+    public BuscarPelicula() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,26 +37,32 @@ public class IniciarSesion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Persona per = new Persona();
-		Login ctrl = new Login();
-		String nombre=null;
-		//String email = request.getParameter("email");
-		//String password = request.getParameter("contraseña");
+		Pelicula pel = new Pelicula();
+		LogicPelicula lp = new LogicPelicula();
 		
-		//validar email y password
+		String nombre = request.getParameter("nombre");
 		
-		per.setEmail(request.getParameter("email"));
-		per.setContraseña(request.getParameter("contraseña"));
 		
-		per=ctrl.validate(per);
-		//LinkedList<Persona> personas = ctrl.getAll();
-		nombre = ctrl.buscarNombre(per);
-
-		request.setAttribute("nombre", nombre);
-		//request.getSession().setAttribute("usuario", per);
-		//request.setAttribute("listaPersonas", personas);
-		//request.setAttribute("usuario", per);
-		request.getRequestDispatcher("WEB-INF/CliManagement.jsp").forward(request, response);
+		//pel.setNombre(nombre);
+		
+		pel=lp.buscar(nombre);
+		
+		if ( !(pel==null) ) {
+			String bandera1 = "encontrada";
+			request.setAttribute("bandera1", bandera1);
+			request.setAttribute("pelicula", pel);
+			request.getRequestDispatcher("WEB-INF/EditarPelicula.jsp").forward(request, response);
+			
+		}   //no esta encontrando la pelicula 
+		
+		
+		
+		
+		
+	
+		
+//		} else { System.out.println("no existe la pelicula");}
+		
 		
 		
 	}
