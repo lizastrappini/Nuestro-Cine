@@ -57,10 +57,10 @@ public class DataCliente {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select nombre from cliente where email=? and contraseña=?"
+					"select nombre from cliente where email=? and contraseï¿½a=?"
 					);
 			stmt.setString(1, cli.getEmail());
-			stmt.setString(2, cli.getContraseña());
+			stmt.setString(2, cli.getContrasena());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				c=new Cliente();
@@ -126,14 +126,14 @@ public class DataCliente {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into cliente(dni,nombre, apellido, email, contraseña,edad, telefono ) values(?,?,?,?,?,?,?)",
+							"insert into cliente(dni,nombre, apellido, email, contraseï¿½a,edad, telefono ) values(?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, c.getDni());
 			stmt.setString(2, c.getNombre());
 			stmt.setString(3, c.getApellido());
 			stmt.setString(4, c.getEmail());
-			stmt.setString(5, c.getContraseña());
+			stmt.setString(5, c.getContrasena());
 			stmt.setString(6, c.getTelefono());
 			stmt.executeUpdate();
 			

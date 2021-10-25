@@ -1,29 +1,27 @@
 package servlets;
 
 import java.io.IOException;
-
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import entities.Cliente;
-import logic.Login;
-
+import data.DataFuncion;
+import entities.Funcion;
 
 /**
- * Servlet implementation class IniciarSesion
+ * Servlet implementation class Funciones
  */
-@WebServlet({ "/IniciarSesion", "/iniciarSesion", "/iniciarsesion", "/Iniciarsesion" })
-public class IniciarSesion extends HttpServlet {
+@WebServlet("/Funciones")
+public class Funciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IniciarSesion() {
+    public Funciones() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,24 +39,18 @@ public class IniciarSesion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Cliente cli = new Cliente();
-		Login ctrl = new Login();
+		
+		Integer cod=Integer.parseInt(request.getParameter("codigo"));
+		Funcion fun = new Funcion();
+		fun.setCodigo_pelicula(cod);
+		DataFuncion df= new DataFuncion();
 		
 		
-		String email = request.getParameter("email");
-		String contrasena = request.getParameter("contrase�a");
-		//validar email y password
-		
-		cli.setEmail(email);
-		cli.setContrasena(contrasena);
-		
-		cli=ctrl.validate(cli);
+		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
 		
 		
-		request.getSession().setAttribute("usuario", cli);
-		request.setAttribute("cliente", cli);
-		request.getRequestDispatcher("WEB-INF/CliManagement.jsp").forward(request, response);
-		response.getWriter().append("Bienvenido: ").append(cli.getNombre()).append(" ").append(cli.getApellido());
+		request.setAttribute("listafunciones", funciones);
+		request.getRequestDispatcher("WEB-INF/FunManagement.jsp").forward(request, response);
 	}
 
 }

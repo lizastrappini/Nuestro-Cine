@@ -5,7 +5,7 @@ public class Cliente {
 	private String nombre;
 	private String apellido;
 	private String email;
-	private String contraseña;
+	private String contrasena;
 	private Integer edad;
 	private String telefono;
 	
@@ -28,11 +28,11 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 	public Integer getEdad() {
 		return edad;
