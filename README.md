@@ -10,7 +10,7 @@
 			
 			-en cliente agrego atributo habilitado (tinyint) para ver si es empleado o no 
 			
-			-cambio atributo contraseña por password
+			
 	
 	-login funcionando ( usando variables de sesion )
 	
