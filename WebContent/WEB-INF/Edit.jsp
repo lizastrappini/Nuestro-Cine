@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page import="entities.Pelicula"%>
 <%@page import="java.time.*"%>
 <%@page import="java.time.format.*"%>
@@ -19,9 +19,9 @@ DateTimeFormatter isoFecha = DateTimeFormatter.ISO_LOCAL_DATE;
 	<h1>Edite la pelicula</h1>
 	<form class="addPelicula" action="ActualizarPelicula" method="post" >
 	<label for="inputNombre" >Nombre de la pelicula</label>
-    <input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text" value="<%-- <%=peli.getNombre()%> --%>">
+    <input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text" value="<%= peli.getNombre() %>">
     <label>Elegir genero:
-			<input list="generos" name="genero" value="<%-- <%=peli.getGenero()%> --%>"  ></label>
+			<input list="generos" name="genero" value="<%= peli.getGenero() %>"  ></label>
 			<datalist id="generos">
 			<option value="romance">Romance</option>
 			<option value="terror">Terror</option>
@@ -29,7 +29,7 @@ DateTimeFormatter isoFecha = DateTimeFormatter.ISO_LOCAL_DATE;
 			<option value="todas">Comedia</option>
 			</datalist>
 	<label>Elegir calificacion:
-			<input list="edades" name="edad" value="<%-- <%=peli.getCalificacion()%> --%>" ></label>
+			<input list="edades" name="edad" value="<%= peli.getCalificacion() %>" ></label>
 			<datalist id="edades">
 			<option value="+3">+3</option>
 			<option value="+7">+7</option>
@@ -38,23 +38,24 @@ DateTimeFormatter isoFecha = DateTimeFormatter.ISO_LOCAL_DATE;
 			</datalist>
 	<br>
 	<label for="inputSinopsis" >Sinopsis de la pelicula</label>
-    <input id="inputSinopsis" name="sinopsis" class="form-control" placeholder="sinopsis" required type="text" value="<%-- <%=peli.getSinopsis()%> --%>">
+    <input id="inputSinopsis" name="sinopsis" class="form-control" placeholder="sinopsis" required type="text" value="<%= peli.getSinopsis() %>">
     
     <label for="inputDirector" >Director de la pelicula</label>
-    <input id="inputDirector" name= "director" class="form-control" placeholder="director" required type="text" value="<%-- <%=peli.getDirector()%> --%>">
+    <input id="inputDirector" name= "director" class="form-control" placeholder="director" required type="text" value="<%= peli.getDirector() %>">
     
     <label for="inputDuracion" >Duracion de la pelicula</label>
-    <input id="inputDuracion" name="duracion" class="form-control" placeholder="duracion" required type="text" value="<%-- <%=peli.getDuracion()%> --%>">
+    <input id="inputDuracion" name="duracion" class="form-control" placeholder="duracion" required type="text" value="<%= peli.getDuracion() %>">
     
     <label for="inputPortada" >Portada de la pelicula</label>
-    <input id="inputPortada" name="portada" class="form-control" placeholder="url de la portada" required type="text" value="<%-- <%=peli.getPortada()%> --%>">
+    <input id="inputPortada" name="portada" class="form-control" placeholder="url de la portada" required type="text" value="<%= peli.getPortada() %>">
     
     <label for="inputEstreno" >Fecha de estreno</label>
     <input type="date" id="inputestreno" name="estreno"
        value=""
-       min="1950-01-01" max="<%=fecha.format(isoFecha)%>"  value="<%-- <%=peli.getFecha_estreno()%> --%>">
+       min="1950-01-01" max="<%=fecha.format(isoFecha)%>"  value="<%= peli.getFecha_estreno() %>">
        
     <br>
+    <%-- <input type="hidden" name="codigo" value="<%= peli.getCodigo() %>"> --%>
     <button class="btn btn-lg btn-primary btn-block" type="submit" >EDITAR</button>
 	</form>
 </body>

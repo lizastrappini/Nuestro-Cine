@@ -5,9 +5,11 @@ public class Persona {
 	private String nombre;
 	private String apellido;
 	private String email;
-	private String contraseña;
+	private String password;
 	private Integer edad;
 	private String telefono;
+	private Integer habilitado;
+	
 	
 	public String getTelefono() {
 		return telefono;
@@ -28,11 +30,11 @@ public class Persona {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getPassword() {
+		return password;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public Integer getEdad() {
 		return edad;
@@ -52,6 +54,18 @@ public class Persona {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+	@Override
+	public String toString() {
+		return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+				+ ", password=" + password + ", edad=" + edad + ", telefono=" + telefono + "]";
+	}
+	public Integer getHabilitado() {
+		return habilitado;
+	}
+	public void setHabilitado(Integer habilitado) {
+		this.habilitado = habilitado;
+	}
+	
 	
 	
 	

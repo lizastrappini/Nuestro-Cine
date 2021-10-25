@@ -71,6 +71,7 @@ public class Pelicula {
 	}
 	@Override
 	public String toString() {
+		
 		return "Pelicula [codigo=" + codigo + ", nombre=" + nombre + ", director=" + director + ", genero=" + genero
 				+ ", calificacion=" + calificacion + ", duracion=" + duracion + ", sinopsis=" + sinopsis + ", portada="
 				+ portada + ", fecha_estreno=" + fecha_estreno + "]";

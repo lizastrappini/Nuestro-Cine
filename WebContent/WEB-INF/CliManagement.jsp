@@ -2,8 +2,8 @@
 <%@page import="entities.Persona"%>
 <%@page import="logic.Login"%>
 <%@page import="java.util.LinkedList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,22 +13,25 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="generator" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
-	<meta http-equiv="refresh" content="1; index.html">
+	<meta http-equiv="refresh" content="0.5; index.jsp">
+	<link rel="shortcut icon" href="https://img.icons8.com/ios-glyphs/30/ffffff/cinema---v1.png">
 	<title>Bienvenido</title>
 	<%
-	String name=null;
-	name = request.getAttribute("nombre").toString();
-	
+
+	Persona per = (Persona) session.getAttribute("usuario");
 	%>
 </head>
 
 <body >
-<%=name%>
+
 <div class="fondo">
+
 <script >
-window.alert("Bienvenido <%=name%> a nuestro sitio web"); /* //muestra BIENVENIDO null ¿¿¿?? // */
+window.alert("Bienvenido <%=per.getNombre()%> a nuestro sitio web")
 </script>
+<%
+System.out.println(per.getNombre());
+%>
 </div>
 </body>
 </html>

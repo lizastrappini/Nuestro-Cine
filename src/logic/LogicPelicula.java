@@ -27,7 +27,7 @@ public class LogicPelicula {
 		return dpel.buscarPorEdad(genero);
 	}	
 	
-	public Pelicula buscar(String nombre) {
+	public LinkedList<Pelicula> buscar(String nombre) {
 		return dpel.buscarPorNombre(nombre);
 	}
 	

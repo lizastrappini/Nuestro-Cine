@@ -8,22 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
-import entities.Pelicula;
-import logic.LogicPelicula;
+import data.DataFuncion;
+import entities.Funcion;
 
 /**
- * Servlet implementation class BuscarPelicula
+ * Servlet implementation class Funciones
  */
-@WebServlet({ "/BuscarPelicula", "/buscarPelicula", "/Buscarpeliculas" })
-public class BuscarPelicula extends HttpServlet {
+@WebServlet("/Funciones")
+public class Funciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BuscarPelicula() {
+    public Funciones() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,38 +38,19 @@ public class BuscarPelicula extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Pelicula pel = new Pelicula();
-		LogicPelicula lp = new LogicPelicula();
+		// TODO Auto-generated method stub
 		
-		String nombre = request.getParameter("nombre").toString();
-		
-		
-		//pel.setNombre(nombre);
-		
-		//pel=lp.buscar(nombre);
-		
-		LinkedList<Pelicula> pelis = lp.buscar(nombre);
-		
-		if ( !(pelis==null) ) {
-			String bandera1 = "encontrada";
-			request.setAttribute("bandera1", bandera1);
-			request.setAttribute("peliculas", pelis);
-			request.getRequestDispatcher("WEB-INF/EditarPelicula.jsp").forward(request, response);
-			for (Pelicula peli : pelis){
-				System.out.println(peli.getNombre());
-			}
-		}   
+		Integer cod=Integer.parseInt(request.getParameter("codigo"));
+		Funcion fun = new Funcion();
+		fun.setCodigo_pelicula(cod);
+		DataFuncion df= new DataFuncion();
 		
 		
+		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
 		
 		
-		
-	
-		
-//		
-		
-		
-		
+		request.setAttribute("listafunciones", funciones);
+		request.getRequestDispatcher("WEB-INF/FunManagement.jsp").forward(request, response);
 	}
 
 }

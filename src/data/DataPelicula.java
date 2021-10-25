@@ -337,11 +337,11 @@ public class DataPelicula {
 	}
 	
 	
-	public Pelicula buscarPorNombre (String nombre) {
+	public LinkedList<Pelicula> buscarPorNombre (String nombre) {
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
-		//LinkedList<Pelicula>peliculas= new LinkedList<>();
-		Pelicula p = new Pelicula();
+		LinkedList<Pelicula>peliculas= new LinkedList<>();
+		
 		
 		try {
 		
@@ -352,7 +352,7 @@ public class DataPelicula {
 			
 			if(rs!=null ) {
 				while (rs.next()) {
-					
+					Pelicula p = new Pelicula();
 					p.setCodigo(rs.getInt("codigo"));
 					p.setNombre(rs.getString("nombre"));
 					p.setDirector(rs.getString("director"));
@@ -362,7 +362,7 @@ public class DataPelicula {
 					p.setSinopsis(rs.getString("sinopsis"));
 					p.setPortada(rs.getString("portada"));
 					
-					
+					peliculas.add(p);
 					
 				}}
 			
@@ -377,7 +377,7 @@ public class DataPelicula {
 				e.printStackTrace();
 			}
 		}
-		return p; 
+		return peliculas; 
 	}
 	
 	

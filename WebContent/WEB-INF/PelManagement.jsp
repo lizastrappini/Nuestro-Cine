@@ -4,8 +4,8 @@
 <%@page import="java.time.Month" %>
 <%@page import="java.util.Locale" %>
 <%@page import="java.time.format.TextStyle" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -85,7 +85,10 @@
                             <p class="infopelicula"> <b>Director :</b> <%=pel.getDirector() %></p>
                             <p class="infopelicula"> <b>Calificacion : </b><%=pel.getCalificacion() %></p>
                             <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %></p>
-                            <button class="infopelicula" id="sacarentrada"  >  Comprar   </button>
+                            <form class="infopelicula" action="Funciones" method="post">
+                            	<input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
+                            	<button class="button" id="sacarentrada">  Comprar   </button>
+                            </form>
                             
                             
         </div>

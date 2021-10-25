@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@page import="java.time.*"%>
     <%@page import="java.time.format.*"%>
 <%@page import="entities.Pelicula"%>
@@ -26,24 +26,16 @@
 		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <%  
-	LocalDateTime fecha = LocalDateTime.now();
-	DateTimeFormatter isoFecha = DateTimeFormatter.ISO_LOCAL_DATE;
-	String bandera1 = null;
+	
+	String bandera1 = "";
+	
 	 if ( !(request.getAttribute("bandera1")==(null)) ){
 		 bandera1 = request.getAttribute("bandera1").toString();
 	}
-	String bandera2=null;
-	if ( !(request.getAttribute("bandera2")==(null)) ){
-		 bandera2 = request.getAttribute("bandera2").toString();
-	} 
+	 
+		 LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
 	
-	/* if( !(request.getAttribute("pelicula")==null)){
-		Pelicula peli = new Pelicula();
-		peli = (Pelicula)request.getAttribute("pelicula");
-		
-	}
-	 */
-	 LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
+	 
     %>
 </head>
 <body>
@@ -53,14 +45,21 @@
 	%>
 	
 	
-	<form class="addPelicula" action="BuscarPelicula" method="post" >
-	<div>
+	
+	
 	<h2>Ingrese nombre de la pelicula</h2>
 	<label for="inputNombre" >Nombre de la pelicula</label>
+	<form class="addPelicula" action="BuscarPelicula" method="post" >
     <input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">
-    <button class="btn btn-lg btn-primary btn-block" type="submit" >BUSCAR</button>
-    </div>
+   
+    
+    <button class="btn btn-lg btn-primary btn-block" >BUSCAR</button>
+
     </form>
+    
+    
+    
+    
 	<%} %>
 	
 	
@@ -69,12 +68,16 @@
 	
 		<h2> Datos de la pelicula: </h2>
 		
-		<% for (Pelicula pel : lp) {%>		
-							 <p class="infopelicula" id="nombrepelicula"><%=pel.getNombre() %></p>
-                            <p class="infopelicula" id="sinopsis"><%=pel.getSinopsis() %></p>
-                            <p class="infopelicula"> <b>Director :</b> <%=pel.getDirector() %></p>
-                            <p class="infopelicula"> <b>Calificacion : </b><%=pel.getCalificacion() %></p>
-                            <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %></p>
+			<% for (Pelicula pel : lp){ %>
+			
+			<div class="peliculas">
+							<p class="infopelicula" id="nombrepelicula"><%= pel.getNombre() %></p>
+                            <p class="infopelicula" id="sinopsis"><%= pel.getSinopsis() %></p>
+                            <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
+                            <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
+                            <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
+                            <button class="pelicula" id="editar">  Editar   </button>
+              </div>
 	<%}}%> 
 	
 	

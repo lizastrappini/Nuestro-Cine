@@ -1,29 +1,23 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.LinkedList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import entities.Pelicula;
-import logic.LogicPelicula;
-
 /**
- * Servlet implementation class BuscarPelicula
+ * Servlet implementation class SignOut
  */
-@WebServlet({ "/BuscarPelicula", "/buscarPelicula", "/Buscarpeliculas" })
-public class BuscarPelicula extends HttpServlet {
+@WebServlet({ "/SignOut", "/signout", "/signOut", "/Signout" })
+public class SignOut extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BuscarPelicula() {
+    public SignOut() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,38 +34,9 @@ public class BuscarPelicula extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Pelicula pel = new Pelicula();
-		LogicPelicula lp = new LogicPelicula();
-		
-		String nombre = request.getParameter("nombre").toString();
-		
-		
-		//pel.setNombre(nombre);
-		
-		//pel=lp.buscar(nombre);
-		
-		LinkedList<Pelicula> pelis = lp.buscar(nombre);
-		
-		if ( !(pelis==null) ) {
-			String bandera1 = "encontrada";
-			request.setAttribute("bandera1", bandera1);
-			request.setAttribute("peliculas", pelis);
-			request.getRequestDispatcher("WEB-INF/EditarPelicula.jsp").forward(request, response);
-			for (Pelicula peli : pelis){
-				System.out.println(peli.getNombre());
-			}
-		}   
-		
-		
-		
-		
-		
-	
-		
-//		
-		
-		
-		
+		// TODO Auto-generated method stub
+		request.getSession().invalidate();
+		request.getRequestDispatcher("WEB-INF/index.jsp");
 	}
 
 }
