@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class SignOut
@@ -26,8 +27,13 @@ public class SignOut extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		 HttpSession sesion = request.getSession(true);
+			//Cerrar sesion
+	        sesion.invalidate();
+	        
+	        //Redirecciono a index.jsp
+	        response.sendRedirect("index.jsp");
 	}
 
 	/**
@@ -35,8 +41,6 @@ public class SignOut extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getSession().invalidate();
-		request.getRequestDispatcher("WEB-INF/index.jsp");
 	}
 
 }

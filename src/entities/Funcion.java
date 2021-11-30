@@ -30,6 +30,9 @@ public class Funcion {
 	public void setNumero_sala(Integer numero_sala) {
 		this.numero_sala = numero_sala;
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern(dateTimeFormat);

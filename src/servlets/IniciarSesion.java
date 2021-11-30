@@ -68,8 +68,9 @@ public class IniciarSesion extends HttpServlet {
 		sesion.setAttribute("nombre",per.getNombre());
 		
 		request.getSession().setAttribute("usuario", per);
-		System.out.println(per.getNombre());
+
 		request.setAttribute("emp", empleado);
+		
 		request.getRequestDispatcher("WEB-INF/CliManagement.jsp").forward(request, response);
 		 
 		 
