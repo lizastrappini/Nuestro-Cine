@@ -3,34 +3,34 @@ package logic;
 import entities.*;
 
 
-import data.DataCliente;
+import data.DataPersona;
 
 import java.util.LinkedList;
 
 public class Login {
 	
-	private DataCliente dp;
-	
+	private DataPersona dp;
 	
 	public Login() {
-		dp = new DataCliente();
+		dp = new DataPersona();
 		
 	}
-	public LinkedList<Cliente>getAll() {
+	public LinkedList<Persona>getAll() {
 		return dp.getAll();
 	}
-	public Cliente validate(Cliente cli) {
-		return dp.getByUser(cli);
+	
+	public Persona validate(Persona p) {
+		return dp.getByUser(p);
 	}
 	//public Cliente getByDocumento(Cliente cli) {
 		//return dp.getByDocumento(cli);
 	//}
-	public LinkedList<Cliente> search(Cliente cli) {
-		return dp.search(cli);
+	public Persona search(Persona per) {
+		return dp.search(per);
 	}
 	
-	public Cliente newCli(Cliente cli) {
-		return dp.add(cli);
+	public Persona newCli(Persona per) {
+		return dp.add(per);
 	}
 	//public void edit(Cliente cli) {
 	//	dp.edit(cli);
@@ -38,6 +38,10 @@ public class Login {
 	//public void delete(Cliente cli) {
 		//dp.delete(cli);
 	//}
+	
+	public String buscarNombre(Persona per) {
+		return dp.buscaNombre(per);
+	}
 	
 }
 

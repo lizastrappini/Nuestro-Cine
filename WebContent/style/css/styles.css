@@ -118,26 +118,27 @@ h1, .h1 {
 }
 
 
-body{
+/* body{
 	background: linear-gradient(to bottom, #ff6a00, white 80%, #ffc107);
-}
-
+} */
 
 .pelicula{
+
 	z-index:2;
 	background-color:white;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	margin-left: 20px;
-	margin-bottom:50px;
-	margin-top:50px;
+	margin-bottom:10px;
+	margin-top:10px;
 	margin-right:20px;
 	box-shadow: #adb5bd 2px 2px 10px 3px;
-	
+	border-radius: 1.2em;
 }
 
 .infopelicula{
 	display: block;
+	margin-left:5px;
 	position:center;
 	font-family:"Segoe UI";
 	
@@ -145,8 +146,10 @@ body{
 }
 #nombrepelicula{
 	font-family: 'Bebas Neue', cursive;
+	margin-left:10px;
 }
 #sinopsis{
+	margin-top:0px;
 	font-family: 'Hind', sans-serif;
 }
 #fotopelicula{
@@ -157,6 +160,60 @@ body{
 	
 	
 }
+.funcion{
+
+	z-index:2;
+	background-color:white;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-left: 20px;
+	margin-bottom:10px;
+	margin-top:10px;
+	margin-right:20px;
+	box-shadow: #adb5bd 2px 2px 10px 3px;
+	border-radius: 1.2em;
+}
+
+.infofuncion{
+	display: block;
+	margin-left:5px;
+	position:center;
+	font-family:"Segoe UI";
+	
+	
+}
+
+
+
+
+.titulo_estrenos{
+	margin-top:50px;
+	margin-bottom:20px;
+	margin-left:20px;
+	font-family: 'Anton', sans-serif;
+}
+
+.filtros{
+	position:flex;
+	margin-top:300px;
+	margin-left:50px;
+	margin-bottom:0;
+	flex-direction: row;
+	float:left;
+	padding-right:50;
+	padding-left:50px;
+	
+	
+}
+
+.addPelicula{
+	position:flex;
+	flex-direction: row;
+	margin-top:10px;
+	margin-left:5px;
+	font-family: 'Hind', sans-serif;
+}
+
 
 #sacarentrada {
 	margin-left: 10px;
@@ -191,8 +248,12 @@ body{
 }
 	
 .fondo{
-	background-color: #ffffff;
+	background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+	 min-height: 100vh;
+	 
 }
+
+
 
 .form-signin{
 	margin-left: 20px;
@@ -202,7 +263,52 @@ body{
 	font-family: 'Hind', sans-serif;
 }
 
+.boton_volver{
+	margin-left:50px;
+	font-family: 'Hind', sans-serif;
+	font-weight: 100;
+	color:#000000;
+}
 
+.menu{
+	justify-content:center;
+	align-items:center;
+	padding-left:100px;
+	margin-left:250px;
+	margin-top: 70px;
+
+}
+
+.menu ul {
+		display: flex;
+		/*justify-content:center;*/
+		/*align-items:center;*/
+		padding: 0;
+		margin:0;
+		list-style: none;
+		
+	}
+	.menu a {
+		display: flex;
+		
+		padding: 2em;
+		background-color: #F9B53C;
+		text-decoration: none;
+		color: #191C26;
+	}
+	.menu a:hover {
+		background-color: #CC673B;
+	}
+	.menu ul li ul {
+		display: none;
+	}
+	.menu ul li a:hover + ul, .menu ul li ul:hover {
+		display: block;
+	}
+ 
+
+ 
+ 
 
 h2, .h2 {
   font-size: calc(1.325rem + 0.9vw);
@@ -725,6 +831,7 @@ progress {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+  
 }
 
 @media (min-width: 576px) {
@@ -4591,8 +4698,8 @@ textarea.form-control-lg {
 
 .card {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: block;
+  flex-direction: row;
   min-width: 0;
   word-wrap: break-word;
   background-color: #fff;
@@ -4626,6 +4733,7 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding: 1rem 1rem;
+ 
 }
 
 .card-title {
@@ -11392,9 +11500,9 @@ html {
 header.masthead {
   position: relative;
   overflow: hidden;
-  padding-top: calc(7rem + 72px);
+  padding-top: 100px;
   padding-bottom: 7rem;
-  background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%);
+  /*background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);*/
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;

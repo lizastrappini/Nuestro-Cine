@@ -8,8 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import entities.Cliente;
+import entities.Persona;
 import logic.Login;
 
 
@@ -40,25 +41,40 @@ public class IniciarSesion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Cliente cli = new Cliente();
+		
+		boolean empleado=false;
+		
+		if( request.getSession().getAttribute("usuario")==null) { 
+		HttpSession sesion = request.getSession();
+		Persona per = new Persona();
 		Login ctrl = new Login();
 		
-		
 		String email = request.getParameter("email");
-		String contraseña = request.getParameter("contraseña");
+		String password = request.getParameter("pass");
+		
 		//validar email y password
 		
-		cli.setEmail(email);
-		cli.setContraseña(contraseña);
-		
-		cli=ctrl.validate(cli);
+		per.setEmail(email);
+		per.setPassword(password);
 		
 		
-		request.getSession().setAttribute("usuario", cli);
-		request.setAttribute("cliente", cli);
+		per=ctrl.validate(per);
+		
+		if ( per.getHabilitado() == 1) {
+			empleado=true;
+		} else { empleado = false;}
+	
+		
+		sesion.setAttribute("nombre",per.getNombre());
+		
+		request.getSession().setAttribute("usuario", per);
+		System.out.println(per.getNombre());
+		request.setAttribute("emp", empleado);
 		request.getRequestDispatcher("WEB-INF/CliManagement.jsp").forward(request, response);
-		response.getWriter().append("Bienvenido: ").append(cli.getNombre()).append(" ").append(cli.getApellido());
-	}
+		 
+		 
+	} 
+		
+}}
 
-}
+

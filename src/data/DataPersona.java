@@ -6,15 +6,50 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 
-import entities.Cliente;
+
+import entities.Persona;
 
 
 
-public class DataCliente {
-	public LinkedList<Cliente> getAll(){
+
+public class DataPersona {
+	
+	
+	public String buscaNombre (Persona per) {
+		//Persona p=null;
+		String n = null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select nombre from cliente where dni=?;"
+					);
+			stmt.setString(1, per.getDni());
+			rs=stmt.executeQuery();
+			if(rs!=null /*&& rs.next()*/) { 
+				n=(rs.getString("nombre"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return n;
+	}
+	
+	public LinkedList<Persona> getAll(){
 		Statement stmt=null;
 		ResultSet rs=null;
-		LinkedList<Cliente> clis= new LinkedList<>();
+		LinkedList<Persona> pers= new LinkedList<>();
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
@@ -22,15 +57,15 @@ public class DataCliente {
 			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {
-					Cliente c=new Cliente();
-					c.setDni(rs.getString("dni"));
-					c.setNombre(rs.getString("nombre"));
-					c.setApellido(rs.getString("apellido"));
-					c.setEmail(rs.getString("email"));
-					c.setEdad(rs.getInt("edad"));
-					c.setTelefono(rs.getString("telefono"));
+					Persona p=new Persona();
+					p.setDni(rs.getString("dni"));
+					p.setNombre(rs.getString("nombre"));
+					p.setApellido(rs.getString("apellido"));
+					p.setEmail(rs.getString("email"));
+					p.setEdad(rs.getInt("edad"));
+					p.setTelefono(rs.getString("telefono"));
 					
-					clis.add(c);
+					pers.add(p);
 				}
 			}
 			
@@ -48,29 +83,33 @@ public class DataCliente {
 		}
 		
 		
-		return clis;
+		return pers;
 	}
 	
-	public Cliente getByUser(Cliente cli) {
-		Cliente c=null;
+	public Persona getByUser(Persona per) {
+		Persona p=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select nombre from cliente where email=? and contraseña=?"
+					"select nombre,apellido,dni,email,telefono,edad,habilitado from cliente where (email=? and contraseña=?);"
 					);
-			stmt.setString(1, cli.getEmail());
-			stmt.setString(2, cli.getContraseña());
+			stmt.setString(1, per.getEmail());
+			stmt.setString(2, per.getPassword());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				c=new Cliente();
-				c.setNombre(rs.getString("nombre"));
-				//
-				
+				p=new Persona();
+				p.setNombre(rs.getString("nombre"));
+				p.setApellido(rs.getString("apellido"));
+				p.setDni(rs.getString("dni"));
+				p.setEmail(rs.getString("email"));
+				p.setTelefono(rs.getString("telefono"));
+				p.setEdad(rs.getInt("edad"));
+				p.setHabilitado(rs.getInt("habilitado"));
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
@@ -81,30 +120,28 @@ public class DataCliente {
 			}
 		}
 		
-		return c;
+		return p;
 	}
 	
-	public LinkedList<Cliente> search(Cliente cli) {
-		LinkedList<Cliente> clis= new LinkedList<>();
+	public Persona search(Persona per) {
+		Persona p = null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"select dni,nombre,apellido,email,telefono from cliente where dni=?");
-			stmt.setString(1, cli.getDni());
+			stmt.setString(1, per.getDni());
 			rs=stmt.executeQuery();
+			
 			if(rs!=null) {
-				while(rs.next()) {
-					Cliente c = new Cliente();
-					c.setDni(rs.getString("dni"));
-					c.setNombre(rs.getString("nombre"));
-					c.setApellido(rs.getString("apellido"));
-					c.setEmail(rs.getString("email"));
-					c.setTelefono(rs.getString("telefono"));
+					p = new Persona();
+					p.setDni(rs.getString("dni"));
+					p.setNombre(rs.getString("nombre"));
+					p.setApellido(rs.getString("apellido"));
+					p.setEmail(rs.getString("email"));
+					p.setTelefono(rs.getString("telefono"));
 
-					clis.add(c);
-				
-				}
+					
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -117,10 +154,10 @@ public class DataCliente {
 				e.printStackTrace();
 			}
 		}
-		return clis;
+		return p;
 	}
 	
-	public Cliente add(Cliente c) {
+	public Persona add(Persona p) {
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
 		try {
@@ -129,12 +166,12 @@ public class DataCliente {
 							"insert into cliente(dni,nombre, apellido, email, contraseña,edad, telefono ) values(?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
-			stmt.setString(1, c.getDni());
-			stmt.setString(2, c.getNombre());
-			stmt.setString(3, c.getApellido());
-			stmt.setString(4, c.getEmail());
-			stmt.setString(5, c.getContraseña());
-			stmt.setString(6, c.getTelefono());
+			stmt.setString(1, p.getDni());
+			stmt.setString(2, p.getNombre());
+			stmt.setString(3, p.getApellido());
+			stmt.setString(4, p.getEmail());
+			stmt.setString(5, p.getPassword());
+			stmt.setString(6, p.getTelefono());
 			stmt.executeUpdate();
 			
 			keyResultSet=stmt.getGeneratedKeys();
@@ -153,7 +190,7 @@ public class DataCliente {
             	e.printStackTrace();
             }
 		}
-		return c;
+		return p;
 	}
 	
 }

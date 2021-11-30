@@ -24,8 +24,7 @@ public class DataPelicula {
 			stmt.setString(4, nuevaPeli.getCalificacion());
 			stmt.setDouble(5, nuevaPeli.getDuracion());
 			stmt.setString(6, nuevaPeli.getSinopsis());
-			//stmt.setBlob(7, nuevaPeli.getFoto_Usu());
-			stmt.setBlob(7, nuevaPeli.getFoto_Usu());
+			stmt.setString(7, nuevaPeli.getPortada());
 			
 			stmt.executeUpdate();
 			
@@ -47,6 +46,8 @@ public class DataPelicula {
 				e.printStackTrace();
 			}
 		}
+		
+		
 	}
 
 	public LinkedList<Pelicula>listarPeliculas(){
@@ -66,8 +67,7 @@ public class DataPelicula {
 					p.setCalificacion(rs.getString("calificacion"));
 					p.setDuracion(rs.getDouble("duracion"));
 					p.setSinopsis(rs.getString("sinopsis"));
-					//p.setRecuperar_Foto_Usu(rs.getBytes("Portada"));
-					p.setRecuperar_Foto_Usu(rs.getBytes("portada"));
+					p.setPortada(rs.getString("portada"));
 					
 					peliculas.add(p);
 				}
@@ -85,16 +85,18 @@ public class DataPelicula {
 		}
 		return peliculas;
 	}
-	public Pelicula buscarPelicula (Pelicula buscaPeli) {
+	public Pelicula buscarPelicula (Pelicula p) {
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		Pelicula peli = null;
 		
 		try {
-		
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where codigo = ?");
-			stmt.setInt(1, buscaPeli.getCodigo());
-			
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select codigo,nombre,director,genero,calificacion,duracion,sinopsis from pelicula WHERE UPPER(nombre) = UPPER(?) and UPPER(director) = UPPER(?) "
+					);
+			//stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where nombre = ?");
+			stmt.setString(1, p.getNombre());
+			stmt.setString(1, p.getDirector());
 			rs = stmt.executeQuery();
 			
 			if(rs!=null && rs.next()) {
@@ -117,9 +119,12 @@ public class DataPelicula {
 			DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
 				e.printStackTrace();
+				
 			}
 		}
+		
 		return peli;
+		
 	}
 
 	public void modificar(Pelicula peli) {
@@ -167,4 +172,215 @@ public class DataPelicula {
 			}
 		}
 	}
+	
+	public LinkedList<Pelicula> buscarPorGenero (String genero) {
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		LinkedList<Pelicula>peliculas= new LinkedList<>();
+		
+		try {
+		
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where genero = ? ");   
+			stmt.setString(1, genero);
+			
+			rs = stmt.executeQuery();
+			
+			if(rs!=null ) {
+				while (rs.next()) {
+					Pelicula p = new Pelicula();
+					p.setCodigo(rs.getInt("codigo"));
+					p.setNombre(rs.getString("nombre"));
+					p.setDirector(rs.getString("director"));
+					p.setGenero(rs.getString("genero"));
+					p.setCalificacion(rs.getString("calificacion"));
+					p.setDuracion(rs.getDouble("duracion"));
+					p.setSinopsis(rs.getString("sinopsis"));
+					p.setPortada(rs.getString("portada"));
+					
+					
+					peliculas.add(p);
+				}}
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return peliculas; 
+	}
+	
+	public LinkedList<Pelicula> buscarPorEdad (String edad) {
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		LinkedList<Pelicula>peliculas= new LinkedList<>();
+		
+		try {
+		
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where calificacion = ? ");   
+			stmt.setString(1, edad);
+			
+			rs = stmt.executeQuery();
+			
+			if(rs!=null ) {
+				while (rs.next()) {
+					Pelicula p = new Pelicula();
+					p.setCodigo(rs.getInt("codigo"));
+					p.setNombre(rs.getString("nombre"));
+					p.setDirector(rs.getString("director"));
+					p.setGenero(rs.getString("genero"));
+					p.setCalificacion(rs.getString("calificacion"));
+					p.setDuracion(rs.getDouble("duracion"));
+					p.setSinopsis(rs.getString("sinopsis"));
+					p.setPortada(rs.getString("portada"));
+					
+					
+					peliculas.add(p);
+				}}
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return peliculas; 
+	}
+	
+	public LinkedList<Pelicula> listarEstrenos () {
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		LinkedList<Pelicula>peliculas= new LinkedList<>();
+		
+		try {
+		
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where month(fecha_estreno) = month(current_date()) ");   
+			rs = stmt.executeQuery();
+			
+			if(rs!=null ) {
+				while (rs.next()) {
+					Pelicula p = new Pelicula();
+					p.setCodigo(rs.getInt("codigo"));
+					p.setNombre(rs.getString("nombre"));
+					p.setDirector(rs.getString("director"));
+					p.setGenero(rs.getString("genero"));
+					p.setCalificacion(rs.getString("calificacion"));
+					p.setDuracion(rs.getDouble("duracion"));
+					p.setSinopsis(rs.getString("sinopsis"));
+					p.setPortada(rs.getString("portada"));
+					
+					
+					peliculas.add(p);
+				}}
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return peliculas; 
+	}
+	
+	
+	public int buscarCodigo (Pelicula p) {
+		int cod=0;
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		
+		
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select codigo from pelicula where nombre=? and director=?"
+					);
+			//stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where nombre = ?");
+			stmt.setString(1, p.getNombre());
+			stmt.setString(1, p.getDirector());
+			
+			rs = stmt.executeQuery();
+			
+			if(rs!=null /*&& rs.next()*/) {
+				cod = (rs.getInt("codigo"));
+				
+			}
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}
+		}
+		
+		return cod;
+		
+	}
+	
+	
+	public LinkedList<Pelicula> buscarPorNombre (String nombre) {
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		LinkedList<Pelicula>peliculas= new LinkedList<>();
+		
+		
+		try {
+		
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where nombre = ? ");   
+			stmt.setString(1, nombre);
+			
+			rs = stmt.executeQuery();
+			
+			if(rs!=null ) {
+				while (rs.next()) {
+					Pelicula p = new Pelicula();
+					p.setCodigo(rs.getInt("codigo"));
+					p.setNombre(rs.getString("nombre"));
+					p.setDirector(rs.getString("director"));
+					p.setGenero(rs.getString("genero"));
+					p.setCalificacion(rs.getString("calificacion"));
+					p.setDuracion(rs.getDouble("duracion"));
+					p.setSinopsis(rs.getString("sinopsis"));
+					p.setPortada(rs.getString("portada"));
+					
+					peliculas.add(p);
+					
+				}}
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return peliculas; 
+	}
+	
+	
+	
+	
 }

@@ -8,25 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import data.DataPelicula;
-import entities.Pelicula;
-
-//import logic.Estrenos;
-
-
+import data.DataFuncion;
+import entities.Funcion;
 
 /**
- * Servlet implementation class Cartelera
+ * Servlet implementation class Funciones
  */
-@WebServlet({ "/Cartelera", "/cartelera" })
-public class Cartelera extends HttpServlet {
+@WebServlet("/Funciones")
+public class Funciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Cartelera() {
+    public Funciones() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,17 +39,18 @@ public class Cartelera extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//Pelicula per = new Pelicula();
-		DataPelicula dp= new DataPelicula();
+		
+		Integer cod=Integer.parseInt(request.getParameter("codigo"));
+		Funcion fun = new Funcion();
+		fun.setCodigo_pelicula(cod);
+		DataFuncion df= new DataFuncion();
 		
 		
-		LinkedList<Pelicula> peliculas = dp.listarPeliculas();
+		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
 		
 		
-		request.setAttribute("listapeliculas", peliculas);
-		request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
-		
-		//doGet(request, response);
+		request.setAttribute("listafunciones", funciones);
+		request.getRequestDispatcher("WEB-INF/FunManagement.jsp").forward(request, response);
 	}
 
 }
