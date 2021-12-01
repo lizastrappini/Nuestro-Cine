@@ -5,11 +5,7 @@ public class Persona {
 	private String nombre;
 	private String apellido;
 	private String email;
-<<<<<<< HEAD:src/entities/Persona.java
 	private String password;
-=======
-	private String contrasena;
->>>>>>> a6760af12af7a65bffacfd867909991be141020f:src/entities/Cliente.java
 	private Integer edad;
 	private String telefono;
 	private Integer habilitado;
@@ -34,19 +30,13 @@ public class Persona {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-<<<<<<< HEAD:src/entities/Persona.java
+
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
-=======
-	public String getContrasena() {
-		return contrasena;
-	}
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
->>>>>>> a6760af12af7a65bffacfd867909991be141020f:src/entities/Cliente.java
+
 	}
 	public Integer getEdad() {
 		return edad;
