@@ -47,7 +47,7 @@ public class Funciones extends HttpServlet {
 		
 		Integer cod=Integer.parseInt(request.getParameter("codigo"));
 		Funcion fun = new Funcion();
-<<<<<<< HEAD
+
 		Pelicula pel = new Pelicula();
 		LogicPelicula lp = new LogicPelicula();
 		
@@ -58,21 +58,11 @@ public class Funciones extends HttpServlet {
 		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
 		
 		request.setAttribute("pel", pel);
-=======
-		fun.setCodigo_pelicula(cod);
-		DataFuncion df= new DataFuncion();
-		
-		
-		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
-		
-		
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
+
 		request.setAttribute("listafunciones", funciones);
 		request.getRequestDispatcher("WEB-INF/FunManagement.jsp").forward(request, response);
 	}
 
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
+
