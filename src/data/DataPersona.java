@@ -92,17 +92,10 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-<<<<<<< HEAD:src/data/DataPersona.java
-					"select nombre,apellido,dni,email,telefono,edad,habilitado from cliente where (email=? and contraseña=?);"
+					"select nombre,apellido,dni,email,telefono,edad,habilitado from cliente where (email=? and contraseÃ±a=?);"
 					);
 			stmt.setString(1, per.getEmail());
 			stmt.setString(2, per.getPassword());
-=======
-					"select nombre from cliente where email=? and contraseï¿½a=?"
-					);
-			stmt.setString(1, cli.getEmail());
-			stmt.setString(2, cli.getContrasena());
->>>>>>> a6760af12af7a65bffacfd867909991be141020f:src/data/DataCliente.java
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				p=new Persona();
@@ -173,21 +166,12 @@ public class DataPersona {
 							"insert into cliente(dni,nombre, apellido, email, contraseï¿½a,edad, telefono ) values(?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
-<<<<<<< HEAD:src/data/DataPersona.java
 			stmt.setString(1, p.getDni());
 			stmt.setString(2, p.getNombre());
 			stmt.setString(3, p.getApellido());
 			stmt.setString(4, p.getEmail());
 			stmt.setString(5, p.getPassword());
 			stmt.setString(6, p.getTelefono());
-=======
-			stmt.setString(1, c.getDni());
-			stmt.setString(2, c.getNombre());
-			stmt.setString(3, c.getApellido());
-			stmt.setString(4, c.getEmail());
-			stmt.setString(5, c.getContrasena());
-			stmt.setString(6, c.getTelefono());
->>>>>>> a6760af12af7a65bffacfd867909991be141020f:src/data/DataCliente.java
 			stmt.executeUpdate();
 			
 			keyResultSet=stmt.getGeneratedKeys();

@@ -50,21 +50,13 @@ public class IniciarSesion extends HttpServlet {
 		Login ctrl = new Login();
 		
 		String email = request.getParameter("email");
-<<<<<<< HEAD
 		String password = request.getParameter("pass");
 		
 		//validar email y password
 		
 		per.setEmail(email);
 		per.setPassword(password);
-		
-=======
-		String contrasena = request.getParameter("contrase�a");
-		//validar email y password
-		
-		cli.setEmail(email);
-		cli.setContrasena(contrasena);
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
+
 		
 		per=ctrl.validate(per);
 		

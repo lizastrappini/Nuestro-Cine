@@ -30,12 +30,6 @@ public class Funcion {
 	public void setNumero_sala(Integer numero_sala) {
 		this.numero_sala = numero_sala;
 	}
-<<<<<<< HEAD
-	
-	
-	
-=======
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
 	@Override
 	public String toString() {
 		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern(dateTimeFormat);
@@ -44,10 +38,5 @@ public class Funcion {
 				", fecha_hora=" + fecha_hora + (fecha_hora==null?null:fecha_hora.format(dtFormat))
 				+ ", numero_sala=" + numero_sala + "]";
 	}
-	
-	
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
+
