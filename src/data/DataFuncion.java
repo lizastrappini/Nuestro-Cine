@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 
-=======
-import java.util.LinkedList;
 
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
 import entities.Funcion;
 
 public class DataFuncion {
@@ -166,13 +163,10 @@ public class DataFuncion {
 			}
 		}
 	}
-<<<<<<< HEAD
-	
+
 	
 	
 	
 	
 }
-=======
-}
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
+
