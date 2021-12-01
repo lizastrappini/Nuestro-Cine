@@ -1,17 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="entities.Funcion"%>
-<<<<<<< HEAD
 <%@page import="entities.Pelicula"%>
 <%@page import="entities.Persona"%>
-=======
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
 <%@page import="java.util.LinkedList"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
 <link href="style/css/styles.css" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" >
@@ -87,29 +83,11 @@
                             <button class="button" id="sacarentrada">  Sacar entrada   </button>
                             </form>
                             
-=======
-<title>Funciones</title>
-<% 
-	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");
-%>
-</head>
-<body>
-	<% for (Funcion fun : lf){ %>
-	  <!-- Content section 1-->
-        <div class="funcion">
-                            <h2 class="funcion" id="fechahora"><%=fun.getFecha_hora() %></h2>
-                            <p class="funcion" id="numerosala"><%=fun.getNumero_sala()%></p>
-                            <br>
-                            <button class="funcion" id="sacarentrada">  Sacar entrada   </button>
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
                             
         </div>
         
 	<%} %>
-<<<<<<< HEAD
 <a class="boton_volver" href="Peliculas.html">VOLVER </a>
 </div>
-=======
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
 </body>
 </html>
