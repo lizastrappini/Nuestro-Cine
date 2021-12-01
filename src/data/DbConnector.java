@@ -13,11 +13,6 @@ public class DbConnector {
 	private String user="root";  //java
 	private String password="STRAPPINIliza99"; //himitsu
 	private String db="bd_cine"; //tp_java_cine
-=======
-	private String user="java";
-	private String password="himitsu";
-	private String db="tp_java_cine";
->>>>>>> a6760af12af7a65bffacfd867909991be141020f
 	private int conectados=0;
 	private Connection conn=null;
 	
