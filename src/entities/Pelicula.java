@@ -1,6 +1,8 @@
 package entities;
 import java.util.Date;
 
+
+
 public class Pelicula {
 	private Integer codigo;
 	private String nombre;
@@ -69,6 +71,13 @@ public class Pelicula {
 	public void setFecha_estreno(Date fecha_estreno) {
 		this.fecha_estreno = fecha_estreno;
 	}
+	
+	public java.sql.Date convertirFecha(Date fecha) {
+		java.util.Date utilDate = fecha;
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	    return sqlDate;
+	}
+	
 	@Override
 	public String toString() {
 		

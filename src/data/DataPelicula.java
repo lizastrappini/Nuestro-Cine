@@ -1,9 +1,11 @@
 package data;
 
-import java.sql.*;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
-
-
 
 import entities.Pelicula;
 
@@ -15,7 +17,7 @@ public class DataPelicula {
 		
 		try {						
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("insert into pelicula"
-					+ "(nombre, director, genero, calificacion, duracion, sinopsis, portada) values (?,?,?,?,?,?,?)",
+					+ "(nombre, director, genero, calificacion, duracion, sinopsis, portada, fecha_estreno) values (?,?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1, nuevaPeli.getNombre());
@@ -25,7 +27,8 @@ public class DataPelicula {
 			stmt.setDouble(5, nuevaPeli.getDuracion());
 			stmt.setString(6, nuevaPeli.getSinopsis());
 			stmt.setString(7, nuevaPeli.getPortada());
-			
+			java.sql.Date date = nuevaPeli.convertirFecha(nuevaPeli.getFecha_estreno());			
+			stmt.setDate(8, date);
 			stmt.executeUpdate();
 			
 			rs = stmt.getGeneratedKeys();
@@ -131,7 +134,7 @@ public class DataPelicula {
 		PreparedStatement stmt=null;
 		try {
 			stmt= DbConnector.getInstancia().getConn().prepareStatement("update pelicula "
-					+ "set nombre=?, director=?, genero=?, calificacion=?, duracion=?, sinopsis=? where codigo=?");
+					+ "set nombre=?, director=?, genero=?, calificacion=?, duracion=?, sinopsis=?, fecha_estreno=? where codigo=?");
 		
 			stmt.setString(1, peli.getNombre());
 			stmt.setString(2, peli.getDirector());
@@ -139,7 +142,8 @@ public class DataPelicula {
 			stmt.setString(4, peli.getCalificacion());
 			stmt.setDouble(5, peli.getDuracion());
 			stmt.setString(6, peli.getSinopsis());
-			stmt.setInt(7, peli.getCodigo());
+			stmt.setString(7, peli.getFecha_estreno().toString());
+			stmt.setInt(8, peli.getCodigo());
 			stmt.executeUpdate();	
 		} catch (SQLException e) {
 			
@@ -298,26 +302,32 @@ public class DataPelicula {
 	}
 	
 	
-	public int buscarCodigo (Pelicula p) {
-		int cod=0;
+	public Pelicula buscarPorCodigo (Integer cod) {
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
-		
+		Pelicula p= new Pelicula();
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select codigo from pelicula where nombre=? and director=?"
-					);
-			//stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where nombre = ?");
-			stmt.setString(1, p.getNombre());
-			stmt.setString(1, p.getDirector());
+		
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where codigo = ? ");   
+			stmt.setInt(1, cod);
 			
 			rs = stmt.executeQuery();
 			
-			if(rs!=null /*&& rs.next()*/) {
-				cod = (rs.getInt("codigo"));
-				
-			}
+			if(rs!=null ) {
+				while (rs.next()) {
+					
+					p.setCodigo(rs.getInt("codigo"));
+					p.setNombre(rs.getString("nombre"));
+					p.setDirector(rs.getString("director"));
+					p.setGenero(rs.getString("genero"));
+					p.setCalificacion(rs.getString("calificacion"));
+					p.setDuracion(rs.getDouble("duracion"));
+					p.setSinopsis(rs.getString("sinopsis"));
+					p.setPortada(rs.getString("portada"));
+					p.setFecha_estreno(rs.getObject("fecha_estreno",Date.class));
+			
+				}}
 			
 		}  catch(SQLException e) {
 			e.printStackTrace();
@@ -328,12 +338,9 @@ public class DataPelicula {
 			DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				
 			}
 		}
-		
-		return cod;
-		
+		return p; 
 	}
 	
 	
@@ -345,7 +352,7 @@ public class DataPelicula {
 		
 		try {
 		
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where nombre = ? ");   
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM pelicula WHERE nombre like concat('%',concat(?,'%')) ");   
 			stmt.setString(1, nombre);
 			
 			rs = stmt.executeQuery();

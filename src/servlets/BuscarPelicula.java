@@ -32,34 +32,39 @@ public class BuscarPelicula extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		LogicPelicula lp = new LogicPelicula();
+		
+		String nombre = request.getParameter("nombre").toString();
+
+		
+		LinkedList<Pelicula> pelis = lp.buscar(nombre);
+		
+		if ( !(pelis.isEmpty()) ) {
+			String encontrada = "encontrada";
+			request.setAttribute("encontrada", encontrada);
+			request.setAttribute("peliculas", pelis);
+			request.getRequestDispatcher("WEB-INF/Pelicula/BorrarPelicula.jsp").forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Pelicula pel = new Pelicula();
+		
 		LogicPelicula lp = new LogicPelicula();
 		
 		String nombre = request.getParameter("nombre").toString();
-		
-		
-		//pel.setNombre(nombre);
-		
-		//pel=lp.buscar(nombre);
+
 		
 		LinkedList<Pelicula> pelis = lp.buscar(nombre);
 		
-		if ( !(pelis==null) ) {
+		if ( !(pelis.isEmpty()) ) {
 			String bandera1 = "encontrada";
 			request.setAttribute("bandera1", bandera1);
 			request.setAttribute("peliculas", pelis);
-			request.getRequestDispatcher("WEB-INF/EditarPelicula.jsp").forward(request, response);
-			for (Pelicula peli : pelis){
-				System.out.println(peli.getNombre());
-			}
+			request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
+			
 		}   
 		
 		

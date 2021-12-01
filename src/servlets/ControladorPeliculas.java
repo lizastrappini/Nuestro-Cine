@@ -42,7 +42,7 @@ public class ControladorPeliculas extends HttpServlet {
 //			 String opc1 = request.getParameter("opc1"); 
 //			 request.setAttribute("opc",opc1);
 			 
-			request.getRequestDispatcher("WEB-INF/AgregarPelicula.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Pelicula/AgregarPelicula.jsp").forward(request, response);
 		}
 		
 		else if (! (request.getParameter("opc2")==(null))  ) {
@@ -50,14 +50,14 @@ public class ControladorPeliculas extends HttpServlet {
 //			 String opc2 = request.getParameter("opc2"); 
 //			 request.setAttribute("opc", opc2);
 			 
-			request.getRequestDispatcher("WEB-INF/EditarPelicula.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
 			
 		}
 		
 		else if (! (request.getParameter("opc3")==(null))  ) {
 //			String opc3 = request.getParameter("opc3");
 //			request.setAttribute("opc", opc3);
-			request.getRequestDispatcher("WEB-INF/BorrarPelicula.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Pelicula/BorrarPelicula.jsp").forward(request, response);
 		}
 		
 		

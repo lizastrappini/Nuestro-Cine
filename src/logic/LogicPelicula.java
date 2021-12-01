@@ -7,6 +7,7 @@ import entities.Pelicula;
 
 
 
+
 public class LogicPelicula {
 	
 	private DataPelicula dpel;
@@ -39,7 +40,15 @@ public class LogicPelicula {
 		 dpel.modificar(pel);
 	}
 	
-	public int buscaCodigo(Pelicula pel) {
-		return dpel.buscarCodigo(pel);
+	public Pelicula buscarPorCodigo(Integer cod) {
+		return dpel.buscarPorCodigo(cod);
+	}
+	
+	public void delete(Pelicula pel) {
+		dpel.borrarPelicula(pel);
+	}
+	
+	public void cargar(Pelicula pel) {
+		dpel.cargarPelicula(pel);
 	}
 }

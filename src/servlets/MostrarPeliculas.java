@@ -54,7 +54,7 @@ public class MostrarPeliculas extends HttpServlet {
 			
 
 			request.setAttribute("listapeliculas", peliculas);
-			request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);
 		}
 		
 		if(genero.equals("todas")) {
@@ -62,7 +62,7 @@ public class MostrarPeliculas extends HttpServlet {
 			LinkedList<Pelicula> peliculas = lp.getAll();
 			
 			request.setAttribute("listapeliculas", peliculas);
-			request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);
 		}}
 		
 		while(!(request.getParameter("edad")==(null))) {
@@ -75,7 +75,7 @@ public class MostrarPeliculas extends HttpServlet {
 				LinkedList<Pelicula> peliculas = lp.buscarPorEdad(edad);
 				
 				request.setAttribute("listapeliculas", peliculas);
-				request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);
 			}
 			
 			if(edad.equals("todas")) {
@@ -83,7 +83,7 @@ public class MostrarPeliculas extends HttpServlet {
 				LinkedList<Pelicula> peliculas = lp.getAll();
 				
 				request.setAttribute("listapeliculas", peliculas);
-				request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);
 			}
 		}
 		
@@ -106,7 +106,7 @@ public class MostrarPeliculas extends HttpServlet {
 				LinkedList<Pelicula> peliculas = dp.listarEstrenos();
 				request.setAttribute("estrenos", estrenos);
 				request.setAttribute("listapeliculas", peliculas);
-				request.getRequestDispatcher("WEB-INF/PelManagement.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);
 		 
 		 
 				

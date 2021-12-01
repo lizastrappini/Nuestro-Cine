@@ -5,6 +5,7 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
    
@@ -33,26 +34,28 @@ pageEncoding="UTF-8"%>
 		%>
     </head>
     <body id="page-top">
- 
     <div class="fondo">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
             <div class="container px-5">
-                <a class="navbar-brand" href="">NUESTRO CINE</a>
+                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">	
                     <%if ( isEmpleado==1){ %>
-                    	<li class="nav-item"><a class="nav-link" href="Empleados.html">EMPLEADOS</a></li> 
+                    	<li class="nav-item"><a class="nav-link" href="Empleados.jsp">EMPLEADOS</a></li> 
                     <%} else {%>
                     	<%} %>	 
-                    	<li class="nav-item"><a class="nav-link" href="Peliculas.html">Cartelera</a></li>
+                    	<li class="nav-item"><a class="nav-link" href="Peliculas.jsp">Cartelera</a></li>
+                        
                         <% if ( request.getSession().getAttribute("usuario")==null ) {%>
+                        
                         <li class="nav-item"><a class="nav-link" href="SignUp.html">Registrarse</a></li>
                         <li class="nav-item"><a class="nav-link" href="SignIn.html" id="signin">Iniciar sesion</a></li>
                         <%}else {%> 
                         <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout">Cerrar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link" id="signout" href="SignOut" >Cerrar sesion</a></li>
+                        
                    		<%} %>	
                     </ul>
                      
@@ -67,8 +70,13 @@ pageEncoding="UTF-8"%>
                   <form class="form-signin" action="MostrarPeliculas" method="post">
                     <h1 class="masthead-heading mb-0">TODOS LOS ESTRENOS</h1>
                     <h2 class="masthead-subheading mb-0">EN UN MISMO LUGAR</h2>
-                    <button class="btn btn-primary btn-xl rounded-pill mt-5"  >Ver estrenos</button>
+<<<<<<< HEAD:WebContent/index.jsp
+                    <button class="botonEstreno"  >Ver estrenos</button>
                     </form>
+=======
+                    <button class="btn btn-primary btn-xl rounded-pill mt-5" type="submit" >Ver estrenos</button>
+                   </form>
+>>>>>>> a6760af12af7a65bffacfd867909991be141020f:WebContent/index.html
                 </div>
             </div>
 

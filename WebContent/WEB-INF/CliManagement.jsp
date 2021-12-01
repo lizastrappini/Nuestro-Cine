@@ -29,9 +29,7 @@
 <script >
 window.alert("Bienvenido <%=per.getNombre()%> a nuestro sitio web")
 </script>
-<%
-System.out.println(per.getNombre());
-%>
+
 </div>
 </body>
 </html>

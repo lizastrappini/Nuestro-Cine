@@ -1,24 +1,28 @@
 package servlets;
 
 import java.io.IOException;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import entities.Pelicula;
+import logic.LogicPelicula;
 
 /**
- * Servlet implementation class SignOut
+ * Servlet implementation class BorraPelicula
  */
-@WebServlet({ "/SignOut", "/signout", "/signOut", "/Signout" })
-public class SignOut extends HttpServlet {
+@WebServlet("/BorraPelicula")
+public class BorraPelicula extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignOut() {
+    public BorraPelicula() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,20 +31,25 @@ public class SignOut extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Pelicula pel = new Pelicula();
+		LogicPelicula lp = new LogicPelicula();
 		
-		 HttpSession sesion = request.getSession(true);
-			//Cerrar sesion
-	        sesion.invalidate();
-	        
-	        //Redirecciono a index.jsp
-	        response.sendRedirect("index.jsp");
+		Integer cod = Integer.parseInt(request.getParameter("codigo"));
+		pel = lp.buscarPorCodigo(cod);
+		lp.delete(pel);
+		String borrada= "borrada";
+		request.setAttribute("borrada", borrada);
+		
+		request.getRequestDispatcher("Empleados.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+
+		
 	}
 
 }

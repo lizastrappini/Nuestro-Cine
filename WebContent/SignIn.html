@@ -19,17 +19,37 @@
 		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 		<link rel="shortcut icon" href="https://img.icons8.com/ios-glyphs/30/ffffff/cinema---v1.png">
 </head>
+
 <body>
 <div class="fondo">
-<form class="form-signin" action="IniciarSesion" method="post" style="width: 962px; height: 366px">
+
+<!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+            <div class="container px-5">
+                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">	
+                    	<li class="nav-item"><a class="nav-link" href="Peliculas.jsp">Cartelera</a></li>
+                    	<li class="nav-item"><a class="nav-link" href="SignUp.html">Registrarse</a></li>
+                    </ul>
+                     
+                </div>
+            </div>
+        </nav>
+
+
+<form class="form-signin" action="IniciarSesion" method="post" >
       
       <h1 class="h3 mb-3 font-weight-normal">Ingrese sus datos</h1>
       <label for="inputEmail" >Email</label>
       <input id="inputEmail" name="email" class="form-control" placeholder="Email address" required type="email">
       <label for="inputPassword" >Contraseña</label>
       <input id="inputPassword" name="pass" class="form-control" placeholder="Password" required type="password">
-      <button class="btn btn-lg btn-primary btn-block" type="submit" >Iniciar sesion</button> 
+      <br>
+      <button class="buttonIniciar" type="submit" >Iniciar sesion</button> 
     </form>
+    
 </div>
 </body>
 </html>
