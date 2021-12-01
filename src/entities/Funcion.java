@@ -31,7 +31,14 @@ public class Funcion {
 		this.numero_sala = numero_sala;
 	}
 
-	
+	@Override
+	public String toString() {
+		DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern(dateTimeFormat);
+		
+		return "Funcion [codigo_pelicula=" + codigo_pelicula + 
+				", fecha_hora=" + fecha_hora + (fecha_hora==null?null:fecha_hora.format(dtFormat))
+				+ ", numero_sala=" + numero_sala + "]";
+	}
 	
 	
 
