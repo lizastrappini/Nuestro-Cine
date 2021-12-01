@@ -106,21 +106,12 @@
                             <p class="infopelicula" id="sinopsis"><%=pel.getSinopsis() %></p>
                             <p class="infopelicula"> <b>Director :</b> <%=pel.getDirector() %></p>
                             <p class="infopelicula"> <b>Calificacion : </b><%=pel.getCalificacion() %></p>
-<<<<<<< HEAD:WebContent/WEB-INF/Pelicula/PelManagement.jsp
                             <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %></p> 
                             <form class="infopelicula" action="Funciones" method="post">
                             <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
                             <button class="buttonClass" id="">  Comprar   </button>
                             </form>
-                            
-=======
-                            <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %></p>
-                            <form class="infopelicula" action="Funciones" method="post">
-                            	<input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
-                            	<button class="infopelicula" id="sacarentrada">  Comprar   </button>
-                            </form>
->>>>>>> a6760af12af7a65bffacfd867909991be141020f:WebContent/WEB-INF/PelManagement.jsp
-                            
+
         </div>
         
 	<%} %>
