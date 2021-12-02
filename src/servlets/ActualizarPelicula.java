@@ -54,7 +54,7 @@ public class ActualizarPelicula extends HttpServlet {
 
 
 		request.setAttribute("pelicula", peli);
-		request.getRequestDispatcher("WEB-INF/Edit.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/Pelicula/Edit.jsp").forward(request, response);
 		}
 		
 		if( !(request.getParameter("bandera")==null)) {
@@ -82,11 +82,11 @@ public class ActualizarPelicula extends HttpServlet {
 
 				String portada = request.getParameter("portada").toString();
 				
-				String fecha1=request.getParameter("estreno").toString();
+				String fecha1=request.getParameter("estreno");
 				
 				Date fecha;
 				try {
-					fecha = new SimpleDateFormat("yyyy/MM/dd").parse(fecha1);
+					fecha = new SimpleDateFormat("yyyy-MM-dd").parse(fecha1);
 					pelicambiada.setFecha_estreno(fecha);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block

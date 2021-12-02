@@ -142,7 +142,8 @@ public class DataPelicula {
 			stmt.setString(4, peli.getCalificacion());
 			stmt.setDouble(5, peli.getDuracion());
 			stmt.setString(6, peli.getSinopsis());
-			stmt.setString(7, peli.getFecha_estreno().toString());
+			java.sql.Date date = peli.convertirFecha(peli.getFecha_estreno());
+			stmt.setDate(7, date);
 			stmt.setInt(8, peli.getCodigo());
 			stmt.executeUpdate();	
 		} catch (SQLException e) {
