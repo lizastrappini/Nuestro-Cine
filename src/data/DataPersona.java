@@ -163,7 +163,7 @@ public class DataPersona {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into cliente(dni,nombre, apellido, email, contrase�a,edad, telefono ) values(?,?,?,?,?,?,?)",
+							"insert into cliente(dni,nombre, apellido, email, contraseï¿½a,edad, telefono ) values(?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, p.getDni());

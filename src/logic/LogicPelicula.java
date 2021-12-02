@@ -5,9 +5,6 @@ import java.util.LinkedList;
 import data.DataPelicula;
 import entities.Pelicula;
 
-
-
-
 public class LogicPelicula {
 	
 	private DataPelicula dpel;

@@ -70,8 +70,8 @@ pageEncoding="UTF-8"%>
                   <form class="form-signin" action="MostrarPeliculas" method="post">
                     <h1 class="masthead-heading mb-0">TODOS LOS ESTRENOS</h1>
                     <h2 class="masthead-subheading mb-0">EN UN MISMO LUGAR</h2>
-                    <button class="btn btn-primary btn-xl rounded-pill mt-5" type="submit" >Ver estrenos</button>
-                   </form>
+                    <button class="botonEstreno"  >Ver estrenos</button>
+                  </form>
                 </div>
             </div>
 

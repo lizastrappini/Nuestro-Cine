@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import data.DataFuncion;
 import entities.Funcion;
+import entities.Pelicula;
+import logic.LogicPelicula;
+
 
 /**
  * Servlet implementation class Funciones
@@ -42,13 +45,22 @@ public class Funciones extends HttpServlet {
 		
 		Integer cod=Integer.parseInt(request.getParameter("codigo"));
 		Funcion fun = new Funcion();
+
+		Pelicula pel = new Pelicula();
+		LogicPelicula lp = new LogicPelicula();
+		
 		fun.setCodigo_pelicula(cod);
 		DataFuncion df= new DataFuncion();
 		
 		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
 		
+		pel = lp.buscarPorCodigo(cod);
+		request.setAttribute("pel", pel);
+
 		request.setAttribute("listafunciones", funciones);
 		request.getRequestDispatcher("WEB-INF/FunManagement.jsp").forward(request, response);
 	}
 
 }
+
+

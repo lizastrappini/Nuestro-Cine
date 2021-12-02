@@ -106,10 +106,10 @@
                             <p class="infopelicula" id="sinopsis"><%=pel.getSinopsis() %></p>
                             <p class="infopelicula"> <b>Director :</b> <%=pel.getDirector() %></p>
                             <p class="infopelicula"> <b>Calificacion : </b><%=pel.getCalificacion() %></p>
-                            <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %></p>
+                            <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %></p> 
                             <form class="infopelicula" action="Funciones" method="post">
-                            	<input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
-                            	<button class="infopelicula" id="sacarentrada">  Comprar   </button>
+                            <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
+                            <button class="buttonClass" id="">  Comprar   </button>
                             </form>
         </div>
         

@@ -82,7 +82,6 @@
                             <br>
                             <button class="button" id="sacarentrada">  Sacar entrada   </button>
                             </form>
-                            
         </div>
         
 	<%} %>
