@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import entities.Funcion;
+import entities.ButacaFuncion;
+import entities.Sala;
 
 public class DataFuncion {
 	
@@ -15,20 +17,29 @@ public class DataFuncion {
 		ResultSet rs = null;
 		
 		try {						
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("insert into funcion"
-					+ "(codigo_pelicula, fecha_hora, numero_sala) values (?,?,?,?)",
-					Statement.RETURN_GENERATED_KEYS);
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"insert into funcion (codigo_pelicula, fecha_hora, numero_sala) values (?,?,?)");
 			
 			stmt.setInt(1, nuevaFuncion.getCodigo_pelicula());
 			stmt.setObject(2, nuevaFuncion.getFecha_hora());
-			stmt.setInt(4, nuevaFuncion.getNumero_sala());
+			stmt.setInt(3, nuevaFuncion.getNumero_sala());
 			
 			stmt.executeUpdate();
 			
-			rs = stmt.getGeneratedKeys();
+			Sala s = new Sala();
+			s.setNumero(nuevaFuncion.getNumero_sala());
+			DataSala ds = new DataSala();
+			Sala sal = ds.buscarSala(s);
 			
-			if(rs != null && rs.next()) {
-				nuevaFuncion.setCodigo_pelicula(rs.getInt(1));
+			DataButacaFuncion dbf = new DataButacaFuncion();
+			
+			for(int i = 1; i <= sal.getCupo(); ++i){ 
+				ButacaFuncion nuevaButaca = new ButacaFuncion();
+				nuevaButaca.setCod_pelicula(nuevaFuncion.getCodigo_pelicula());
+				nuevaButaca.setFecha_hora_funcion(nuevaFuncion.getFecha_hora());
+				nuevaButaca.setNro_sala(nuevaFuncion.getNumero_sala());
+				nuevaButaca.setEstado(0);
+				dbf.cargarButaca(nuevaButaca);
 			}
 			
 		} catch (SQLException e) {
