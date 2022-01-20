@@ -97,7 +97,7 @@ public class DataPelicula {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"select codigo,nombre,director,genero,calificacion,duracion,sinopsis from pelicula WHERE UPPER(nombre) = UPPER(?) and UPPER(director) = UPPER(?) "
 					);
-			//stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where nombre = ?");
+			
 			stmt.setString(1, p.getNombre());
 			stmt.setString(1, p.getDirector());
 			rs = stmt.executeQuery();

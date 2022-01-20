@@ -67,18 +67,21 @@ public class DataSala {
 		}
 		return salas;
 	}
+	
 	public Sala buscarSala (Sala buscaSala) {
-		ResultSet rs=null;
+		ResultSet rs = null;
 		PreparedStatement stmt=null;
 		Sala sal = null;
 		
 		try {
-			stmt= DbConnector.getInstancia().getConn().prepareStatement("select * from sala where nro_sala =?");
-			stmt.setInt(1,buscaSala.getNumero());
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from sala where numero = ?");
+			stmt.setInt(1, buscaSala.getNumero());
 			
-			rs= stmt.executeQuery();
+			rs = stmt.executeQuery();
+			
 			if(rs != null && rs.next()) {
-				sal.setNumero(rs.getInt("nro_sala"));
+				sal = new Sala();
+				sal.setNumero(rs.getInt("numero"));
 				sal.setCupo(rs.getInt("cupo"));
 			}
 			
@@ -93,18 +96,21 @@ public class DataSala {
 				e.printStackTrace();
 			}
 		}
+		
 		return sal;
 	}
 
 	public void modificar(Sala sal) {
 		PreparedStatement stmt =null;
 		try {
-			stmt= DbConnector.getInstancia().getConn().prepareStatement("update sala"
-					+ "set nro_sala=?, cupo=? where nro_sala=?");
+			stmt= DbConnector.getInstancia().getConn().prepareStatement("update sala set numero=?, cupo=? where numero=?");
 			
-			stmt.setInt(1,  sal.getNumero());
+			stmt.setInt(1, sal.getNumero());
 			stmt.setInt(2, sal.getCupo());
+			stmt.setInt(3, sal.getNumero());
+			
 			stmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			
 		} finally {
@@ -120,9 +126,10 @@ public class DataSala {
 		PreparedStatement stmt=null;
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("delete from sala where nro_sala=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("delete from sala where numero=?");
 			stmt.setInt(1, borraSala.getNumero());
 			stmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
