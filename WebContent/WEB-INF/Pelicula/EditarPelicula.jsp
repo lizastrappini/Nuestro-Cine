@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import="java.time.*"%>
-    <%@page import="java.time.format.*"%>
+<%@page import="java.time.*"%>
+<%@page import="java.time.format.*"%>
 <%@page import="entities.Pelicula"%>
 <%@page import="logic.LogicPelicula"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Persona"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,16 +42,16 @@
 	} 
 	 
 	 
-		 LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
+		LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
 	
-		 Integer isEmpleado = 0;
+		Integer isEmpleado = 0;
 		Persona per = (Persona)request.getSession().getAttribute("usuario");
 			
 			if ( !(per==null)){
 				isEmpleado = per.getHabilitado();
 			} else {isEmpleado = 0;}	 
 	 
-    %>
+%>
 </head>
 <body>
 <div class="fondo">

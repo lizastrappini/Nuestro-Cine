@@ -4,6 +4,7 @@
 <%@page import="logic.LogicPelicula"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Persona" %>
+
 <!DOCTYPE html>
 <html>
 <head>
