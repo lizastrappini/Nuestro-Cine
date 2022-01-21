@@ -17,11 +17,9 @@ public class DataCostoEntrada {
 		
 		try {						
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("insert into costo_entrada"
-					+ "(fecha_desde, costo) values (?,?)");
+					+ "(fecha_desde, costo) values (current_date(),?)");
 			
-			java.sql.Date date = nuevoCostoEntrada.convertirFecha(nuevoCostoEntrada.getFecha_desde());			
-			stmt.setDate(1, date);
-			stmt.setDouble(2, nuevoCostoEntrada.getCosto());
+			stmt.setDouble(1, nuevoCostoEntrada.getCosto());
 			
 			stmt.executeUpdate();
 			
