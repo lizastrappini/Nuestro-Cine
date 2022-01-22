@@ -35,6 +35,7 @@ public class DataFuncion {
 			
 			for(int i = 1; i <= sal.getCupo(); ++i){ 
 				ButacaFuncion nuevaButaca = new ButacaFuncion();
+				nuevaButaca.setNumero(i);
 				nuevaButaca.setCod_pelicula(nuevaFuncion.getCodigo_pelicula());
 				nuevaButaca.setFecha_hora_funcion(nuevaFuncion.getFecha_hora());
 				nuevaButaca.setNro_sala(nuevaFuncion.getNumero_sala());

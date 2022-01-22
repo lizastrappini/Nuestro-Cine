@@ -2,6 +2,8 @@ package servlets.funcion;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,15 +36,25 @@ public class NuevaFuncion extends HttpServlet {
 		Funcion fun = new Funcion();
 		LogicFuncion lf = new LogicFuncion();
 		
-		
 		fun.setCodigo_pelicula(Integer.parseInt(request.getParameter("codigo")));
-		fun.setFecha_hora(LocalDateTime.parse(request.getParameter("fechahora")));
-		fun.setNumero_sala(Integer.parseInt(request.getParameter("numero")));
-		lf.cargar(fun);
-		
-		String cargada = "cargada";
-		request.setAttribute("cargada", cargada);
-		request.getRequestDispatcher("Empleados.jsp").forward(request, response);
+		String str = (request.getParameter("fechahora"));
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+			fun.setFecha_hora(dateTime);
+			fun.setNumero_sala(Integer.parseInt(request.getParameter("numero")));
+			lf.cargar(fun);
+			
+			String cargada = "cargada";
+			request.setAttribute("cargada", cargada);
+			request.getRequestDispatcher("Empleados.jsp").forward(request, response);
+		} catch (DateTimeParseException e) {
+			String errorFormatoFecha = "errorfecha";
+			request.setAttribute("errorFormatoFecha", errorFormatoFecha);
+			request.getRequestDispatcher("WEB-INF/Funcion/AgregarFuncion.jsp").forward(request, response);
+		} finally {
+			
+		}
 		
 	}
 
