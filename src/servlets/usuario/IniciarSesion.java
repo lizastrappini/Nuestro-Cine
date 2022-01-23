@@ -1,4 +1,4 @@
-package servlets;
+package servlets.usuario;
 
 import java.io.IOException;
 
@@ -56,22 +56,31 @@ public class IniciarSesion extends HttpServlet {
 		
 		per.setEmail(email);
 		per.setPassword(password);
+		
+		try {
+			per=ctrl.validate(per);
+			if ( per.getHabilitado() == 1) {
+				empleado=true;
+			} else { empleado = false;}
+		
+			
+			sesion.setAttribute("nombre",per.getNombre());
+			
+			request.getSession().setAttribute("usuario", per);
 
+			request.setAttribute("emp", empleado);
+			
+			request.getRequestDispatcher("SignIn.jsp").forward(request, response);
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			request.setAttribute("mensaje", e.getMessage());
+			request.getRequestDispatcher("SignIn.jsp").forward(request, response);
+			
+			
+		}  
 		
-		per=ctrl.validate(per);
 		
-		if ( per.getHabilitado() == 1) {
-			empleado=true;
-		} else { empleado = false;}
-	
-		
-		sesion.setAttribute("nombre",per.getNombre());
-		
-		request.getSession().setAttribute("usuario", per);
-
-		request.setAttribute("emp", empleado);
-		
-		request.getRequestDispatcher("WEB-INF/CliManagement.jsp").forward(request, response);
 		 
 		 
 	} 

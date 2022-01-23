@@ -43,5 +43,17 @@ public class Login {
 		return dp.buscaNombre(per);
 	}
 	
+	public Integer buscarPorDni(Persona per) {
+		return dp.buscarPorDni(per);
+	}
+	
+	public String obtenerPass(Persona per) {
+		return dp.obtenerPass(per);
+	}
+	
+	public void actualizarPass(Persona per) {
+		dp.editPass(per);
+	}
+	
 }
 

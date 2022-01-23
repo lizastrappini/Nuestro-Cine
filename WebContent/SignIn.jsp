@@ -1,23 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
         <title>---INICIAR SESION---</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" ></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="style/css/styles.css" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" >
-		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-		<link rel="shortcut icon" href="https://img.icons8.com/ios-glyphs/30/ffffff/cinema---v1.png">
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
 </head>
 
 <body>
@@ -39,7 +30,7 @@
         </nav>
 
 
-<form class="form-signin" action="IniciarSesion" method="post" >
+<form class="form-signin" action="iniciarSesion" method="post" >
       
       <h1 class="h3 mb-3 font-weight-normal">Ingrese sus datos</h1>
       <label for="inputEmail" >Email</label>
@@ -51,5 +42,25 @@
     </form>
     
 </div>
+
+
+<%
+if (request.getAttribute("mensaje")!=(null) ){%>
+	<script>
+	Swal.fire({
+		  icon: 'error',
+		  title: 'Oops...',
+		  text: 'Usuario o contraseña incorrectos',
+		})
+	</script>
+<%} else if ( session.getAttribute("usuario")!=(null)){%>
+	<script>
+	Swal.fire({
+	title: "Bienvenido!"
+	});
+	setTimeout( function() { window.location.href = "index.jsp"; }, 1600 );
+	</script>
+<%}
+%>
 </body>
 </html>

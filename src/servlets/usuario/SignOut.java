@@ -1,4 +1,4 @@
-package servlets;
+package servlets.usuario;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -28,12 +28,12 @@ public class SignOut extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 HttpSession sesion = request.getSession(true);
-			//Cerrar sesion
-	        sesion.invalidate();
-	        
-	        //Redirecciono a index.jsp
-	        response.sendRedirect("index.jsp");
+		HttpSession sesion = request.getSession(true);
+		//Cerrar sesion
+        sesion.invalidate();
+        
+        //Redirecciono a index.jsp
+        response.sendRedirect("index.jsp");
 	}
 
 	/**

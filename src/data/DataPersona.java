@@ -92,7 +92,7 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select nombre,apellido,dni,email,telefono,edad,habilitado from cliente where (email=? and contraseña=?);"
+					"select nombre,apellido,dni,email,telefono,edad,habilitado from cliente where (email=? and password=?);"
 					);
 			stmt.setString(1, per.getEmail());
 			stmt.setString(2, per.getPassword());
@@ -163,7 +163,7 @@ public class DataPersona {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into cliente(dni,nombre, apellido, email, contraseï¿½a,edad, telefono ) values(?,?,?,?,?,?,?)",
+							"insert into cliente"+"(dni,nombre, apellido, email, password,edad, telefono,habilitado) values(?,?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, p.getDni());
@@ -171,12 +171,13 @@ public class DataPersona {
 			stmt.setString(3, p.getApellido());
 			stmt.setString(4, p.getEmail());
 			stmt.setString(5, p.getPassword());
-			stmt.setString(6, p.getTelefono());
+			stmt.setInt(6, p.getEdad());
+			stmt.setString(7, p.getTelefono());
+			stmt.setInt(8, p.getHabilitado());
 			stmt.executeUpdate();
 			
 			keyResultSet=stmt.getGeneratedKeys();
-            if(keyResultSet!=null && keyResultSet.next()){
-            	            }
+      
             
 			
 		} catch (SQLException e) {
@@ -191,6 +192,95 @@ public class DataPersona {
             }
 		}
 		return p;
+	}
+	public Integer buscarPorDni(Persona per) {		
+		Integer d = null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select dni from cliente where dni=?");
+			stmt.setString(1, per.getDni());
+			rs=stmt.executeQuery();
+			
+			if(rs!=null && rs.next()) {
+					
+					d = rs.getInt("dni");
+					//System.out.println(p);
+					
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return d;
+	}
+	public String obtenerPass(Persona per) {
+		String p="";
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select password from cliente where email=?");
+			stmt.setString(1, per.getEmail());
+			rs=stmt.executeQuery();
+			
+			if(rs!=null && rs.next()) {
+					p=rs.getString("password");
+					//System.out.println(p);
+
+					
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return p;
+	}
+	
+	public void editPass(Persona p) {
+		PreparedStatement stmt= null;
+		ResultSet keyResultSet=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().
+					prepareStatement(
+							"update cliente set password=? where email=?",
+							PreparedStatement.RETURN_GENERATED_KEYS
+							);
+			stmt.setString(1, p.getPassword());
+			stmt.setString(2, p.getEmail());
+			stmt.executeUpdate();
+			
+			keyResultSet=stmt.getGeneratedKeys();
+      
+            
+			
+		} catch (SQLException e) {
+            e.printStackTrace();
+		} finally {
+            try {
+                if(keyResultSet!=null)keyResultSet.close();
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+		
 	}
 	
 }
