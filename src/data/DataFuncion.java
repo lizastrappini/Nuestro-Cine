@@ -123,37 +123,86 @@ public class DataFuncion {
 		return funciones_peli;
 	}
 	
-	public void modificarFuncion(Funcion f) {
+	public Funcion buscarFuncion (Funcion buscaFuncion) {
+		ResultSet rs = null;
 		PreparedStatement stmt=null;
-		try {
-			stmt= DbConnector.getInstancia().getConn().prepareStatement("update funcion "
-					+ "set codigo_pelicula=?, fecha_hora=?, numero_sala=? where codigo_pelicula=?"
-					+ "and fecha_hora=? and numero_sala=?");
+		Funcion fun = null;
 		
-			stmt.setInt(1, f.getCodigo_pelicula());
-			stmt.setObject(2, f.getFecha_hora());
-			stmt.setInt(3, f.getNumero_sala());
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select * from funcion where codigo_pelicula = ? and numero_sala = ? and fecha_hora = ?");
+			stmt.setInt(1, buscaFuncion.getCodigo_pelicula());
+			stmt.setInt(2, buscaFuncion.getNumero_sala());
+			stmt.setObject(3, buscaFuncion.getFecha_hora());
 			
-			stmt.executeUpdate();	
+			rs = stmt.executeQuery();
+			
+			if(rs != null && rs.next()) {
+				fun = new Funcion();
+				fun.setCodigo_pelicula(rs.getInt("codigo_pelicula"));
+				fun.setNumero_sala(rs.getInt("numero_sala"));
+				fun.setFecha_hora(rs.getObject("fecha_hora", LocalDateTime.class));
+			}
+			
 		} catch (SQLException e) {
-			
+			e.printStackTrace();
 		}finally {
 			try {
-				if(stmt!=null) {stmt.close();}
-				DbConnector.getInstancia().releaseConn();
+				if (rs!= null ) {rs.close();}
+				if(stmt != null ) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		
+		return fun;
+	}
+
+	
+	public void modificarFuncion(Funcion funcionNueva, Funcion funcionAnterior) {
+		PreparedStatement stmt=null;
+		try {
+			stmt= DbConnector.getInstancia().getConn().prepareStatement(
+					"update funcion set codigo_pelicula=?, fecha_hora=?, numero_sala=? where codigo_pelicula=? and fecha_hora=? and numero_sala=?");
+		
+			stmt.setInt(1, funcionNueva.getCodigo_pelicula());
+			stmt.setObject(2, funcionNueva.getFecha_hora());
+			stmt.setInt(3, funcionNueva.getNumero_sala());
+			stmt.setInt(4, funcionAnterior.getCodigo_pelicula());
+			stmt.setObject(5, funcionAnterior.getFecha_hora());
+			stmt.setInt(6, funcionAnterior.getNumero_sala());
+			
+			stmt.executeUpdate();	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(stmt != null ) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	
+		
 	}
 	
-	public void borrarPelicula(Funcion borraFun) {
+	public void borrarFuncion(Funcion borraFun) {
 		PreparedStatement stmt=null;
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from funcion where"
-					+ "codigo_pelicula=? and fecha_hora=? and numero_sala=?");
+			ButacaFuncion borraBut = new ButacaFuncion();
+			
+			borraBut.setCod_pelicula(borraFun.getCodigo_pelicula());
+			borraBut.setFecha_hora_funcion(borraFun.getFecha_hora());
+			borraBut.setNro_sala(borraFun.getNumero_sala());
+			
+			DataButacaFuncion dbf = new DataButacaFuncion();
+			dbf.borrarButaca(borraBut);
+			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"delete from funcion where codigo_pelicula=? and fecha_hora=? and numero_sala=?");
 			stmt.setInt(1, borraFun.getCodigo_pelicula());
 			stmt.setObject(2, borraFun.getFecha_hora());
 			stmt.setInt(3, borraFun.getNumero_sala());

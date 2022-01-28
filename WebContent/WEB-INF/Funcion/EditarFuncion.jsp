@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.time.*"%>
-<%@page import="java.time.format.*"%>
-<%@page import="entities.Persona" %>
+<%@page import="entities.Persona"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="entities.Pelicula"%>
+<%@page import="entities.Pelicula"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,25 +22,31 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" >
 		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-		<script src="style/codigo.js"></script>
-	<title>NUEVA FUNCION</title>
+
 <%
 
 String bandera1 = "";
 
 if ( !(request.getAttribute("encontrada")==(null)) ){
 	 bandera1 = request.getAttribute("encontrada").toString();
+}
+
+String bandera2 = "";
+	
+if ( !(request.getAttribute("borrada")==(null)) ){
+	 bandera2 = request.getAttribute("borrada").toString();
 } 
 
 LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
-
-Integer isEmpleado = 0;
-Persona per = (Persona)request.getSession().getAttribute("usuario");
+	 Integer isEmpleado = 0;
+		Persona per = (Persona)request.getSession().getAttribute("usuario");
 			
-if ( !(per==null)){
-	isEmpleado = per.getHabilitado();
-} else {isEmpleado = 0;}	 	 
+			if ( !(per==null)){
+				isEmpleado = per.getHabilitado();
+			} else {isEmpleado = 0;}	 
+	 
 %>
+<title>EDITAR FUNCION</title>
 </head>
 <body>
 <div class="fondo">
@@ -74,24 +78,23 @@ if ( !(per==null)){
             </div>
         </nav>
 	
-	<%if ( request.getAttribute("encontrada")==(null) ) { %>
+	
+	<%	if ( request.getAttribute("encontrada")==(null) ){ %>
 		<br>
 		<br>
 		<h2>Ingrese nombre de la pelicula</h2>
-		<form class="addPelicula" action="MostrarPelicula" method="get" >
+		<form class="addPelicula" action="MostrarPeliculaEditar" method="get" >
 			<label for="inputNombre" >Nombre de la pelicula</label>
     		<input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">
     		<br>
    		 	<button class="btn btn-lg btn-primary btn-block" type="submit" >BUSCAR</button>
     	</form>
     <%} %>
-  
-    <%if ( !(request.getAttribute("encontrada")==(null)) && bandera1.equals("encontrada") ) {%>
-    	<br>
+	<% if (!(request.getAttribute("encontrada")==(null)) && bandera1.equals("encontrada")){  %>
+		<br>
 		<br>
     	<br>
-		
-			<%for (Pelicula pel : lp){ %>
+		<%for (Pelicula pel : lp){ %>
 			
 			<div class="pelicula">
 				<div class="infopelicula">
@@ -101,16 +104,16 @@ if ( !(per==null)){
                     <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
                     <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
                     <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
-                    <form action="IngresarDatosFun" method="get">
+                    <form action="EditaFuncion" method="post">
                     	<input type="hidden" name="codigo" value="<%=pel.getCodigo() %>"/>
                         <br/>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >AGREGAR FUNCION</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >MOSTRAR FUNCIONES</button>
                     </form>
                 </div>
             </div>
-            <%}%>
-    <%}%>
-    
+              
+        <%}%> 
+    <%}%>  
 </div>
 </body>
 </html>

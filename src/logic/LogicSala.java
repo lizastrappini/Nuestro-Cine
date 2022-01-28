@@ -2,6 +2,7 @@ package logic;
 
 import data.DataSala;
 import entities.Sala;
+import java.util.LinkedList;
 
 public class LogicSala {
 	
@@ -25,5 +26,9 @@ public class LogicSala {
 	
 	public void borrar(Sala sal) {
 		ds.borrarSala(sal);
+	}
+	
+	public LinkedList<Sala> getAll(){
+		return ds.listarSalas();
 	}
 }

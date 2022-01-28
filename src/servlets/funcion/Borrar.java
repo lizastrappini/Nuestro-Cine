@@ -1,23 +1,28 @@
 package servlets.funcion;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Funcion;
+import logic.LogicFuncion;
+
 /**
- * Servlet implementation class ControladorFunciones
+ * Servlet implementation class Borrar
  */
-@WebServlet({"/ControladorFunciones", "/EditFunciones", "/Controladorfunciones"})
-public class ControladorFunciones extends HttpServlet {
+@WebServlet("/Borrar")
+public class Borrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControladorFunciones() {
+    public Borrar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,22 +39,21 @@ public class ControladorFunciones extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Funcion fun = new Funcion();
+		LogicFuncion lf = new LogicFuncion();
 		
-		if(! (request.getParameter("opc1")==(null)) ){
-			
-			request.getRequestDispatcher("WEB-INF/Funcion/AgregarFuncion.jsp").forward(request, response);
-		}
+		Integer codigo = Integer.parseInt(request.getParameter("codigopeli"));
+		fun.setCodigo_pelicula(codigo);
+		Integer numero = Integer.parseInt(request.getParameter("nrosala"));
+		fun.setNumero_sala(numero);
+		String str = (request.getParameter("fechahora"));
+		LocalDateTime dateTime = LocalDateTime.parse(str);
+		fun.setFecha_hora(dateTime);
+		lf.borrar(fun);
+		String borrada= "borrada";
+		request.setAttribute("borrada", borrada);
 		
-		else if (! (request.getParameter("opc2")==(null))  ) {
-			 
-			request.getRequestDispatcher("WEB-INF/Funcion/EditarFuncion.jsp").forward(request, response);
-			
-		}
-		
-		else if (! (request.getParameter("opc3")==(null))  ) {
-
-			request.getRequestDispatcher("WEB-INF/Funcion/BorrarFuncion.jsp").forward(request, response);
-		}
+		request.getRequestDispatcher("Empleados.jsp").forward(request, response);
 	}
 
 }

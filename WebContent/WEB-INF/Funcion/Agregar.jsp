@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.time.*"%>
-<%@page import="java.time.format.*"%>
-<%@page import="entities.Persona" %>
-<%@page import="java.util.LinkedList"%>
-<%@page import="entities.Pelicula"%>
+<%@page import="entities.Persona" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,17 +21,8 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" >
 		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 		<script src="style/codigo.js"></script>
-	<title>NUEVA FUNCION</title>
+<title>NUEVA FUNCION</title>
 <%
-
-String bandera1 = "";
-
-if ( !(request.getAttribute("encontrada")==(null)) ){
-	 bandera1 = request.getAttribute("encontrada").toString();
-} 
-
-LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
-
 Integer isEmpleado = 0;
 Persona per = (Persona)request.getSession().getAttribute("usuario");
 			
@@ -43,6 +30,7 @@ if ( !(per==null)){
 	isEmpleado = per.getHabilitado();
 } else {isEmpleado = 0;}	 	 
 %>
+
 </head>
 <body>
 <div class="fondo">
@@ -73,44 +61,22 @@ if ( !(per==null)){
                 </div>
             </div>
         </nav>
-	
-	<%if ( request.getAttribute("encontrada")==(null) ) { %>
 		<br>
-		<br>
-		<h2>Ingrese nombre de la pelicula</h2>
-		<form class="addPelicula" action="MostrarPelicula" method="get" >
-			<label for="inputNombre" >Nombre de la pelicula</label>
-    		<input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">
+    	<br>
+    	<form action="NuevaFuncion" method="get">
+    		<%String codigo = request.getParameter("codigo"); %>
+    		<input type="hidden" name="codigo" value="<%=codigo%>"/>
+    		
+			<label for="inputNumeroSala" >Numero de Sala</label>
+    		<input id="inputNumeroSala" name="numero" class="form-control" placeholder="numero" required type="text">
+    		
+    		<label for="inputFecha" >Fecha y Hora de la Funcion (yyyy-MM-dd HH:mm)</label>
+    		<% if (request.getAttribute("errorFormatoFecha")!=null) {%>
+        		<div class="alert alert-danger">Formato de fecha invalido</div>
+        	<%}%>
+    		<input id="inputFecha" name="fechahora" class="form-control" placeholder="fechahora" required type="text">
     		<br>
-   		 	<button class="btn btn-lg btn-primary btn-block" type="submit" >BUSCAR</button>
+    		<button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >AGREGAR FUNCION</button>
     	</form>
-    <%} %>
-  
-    <%if ( !(request.getAttribute("encontrada")==(null)) && bandera1.equals("encontrada") ) {%>
-    	<br>
-		<br>
-    	<br>
-		
-			<%for (Pelicula pel : lp){ %>
-			
-			<div class="pelicula">
-				<div class="infopelicula">
-					<img class="infopelicula" id="fotopelicula" src="<%=pel.getPortada()%>"/>
-					<p class="nombrepelicula" id="nombrepelicula" ><%= pel.getNombre() %></p>
-                    <p class="sinopsis" id="sinopsis"><%= pel.getSinopsis() %></p>
-                    <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
-                    <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
-                    <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
-                    <form action="IngresarDatosFun" method="get">
-                    	<input type="hidden" name="codigo" value="<%=pel.getCodigo() %>"/>
-                        <br/>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >AGREGAR FUNCION</button>
-                    </form>
-                </div>
-            </div>
-            <%}%>
-    <%}%>
-    
-</div>
 </body>
 </html>

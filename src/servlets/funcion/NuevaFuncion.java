@@ -49,11 +49,9 @@ public class NuevaFuncion extends HttpServlet {
 			request.setAttribute("cargada", cargada);
 			request.getRequestDispatcher("Empleados.jsp").forward(request, response);
 		} catch (DateTimeParseException e) {
-			String errorFormatoFecha = "errorfecha";
-			request.setAttribute("errorFormatoFecha", errorFormatoFecha);
-			request.getRequestDispatcher("WEB-INF/Funcion/AgregarFuncion.jsp").forward(request, response);
-		} finally {
-			
+			e.printStackTrace();
+			request.setAttribute("errorFormatoFecha", e.getMessage());
+			request.getRequestDispatcher("WEB-INF/Funcion/Agregar.jsp").forward(request, response);
 		}
 		
 	}

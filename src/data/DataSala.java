@@ -44,11 +44,11 @@ public class DataSala {
 		LinkedList<Sala>salas = new LinkedList<>();
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("Select nro_sala, cupo from sala");
+			rs= stmt.executeQuery("Select numero, cupo from sala");
 			if (rs != null ) {
 				while (rs.next()) {
 					Sala s = new Sala();
-					s.setNumero(rs.getInt("nro_sala"));
+					s.setNumero(rs.getInt("numero"));
 					s.setCupo(rs.getInt("cupo"));
 					
 					salas.add(s);
