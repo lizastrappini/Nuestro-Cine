@@ -1,4 +1,4 @@
-package servlets.funcion;
+package servlets.funcion.editar;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -47,36 +47,36 @@ public class ActualizarFuncion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 					
-		Funcion funcionanterior = new Funcion();
-					
-		Integer codigo = Integer.parseInt(request.getParameter("codigopeli"));
-		funcionanterior.setCodigo_pelicula(codigo);
-			
-		LogicPelicula lp = new LogicPelicula();
-		Pelicula pelant = lp.buscarPorCodigo(codigo);
+		if ( request.getParameter("bandera")==null){
+			Funcion funcionActual = new Funcion();
 				
-		Integer numero = Integer.parseInt(request.getParameter("nrosala"));
-		funcionanterior.setNumero_sala(numero);
+			Integer numero = Integer.parseInt(request.getParameter("nrosala"));
+			funcionActual.setNumero_sala(numero);
 				
-		String str = (request.getParameter("fechahora"));
-		LocalDateTime dateTime = LocalDateTime.parse(str);
-		funcionanterior.setFecha_hora(dateTime);
-			
-		LinkedList<Pelicula>peliculas= lp.getAll();
-			
-		LogicSala ls = new LogicSala();
-		LinkedList<Sala> salas = ls.getAll();
+			String str = (request.getParameter("fechahora"));
+			LocalDateTime dateTime = LocalDateTime.parse(str);
+			funcionActual.setFecha_hora(dateTime);
 		
-		request.setAttribute("funcionanterior", funcionanterior);
-		request.setAttribute("pelicula", pelant);
-		request.setAttribute("peliculas", peliculas);
-		request.setAttribute("salas", salas);
-		if (request.getParameter("bandera")==null) {
-			request.getRequestDispatcher("WEB-INF/Funcion/Edit.jsp").forward(request, response);
+			Integer codigo = Integer.parseInt(request.getParameter("codigopeli"));
+			funcionActual.setCodigo_pelicula(codigo);
+		
+			LogicPelicula lp = new LogicPelicula();
+			Pelicula pelActual = lp.buscarPorCodigo(codigo);
+			
+			LinkedList<Pelicula>peliculas= lp.getAll();
+			
+			LogicSala ls = new LogicSala();
+			LinkedList<Sala> salas = ls.getAll();
+		
+			request.setAttribute("funcionActual", funcionActual);
+			request.setAttribute("pelActual", pelActual);
+			request.setAttribute("peliculas", peliculas);
+			request.setAttribute("salas", salas);
+			request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
 		}
 		
 		if( (request.getParameter("bandera")!=null)) {
-			if (request.getParameter("bandera").toString().equals("cambio") ) {
+			if (request.getParameter("bandera").toString().equals("actualizar") ) {
 				
 				Funcion nuevafuncion = new Funcion();
 				
@@ -121,8 +121,9 @@ public class ActualizarFuncion extends HttpServlet {
 				} catch (DateTimeParseException e) {
 					e.printStackTrace();
 					request.setAttribute("errorFormatoFecha", e.getMessage());
-					request.setAttribute("bandera", null);
-					request.getRequestDispatcher("WEB-INF/Funcion/Edit.jsp").forward(request, response);
+					String error = "error";
+					request.setAttribute("bandera", error);
+					request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
 				}
 			}
 		}

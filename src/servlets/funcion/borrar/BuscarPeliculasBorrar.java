@@ -1,4 +1,4 @@
-package servlets.funcion;
+package servlets.funcion.borrar;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -13,16 +13,16 @@ import entities.Pelicula;
 import logic.LogicPelicula;
 
 /**
- * Servlet implementation class MostrarPeliculaEditar
+ * Servlet implementation class MostrarPeliculaBorrar
  */
-@WebServlet("/MostrarPeliculaEditar")
-public class MostrarPeliculaEditar extends HttpServlet {
+@WebServlet("/BuscarPeliculasBorrar")
+public class BuscarPeliculasBorrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MostrarPeliculaEditar() {
+    public BuscarPeliculasBorrar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,8 +42,9 @@ public class MostrarPeliculaEditar extends HttpServlet {
 			String encontrada = "encontrada";
 			request.setAttribute("encontrada", encontrada);
 			request.setAttribute("peliculas", pelis);
-			request.getRequestDispatcher("WEB-INF/Funcion/EditarFuncion.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Funcion/Borrar/BorrarFuncion.jsp").forward(request, response);
 		}
+
 	}
 
 	/**

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="entities.Persona" %>
+<%@page import="entities.Persona"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="entities.Pelicula"%>
+<%@page import="entities.Pelicula"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,21 +22,13 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" >
 		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-		<script src="style/codigo.js"></script>
-		
-<title>Borrar Funcion</title>
+
 <%
 
 String bandera1 = "";
 
 if ( !(request.getAttribute("encontrada")==(null)) ){
 	 bandera1 = request.getAttribute("encontrada").toString();
-}
-
-String bandera2 = "";
-	
-if ( !(request.getAttribute("borrada")==(null)) ){
-	 bandera2 = request.getAttribute("borrada").toString();
 } 
 
 LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
@@ -48,6 +40,7 @@ LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
 			} else {isEmpleado = 0;}	 
 	 
 %>
+<title>EDITAR FUNCION</title>
 </head>
 <body>
 <div class="fondo">
@@ -79,20 +72,20 @@ LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
             </div>
         </nav>
 	
-	<%if ( request.getAttribute("encontrada")==(null) ) { %>
+	
+	<%	if ( request.getAttribute("encontrada")==(null) ){ %>
 		<br>
 		<br>
 		<h2>Ingrese nombre de la pelicula</h2>
-		<form class="addPelicula" action="MostrarPeliculaBorrar" method="get" >
+		<form class="addPelicula" action="BuscarPeliculasEditar" method="get" >
 			<label for="inputNombre" >Nombre de la pelicula</label>
     		<input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">
     		<br>
    		 	<button class="btn btn-lg btn-primary btn-block" type="submit" >BUSCAR</button>
     	</form>
     <%} %>
-  
-    <%if ( !(request.getAttribute("encontrada")==(null)) && bandera1.equals("encontrada") ) {%>
-    	<br>
+	<% if (!(request.getAttribute("encontrada")==(null)) && bandera1.equals("encontrada")){  %>
+		<br>
 		<br>
     	<br>
 		<%for (Pelicula pel : lp){ %>
@@ -105,7 +98,7 @@ LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
                     <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
                     <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
                     <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
-                    <form action="BorraFuncion" method="post">
+                    <form action="BuscarFuncionesDePeliculaEditar" method="post">
                     	<input type="hidden" name="codigo" value="<%=pel.getCodigo() %>"/>
                         <br/>
                         <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >MOSTRAR FUNCIONES</button>
@@ -114,14 +107,7 @@ LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
             </div>
               
         <%}%> 
-    <%}%>
-         <%if ( !(request.getAttribute("borrada")==(null)) && bandera2.equals("borrada")){%>
-    		<script>
-    			window.alert("sala borrada!")
-    		</script>
-    	<%}%>  
-    	  
+    <%}%>  
 </div>
-
 </body>
 </html>

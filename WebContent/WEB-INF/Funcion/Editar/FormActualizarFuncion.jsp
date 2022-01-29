@@ -14,9 +14,9 @@
 <script src="style/codigo.js"></script>
 <title>EDITAR SALA</title>
 <% 
-Funcion funcionanterior = (Funcion)request.getAttribute("funcionanterior");
+Funcion funcionActual = (Funcion)request.getAttribute("funcionActual");
 
-Pelicula pelant = (Pelicula)request.getAttribute("pelicula");
+Pelicula pelActual = (Pelicula)request.getAttribute("pelActual");
 
 Integer isEmpleado = 0;
 Persona per = (Persona)request.getSession().getAttribute("usuario");
@@ -62,45 +62,44 @@ LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");
      <br>
 	<h1>Edite la funcion</h1>
 	<form class="addFuncion" action="ActualizarFuncion" method="post" >
-	<div>
-        <label>Peliculas</label>
-        <select name="elegirpelicula" required="required">
-        	<% for (Pelicula pel: lp){ %>
-        		<% if (pel.getCodigo() == pelant.getCodigo()){ %>
-        			<option value="<%= pel.getCodigo() %>" selected="selected"><%= pel.getNombre() %></option>
-        		<% } else { %>
-            		<option value="<%= pel.getCodigo() %>"><%= pel.getNombre() %></option>
+		<div>
+        	<label>Peliculas</label>
+        	<select name="elegirpelicula" required="required">
+        		<% for (Pelicula pel: lp){ %>
+        			<% if (pel.getCodigo() == pelActual.getCodigo()){ %>
+        				<option value="<%= pel.getCodigo() %>" selected="selected"><%= pel.getNombre() %></option>
+        			<% } else { %>
+            			<option value="<%= pel.getCodigo() %>"><%= pel.getNombre() %></option>
+            		<% } %>
             	<% } %>
-            <% } %>
-        </select>
-    </div>
-    <br>
-    <div>
-        <label>Salas</label>
-        <select name="elegirsala" required="required">
-        	<% for (Sala sal: ls){ %>
-        		<% if (sal.getNumero() == funcionanterior.getNumero_sala() ){ %>
-        			<option value="<%= sal.getNumero() %>" selected="selected"><%= sal.getNumero() %></option>
-        		<% } else { %>
-            		<option value="<%= sal.getNumero() %>"><%= sal.getNumero() %></option>
+        	</select>
+    	</div>
+    	<br>
+    	<div>
+        	<label>Salas</label>
+        	<select name="elegirsala" required="required">
+        		<% for (Sala sal: ls){ %>
+        			<% if (sal.getNumero() == funcionActual.getNumero_sala() ){ %>
+        				<option value="<%= sal.getNumero() %>" selected="selected"><%= sal.getNumero() %></option>
+        			<% } else { %>
+            			<option value="<%= sal.getNumero() %>"><%= sal.getNumero() %></option>
+            		<% } %>
             	<% } %>
-            <% } %>
-        </select>
-    </div>
-    <br>
-    <label for="inputFechaHora" >Fecha y Hora</label>
-    <% if (request.getAttribute("errorFormatoFecha")!=null) {%>
+        	</select>
+    	</div>
+    	<br>
+    	<label for="inputFechaHora" >Fecha y Hora</label>
+    	<% if (request.getAttribute("errorFormatoFecha")!=null) {%>
         		<div class="alert alert-danger">Formato de fecha invalido</div>
-    <%}%>
-    <input id="inputFechaHora" name="fechahora" class="form-control" placeholder="fechahora" required type="text" value="<%= funcionanterior.getFecha_hora() %>">
-    <br>
-    <input type="hidden" name="bandera" value="cambio">
-    <input type="hidden" name="codigoPelAnt" value="<%=funcionanterior.getCodigo_pelicula()%>">
-    <input type="hidden" name="numSalaAnt" value="<%=funcionanterior.getNumero_sala()%>">
-    <input type="hidden" name="fechaHoraAnt" value="<%=funcionanterior.getFecha_hora()%>">
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonEditar">EDITAR</button>
-
+    	<% }%>
+    	<input id="inputFechaHora" name="fechahora" class="form-control" placeholder="fechahora" required type="text" value="<%= funcionActual.getFecha_hora() %>">
+    	<br>
+    	<input type="hidden" name="codigoPelAnt" value="<%=funcionActual.getCodigo_pelicula()%>">
+    	<input type="hidden" name="numSalaAnt" value="<%=funcionActual.getNumero_sala()%>">
+    	<input type="hidden" name="fechaHoraAnt" value="<%=funcionActual.getFecha_hora()%>">
+    	<input type="hidden" name="bandera" value="actualizar">
+		
+    	<button class="btn btn-lg btn-primary btn-block" type="submit" id="botonEditar">EDITAR</button>
 	</form>
 </div>	
 </body>

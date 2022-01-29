@@ -1,4 +1,4 @@
-package servlets.funcion;
+package servlets.funcion.agregar;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -51,7 +51,7 @@ public class NuevaFuncion extends HttpServlet {
 		} catch (DateTimeParseException e) {
 			e.printStackTrace();
 			request.setAttribute("errorFormatoFecha", e.getMessage());
-			request.getRequestDispatcher("WEB-INF/Funcion/Agregar.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Funcion/Agregar/FormNuevaFuncion.jsp").forward(request, response);
 		}
 		
 	}

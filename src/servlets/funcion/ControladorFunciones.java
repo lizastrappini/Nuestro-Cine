@@ -37,18 +37,18 @@ public class ControladorFunciones extends HttpServlet {
 		
 		if(! (request.getParameter("opc1")==(null)) ){
 			
-			request.getRequestDispatcher("WEB-INF/Funcion/AgregarFuncion.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Funcion/Agregar/AgregarFuncion.jsp").forward(request, response);
 		}
 		
 		else if (! (request.getParameter("opc2")==(null))  ) {
 			 
-			request.getRequestDispatcher("WEB-INF/Funcion/EditarFuncion.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Funcion/Editar/EditarFuncion.jsp").forward(request, response);
 			
 		}
 		
 		else if (! (request.getParameter("opc3")==(null))  ) {
 
-			request.getRequestDispatcher("WEB-INF/Funcion/BorrarFuncion.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Funcion/Borrar/BorrarFuncion.jsp").forward(request, response);
 		}
 	}
 

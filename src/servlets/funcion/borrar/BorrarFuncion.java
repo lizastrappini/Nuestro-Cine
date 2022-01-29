@@ -1,7 +1,7 @@
-package servlets.funcion;
+package servlets.funcion.borrar;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.DataFuncion;
 import entities.Funcion;
-import entities.Pelicula;
-import logic.LogicPelicula;
+import logic.LogicFuncion;
 
 /**
- * Servlet implementation class BorraFuncion
+ * Servlet implementation class Borrar
  */
-@WebServlet("/BorraFuncion")
-public class BorraFuncion extends HttpServlet {
+@WebServlet("/BorrarFuncion")
+public class BorrarFuncion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BorraFuncion() {
+    public BorrarFuncion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,22 +39,21 @@ public class BorraFuncion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer cod=Integer.parseInt(request.getParameter("codigo"));
 		Funcion fun = new Funcion();
-
-		Pelicula pel = new Pelicula();
-		LogicPelicula lp = new LogicPelicula();
+		LogicFuncion lf = new LogicFuncion();
 		
-		fun.setCodigo_pelicula(cod);
-		DataFuncion df= new DataFuncion();
+		Integer codigo = Integer.parseInt(request.getParameter("codigopeli"));
+		fun.setCodigo_pelicula(codigo);
+		Integer numero = Integer.parseInt(request.getParameter("nrosala"));
+		fun.setNumero_sala(numero);
+		String str = (request.getParameter("fechahora"));
+		LocalDateTime dateTime = LocalDateTime.parse(str);
+		fun.setFecha_hora(dateTime);
+		lf.borrar(fun);
+		String borrada= "borrada";
+		request.setAttribute("borrada", borrada);
 		
-		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
-		
-		pel = lp.buscarPorCodigo(cod);
-		request.setAttribute("pel", pel);
-
-		request.setAttribute("listafunciones", funciones);
-		request.getRequestDispatcher("WEB-INF/Funcion/Borrar.jsp").forward(request, response);
+		request.getRequestDispatcher("Empleados.jsp").forward(request, response);
 	}
 
 }
