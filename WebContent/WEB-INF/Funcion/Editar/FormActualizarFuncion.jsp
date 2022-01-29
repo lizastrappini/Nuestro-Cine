@@ -13,20 +13,20 @@
 <link href="style/css/styles.css" rel="stylesheet" />
 <script src="style/codigo.js"></script>
 <title>EDITAR SALA</title>
-<% 
+<%
+Integer isEmpleado = 0;
+Persona per = (Persona)request.getSession().getAttribute("usuario");
+
+if ( !(per==null)){
+	isEmpleado = per.getHabilitado();
+} else {isEmpleado = 0;}
+
 Funcion funcionActual = (Funcion)request.getAttribute("funcionActual");
 
 Pelicula pelActual = (Pelicula)request.getAttribute("pelActual");
 
-Integer isEmpleado = 0;
-Persona per = (Persona)request.getSession().getAttribute("usuario");
-
 LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
-LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");
-	
-	if ( !(per==null)){
-		isEmpleado = per.getHabilitado();
-	} else {isEmpleado = 0;}	 
+LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");	 
 %>
 </head>
 <body>
@@ -59,7 +59,10 @@ LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");
             </div>
         </nav>
      <br>
-     <br>
+    <br>
+    <% if (request.getAttribute("modificada")!=null) {%>
+        	<div class="alert alert-success">¡Funcion actualizada con exito!</div>
+    <% }%>
 	<h1>Edite la funcion</h1>
 	<form class="addFuncion" action="ActualizarFuncion" method="post" >
 		<div>
@@ -92,7 +95,8 @@ LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");
     	<% if (request.getAttribute("errorFormatoFecha")!=null) {%>
         		<div class="alert alert-danger">Formato de fecha invalido</div>
     	<% }%>
-    	<input id="inputFechaHora" name="fechahora" class="form-control" placeholder="fechahora" required type="text" value="<%= funcionActual.getFecha_hora() %>">
+    	<input id="inputFechaHora" name="fechahora" class="form-control" 
+    		placeholder="fechahora" required type="text" value="<%= funcionActual.getFecha_hora() %>">
     	<br>
     	<input type="hidden" name="codigoPelAnt" value="<%=funcionActual.getCodigo_pelicula()%>">
     	<input type="hidden" name="numSalaAnt" value="<%=funcionActual.getNumero_sala()%>">

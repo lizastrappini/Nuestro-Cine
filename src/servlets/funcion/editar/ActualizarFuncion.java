@@ -47,21 +47,20 @@ public class ActualizarFuncion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 					
-		if ( request.getParameter("bandera")==null){
 			Funcion funcionActual = new Funcion();
 				
-			Integer numero = Integer.parseInt(request.getParameter("nrosala"));
+			Integer numero = Integer.parseInt(request.getParameter("numSalaAnt"));
 			funcionActual.setNumero_sala(numero);
 				
-			String str = (request.getParameter("fechahora"));
+			String str = (request.getParameter("fechaHoraAnt"));
 			LocalDateTime dateTime = LocalDateTime.parse(str);
 			funcionActual.setFecha_hora(dateTime);
 		
-			Integer codigo = Integer.parseInt(request.getParameter("codigopeli"));
-			funcionActual.setCodigo_pelicula(codigo);
+			Integer codigoPel = Integer.parseInt(request.getParameter("codigoPelAnt"));
+			funcionActual.setCodigo_pelicula(codigoPel);
 		
 			LogicPelicula lp = new LogicPelicula();
-			Pelicula pelActual = lp.buscarPorCodigo(codigo);
+			Pelicula pelActual = lp.buscarPorCodigo(codigoPel);
 			
 			LinkedList<Pelicula>peliculas= lp.getAll();
 			
@@ -72,6 +71,8 @@ public class ActualizarFuncion extends HttpServlet {
 			request.setAttribute("pelActual", pelActual);
 			request.setAttribute("peliculas", peliculas);
 			request.setAttribute("salas", salas);
+			
+		if ( request.getParameter("bandera")==null){
 			request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
 		}
 		
@@ -83,48 +84,29 @@ public class ActualizarFuncion extends HttpServlet {
 				Integer numero_sala = Integer.parseInt(request.getParameter("elegirsala"));
 				nuevafuncion.setNumero_sala(numero_sala);
 				
+				Integer codigo_peli = Integer.parseInt(request.getParameter("elegirpelicula"));
+				nuevafuncion.setCodigo_pelicula(codigo_peli);
+				
 				String str2 = (request.getParameter("fechahora"));
 				try {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 					LocalDateTime dateTime2 = LocalDateTime.parse(str2, formatter);
 					nuevafuncion.setFecha_hora(dateTime2);
-				
-					Integer codigo_peli = Integer.parseInt(request.getParameter("elegirpelicula"));
-					nuevafuncion.setCodigo_pelicula(codigo_peli);
-				
-					Funcion anteriorFuncion = new Funcion();
-				
-					Integer numSalaAnt = Integer.parseInt(request.getParameter("numSalaAnt"));
-					anteriorFuncion.setNumero_sala(numSalaAnt);
-				
-					String str3 = (request.getParameter("fechaHoraAnt"));
-					LocalDateTime dateTime3 = LocalDateTime.parse(str3);
-					anteriorFuncion.setFecha_hora(dateTime3);
-				
-					Integer codigoPelAnt = Integer.parseInt(request.getParameter("codigoPelAnt"));
-					anteriorFuncion.setCodigo_pelicula(codigoPelAnt);
-				
-					if ( !(anteriorFuncion.equals(nuevafuncion)) ) {
-					
-						LogicFuncion lf = new LogicFuncion();
-						lf.modificar(nuevafuncion, anteriorFuncion);
-						String modificada = "modificada";
-						request.setAttribute("modificada", modificada);
-						request.getRequestDispatcher("Empleados.jsp").forward(request, response);
-				
-					} else if ( anteriorFuncion.equals(nuevafuncion) ){ 
-						String nocambio = "nocambio";
-						request.setAttribute("nocambio", nocambio);
-						request.getRequestDispatcher("Empleados.jsp").forward(request, response);
-
-					}
 				} catch (DateTimeParseException e) {
 					e.printStackTrace();
 					request.setAttribute("errorFormatoFecha", e.getMessage());
-					String error = "error";
-					request.setAttribute("bandera", error);
 					request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
 				}
+				
+					if ( !(funcionActual.equals(nuevafuncion)) ) {
+					
+						LogicFuncion lf = new LogicFuncion();
+						lf.modificar(nuevafuncion, funcionActual);
+						request.setAttribute("modificada", "modificada");
+						request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
+				
+					}
+					request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
 			}
 		}
 	}
