@@ -73,17 +73,7 @@ public class DataCostoEntrada {
 		CostoEntrada costo = null;
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("drop temporary table if exists ult_valor;\n"
-					+ "create temporary table ult_valor\n"
-					+ "\n"
-					+ "select max(fecha_desde) ult_fecha\n"
-					+ "from costo_entrada\n"
-					+ "where fecha_desde <= current_date();\n"
-					+ "\n"
-					+ "select uv.ult_fecha, ce.costo\n"
-					+ "from costo_entrada ce\n"
-					+ "inner join ult_valor uv\n"
-					+ "on ce.fecha_desde=uv.ult_fecha;");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("call tp_java_cine.costo_actual();");
 			
 			rs = stmt.executeQuery();
 			
