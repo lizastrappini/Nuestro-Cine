@@ -101,7 +101,7 @@ if ( !(per==null)){
                     <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
                     <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
                     <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
-                    <form action="IngresarDatosFun" method="get">
+                    <form action="NuevaFuncion" method="get">
                     	<input type="hidden" name="codigo" value="<%=pel.getCodigo() %>"/>
                         <br/>
                         <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >AGREGAR FUNCION</button>

@@ -28,12 +28,10 @@ public class DataFuncion {
 			
 			Sala s = new Sala();
 			s.setNumero(nuevaFuncion.getNumero_sala());
-			DataSala ds = new DataSala();
-			Sala sal = ds.buscarSala(s);
 			
 			DataButacaFuncion dbf = new DataButacaFuncion();
 			
-			for(int i = 1; i <= sal.getCupo(); ++i){ 
+			for(int i = 1; i <= 48; ++i){ 
 				ButacaFuncion nuevaButaca = new ButacaFuncion();
 				nuevaButaca.setNumero(i);
 				nuevaButaca.setCod_pelicula(nuevaFuncion.getCodigo_pelicula());

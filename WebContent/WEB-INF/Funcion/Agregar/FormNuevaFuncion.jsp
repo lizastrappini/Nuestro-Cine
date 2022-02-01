@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="entities.Persona" %>    
+<%@page import="entities.Persona" %>
+<%@page import="entities.Pelicula" %>
+<%@page import="entities.Sala" %>
+<%@page import="java.util.LinkedList"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +31,10 @@ Persona per = (Persona)request.getSession().getAttribute("usuario");
 			
 if ( !(per==null)){
 	isEmpleado = per.getHabilitado();
-} else {isEmpleado = 0;}	 	 
+} else {isEmpleado = 0;}	 
+
+LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
+LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");
 %>
 
 </head>
@@ -63,19 +69,38 @@ if ( !(per==null)){
         </nav>
 		<br>
     	<br>
+    	<% if (request.getAttribute("cargada")!=null) {%>
+        	<div class="alert alert-success">¡Funcion creada con exito!</div>
+    <% }%>
+    	<h1>Ingrese los datos de la nueva funcion</h1>
     	<form action="NuevaFuncion" method="get">
     		<%String codigo = request.getParameter("codigo"); %>
     		<input type="hidden" name="codigo" value="<%=codigo%>"/>
-    		
-			<label for="inputNumeroSala" >Numero de Sala</label>
-    		<input id="inputNumeroSala" name="numero" class="form-control" placeholder="numero" required type="text">
-    		
+			<div>
+        		<label>Salas</label>
+        		<select name="elegirsala" required="required">
+        			<% for (Sala sal: ls){ %>
+            			<option value="<%= sal.getNumero() %>"><%= sal.getNumero() %></option>
+            		<% } %>
+        		</select>
+    		</div>
+    		<br>
+    		<div>
+        		<label>Peliculas</label>
+        		<select name="elegirpelicula" required="required">
+        			<% for (Pelicula pel: lp){ %>
+            			<option value="<%= pel.getCodigo() %>"><%= pel.getNombre() %></option>
+            		<% } %>
+        		</select>
+    		</div>
+    		<br>
     		<label for="inputFecha" >Fecha y Hora de la Funcion (yyyy-MM-dd HH:mm)</label>
     		<% if (request.getAttribute("errorFormatoFecha")!=null) {%>
         		<div class="alert alert-danger">Formato de fecha invalido</div>
         	<%}%>
     		<input id="inputFecha" name="fechahora" class="form-control" placeholder="fechahora" required type="text">
     		<br>
+    		<input type="hidden" name="bandera" value="agregar">
     		<button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >AGREGAR FUNCION</button>
     	</form>
 </body>
