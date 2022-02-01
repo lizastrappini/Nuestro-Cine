@@ -1,4 +1,4 @@
-package servlets.sala;
+package servlets.sala.agregar;
 
 import java.io.IOException;
 
@@ -35,7 +35,6 @@ public class NuevaSala extends HttpServlet {
 		
 		
 		sal.setNumero(Integer.parseInt(request.getParameter("numero").toString()));
-		sal.setCupo(Integer.parseInt(request.getParameter("cupo").toString()));
 		ls.cargar(sal);
 		
 		String cargada = "cargada";

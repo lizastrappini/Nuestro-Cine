@@ -65,7 +65,6 @@ public class ActualizarSala extends HttpServlet {
 					Integer cupo = Integer.parseInt(request.getParameter("cupo"));					
 				
 					salacambiada.setNumero(numero);
-					salacambiada.setCupo(cupo);
 							
 					if ( !(salaanterior.equals(salacambiada.toString())) ) {
 						
