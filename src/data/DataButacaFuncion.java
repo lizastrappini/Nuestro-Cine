@@ -105,12 +105,11 @@ public class DataButacaFuncion {
 		PreparedStatement stmt=null;
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from butaca_funcion where"
-					+ "cod_pelicula=? and fecha_hora_funcion=? and nro_sala=? and numero=?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"delete from butaca_funcion where cod_pelicula=? and fecha_hora_funcion=? and nro_sala=?");
 			stmt.setInt(1, borraButaca.getCod_pelicula());
 			stmt.setObject(2, borraButaca.getFecha_hora_funcion());
 			stmt.setInt(3, borraButaca.getNro_sala());
-			stmt.setInt(4, borraButaca.getNumero());
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {

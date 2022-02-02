@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.time.*"%>
-<%@page import="java.time.format.*"%>
 <%@page import="entities.Persona" %>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Pelicula"%>
@@ -25,23 +23,30 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" >
 		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 		<script src="style/codigo.js"></script>
-	<title>NUEVA FUNCION</title>
+		
+<title>Borrar Funcion</title>
 <%
 
 String bandera1 = "";
 
 if ( !(request.getAttribute("encontrada")==(null)) ){
 	 bandera1 = request.getAttribute("encontrada").toString();
+}
+
+String bandera2 = "";
+	
+if ( !(request.getAttribute("borrada")==(null)) ){
+	 bandera2 = request.getAttribute("borrada").toString();
 } 
 
 LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
-
-Integer isEmpleado = 0;
-Persona per = (Persona)request.getSession().getAttribute("usuario");
+	 Integer isEmpleado = 0;
+		Persona per = (Persona)request.getSession().getAttribute("usuario");
 			
-if ( !(per==null)){
-	isEmpleado = per.getHabilitado();
-} else {isEmpleado = 0;}	 	 
+			if ( !(per==null)){
+				isEmpleado = per.getHabilitado();
+			} else {isEmpleado = 0;}	 
+	 
 %>
 </head>
 <body>
@@ -78,11 +83,11 @@ if ( !(per==null)){
 		<br>
 		<br>
 		<h2>Ingrese nombre de la pelicula</h2>
-		<form class="addPelicula" action="MostrarPelicula" method="get" >
-		<label for="inputNombre" >Nombre de la pelicula</label>
-    	<input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">
-    	<br>
-   		 <button class="btn btn-lg btn-primary btn-block" type="submit" >BUSCAR</button>
+		<form class="addPelicula" action="BuscarPeliculasBorrar" method="get" >
+			<label for="inputNombre" >Nombre de la pelicula</label>
+    		<input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">
+    		<br>
+   		 	<button class="btn btn-lg btn-primary btn-block" type="submit" >BUSCAR</button>
     	</form>
     <%} %>
   
@@ -90,8 +95,7 @@ if ( !(per==null)){
     	<br>
 		<br>
     	<br>
-		
-			<%for (Pelicula pel : lp){ %>
+		<%for (Pelicula pel : lp){ %>
 			
 			<div class="pelicula">
 				<div class="infopelicula">
@@ -101,23 +105,23 @@ if ( !(per==null)){
                     <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
                     <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
                     <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
-                    <form action="NuevaFuncion" method="get">
+                    <form action="BuscarFuncionesDePeliculaBorrar" method="post">
                     	<input type="hidden" name="codigo" value="<%=pel.getCodigo() %>"/>
-                    	<label for="inputNumeroSala" >Numero de Sala</label>
-    					<input id="inputNumeroSala" name="numero" class="form-control" placeholder="numero" required type="text">
-    					<label for="inputFecha" >Fecha y Hora de la Funcion (yyyy-MM-dd HH:mm)</label>
-    					<input id="inputFecha" name="fechahora" class="form-control" placeholder="fechahora" required type="text">
-                        <% //if ( request.getAttribute("errorFormatoFecha") != null ) {%>
-                        	<!-- <span>Formato de fecha no valida</span> -->
-                        <%//}%>
                         <br/>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >AGREGAR FUNCION</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >MOSTRAR FUNCIONES</button>
                     </form>
                 </div>
             </div>
-            <%}%>
+              
+        <%}%> 
     <%}%>
-    
+         <%if ( !(request.getAttribute("borrada")==(null)) && bandera2.equals("borrada")){%>
+    		<script>
+    			window.alert("sala borrada!")
+    		</script>
+    	<%}%>  
+    	  
 </div>
+
 </body>
 </html>

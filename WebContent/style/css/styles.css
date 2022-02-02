@@ -5407,6 +5407,7 @@ textarea.form-control-lg {
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+  width: 20%;/*Agrego atributo width para cambiar el ancho */
 }
 
 .alert-heading {

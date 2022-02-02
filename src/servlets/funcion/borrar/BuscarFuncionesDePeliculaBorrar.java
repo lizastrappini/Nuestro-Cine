@@ -1,4 +1,4 @@
-package servlets.sala;
+package servlets.funcion.borrar;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Sala;
-import logic.LogicSala;
+import data.DataFuncion;
+import entities.Funcion;
+import entities.Pelicula;
+import logic.LogicPelicula;
 
 /**
- * Servlet implementation class ControladorSalas
+ * Servlet implementation class BorraFuncion
  */
-@WebServlet({"/EditSalas","/Controladorsalas","/ControladorSalas"})
-public class ControladorSalas extends HttpServlet {
+@WebServlet("/BuscarFuncionesDePeliculaBorrar")
+public class BuscarFuncionesDePeliculaBorrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControladorSalas() {
+    public BuscarFuncionesDePeliculaBorrar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,27 +41,22 @@ public class ControladorSalas extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		LogicSala ls = new LogicSala();
-		LinkedList<Sala> salas = ls.getAll();
-		
-		request.setAttribute("salas", salas);
-		
-		if(! (request.getParameter("opc1")==(null)) ){
-			
-			request.getRequestDispatcher("WEB-INF/Sala/Agregar/AgregarSala.jsp").forward(request, response);
-		}
-		
-		else if (! (request.getParameter("opc2")==(null))  ) {
-			 
-			request.getRequestDispatcher("WEB-INF/Sala/EditarSala.jsp").forward(request, response);
-			
-		}
-		
-		else if (! (request.getParameter("opc3")==(null))  ) {
+		Integer cod=Integer.parseInt(request.getParameter("codigo"));
+		Funcion fun = new Funcion();
 
-			request.getRequestDispatcher("WEB-INF/Sala/BorrarSala.jsp").forward(request, response);
-		}
+		Pelicula pel = new Pelicula();
+		LogicPelicula lp = new LogicPelicula();
+		
+		fun.setCodigo_pelicula(cod);
+		DataFuncion df= new DataFuncion();
+		
+		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
+		
+		pel = lp.buscarPorCodigo(cod);
+		request.setAttribute("pel", pel);
+
+		request.setAttribute("listafunciones", funciones);
+		request.getRequestDispatcher("WEB-INF/Funcion/Borrar/MostrarFuncionesDePelicula.jsp").forward(request, response);
 	}
 
 }

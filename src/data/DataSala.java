@@ -12,11 +12,10 @@ public class DataSala {
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().prepareStatement("insert into sala"
-					+ "(numero, cupo) values (?,?)",
+					+ "(numero) values (?)",
 					Statement.RETURN_GENERATED_KEYS);
 			
 			stmt.setInt(1,  nuevaSala.getNumero());
-			stmt.setInt(2, nuevaSala.getCupo());
 			
 			stmt.executeUpdate();
 			
@@ -44,12 +43,11 @@ public class DataSala {
 		LinkedList<Sala>salas = new LinkedList<>();
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("Select nro_sala, cupo from sala");
+			rs= stmt.executeQuery("Select numero from sala");
 			if (rs != null ) {
 				while (rs.next()) {
 					Sala s = new Sala();
-					s.setNumero(rs.getInt("nro_sala"));
-					s.setCupo(rs.getInt("cupo"));
+					s.setNumero(rs.getInt("numero"));
 					
 					salas.add(s);
 				}
@@ -82,7 +80,6 @@ public class DataSala {
 			if(rs != null && rs.next()) {
 				sal = new Sala();
 				sal.setNumero(rs.getInt("numero"));
-				sal.setCupo(rs.getInt("cupo"));
 			}
 			
 		} catch (SQLException e) {
@@ -103,11 +100,10 @@ public class DataSala {
 	public void modificar(Sala sal) {
 		PreparedStatement stmt =null;
 		try {
-			stmt= DbConnector.getInstancia().getConn().prepareStatement("update sala set numero=?, cupo=? where numero=?");
+			stmt= DbConnector.getInstancia().getConn().prepareStatement("update sala set numero=? where numero=?");
 			
 			stmt.setInt(1, sal.getNumero());
-			stmt.setInt(2, sal.getCupo());
-			stmt.setInt(3, sal.getNumero());
+			stmt.setInt(2, sal.getNumero());
 			
 			stmt.executeUpdate();
 			
@@ -122,6 +118,7 @@ public class DataSala {
 			}
 		}
 	}
+	
 	public void borrarSala(Sala borraSala) {
 		PreparedStatement stmt=null;
 		

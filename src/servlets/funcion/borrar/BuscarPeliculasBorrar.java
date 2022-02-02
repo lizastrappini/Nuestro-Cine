@@ -1,6 +1,7 @@
-package servlets.sala;
+package servlets.funcion.borrar;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Sala;
-import logic.LogicSala;
+import entities.Pelicula;
+import logic.LogicPelicula;
 
 /**
- * Servlet implementation class NuevaSala
+ * Servlet implementation class MostrarPeliculaBorrar
  */
-@WebServlet("/NuevaSala")
-public class NuevaSala extends HttpServlet {
+@WebServlet("/BuscarPeliculasBorrar")
+public class BuscarPeliculasBorrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NuevaSala() {
+    public BuscarPeliculasBorrar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +31,20 @@ public class NuevaSala extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Sala sal = new Sala();
-		LogicSala ls = new LogicSala();
+		LogicPelicula lp = new LogicPelicula();
 		
+		String nombre = request.getParameter("nombre").toString();
+
 		
-		sal.setNumero(Integer.parseInt(request.getParameter("numero").toString()));
-		sal.setCupo(Integer.parseInt(request.getParameter("cupo").toString()));
-		ls.cargar(sal);
+		LinkedList<Pelicula> pelis = lp.buscar(nombre);
 		
-		String cargada = "cargada";
-		request.setAttribute("cargada", cargada);
-		request.getRequestDispatcher("Empleados.jsp").forward(request, response);
-		
-		
+		if ( !(pelis.isEmpty()) ) {
+			String encontrada = "encontrada";
+			request.setAttribute("encontrada", encontrada);
+			request.setAttribute("peliculas", pelis);
+			request.getRequestDispatcher("WEB-INF/Funcion/Borrar/BorrarFuncion.jsp").forward(request, response);
+		}
+
 	}
 
 	/**

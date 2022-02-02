@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.time.*"%>
-<%@page import="java.time.format.*"%>
 <%@page import="entities.Sala"%>
 <%@page import="logic.LogicSala"%>
-<%@page import="entities.Persona"%>
+<%@page import="entities.Persona" %>
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>---EDIT SALAS---</title>
+        <title>---EDIT PELICULAS---</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" ></script>
@@ -25,25 +23,25 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" >
 		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
-<%  
-	
-	String bandera1 = "";
-	
-	 if ( !(request.getAttribute("bandera1")==(null)) ){
-		 bandera1 = request.getAttribute("bandera1").toString();
-	}
-	 
-	 String bandera3 = "";
+		<script src="style/codigo.js"></script>
 		
-	 if ( !(request.getAttribute("bandera3")==(null)) ){
-		 bandera3 = request.getAttribute("bandera3").toString();
-	} 
-	 
-	 
-		Sala sala = (Sala)request.getAttribute("sala");
+<title>Borrar Sala</title>
+<%
+
+String bandera1 = "";
+
+if ( !(request.getAttribute("encontrada")==(null)) ){
+	 bandera1 = request.getAttribute("encontrada").toString();
+}
+
+String bandera2 = "";
 	
-		Integer isEmpleado = 0;
+if ( !(request.getAttribute("borrada")==(null)) ){
+	 bandera2 = request.getAttribute("borrada").toString();
+} 
+
+	 Sala sala=(Sala)request.getAttribute("sala");
+	 Integer isEmpleado = 0;
 		Persona per = (Persona)request.getSession().getAttribute("usuario");
 			
 			if ( !(per==null)){
@@ -51,6 +49,7 @@
 			} else {isEmpleado = 0;}	 
 	 
 %>
+
 </head>
 <body>
 <div class="fondo">
@@ -82,38 +81,41 @@
             </div>
         </nav>
 	
-	
-	<%	if ( request.getAttribute("bandera1")==(null) ){ %>
-	<br>
-	<br>
-	<h2>Ingrese numero de la sala</h2>
-	<form class="addPelicula" action="BuscarSala" method="post" >
-    <input id="inputNumero" name="numero" class="form-control" placeholder="numero de la sala" required type="text">
-    <br>
-    <button class="btn btn-lg btn-primary btn-block" >BUSCAR</button>
-    </form>
-	
-	<%} if (!(request.getAttribute("bandera1")==(null)) && bandera1.equals("encontrada")){  %>
+	<%if ( request.getAttribute("encontrada")==(null) ) { %>
 		<br>
 		<br>
+		<h2>Ingrese numero de la sala</h2>
+		<form class="addPelicula" action="BuscarSala" method="get" >
+		<label for="inputNumero" >Numero de la sala</label>
+    	<input id="inputNumero" name="numero" class="form-control" placeholder="numero de la sala" required type="text">
+    	<br>
+   		 <button class="btn btn-lg btn-primary btn-block" type="submit" >BUSCAR</button>
+    	</form>
+    <%} %>
+  
+    <%if ( !(request.getAttribute("encontrada")==(null)) && bandera1.equals("encontrada") ) {%>
+    	<br>
+		<br>
+    	<br>
 			
 			<div class="pelicula">
 							<div class="infopelicula">
 							<p class="infopelicula"> <b>Numero Sala :</b> <%= sala.getNumero() %></p>
-                            <p class="infopelicula"> <b>Cupo :</b> <%= sala.getCupo() %></p>
-                            <form action="ActualizarSala" method="post">
+                            <form action="BorraSala" method="get">
                             <input type="hidden" name="numerosala" value="<%= sala.getNumero() %>">
-                            <button class="buttonClass">Editar</button>
+                            <button id="botonBorrar" class="buttonBorrar" >Borrar</button>
                             </form>
                             </div>
               </div>
               
-	<%} %>
-	<br>
-	<a class="boton_volver" href="Empleados.jsp">VOLVER </a> 
-<br>	
+              <%} if ( !(request.getAttribute("borrada")==(null)) && bandera2.equals("borrada") ) {%>
+    	<script>
+    	window.alert("sala borrada!")
+    	</script>
+    	<%} %> 
 
+    
+  	  
 </div>
-
 </body>
 </html>

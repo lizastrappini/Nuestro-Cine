@@ -1,4 +1,4 @@
-package servlets.funcion;
+package servlets.funcion.agregar;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -15,14 +15,14 @@ import logic.LogicPelicula;
 /**
  * Servlet implementation class MostrarPelicula
  */
-@WebServlet("/MostrarPelicula")
-public class MostrarPelicula extends HttpServlet {
+@WebServlet("/BuscarPeliculasAgregar")
+public class BuscarPeliculasAgregar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MostrarPelicula() {
+    public BuscarPeliculasAgregar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,16 +35,14 @@ public class MostrarPelicula extends HttpServlet {
 		
 		String nombre = request.getParameter("nombre").toString();
 
-		
 		LinkedList<Pelicula> pelis = lp.buscar(nombre);
 		
 		if ( !(pelis.isEmpty()) ) {
 			String encontrada = "encontrada";
 			request.setAttribute("encontrada", encontrada);
 			request.setAttribute("peliculas", pelis);
-			request.getRequestDispatcher("WEB-INF/Funcion/AgregarFuncion.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Funcion/Agregar/AgregarFuncion.jsp").forward(request, response);
 		}
-
 	}
 
 	/**
