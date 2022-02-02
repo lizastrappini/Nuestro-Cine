@@ -69,7 +69,7 @@ public class DataCostoEntrada {
 	
 	public CostoEntrada buscarCostoActual() {
 		ResultSet rs = null;
-		Statement stmt=null;
+		PreparedStatement stmt=null;
 		CostoEntrada costo = null;
 		
 		try {
