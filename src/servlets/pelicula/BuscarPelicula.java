@@ -44,6 +44,10 @@ public class BuscarPelicula extends HttpServlet {
 			request.setAttribute("encontrada", encontrada);
 			request.setAttribute("peliculas", pelis);
 			request.getRequestDispatcher("WEB-INF/Pelicula/BorrarPelicula.jsp").forward(request, response);
+		} else {
+			String noencontrada = "noencontrada";
+			request.setAttribute("noencontrada", noencontrada);
+			request.getRequestDispatcher("WEB-INF/Pelicula/BorrarPelicula.jsp").forward(request, response);
 		}
 	}
 
@@ -60,22 +64,16 @@ public class BuscarPelicula extends HttpServlet {
 		LinkedList<Pelicula> pelis = lp.buscar(nombre);
 		
 		if ( !(pelis.isEmpty()) ) {
-			String bandera1 = "encontrada";
-			request.setAttribute("bandera1", bandera1);
+			String encontrada = "encontrada";
+			request.setAttribute("encontrada", encontrada);
 			request.setAttribute("peliculas", pelis);
 			request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
 			
-		}   
-		
-		
-		
-		
-		
-	
-		
-//		
-		
-		
+		}   else {
+			String noencontrada = "noencontrada";
+			request.setAttribute("noencontrada", noencontrada);
+			request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
+		}
 		
 	}
 

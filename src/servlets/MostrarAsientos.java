@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -10,9 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Funcion;
+import entities.Pelicula;
+import entities.Sala;
 import logic.LogicButFun;
+import logic.LogicCostoEntrada;
+import logic.LogicPelicula;
+import logic.LogicSala;
 import entities.ButacaFuncion;
+import entities.CostoEntrada;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -34,32 +43,34 @@ public class MostrarAsientos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		Integer cod=Integer.parseInt(request.getParameter("codigopeli"));
 		Integer nro_sala=Integer.parseInt(request.getParameter("nrosala"));
-		String fecha1=request.getParameter("fechahora");
+		String fecha=request.getParameter("fechahora");
 		
-		Funcion fun = new Funcion();
+		Sala sala = new Sala();
 		
-		fun.setCodigo_pelicula(cod);
-		fun.setNumero_sala(nro_sala);
+		sala.setNumero(nro_sala);
+		LogicSala ls = new LogicSala();
+		Sala salaElegida = ls.buscar(sala);
 		
-		DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LogicPelicula lp = new LogicPelicula();
+		Pelicula peli = lp.buscarPorCodigo(cod);
 		
-		LocalDate fecha = LocalDate.parse(fecha1, inputFormat);
-
-        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        System.out.println(fecha.format(outputFormat));
-		//fun.setFecha_hora(fecha);
 		
-		LogicButFun lbf = new LogicButFun();
 		
-		LinkedList<ButacaFuncion> butacas = lbf.buscar(fun);
-
-		request.setAttribute("listabutacas", butacas);
-		request.getRequestDispatcher("WEB-INF/FunManagement.jsp").forward(request, response);
+		
+		LogicCostoEntrada lce = new LogicCostoEntrada();
+		CostoEntrada ce = lce.costoActual();
+		
+		Double costo = ce.getCosto();
+		
+		
+		request.setAttribute("fechafuncion", fecha);
+		request.setAttribute("costo", costo);
+		request.setAttribute("peli", peli);
+		request.setAttribute("salaElegida", salaElegida);
+		request.getRequestDispatcher("WEB-INF/Asientos.jsp").forward(request, response);
 	}
 
 	/**

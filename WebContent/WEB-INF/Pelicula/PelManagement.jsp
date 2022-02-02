@@ -14,33 +14,16 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
         <title>---CINE---</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" ></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="style/css/styles.css" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" >
-		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" >
-		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@200&display=swap" rel="stylesheet">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" >
-		<link href="https://fonts.googleapis.com/css2?family=Hind:wght@300&display=swap" rel="stylesheet">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" >
-		<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+        <script src="Javascript/SweetAlert.js"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="Javascript/Script.js"></script>
 		 <% 
 		 
 		Month mes = LocalDate.now().getMonth(); //obtengo el mes
-		String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();  //lo convierto a mayusculas
+		String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();  // convierto a mayusculas
 		
 		LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("listapeliculas");
 		Integer isEmpleado = 0;
@@ -54,6 +37,7 @@
    </head>
 
 <body>
+
 <div class="fondo" >		
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
@@ -74,7 +58,8 @@
                         <li class="nav-item"><a class="nav-link" href="SignIn.html" id="signin">Iniciar sesion</a></li>
                         <%}else {%> 
                         <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout" href="SignOut" >Cerrar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link"  onclick="cerrarSesion()">Cerrar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link" id="" href="MiCuenta.jsp">Mi cuenta</a></li>
                         
                    		<%} %>	
                     </ul>
@@ -91,12 +76,32 @@
 <br>
 <!-- titulo si seleccionamos estrenos -->
 
-<%if( !(request.getAttribute("estrenos")==null) && (request.getAttribute("estrenos").toString()).equals("true")){%> 
+<%if( !(request.getAttribute("estrenos")==null) ){%> 
 
+	<% if ( lp==null || lp.isEmpty()){ %>
+	<script type="text/javascript">
+	Swal.fire({
+		  imageUrl: 'https://images.emojiterra.com/twitter/v13.1/512px/2639.png',
+		  imageHeight: 100,
+		  text: 'No hay estrenos este mes',
+		  timer: 2000,
+		  timerProgressBar: true,
+		  allowOutsideClick: false,
+		  didOpen: () => {
+			    Swal.showLoading()
+			    const b = Swal.getHtmlContainer().querySelector('b')
+			    timerInterval = setInterval(() => {
+			      b.textContent = Swal.getTimerLeft()
+			    }, 100)
+			  },
+		})
+		setTimeout( function() { window.location.href = "index.jsp"; }, 2000 );
+	</script>
+	
+	<%} else {%>
 	<h1 class="titulo_estrenos"> ESTRENOS DEL MES DE <%=nombre %></h1>
-	<%} if (lp.isEmpty()){ %>
-	<p class="noEstreno">No hay estrenos este mes!</p>
-	<%} %>
+	
+	<% }} %>
 
 <% for (Pelicula pel : lp){ %>
 	  <!-- Contenido peliculas-->
@@ -111,12 +116,37 @@
                             <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
                             <button class="buttonClass" id="">  Comprar   </button>
                             </form>
+                            
+                            
         </div>
         
 	<%} %>
+	<a class="boton_volver" href="index.jsp">VOLVER </a>
+	<% if (lp.isEmpty() && request.getAttribute("estrenos")==null){ %>
+	<script type="text/javascript">
+	Swal.fire({
+		  imageUrl: 'https://images.emojiterra.com/twitter/v13.1/512px/2639.png',
+		  imageHeight: 100,
+		  text: 'No hay peliculas que coincidan con la busqueda',
+		  timer: 2000,
+		  timerProgressBar: true,
+		  allowOutsideClick: false,
+		  didOpen: () => {
+			    Swal.showLoading()
+			    const b = Swal.getHtmlContainer().querySelector('b')
+			    timerInterval = setInterval(() => {
+			      b.textContent = Swal.getTimerLeft()
+			    }, 100)
+			  },
+		})
+		setTimeout( function() { window.location.href = "Peliculas.jsp"; }, 2000 );
+		</script>
+
+	<%} %>
 <br>
 <br>
-<a class="boton_volver" href="index.jsp">VOLVER </a>
 </div>	
+
+
 </body>
 </html>

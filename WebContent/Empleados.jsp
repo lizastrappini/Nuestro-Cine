@@ -8,65 +8,23 @@ pageEncoding="UTF-8"%>
 	<meta charset="UTF-8">
 	<link href="style/css/styles.css" rel="stylesheet" />
 	<link rel="shortcut icon" href="https://img.icons8.com/ios-glyphs/30/ffffff/cinema---v1.png" />
-	<script src="style/script.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="Javascript/Script.js"></script>
+
 	<title>--EMPLEADOS--</title>
 
 <%
-	String borrada = "";
 
-	if ( !(request.getAttribute("borrada")==(null)) ){
-	borrada = request.getAttribute("borrada").toString();
-	} 	
-
-	String modificada = "";
-
-	if ( !(request.getAttribute("modificada")==(null)) ){
- 	modificada = request.getAttribute("modificada").toString();
-	} 
-	
-	String cargada = "";
-
-	if ( !(request.getAttribute("cargada")==(null)) ){
- 	cargada = request.getAttribute("cargada").toString();
-	} 
-	
-	String nocambio = "";
-
-	if ( !(request.getAttribute("nocambio")==(null)) ){
- 	nocambio = request.getAttribute("nocambio").toString();
-	} 
-	
 	Persona per = (Persona)request.getSession().getAttribute("usuario");
 
 %>
 </head>
 <body>
 <div class="fondo">
-	
-<% if (!(request.getAttribute("bandera1")==(null)) && borrada.equals("borrada")){  %>
-		<script>
-		Window.alert('Ejemplo basico de Sweet Alert 2');
-		</script>
-		
-	<%} %>
-<% if (!(request.getAttribute("bandera2")==(null)) && modificada.equals("modificada")){  %>
-		<script >
-		Window.alert("Pelicula modificada con exito!")
-		</script>
-		
-	<%} %>
-<% if (!(request.getAttribute("bandera3")==(null)) && cargada.equals("cargada")){  %>
-		<script >
-		Window.alert("Pelicula cargada con exito!")
-		</script>
-	<%} %>
-<% if (!(request.getAttribute("bandera4")==(null)) && nocambio.equals("nocambio")){  %>
-		<script >
-		Window.alert("No hubo cambios en la pelicula")
-		</script>
-	<%} %>	
+<%
+if ( per != (null) ){
+%>	
+
 
 <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
@@ -80,12 +38,12 @@ pageEncoding="UTF-8"%>
                         
                         <% if ( request.getSession().getAttribute("usuario")==null ) {%>
                         
-                        <li class="nav-item"><a class="nav-link" href="SignUp.html">Registrarse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SignIn.html" id="signin">Iniciar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="SignUp.jsp">Registrarse</a></li>
+                        <li class="nav-item"><a class="nav-link" href="SignIn.jsp" id="signin">Iniciar sesion</a></li>
                         <%}else {%> 
                         <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout" href="SignOut" >Cerrar sesion</a></li>
-                        
+                        <li class="nav-item"><a class="nav-link"  onclick="cerrarSesion()">Cerrar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link" id="" href="MiCuenta.jsp">Mi cuenta</a></li>
                    		<%} %>	
                     </ul>
                      
@@ -95,7 +53,7 @@ pageEncoding="UTF-8"%>
 
 
 	<div class="opciones">
-	<h1>Seccion Peliculas</h1>
+	<h1>Seccion peliculas</h1>
 	<form action="ControladorPeliculas" method="post">
 	<button class="buttonFiltros" id="agregar" name="opc1" value="add" >Agregar Pelicula</button>
 	<button class="buttonFiltros" id="editar" name="opc2" value="edit" >Editar Pelicula</button>
@@ -123,8 +81,43 @@ pageEncoding="UTF-8"%>
 	<button class="buttonFiltros" id="borrar" name="opc3" value="delete" >Borrar Costo</button>
 	</form>
 	</div>
-	
-
 </div>	
+<% if (!(request.getAttribute("borrada")==(null)) ){  %>
+		<script>
+		Swal.fire({
+			  icon: 'success',
+			  title: 'Pelicula borrada',
+			})
+		</script>
+		
+	<%} %>
+<% if (!(request.getAttribute("modificada")==(null)) ){  %>
+		<script >
+		Swal.fire({
+			  icon: 'success',
+			  title: 'Pelicula modificada',
+			})
+		</script>
+		
+	<%} %>
+<% if (!(request.getAttribute("cargada")==(null)) ){  %>
+		<script >
+		Swal.fire({
+			  icon: 'success',
+			  title: 'Pelicula cargada',
+			})
+		</script>
+	<%} %>
+<% if (!(request.getAttribute("nocambio")==(null)) ){  %>
+		<script >
+		Swal.fire({
+			  icon: 'warning',
+			  title: 'Pelicula duplicada',
+			  footer: 'No hubo cambios'
+			})
+		</script>
+	<%} } else {%>
+	<jsp:forward page="index.jsp"/>
+	<%} %>	
 </body>
 </html>

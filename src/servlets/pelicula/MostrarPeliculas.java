@@ -43,18 +43,26 @@ public class MostrarPeliculas extends HttpServlet {
 		
 		
 		
-		while(!(request.getParameter("genero")==(null))) {
+		if(!(request.getParameter("genero")==(null))) {
 			
 			String genero = request.getParameter("genero");
 			LogicPelicula lp = new LogicPelicula();
 		
 			if(!(genero.equals("todas")) ) {
 			
-			LinkedList<Pelicula> peliculas = lp.buscarPorGenero(genero);
+			
+			try {
+				LinkedList<Pelicula> peliculas = lp.buscarPorGenero(genero);
+				request.setAttribute("listapeliculas", peliculas);
+				request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+				String noEncontrada="noEncontrada";
+				request.setAttribute("noEncontrada", noEncontrada);
+				request.getRequestDispatcher("Peliculas.jsp").forward(request, response);
+			}
 			
 
-			request.setAttribute("listapeliculas", peliculas);
-			request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);
 		}
 		
 		if(genero.equals("todas")) {
@@ -65,7 +73,7 @@ public class MostrarPeliculas extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);
 		}}
 		
-		while(!(request.getParameter("edad")==(null))) {
+		if(!(request.getParameter("edad")==(null))) {
 			String edad = request.getParameter("edad");
 			LogicPelicula lp = new LogicPelicula();
 			
@@ -87,7 +95,22 @@ public class MostrarPeliculas extends HttpServlet {
 			}
 		}
 		
-		
+		if(!(request.getParameter("nombre")==(null))) {
+			
+			String nombre = request.getParameter("nombre").toString();
+			LogicPelicula lp = new LogicPelicula();
+			LinkedList<Pelicula> peliculas = lp.buscar(nombre);
+			
+			if ( !(peliculas.isEmpty()) ) {
+				request.setAttribute("peliculas", peliculas);
+				request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);
+			} else {
+				String noEncontrada = "noencontrada";
+				request.setAttribute("noEncontrada", noEncontrada);
+				request.getRequestDispatcher("Peliculas.jsp").forward(request, response);
+			}
+			
+		}
 		 
 		
 		

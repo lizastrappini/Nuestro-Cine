@@ -10,51 +10,26 @@
 <head>
 <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
         <title>---EDIT PELICULAS---</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" ></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="style/css/styles.css" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" >
-		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-		<script src="style/codigo.js"></script>
+		<script src="Javascript/Script.js"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		
 <title>Borrar Pelicula</title>
 <%
 
-String bandera1 = "";
-
-if ( !(request.getAttribute("encontrada")==(null)) ){
-	 bandera1 = request.getAttribute("encontrada").toString();
-}
-
-String bandera2 = "";
-	
-if ( !(request.getAttribute("borrada")==(null)) ){
-	 bandera2 = request.getAttribute("borrada").toString();
-} 
-
-	 LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
-	 Integer isEmpleado = 0;
-		Persona per = (Persona)request.getSession().getAttribute("usuario");
+LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
+Integer isEmpleado = 0;
+Persona per = (Persona)request.getSession().getAttribute("usuario");
 			
-			if ( !(per==null)){
-				isEmpleado = per.getHabilitado();
-			} else {isEmpleado = 0;}	 
+if ( !(per==null)){
+	isEmpleado = per.getHabilitado();
+	} else {isEmpleado = 0;}	 
 	 
 %>
-
-
 </head>
-
 <body>
+<%if ( per!= (null) && isEmpleado==1){ %>
 <div class="fondo">
 <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
@@ -71,11 +46,12 @@ if ( !(request.getAttribute("borrada")==(null)) ){
                         
                         <% if ( request.getSession().getAttribute("usuario")==null ) {%>
                         
-                        <li class="nav-item"><a class="nav-link" href="SignUp.html">Registrarse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SignIn.html" id="signin">Iniciar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="SignUp.jsp">Registrarse</a></li>
+                        <li class="nav-item"><a class="nav-link" href="SignIn.jsp" id="signin">Iniciar sesion</a></li>
                         <%}else {%> 
                         <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout" href="SignOut" >Cerrar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link"  onclick="cerrarSesion()">Cerrar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link" id="" href="MiCuenta.jsp">Mi cuenta</a></li>
                         
                    		<%} %>	
                     </ul>
@@ -96,7 +72,7 @@ if ( !(request.getAttribute("borrada")==(null)) ){
     	</form>
     <%} %>
   
-    <%if ( !(request.getAttribute("encontrada")==(null)) && bandera1.equals("encontrada") ) {%>
+    <%if ( !(request.getAttribute("encontrada")==(null))) {%>
     	<br>
 		<br>
     	<br>
@@ -111,23 +87,37 @@ if ( !(request.getAttribute("borrada")==(null)) ){
                             <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
                             <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
                             <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
-                            <form action="BorraPelicula" method="get">
+                            <form action="BorraPelicula" method="get" name="form">
                             <input type="hidden" name="codigo" value="<%=pel.getCodigo() %>">
-                            
                             <br>
-                            <button id="botonBorrar" class="buttonBorrar" >Borrar</button>
+                            <button id="botonBorrar" class="buttonBorrar">Borrar</button>
                             </form>
                             </div>
               </div>
               
-              <%}} if ( !(request.getAttribute("borrada")==(null)) && bandera2.equals("borrada") ) {%>
-    	<script>
-    	window.alert("pelicula borrada!")
-    	</script>
-    	<%} %> 
-
-    
-  	  
+              <%}} 
+    else if (!(request.getAttribute("noencontrada")==(null))){ %>
+    <script type="text/javascript">
+	Swal.fire({
+		  imageUrl: 'https://images.emojiterra.com/twitter/v13.1/512px/2639.png',
+		  imageHeight: 100,
+		  text: 'No hay peliculas que coincidan con la busqueda',
+		  timer: 2000,
+		  timerProgressBar: true,
+		  allowOutsideClick: false,
+		  didOpen: () => {
+			    Swal.showLoading()
+			    const b = Swal.getHtmlContainer().querySelector('b')
+			    timerInterval = setInterval(() => {
+			      b.textContent = Swal.getTimerLeft()
+			    }, 100)
+			  },
+		})
+		setTimeout( function() { window.location.href = "Empleados.jsp"; }, 2000 );
+		</script>
+    <%} } else {%>
+    <jsp:forward page="index.jsp"/>
+    <%} %>  	  
 </div>
 </body>
 </html>

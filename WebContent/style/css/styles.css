@@ -360,15 +360,28 @@ table.blueTable thead th:first-child {
 	font-family: 'Anton', sans-serif;
 }
 
-.filtros{
-	position:flex;
-	margin-top:100px;
-	margin-left:50px;
-	margin-bottom:0;
-	flex-direction: row;
+
+.filtroGenero{
 	float:left;
-	padding-right:50;
+	margin-top:100px;
+	padding-right:50px;
+	flex-direction: row;
+	
+}
+
+.filtroNombre{
+	margin-top:100px;
+	float:left;
+	padding-right:50px;
 	padding-left:50px;
+	flex-direction: row;
+}
+
+.filtroEdad{
+	float:left;
+	margin-top:100px;
+	flex-direction: row;
+	
 	
 	
 }

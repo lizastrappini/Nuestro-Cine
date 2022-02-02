@@ -7,22 +7,10 @@ pageEncoding="UTF-8"%>
 <head>
 <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
         <title>---PELICULAS---</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" ></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="style/css/styles.css" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" >
-		<link rel="shortcut icon" href="https://img.icons8.com/ios-glyphs/30/ffffff/cinema---v1.png">
-		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-		    <style>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		 <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -81,7 +69,15 @@ pageEncoding="UTF-8"%>
            
 	</header>
 		
-		<div class="filtros">
+		<div class="filtroNombre">
+		<h1>Nombre</h1>
+		<form action="MostrarPeliculas" method="get">
+		<input name="nombre" type=text>
+		<input type="submit" value="buscar">
+		</form>
+		</div>
+		
+		<div class="filtroGenero">
 		<h1>Buscar por genero</h1>	
 		
 		<form action="MostrarPeliculas" method="get">
@@ -97,7 +93,7 @@ pageEncoding="UTF-8"%>
 		</form>
 		</div>	
 		
-		<div class="filtros">
+		<div class="filtroEdad">
 		<h1>Buscar por edad</h1>	
 		<form action="MostrarPeliculas" method="get">
 			<label>Elegir edad:
@@ -111,7 +107,27 @@ pageEncoding="UTF-8"%>
 			<input type="submit" value="buscar">
 		</form>
 		</div>		
-				
-</div> 	
+		</div>		
+		<div style="clear:both"></div>
+		<%if (!(request.getAttribute("noEncontrada")==(null))){  %>
+		<script type="text/javascript">
+		Swal.fire({
+		  imageUrl: 'https://images.emojiterra.com/twitter/v13.1/512px/2639.png',
+		  imageHeight: 100,
+		  text: 'No hay peliculas que coincidan con la busqueda',
+		  timer: 2000,
+		  timerProgressBar: true,
+		  allowOutsideClick: false,
+		  didOpen: () => {
+			    Swal.showLoading()
+			    const b = Swal.getHtmlContainer().querySelector('b')
+			    timerInterval = setInterval(() => {
+			      b.textContent = Swal.getTimerLeft()
+			    }, 100)
+			  },
+		})
+		setTimeout( function() { window.location.href = "Peliculas.jsp"; }, 2000 );
+		</script>
+    <%}%>
 </body>
 </html>

@@ -13,4 +13,8 @@ private DataCostoEntrada dce;
 	public void cargar(CostoEntrada ce) {
 		dce.cargarCostoEntrada(ce);
 	}
+	
+	public CostoEntrada costoActual() {
+		return dce.buscarCostoActual();
+	}
 }

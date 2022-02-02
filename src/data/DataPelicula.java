@@ -14,13 +14,13 @@ public class DataPelicula {
 		public void cargarPelicula(Pelicula nuevaPeli) {
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
-		
+		String nombre = nuevaPeli.getNombre().toUpperCase(); //para guardar los nombres en mayuscula
 		try {						
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("insert into pelicula"
 					+ "(nombre, director, genero, calificacion, duracion, sinopsis, portada, fecha_estreno) values (?,?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			
-			stmt.setString(1, nuevaPeli.getNombre());
+			stmt.setString(1, nombre);
 			stmt.setString(2, nuevaPeli.getDirector());
 			stmt.setString(3, nuevaPeli.getGenero());
 			stmt.setString(4, nuevaPeli.getCalificacion());
@@ -353,9 +353,9 @@ public class DataPelicula {
 		
 		try {
 		
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM pelicula WHERE nombre like concat('%',concat(?,'%')) ");   
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM pelicula WHERE nombre like UPPER(concat('%',concat(?,'%'))) or nombre like LOWER(concat('%',concat(?,'%'))) ");   
 			stmt.setString(1, nombre);
-			
+			stmt.setString(2, nombre);
 			rs = stmt.executeQuery();
 			
 			if(rs!=null ) {
