@@ -101,7 +101,6 @@ if ( !(request.getAttribute("borrada")==(null)) ){
 			<div class="pelicula">
 							<div class="infopelicula">
 							<p class="infopelicula"> <b>Numero Sala :</b> <%= sala.getNumero() %></p>
-							<p class="infopelicula"> <b>Cupo :</b> <%= sala.getCupo() %></p>
                             <form action="BorraSala" method="get">
                             <input type="hidden" name="numerosala" value="<%= sala.getNumero() %>">
                             <button id="botonBorrar" class="buttonBorrar" >Borrar</button>

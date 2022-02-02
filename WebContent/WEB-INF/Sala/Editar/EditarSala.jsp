@@ -100,7 +100,6 @@
 			<div class="pelicula">
 							<div class="infopelicula">
 							<p class="infopelicula"> <b>Numero Sala :</b> <%= sala.getNumero() %></p>
-                            <p class="infopelicula"> <b>Cupo :</b> <%= sala.getCupo() %></p>
                             <form action="ActualizarSala" method="post">
                             <input type="hidden" name="numerosala" value="<%= sala.getNumero() %>">
                             <button class="buttonClass">Editar</button>

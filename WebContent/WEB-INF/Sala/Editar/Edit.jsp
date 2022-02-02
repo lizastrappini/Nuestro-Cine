@@ -55,9 +55,6 @@ Persona per = (Persona)request.getSession().getAttribute("usuario");
 	<form class="addSala" action="ActualizarSala" method="post" >
 	<input type="hidden" id="inputNumero" name="numero" class="form-control" placeholder="numero" required type="text" value="<%= sala.getNumero() %>">
     <br>
-	<label for="inputCupo" >Cupo de la sala</label>
-    <input id="inputCupo" name="cupo" class="form-control" placeholder="cupo" required type="text" value="<%= sala.getCupo() %>">
-    <br>
     <input type="hidden" name="bandera" value="cambio">
     <input type="hidden" name="salaanterior" value="<%=sala%>">
 

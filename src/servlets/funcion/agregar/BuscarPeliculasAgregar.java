@@ -35,7 +35,6 @@ public class BuscarPeliculasAgregar extends HttpServlet {
 		
 		String nombre = request.getParameter("nombre").toString();
 
-		
 		LinkedList<Pelicula> pelis = lp.buscar(nombre);
 		
 		if ( !(pelis.isEmpty()) ) {
@@ -44,7 +43,6 @@ public class BuscarPeliculasAgregar extends HttpServlet {
 			request.setAttribute("peliculas", pelis);
 			request.getRequestDispatcher("WEB-INF/Funcion/Agregar/AgregarFuncion.jsp").forward(request, response);
 		}
-
 	}
 
 	/**
