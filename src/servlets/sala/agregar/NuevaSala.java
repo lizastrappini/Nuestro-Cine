@@ -30,26 +30,26 @@ public class NuevaSala extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Sala sal = new Sala();
-		LogicSala ls = new LogicSala();
-		
-		
-		sal.setNumero(Integer.parseInt(request.getParameter("numero").toString()));
-		ls.cargar(sal);
-		
-		String cargada = "cargada";
-		request.setAttribute("cargada", cargada);
-		request.getRequestDispatcher("Empleados.jsp").forward(request, response);
-		
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		Sala sal = new Sala();
+		LogicSala ls = new LogicSala();
+		
+		sal.setNumero(Integer.parseInt(request.getParameter("numero")));
+		Sala salaEncontrada = ls.buscar(sal);
+		if (salaEncontrada == null) {
+			ls.cargar(sal);
+			request.setAttribute("cargada", "cargada");
+			request.getRequestDispatcher("WEB-INF/Sala/Agregar/AgregarSala.jsp").forward(request, response);
+		} else {
+			request.setAttribute("Noencontrada", "Noencontrada");
+			request.getRequestDispatcher("WEB-INF/Sala/Agregar/AgregarSala.jsp").forward(request, response);
+		}
 	}
 
 }

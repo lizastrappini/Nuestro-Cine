@@ -52,7 +52,12 @@ public class NuevaFuncion extends HttpServlet {
 		
 		LogicSala ls = new LogicSala();
 		LinkedList<Sala> salas = ls.getAll();
+		
+		Integer codigo_peli = Integer.parseInt(request.getParameter("codigoPel"));
+		Pelicula pel = new Pelicula();
+		pel.setCodigo(codigo_peli);
 	
+		request.setAttribute("pelActual", pel);
 		request.setAttribute("peliculas", peliculas);
 		request.setAttribute("salas", salas);
 		
@@ -69,10 +74,19 @@ public class NuevaFuncion extends HttpServlet {
 				Integer numero_sala = Integer.parseInt(request.getParameter("elegirsala"));
 				nuevafuncion.setNumero_sala(numero_sala);
 				
-				Integer codigo_peli = Integer.parseInt(request.getParameter("elegirpelicula"));
 				nuevafuncion.setCodigo_pelicula(codigo_peli);
 				
 				String str = (request.getParameter("fechahora"));
+				
+				Sala sala = new Sala();
+				sala.setNumero(numero_sala);
+				Sala salaEncontrada = ls.buscar(sala);
+				if (salaEncontrada!=null) {
+					request.setAttribute("encontrada", "encontrada");
+				} else {
+					request.setAttribute("encontrada", null);
+					request.getRequestDispatcher("WEB-INF/Funcion/Agregar/FormNuevaFuncion.jsp").forward(request, response);
+				}
 		
 				try {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
