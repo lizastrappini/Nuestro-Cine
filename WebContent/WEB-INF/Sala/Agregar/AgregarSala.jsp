@@ -21,12 +21,9 @@
 	<% if (request.getAttribute("cargada")!=null) {%>
 		<div class="alert alert-success">¡Sala creada con exito!</div>
 	<%} %>
-	<%if ( request.getAttribute("Noencontrada")!=null ) { %>
-    	<div class="alert alert-warning">Ya existe una sala con ese numero</div>
-    <% } %>
 	<form class="addSala" action="NuevaSala" method="post" >
-		<label for="inputNumero" >Numero de la sala</label>
-    	<input id="inputNumero" name="numero" class="form-control" placeholder="numero de la sala" required type="text">	
+		<label for="inputDescripcion" >Descripcion</label>
+    	<input id="inputDescripcion" name="descripcion" class="form-control" placeholder="descripcion de la sala" required type="text">	
     	<br>
     	<input type="hidden" name="bandera" value="agregar">
     	<button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >AGREGAR</button>

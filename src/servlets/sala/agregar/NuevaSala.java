@@ -40,16 +40,9 @@ public class NuevaSala extends HttpServlet {
 		Sala sal = new Sala();
 		LogicSala ls = new LogicSala();
 		
-		sal.setNumero(Integer.parseInt(request.getParameter("numero")));
-		Sala salaEncontrada = ls.buscar(sal);
-		if (salaEncontrada == null) {
-			ls.cargar(sal);
-			request.setAttribute("cargada", "cargada");
-			request.getRequestDispatcher("WEB-INF/Sala/Agregar/AgregarSala.jsp").forward(request, response);
-		} else {
-			request.setAttribute("Noencontrada", "Noencontrada");
-			request.getRequestDispatcher("WEB-INF/Sala/Agregar/AgregarSala.jsp").forward(request, response);
-		}
+		sal.setDescripcion(request.getParameter("descripcion"));
+		ls.cargar(sal);
+		request.setAttribute("cargada", "cargada");
+		request.getRequestDispatcher("WEB-INF/Sala/Agregar/AgregarSala.jsp").forward(request, response);
 	}
-
 }

@@ -1,4 +1,4 @@
-package servlets.sala;
+package servlets.sala.borrar;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

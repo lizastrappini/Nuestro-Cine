@@ -11,11 +11,10 @@ public class DataSala {
 		ResultSet rs=null;
 		
 		try {
-			stmt= DbConnector.getInstancia().getConn().prepareStatement("insert into sala"
-					+ "(numero) values (?)",
-					Statement.RETURN_GENERATED_KEYS);
+			stmt= DbConnector.getInstancia().getConn().prepareStatement(
+					"insert into sala (descripcion) values (?)", Statement.RETURN_GENERATED_KEYS);
 			
-			stmt.setInt(1,  nuevaSala.getNumero());
+			stmt.setString(1, nuevaSala.getDescripcion());
 			
 			stmt.executeUpdate();
 			
@@ -24,6 +23,7 @@ public class DataSala {
 			if(rs!= null && rs.next()) {
 				nuevaSala.setNumero(rs.getInt(1));
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -43,11 +43,12 @@ public class DataSala {
 		LinkedList<Sala>salas = new LinkedList<>();
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("Select numero from sala");
+			rs= stmt.executeQuery("Select numero, descripcion from sala");
 			if (rs != null ) {
 				while (rs.next()) {
 					Sala s = new Sala();
 					s.setNumero(rs.getInt("numero"));
+					s.setDescripcion(rs.getString("descripcion"));
 					
 					salas.add(s);
 				}
@@ -72,7 +73,8 @@ public class DataSala {
 		Sala sal = null;
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from sala where numero = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select numero, descripcion from sala where numero = ?");
 			stmt.setInt(1, buscaSala.getNumero());
 			
 			rs = stmt.executeQuery();
@@ -80,6 +82,7 @@ public class DataSala {
 			if(rs != null && rs.next()) {
 				sal = new Sala();
 				sal.setNumero(rs.getInt("numero"));
+				sal.setDescripcion(rs.getString("descripcion"));
 			}
 			
 		} catch (SQLException e) {
@@ -100,10 +103,12 @@ public class DataSala {
 	public void modificar(Sala sal) {
 		PreparedStatement stmt =null;
 		try {
-			stmt= DbConnector.getInstancia().getConn().prepareStatement("update sala set numero=? where numero=?");
+			stmt= DbConnector.getInstancia().getConn().prepareStatement(
+					"update sala set numero=?, descripcion=? where numero=?");
 			
 			stmt.setInt(1, sal.getNumero());
-			stmt.setInt(2, sal.getNumero());
+			stmt.setString(2, sal.getDescripcion());
+			stmt.setInt(3, sal.getNumero());
 			
 			stmt.executeUpdate();
 			
@@ -138,6 +143,5 @@ public class DataSala {
 			}
 		}
 	}
-
 }
 
