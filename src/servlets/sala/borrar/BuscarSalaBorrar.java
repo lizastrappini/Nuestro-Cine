@@ -1,4 +1,4 @@
-package servlets.sala;
+package servlets.sala.borrar;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -13,16 +13,16 @@ import entities.Sala;
 import logic.LogicSala;
 
 /**
- * Servlet implementation class ControladorSalas
+ * Servlet implementation class BuscarSala
  */
-@WebServlet({"/EditSalas","/Controladorsalas","/ControladorSalas"})
-public class ControladorSalas extends HttpServlet {
+@WebServlet("/BuscarSalaBorrar")
+public class BuscarSalaBorrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControladorSalas() {
+    public BuscarSalaBorrar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +31,7 @@ public class ControladorSalas extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
@@ -41,23 +40,24 @@ public class ControladorSalas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		LogicSala ls = new LogicSala();
-		LinkedList<Sala> salas = ls.getAll();
 		
-		request.setAttribute("salas", salas);
-		
-		if(request.getParameter("opc1")!=null){
+		if (request.getParameter("bandera")==null) {
+			LinkedList<Sala> salas = ls.getAll();
+			request.setAttribute("salas", salas);
 			
-			request.getRequestDispatcher("WEB-INF/Sala/Agregar/AgregarSala.jsp").forward(request, response);
-		}
-		
-		else if (! (request.getParameter("opc2")==(null))  ) {
-			 
-			request.getRequestDispatcher("WEB-INF/Sala/EditarSala.jsp").forward(request, response);
+			Integer nroSala = Integer.parseInt(request.getParameter("elegirsala"));
 			
-		}
-		
-		else if (! (request.getParameter("opc3")==(null))  ) {
-
+			Sala salaEncontrada = ls.buscarPorNumero(nroSala);
+			request.setAttribute("salaEncontrada", salaEncontrada);
+			request.setAttribute("encontrada", "encontrada");
+			request.getRequestDispatcher("WEB-INF/Sala/Borrar/BorrarSala.jsp").forward(request, response);
+		} else {
+			Integer nroSala = Integer.parseInt(request.getParameter("numerosala"));
+			Sala salaEncontrada = ls.buscarPorNumero(nroSala);
+			ls.borrar(salaEncontrada);
+			request.setAttribute("salaEncontrada", salaEncontrada);
+			request.setAttribute("encontrada", "encontrada");
+			request.setAttribute("borrada", "borrada");
 			request.getRequestDispatcher("WEB-INF/Sala/Borrar/BorrarSala.jsp").forward(request, response);
 		}
 	}

@@ -31,4 +31,7 @@ public class LogicSala {
 	public LinkedList<Sala> getAll(){
 		return ds.listarSalas();
 	}
+	public Sala buscarPorNumero(Integer nro) {
+		return ds.buscarPorNumero(nro);
+	}
 }

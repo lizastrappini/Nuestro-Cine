@@ -9,8 +9,6 @@
 	<meta charset="UTF-8">
 	<%@ include file="/Estilo.jsp" %>
 	<title>NUEVA SALA</title>
-	<%  
-	%>
 </head>
 <body>
 <div class="fondo">
@@ -25,7 +23,6 @@
 		<label for="inputDescripcion" >Descripcion</label>
     	<input id="inputDescripcion" name="descripcion" class="form-control" placeholder="descripcion de la sala" required type="text">	
     	<br>
-    	<input type="hidden" name="bandera" value="agregar">
     	<button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >AGREGAR</button>
     </form>
 </div>

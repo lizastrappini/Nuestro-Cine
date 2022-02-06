@@ -143,5 +143,38 @@ public class DataSala {
 			}
 		}
 	}
+	
+	public Sala buscarPorNumero(Integer nro) {
+		ResultSet rs = null;
+		PreparedStatement stmt=null;
+		Sala sal = null;
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select numero, descripcion from sala where numero = ?");
+			stmt.setInt(1, nro);
+			
+			rs = stmt.executeQuery();
+			
+			if(rs != null && rs.next()) {
+				sal = new Sala();
+				sal.setNumero(rs.getInt("numero"));
+				sal.setDescripcion(rs.getString("descripcion"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rs!= null ) {rs.close();}
+				if(stmt != null ) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return sal;
+	}
 }
+
 
