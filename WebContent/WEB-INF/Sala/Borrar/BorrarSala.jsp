@@ -40,6 +40,7 @@
     	<% if (request.getAttribute("borrada")!=null) {%>
         	<div class="alert alert-success">¡Sala borrada con exito!</div>
     	<% }%>
+    	<div class="alert alert-warning">Al eliminar una sala se borraran las funciones asignadas a esa sala</div>
 		<div class="infosala">
 			<p class="infosala"> <b>Numero Sala :</b> <%= salaEncontrada.getNumero() %></p>
 			<p class="infosala"> <b>Descripcion :</b> <%= salaEncontrada.getDescripcion() %></p>
