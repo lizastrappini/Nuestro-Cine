@@ -52,7 +52,7 @@ public class ControladorSalas extends HttpServlet {
 		
 		else if (! (request.getParameter("opc2")==(null))  ) {
 			 
-			request.getRequestDispatcher("WEB-INF/Sala/EditarSala.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Sala/Editar/EditarSala.jsp").forward(request, response);
 			
 		}
 		

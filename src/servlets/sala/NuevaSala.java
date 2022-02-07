@@ -1,4 +1,4 @@
-package servlets.sala.agregar;
+package servlets.sala;
 
 import java.io.IOException;
 

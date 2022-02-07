@@ -1,6 +1,8 @@
 package servlets.sala;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,52 +40,30 @@ public class ActualizarSala extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if( request.getParameter("bandera")==null ) {
-			Integer numero = Integer.parseInt(request.getParameter("numerosala"));
+		LogicSala ls = new LogicSala();
+		
+		if (request.getParameter("bandera")==null) {
+			LinkedList<Sala> salas = ls.getAll();
+			request.setAttribute("salas", salas);
 			
-			Sala sal = new Sala();
-			sal.setNumero(numero);
+			Integer nroSala = Integer.parseInt(request.getParameter("elegirsala"));
 			
-			LogicSala ls = new LogicSala();
-			
-			sal = ls.buscar(sal);
-			
-			request.setAttribute("sala", sal);
-			request.getRequestDispatcher("WEB-INF/Sala/Edit.jsp").forward(request, response);
-			}
-			
-			if( !(request.getParameter("bandera")==null)) {
-				if (request.getParameter("bandera").toString().equals("cambio") ) {
-					
-					String salaanterior = request.getParameter("salaanterior");
-					
-					Sala salacambiada = new Sala();
-					LogicSala ls = new LogicSala();
-					
-					Integer numero = Integer.parseInt(request.getParameter("numero"));
-					
-					Integer cupo = Integer.parseInt(request.getParameter("cupo"));					
-				
-					salacambiada.setNumero(numero);
-							
-					if ( !(salaanterior.equals(salacambiada.toString())) ) {
-						
-						ls.modificar(salacambiada);
-						String modificada = "modificada";
-						request.setAttribute("modificada", modificada);
-						request.getRequestDispatcher("Empleados.jsp").forward(request, response);
-					
-					} else if ( salaanterior.equals(salacambiada.toString()) ){ 
-						String nocambio = "nocambio";
-						request.setAttribute("nocambio", nocambio);
-						request.getRequestDispatcher("Empleados.jsp").forward(request, response);
-
-					}
-					
-					
-				}
-			}
-					
+			Sala salaEncontrada = ls.buscarPorNumero(nroSala);
+			request.setAttribute("salaEncontrada", salaEncontrada);
+			request.setAttribute("encontrada", "encontrada");
+			request.getRequestDispatcher("WEB-INF/Sala/Editar/EditarSala.jsp").forward(request, response);
+		} else {
+			Integer nroSala = Integer.parseInt(request.getParameter("numerosala"));
+			String descripcion = request.getParameter("descripcion");
+			Sala salaEncontrada = ls.buscarPorNumero(nroSala);
+			salaEncontrada.setDescripcion(descripcion);
+			ls.modificar(salaEncontrada);;
+			request.setAttribute("salaEncontrada", salaEncontrada);
+			request.setAttribute("encontrada", "encontrada");
+			request.setAttribute("editada", "editada");
+			request.getRequestDispatcher("WEB-INF/Sala/Editar/EditarSala.jsp").forward(request, response);
+		}
+		
 	}
 
 }

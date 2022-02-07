@@ -1,4 +1,4 @@
-package servlets.sala.borrar;
+package servlets.sala;
 
 import java.io.IOException;
 import java.util.LinkedList;
