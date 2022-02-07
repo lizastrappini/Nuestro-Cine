@@ -125,6 +125,13 @@ public class DataSala {
 	}
 	
 	public void borrarSala(Sala borraSala) {
+		
+		DataButacaFuncion dbf = new DataButacaFuncion();
+		dbf.borrarButacasPorSala(borraSala);
+		
+		DataFuncion df = new DataFuncion();
+		df.borrarFuncionesPorSala(borraSala);
+		
 		PreparedStatement stmt=null;
 		
 		try {

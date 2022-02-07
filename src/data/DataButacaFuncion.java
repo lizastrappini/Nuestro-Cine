@@ -9,6 +9,7 @@ import java.util.LinkedList;
 
 import entities.ButacaFuncion;
 import entities.Funcion;
+import entities.Sala;
 
 public class DataButacaFuncion {
 	
@@ -162,5 +163,27 @@ public class DataButacaFuncion {
 			}
 		}
 		return butacas_funcion;
+	}
+	
+	public void borrarButacasPorSala(Sala borraSala) {
+		PreparedStatement stmt=null;
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"delete from butaca_funcion where nro_sala=?");
+			stmt.setInt(1, borraSala.getNumero());
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(stmt!=null)stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	
 	}
 }
