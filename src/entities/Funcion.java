@@ -2,6 +2,10 @@ package entities;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import logic.LogicFuncion;
+import logic.LogicPelicula;
+
+import java.util.LinkedList;
 public class Funcion {
 	
 	private String dateFormat = "dd/MM/yyyy";
@@ -37,6 +41,38 @@ public class Funcion {
 		return "Funcion [codigo_pelicula=" + codigo_pelicula + 
 				", fecha_hora=" + fecha_hora + (fecha_hora==null?null:fecha_hora.format(dtFormat))
 				+ ", numero_sala=" + numero_sala + "]";
+	}
+	public Boolean validarFuncion(Funcion fun) {
+		LogicFuncion lf = new LogicFuncion();
+		LinkedList<Funcion>funciones = lf.listar();
+
+		LogicPelicula lp = new LogicPelicula();
+		Pelicula pel = new Pelicula();
+
+		for (Funcion f: funciones) {
+			if (f.getNumero_sala()==fun.getNumero_sala()) {
+				LocalDateTime fh_inicio1 = fun.getFecha_hora();
+				pel = lp.buscarPorCodigo(fun.getCodigo_pelicula());
+				LocalDateTime fh_fin1 = fun.getFecha_hora().plusMinutes((long)pel.getDuracion());
+				
+				LocalDateTime fh_inicio2 = f.getFecha_hora();
+				pel = lp.buscarPorCodigo(f.getCodigo_pelicula());
+				LocalDateTime fh_fin2 = f.getFecha_hora().plusMinutes((long)pel.getDuracion());
+
+				if (fun.getFecha_hora().equals(f.getFecha_hora())) {
+					return false;
+				}
+				if ( fh_inicio2.isBefore(fh_inicio1) && fh_fin2.isAfter(fh_inicio1) ) {
+					return false;
+				}
+
+				if ( fh_inicio2.isBefore(fh_fin1) && fh_fin2.isAfter(fh_fin1) ) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 }
 

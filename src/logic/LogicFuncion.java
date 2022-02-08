@@ -2,6 +2,7 @@ package logic;
 
 import data.DataFuncion;
 import entities.Funcion;
+import java.util.LinkedList;
 
 public class LogicFuncion {
 private DataFuncion df;
@@ -21,5 +22,11 @@ private DataFuncion df;
 	}
 	public Funcion buscar(Funcion fun) {
 		return df.buscarFuncion(fun);
+	}
+	public LinkedList<Funcion> listar(){
+		return df.listarFunciones();
+	}
+	public LinkedList<Funcion> buscarFuncionesPorPeli(Funcion fun){
+		return df.buscarFuncionPorPeli(fun);
 	}
 }

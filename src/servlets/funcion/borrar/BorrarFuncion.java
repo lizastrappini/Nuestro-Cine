@@ -2,6 +2,7 @@ package servlets.funcion.borrar;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Funcion;
+import entities.Pelicula;
 import logic.LogicFuncion;
+import logic.LogicPelicula;
 
 /**
  * Servlet implementation class Borrar
@@ -39,8 +42,12 @@ public class BorrarFuncion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Funcion fun = new Funcion();
+		
+		
 		LogicFuncion lf = new LogicFuncion();
+		LogicPelicula lp = new LogicPelicula();
+
+		Funcion fun = new Funcion();
 		
 		Integer codigo = Integer.parseInt(request.getParameter("codigopeli"));
 		fun.setCodigo_pelicula(codigo);
@@ -50,10 +57,15 @@ public class BorrarFuncion extends HttpServlet {
 		LocalDateTime dateTime = LocalDateTime.parse(str);
 		fun.setFecha_hora(dateTime);
 		lf.borrar(fun);
-		String borrada= "borrada";
-		request.setAttribute("borrada", borrada);
 		
-		request.getRequestDispatcher("Empleados.jsp").forward(request, response);
+		LinkedList<Funcion> funciones = lf.buscarFuncionesPorPeli(fun);
+		
+		Pelicula pel = lp.buscarPorCodigo(codigo);
+		request.setAttribute("pel", pel);
+
+		request.setAttribute("listafunciones", funciones);
+		request.setAttribute("borrada", "borrada");
+		request.getRequestDispatcher("WEB-INF/Funcion/Borrar/MostrarFuncionesDePelicula.jsp").forward(request, response);
 	}
 
 }

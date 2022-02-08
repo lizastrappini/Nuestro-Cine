@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.DataFuncion;
 import entities.Funcion;
 import entities.Pelicula;
 import logic.LogicPelicula;
+import logic.LogicFuncion;
 
 /**
  * Servlet implementation class BorraFuncion
@@ -33,30 +33,29 @@ public class BuscarFuncionesDePeliculaBorrar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer cod=Integer.parseInt(request.getParameter("codigo"));
+		
+		Integer cod=Integer.parseInt(request.getParameter("codigoPel"));
 		Funcion fun = new Funcion();
 
 		Pelicula pel = new Pelicula();
 		LogicPelicula lp = new LogicPelicula();
+		LogicFuncion lf = new LogicFuncion();
 		
 		fun.setCodigo_pelicula(cod);
-		DataFuncion df= new DataFuncion();
-		
-		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
+		LinkedList<Funcion> funciones = lf.buscarFuncionesPorPeli(fun);
 		
 		pel = lp.buscarPorCodigo(cod);
 		request.setAttribute("pel", pel);
 
 		request.setAttribute("listafunciones", funciones);
 		request.getRequestDispatcher("WEB-INF/Funcion/Borrar/MostrarFuncionesDePelicula.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 	}
 
 }

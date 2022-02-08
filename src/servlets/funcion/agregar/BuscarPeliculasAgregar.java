@@ -44,7 +44,7 @@ public class BuscarPeliculasAgregar extends HttpServlet {
 		
 		request.setAttribute("peliculaEncontrada", peli);
 		
-		if ( peli.getNombre()!=null) {
+		if ( peli!=null) {
 			request.setAttribute("encontrada", "encontrada");
 		}
 		else {

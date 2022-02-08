@@ -66,42 +66,45 @@ public class NuevaFuncion extends HttpServlet {
 		}
 		
 		if( (request.getParameter("bandera")!=null)) {
-			if (request.getParameter("bandera").toString().equals("agregar") ) {
 				
-				Funcion nuevafuncion = new Funcion();
-				LogicFuncion lf = new LogicFuncion();
+			Funcion nuevafuncion = new Funcion();
+			LogicFuncion lf = new LogicFuncion();
 				
-				Integer numero_sala = Integer.parseInt(request.getParameter("elegirsala"));
-				nuevafuncion.setNumero_sala(numero_sala);
+			Integer numero_sala = Integer.parseInt(request.getParameter("elegirsala"));
+			nuevafuncion.setNumero_sala(numero_sala);
 				
-				nuevafuncion.setCodigo_pelicula(codigo_peli);
+			nuevafuncion.setCodigo_pelicula(codigo_peli);
 				
-				String str = (request.getParameter("fechahora"));
+			String str = (request.getParameter("fechahora"));
 				
-				Sala sala = new Sala();
-				sala.setNumero(numero_sala);
-				Sala salaEncontrada = ls.buscar(sala);
-				if (salaEncontrada!=null) {
-					request.setAttribute("encontrada", "encontrada");
-				} else {
-					request.setAttribute("encontrada", null);
-					request.getRequestDispatcher("WEB-INF/Funcion/Agregar/FormNuevaFuncion.jsp").forward(request, response);
-				}
+			Sala sala = new Sala();
+			sala.setNumero(numero_sala);
+			Sala salaEncontrada = ls.buscar(sala);
+			if (salaEncontrada!=null) {
+				request.setAttribute("encontrada", "encontrada");
+			} else {
+				request.setAttribute("encontrada", null);
+				request.getRequestDispatcher("WEB-INF/Funcion/Agregar/FormNuevaFuncion.jsp").forward(request, response);
+			}
 		
-				try {
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-					LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-					nuevafuncion.setFecha_hora(dateTime);
+			try {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+				nuevafuncion.setFecha_hora(dateTime);
+				if ( nuevafuncion.validarFuncion(nuevafuncion) ) {
 					lf.cargar(nuevafuncion);
-			
 					request.setAttribute("cargada", "cargada");
-					request.getRequestDispatcher("WEB-INF/Funcion/Agregar/FormNuevaFuncion.jsp").forward(request, response);
-				} catch (DateTimeParseException e) {
-					e.printStackTrace();
-					request.setAttribute("errorFormatoFecha", e.getMessage());
-					request.getRequestDispatcher("WEB-INF/Funcion/Agregar/FormNuevaFuncion.jsp").forward(request, response);
+				} else {
+					request.setAttribute("fechaExiste", "fechaExiste");
 				}
+			
+				request.getRequestDispatcher("WEB-INF/Funcion/Agregar/FormNuevaFuncion.jsp").forward(request, response);
+			} catch (DateTimeParseException e) {
+				e.printStackTrace();
+				request.setAttribute("errorFormatoFecha", e.getMessage());
+				request.getRequestDispatcher("WEB-INF/Funcion/Agregar/FormNuevaFuncion.jsp").forward(request, response);
 			}
 		}
 	}
 }
+

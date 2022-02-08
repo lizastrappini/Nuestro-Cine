@@ -6,122 +6,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>---EDIT FUNCIONES---</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" ></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="style/css/styles.css" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" >
-		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-		<script src="style/codigo.js"></script>
-		
-<title>Borrar Funcion</title>
-<%
-
-String bandera1 = "";
-
-if ( !(request.getAttribute("encontrada")==(null)) ){
-	 bandera1 = request.getAttribute("encontrada").toString();
-}
-
-String bandera2 = "";
-	
-if ( !(request.getAttribute("borrada")==(null)) ){
-	 bandera2 = request.getAttribute("borrada").toString();
-} 
-
-LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
-	 Integer isEmpleado = 0;
-		Persona per = (Persona)request.getSession().getAttribute("usuario");
-			
-			if ( !(per==null)){
-				isEmpleado = per.getHabilitado();
-			} else {isEmpleado = 0;}	 
-	 
-%>
+	<meta charset="UTF-8">
+	<%@ include file="/Estilo.jsp" %>
+	<title>BORRAR FUNCION</title>
+	<%
+	LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
+	Pelicula peliculaEncontrada = (Pelicula)request.getAttribute("peliculaEncontrada");
+	%>
 </head>
 <body>
 <div class="fondo">
-<!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">	
-                    <%if ( isEmpleado==1){ %>
-                    	<li class="nav-item"><a class="nav-link" href="Empleados.jsp">EMPLEADOS</a></li> 
-                    <%} else {%>
-                    	<%} %>	 
-                    	<li class="nav-item"><a class="nav-link" href="Peliculas.jsp">Cartelera</a></li>
-                        
-                        <% if ( request.getSession().getAttribute("usuario")==null ) {%>
-                        
-                        <li class="nav-item"><a class="nav-link" href="SignUp.html">Registrarse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SignIn.html" id="signin">Iniciar sesion</a></li>
-                        <%}else {%> 
-                        <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout" href="SignOut" >Cerrar sesion</a></li>
-                        
-                   		<%} %>	
-                    </ul>
-                     
-                </div>
-            </div>
-        </nav>
-	
-	<%if ( request.getAttribute("encontrada")==(null) ) { %>
+	<jsp:include page="/BarraMenu.jsp" />
+	<%if ( request.getAttribute("encontrada")==null ) { %>
 		<br>
 		<br>
-		<h2>Ingrese nombre de la pelicula</h2>
+		<%if ( request.getAttribute("Noencontrada")!=null ) { %>
+        	<div class="alert alert-warning">No se encontro la pelicula seleccionada</div>
+        <% } %>
+		<h2>Seleccione una pelicula</h2>
 		<form class="addPelicula" action="BuscarPeliculasBorrar" method="get" >
-			<label for="inputNombre" >Nombre de la pelicula</label>
-    		<input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">
+			<div>
+        		<label>Peliculas</label>
+        		<select name="elegirpelicula" required="required">
+        			<% for (Pelicula pel: lp){ %>
+            			<option value="<%= pel.getCodigo() %>"><%= pel.getNombre() %></option>
+            		<% } %>
+        		</select>
+    		</div>
     		<br>
    		 	<button class="btn btn-lg btn-primary btn-block" type="submit" >BUSCAR</button>
     	</form>
     <%} %>
-  
-    <%if ( !(request.getAttribute("encontrada")==(null)) && bandera1.equals("encontrada") ) {%>
+    
+    <%if ( request.getAttribute("encontrada")!=null ) {%>
     	<br>
 		<br>
     	<br>
-		<%for (Pelicula pel : lp){ %>
-			
-			<div class="pelicula">
-				<div class="infopelicula">
-					<img class="infopelicula" id="fotopelicula" src="<%=pel.getPortada()%>"/>
-					<p class="nombrepelicula" id="nombrepelicula" ><%= pel.getNombre() %></p>
-                    <p class="sinopsis" id="sinopsis"><%= pel.getSinopsis() %></p>
-                    <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
-                    <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
-                    <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
-                    <form action="BuscarFuncionesDePeliculaBorrar" method="post">
-                    	<input type="hidden" name="codigo" value="<%=pel.getCodigo() %>"/>
-                        <br/>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >MOSTRAR FUNCIONES</button>
-                    </form>
-                </div>
+		<div class="pelicula">
+			<div class="infopelicula">
+				<img class="infopelicula" id="fotopelicula" src="<%=peliculaEncontrada.getPortada()%>"/>
+				<p class="nombrepelicula" id="nombrepelicula" ><%= peliculaEncontrada.getNombre() %></p>
+                <p class="sinopsis" id="sinopsis"><%= peliculaEncontrada.getSinopsis() %></p>
+                <p class="infopelicula"> <b>Director :</b> <%= peliculaEncontrada.getDirector() %></p>
+                <p class="infopelicula"> <b>Calificacion :</b> <%= peliculaEncontrada.getCalificacion() %></p>
+                <p class="infopelicula"> <b>Duracion :</b> <%= peliculaEncontrada.getDuracion() %></p>
+                <form action="BuscarFuncionesDePeliculaBorrar" method="get">
+                    <input type="hidden" name="codigoPel" value="<%=peliculaEncontrada.getCodigo() %>"/>
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >MOSTRAR FUNCIONES</button>
+                </form>
             </div>
-              
-        <%}%> 
-    <%}%>
-         <%if ( !(request.getAttribute("borrada")==(null)) && bandera2.equals("borrada")){%>
-    		<script>
-    			window.alert("sala borrada!")
-    		</script>
-    	<%}%>  
-    	  
+        </div>
+    <%}%>       	  
 </div>
-
 </body>
 </html>

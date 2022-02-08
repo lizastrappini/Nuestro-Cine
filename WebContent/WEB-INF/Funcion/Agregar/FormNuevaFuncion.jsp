@@ -24,9 +24,6 @@
     <% if (request.getAttribute("cargada")!=null) {%>
         <div class="alert alert-success">¡Funcion creada con exito!</div>
     <% }%>
-    <%if ( request.getAttribute("encontrada")==null ) { %>
-    	<div class="alert alert-warning">No se encontro la sala seleccionada</div>
-    <% } %>
     <h1>Ingrese los datos de la nueva funcion</h1>
     <form action="NuevaFuncion" method="post">
     	<input type="hidden" name="codigoPel" value="<%= pelActual.getCodigo() %>"/>
@@ -40,6 +37,9 @@
     	</div>
     	<br>
     	<label for="inputFecha" >Fecha y Hora de la Funcion (yyyy-MM-dd HH:mm)</label>
+    	<% if (request.getAttribute("fechaExiste")!=null) {%>
+        	<div class="alert alert-danger">Ya existe una funcion en esa sala a ese horario</div>
+    	<% }%>
     	<% if (request.getAttribute("errorFormatoFecha")!=null) {%>
         	<div class="alert alert-danger">Formato de fecha invalido</div>
         <%}%>
