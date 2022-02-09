@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Funcion;
-import entities.Pelicula;
-import logic.LogicPelicula;
 import logic.LogicFuncion;
 
 /**
@@ -37,15 +35,10 @@ public class BuscarFuncionesDePeliculaBorrar extends HttpServlet {
 		Integer cod=Integer.parseInt(request.getParameter("codigoPel"));
 		Funcion fun = new Funcion();
 
-		Pelicula pel = new Pelicula();
-		LogicPelicula lp = new LogicPelicula();
 		LogicFuncion lf = new LogicFuncion();
 		
 		fun.setCodigo_pelicula(cod);
 		LinkedList<Funcion> funciones = lf.buscarFuncionesPorPeli(fun);
-		
-		pel = lp.buscarPorCodigo(cod);
-		request.setAttribute("pel", pel);
 
 		request.setAttribute("listafunciones", funciones);
 		request.getRequestDispatcher("WEB-INF/Funcion/Borrar/MostrarFuncionesDePelicula.jsp").forward(request, response);

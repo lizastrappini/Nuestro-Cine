@@ -18,8 +18,8 @@ if ( !(per==null)){
                 <%}%>	 
                 <li class="nav-item"><a class="nav-link" href="Peliculas.jsp">Cartelera</a></li>
                 <% if ( request.getSession().getAttribute("usuario")==null ) {%>
-                	<li class="nav-item"><a class="nav-link" href="SignUp.html">Registrarse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="SignIn.html" id="signin">Iniciar sesion</a></li>
+                	<li class="nav-item"><a class="nav-link" href="SignUp.jsp">Registrarse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="SignIn.jsp" id="signin">Iniciar sesion</a></li>
                 <%} else {%> 
                     	<li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
                         <li class="nav-item"><a class="nav-link" id="signout" href="SignOut" >Cerrar sesion</a></li>               

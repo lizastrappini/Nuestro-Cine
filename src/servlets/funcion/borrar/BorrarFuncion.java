@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Funcion;
-import entities.Pelicula;
 import logic.LogicFuncion;
-import logic.LogicPelicula;
 
 /**
  * Servlet implementation class Borrar
@@ -45,7 +43,6 @@ public class BorrarFuncion extends HttpServlet {
 		
 		
 		LogicFuncion lf = new LogicFuncion();
-		LogicPelicula lp = new LogicPelicula();
 
 		Funcion fun = new Funcion();
 		
@@ -59,9 +56,6 @@ public class BorrarFuncion extends HttpServlet {
 		lf.borrar(fun);
 		
 		LinkedList<Funcion> funciones = lf.buscarFuncionesPorPeli(fun);
-		
-		Pelicula pel = lp.buscarPorCodigo(codigo);
-		request.setAttribute("pel", pel);
 
 		request.setAttribute("listafunciones", funciones);
 		request.setAttribute("borrada", "borrada");

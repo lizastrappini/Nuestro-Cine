@@ -12,7 +12,6 @@
 	<title>FUNCIONES</title>
 	<% 
 	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");
-	Pelicula p  = (Pelicula)request.getAttribute("pel");
 	%>
 </head>
 <body>
@@ -23,7 +22,7 @@
 	<br>
 	<br>
 	<%if ( request.getAttribute("borrada")!=null ) { %>
-        <div class="alert alert-success">¡Pelicula borrada con exito!</div>
+        <div class="alert alert-success">¡Funcion borrada con exito!</div>
     <% } %>
 	<% for (Funcion fun : lf){ %>
         <div class="funcion">
@@ -32,7 +31,7 @@
             	<input type="hidden" name="fechahora" value="<%=fun.getFecha_hora() %>">
             	<p class="infopelicula" id="numerosala"><b>Sala n°:</b>  <%=fun.getNumero_sala()%></p>
             	<input type="hidden" name="nrosala" value="<%= fun.getNumero_sala() %>">
-            	<input type="hidden" name="codigopeli" value="<%= p.getCodigo() %>">
+            	<input type="hidden" name="codigopeli" value="<%= fun.getCodigo_pelicula() %>">
             	<br>
             	<button class="button" id="sacarentrada">Borrar Funcion</button>
             </form>
