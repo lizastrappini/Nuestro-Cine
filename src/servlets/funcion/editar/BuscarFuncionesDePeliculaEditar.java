@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.DataFuncion;
 import entities.Funcion;
-import entities.Pelicula;
-import logic.LogicPelicula;
+import logic.LogicFuncion;
 
 /**
  * Servlet implementation class EditaFuncion
@@ -33,31 +31,25 @@ public class BuscarFuncionesDePeliculaEditar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		Integer cod=Integer.parseInt(request.getParameter("codigoPel"));
+		Funcion fun = new Funcion();
+
+		LogicFuncion lf = new LogicFuncion();
+		
+		fun.setCodigo_pelicula(cod);
+		LinkedList<Funcion> funciones = lf.buscarFuncionesPorPeli(fun);
+
+		request.setAttribute("listafunciones", funciones);
+		request.getRequestDispatcher("WEB-INF/Funcion/Editar/MostrarFuncionesDePelicula.jsp").forward(request, response);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer cod=Integer.parseInt(request.getParameter("codigo"));
-		Funcion fun = new Funcion();
-
-		Pelicula pel = new Pelicula();
-		LogicPelicula lp = new LogicPelicula();
 		
-		fun.setCodigo_pelicula(cod);
-		DataFuncion df= new DataFuncion();
-		
-		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
-		
-		pel = lp.buscarPorCodigo(cod);
-		request.setAttribute("pel", pel);
-
-		request.setAttribute("listafunciones", funciones);
-		request.getRequestDispatcher("WEB-INF/Funcion/Editar/MostrarFuncionesDePelicula.jsp").forward(request, response);
-
 	}
 
 }

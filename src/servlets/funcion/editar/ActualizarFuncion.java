@@ -49,14 +49,14 @@ public class ActualizarFuncion extends HttpServlet {
 					
 			Funcion funcionActual = new Funcion();
 				
-			Integer numero = Integer.parseInt(request.getParameter("numSalaAnt"));
+			Integer numero = Integer.parseInt(request.getParameter("numSalaAct"));
 			funcionActual.setNumero_sala(numero);
 				
-			String str = (request.getParameter("fechaHoraAnt"));
+			String str = (request.getParameter("fechaHoraAct"));
 			LocalDateTime dateTime = LocalDateTime.parse(str);
 			funcionActual.setFecha_hora(dateTime);
 		
-			Integer codigoPel = Integer.parseInt(request.getParameter("codigoPelAnt"));
+			Integer codigoPel = Integer.parseInt(request.getParameter("codigoPelAct"));
 			funcionActual.setCodigo_pelicula(codigoPel);
 		
 			LogicPelicula lp = new LogicPelicula();
@@ -77,37 +77,40 @@ public class ActualizarFuncion extends HttpServlet {
 		}
 		
 		if( (request.getParameter("bandera")!=null)) {
-			if (request.getParameter("bandera").toString().equals("actualizar") ) {
 				
-				Funcion nuevafuncion = new Funcion();
+			Funcion nuevafuncion = new Funcion();
 				
-				Integer numero_sala = Integer.parseInt(request.getParameter("elegirsala"));
-				nuevafuncion.setNumero_sala(numero_sala);
+			Integer numero_sala = Integer.parseInt(request.getParameter("elegirsala"));
+			nuevafuncion.setNumero_sala(numero_sala);
 				
-				Integer codigo_peli = Integer.parseInt(request.getParameter("elegirpelicula"));
-				nuevafuncion.setCodigo_pelicula(codigo_peli);
+			Integer codigo_peli = Integer.parseInt(request.getParameter("elegirpelicula"));
+			nuevafuncion.setCodigo_pelicula(codigo_peli);
 				
-				String str2 = (request.getParameter("fechahora"));
-				try {
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-					LocalDateTime dateTime2 = LocalDateTime.parse(str2, formatter);
-					nuevafuncion.setFecha_hora(dateTime2);
-				} catch (DateTimeParseException e) {
-					e.printStackTrace();
-					request.setAttribute("errorFormatoFecha", e.getMessage());
-					request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
+			String str2 = (request.getParameter("fechahora"));
+			try {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime dateTime2 = LocalDateTime.parse(str2, formatter);
+				nuevafuncion.setFecha_hora(dateTime2);
+			} catch (DateTimeParseException e) {
+				e.printStackTrace();
+				request.setAttribute("errorFormatoFecha", e.getMessage());
+				request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
+			}
+				
+			if ( !(funcionActual.equals(nuevafuncion)) ) {
+					
+				if (nuevafuncion.validarFuncion(nuevafuncion)) {
+					LogicFuncion lf = new LogicFuncion();
+					lf.modificar(nuevafuncion, funcionActual);
+					request.setAttribute("modificada", "modificada");
+				} else {
+					request.setAttribute("fechaExiste", "fechaExiste");
 				}
 				
-					if ( !(funcionActual.equals(nuevafuncion)) ) {
-					
-						LogicFuncion lf = new LogicFuncion();
-						lf.modificar(nuevafuncion, funcionActual);
-						request.setAttribute("modificada", "modificada");
-						request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
 				
-					}
-					request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
 			}
+			request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
 		}
 	}
 }

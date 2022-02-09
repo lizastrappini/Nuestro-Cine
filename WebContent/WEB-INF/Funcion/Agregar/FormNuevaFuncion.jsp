@@ -36,7 +36,7 @@
         	</select>
     	</div>
     	<br>
-    	<label for="inputFecha" >Fecha y Hora de la Funcion (yyyy-MM-dd HH:mm)</label>
+    	<label for="inputFecha" >Ingrese Fecha y Hora de la Funcion con el siguiente formato: yyyy-MM-dd HH:mm</label>
     	<% if (request.getAttribute("fechaExiste")!=null) {%>
         	<div class="alert alert-danger">Ya existe una funcion en esa sala a ese horario</div>
     	<% }%>

@@ -9,60 +9,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link href="style/css/styles.css" rel="stylesheet" />
-<script src="style/codigo.js"></script>
-<title>EDITAR SALA</title>
-<%
-Integer isEmpleado = 0;
-Persona per = (Persona)request.getSession().getAttribute("usuario");
+	<meta charset="UTF-8">
+	<%@ include file="/Estilo.jsp" %>
+	<title>EDITAR SALA</title>
+	<%
+	Funcion funcionActual = (Funcion)request.getAttribute("funcionActual");
 
-if ( !(per==null)){
-	isEmpleado = per.getHabilitado();
-} else {isEmpleado = 0;}
+	Pelicula pelActual = (Pelicula)request.getAttribute("pelActual");
 
-Funcion funcionActual = (Funcion)request.getAttribute("funcionActual");
-
-Pelicula pelActual = (Pelicula)request.getAttribute("pelActual");
-
-LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
-LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");	 
-%>
+	LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
+	LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");	 
+	%>
 </head>
 <body>
 <div class="fondo">
-<!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">	
-                    <%if ( isEmpleado==1){ %>
-                    	<li class="nav-item"><a class="nav-link" href="Empleados.jsp">EMPLEADOS</a></li> 
-                    <%} else {%>
-                    	<%} %>	 
-                    	<li class="nav-item"><a class="nav-link" href="Peliculas.jsp">Cartelera</a></li>
-                        
-                        <% if ( request.getSession().getAttribute("usuario")==null ) {%>
-                        
-                        <li class="nav-item"><a class="nav-link" href="SignUp.html">Registrarse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SignIn.html" id="signin">Iniciar sesion</a></li>
-                        <%}else {%> 
-                        <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout" href="SignOut" >Cerrar sesion</a></li>
-                        
-                   		<%} %>	
-                    </ul>
-                     
-                </div>
-            </div>
-        </nav>
-     <br>
+	<jsp:include page="/BarraMenu.jsp" />
+    <br>
     <br>
     <% if (request.getAttribute("modificada")!=null) {%>
-        	<div class="alert alert-success">¡Funcion actualizada con exito!</div>
-    <% }%>
+    	<div class="alert alert-success">¡Funcion actualizada con exito!</div>
+    <% } %>
 	<h1>Edite la funcion</h1>
 	<form class="addFuncion" action="ActualizarFuncion" method="post" >
 		<div>
@@ -91,16 +57,19 @@ LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");
         	</select>
     	</div>
     	<br>
-    	<label for="inputFechaHora" >Fecha y Hora</label>
+    	<label for="inputFechaHora" >Ingrese Fecha y Hora de la Funcion con el siguiente formato: yyyy-MM-dd HH:mm</label>
     	<% if (request.getAttribute("errorFormatoFecha")!=null) {%>
         		<div class="alert alert-danger">Formato de fecha invalido</div>
+    	<% }%>
+    	<% if (request.getAttribute("fechaExiste")!=null) {%>
+        	<div class="alert alert-danger">Ya existe una funcion en esa sala a ese horario</div>
     	<% }%>
     	<input id="inputFechaHora" name="fechahora" class="form-control" 
     		placeholder="fechahora" required type="text" value="<%= funcionActual.getFecha_hora() %>">
     	<br>
-    	<input type="hidden" name="codigoPelAnt" value="<%=funcionActual.getCodigo_pelicula()%>">
-    	<input type="hidden" name="numSalaAnt" value="<%=funcionActual.getNumero_sala()%>">
-    	<input type="hidden" name="fechaHoraAnt" value="<%=funcionActual.getFecha_hora()%>">
+    	<input type="hidden" name="codigoPelAct" value="<%=funcionActual.getCodigo_pelicula()%>">
+    	<input type="hidden" name="numSalaAct" value="<%=funcionActual.getNumero_sala()%>">
+    	<input type="hidden" name="fechaHoraAct" value="<%=funcionActual.getFecha_hora()%>">
     	<input type="hidden" name="bandera" value="actualizar">
 		
     	<button class="btn btn-lg btn-primary btn-block" type="submit" id="botonEditar">EDITAR</button>
