@@ -80,6 +80,13 @@ if ( per != (null) ){
 	<button class="buttonFiltros" id="editar" name="opc2" value="edit" >Editar Costo</button>
 	<button class="buttonFiltros" id="borrar" name="opc3" value="delete" >Borrar Costo</button>
 	</form>
+	<br>
+	<h1>Seccion Calificaciones</h1>
+	<form action="ControladorCalificaciones" method="post">
+	<button class="buttonFiltros" id="agregar" name="opc1" value="add" >Agregar Calificacion</button>
+	<button class="buttonFiltros" id="editar" name="opc2" value="edit" >Editar Calificacion</button>
+	<button class="buttonFiltros" id="borrar" name="opc3" value="delete" >Borrar Calificacion</button>
+	</form>
 	</div>
 </div>	
 <% if (!(request.getAttribute("borrada")==(null)) ){  %>

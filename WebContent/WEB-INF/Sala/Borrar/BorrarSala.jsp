@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="entities.Sala"%>
-<%@page import="logic.LogicSala"%>
-<%@page import="entities.Persona" %>
 <%@page import="java.util.LinkedList" %>
 
 <!DOCTYPE html>
@@ -23,7 +21,7 @@
 	<br>
 	<% if (request.getAttribute("encontrada")==null) {%>
 		<h2>Seleccione una sala</h2>
-		<form class="addPelicula" action="BuscarSalaBorrar" method="post" >
+		<form class="addSala" action="BuscarSalaBorrar" method="post" >
 			<div>
         		<label>Salas</label>
         		<select name="elegirsala" required="required">
