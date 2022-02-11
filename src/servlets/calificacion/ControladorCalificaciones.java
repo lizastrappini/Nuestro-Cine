@@ -51,7 +51,7 @@ public class ControladorCalificaciones extends HttpServlet {
 		
 		else if (! (request.getParameter("opc2")==(null))  ) {
 			 
-			request.getRequestDispatcher("WEB-INF/Sala/Editar/EditarSala.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Calificacion/Editar/EditarCalificacion.jsp").forward(request, response);
 			
 		}
 		
