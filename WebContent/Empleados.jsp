@@ -87,6 +87,13 @@ if ( per != (null) ){
 	<button class="buttonFiltros" id="editar" name="opc2" value="edit" >Editar Calificacion</button>
 	<button class="buttonFiltros" id="borrar" name="opc3" value="delete" >Borrar Calificacion</button>
 	</form>
+	<br>
+	<h1>Seccion Genero</h1>
+	<form action="ControladorGeneros" method="post">
+	<button class="buttonFiltros" id="agregar" name="opc1" value="add" >Agregar Genero</button>
+	<button class="buttonFiltros" id="editar" name="opc2" value="edit" >Editar Genero</button>
+	<button class="buttonFiltros" id="borrar" name="opc3" value="delete" >Borrar Genero</button>
+	</form>
 	</div>
 </div>	
 <% if (!(request.getAttribute("borrada")==(null)) ){  %>
@@ -123,6 +130,30 @@ if ( per != (null) ){
 			  footer: 'No hubo cambios'
 			})
 		</script>
+	<%} %>
+	<% if (!(request.getAttribute("noAgregado")==(null)) ){  %>
+	<script >
+	Swal.fire({
+		  icon: 'warning',
+		  title: 'Genero duplicado',
+		  footer: 'No hubo cambios'
+		})
+	</script> %>
+	<%} if (!(request.getAttribute("Agregado")==(null)) ){  %>
+	<script >
+	Swal.fire({
+		  icon: 'success',
+		  title: 'Genero cargado',
+		})
+	</script> 
+	<%} %>
+	<% if (!(request.getAttribute("Cambiado")==(null)) ){  %>
+	<script >
+	Swal.fire({
+		  icon: 'success',
+		  title: 'Genero cambiado',
+		})
+	</script> 
 	<%} } else {%>
 	<jsp:forward page="index.jsp"/>
 	<%} %>	

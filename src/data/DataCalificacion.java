@@ -49,7 +49,6 @@ public class DataCalificacion {
 					Calificacion c = new Calificacion();
 					c.setCodigo_calificacion(rs.getInt("codigo_calificacion"));
 					c.setDescripcion(rs.getString("descripcion"));
-					
 					calificaciones.add(c);
 				}
 			}
@@ -66,7 +65,6 @@ public class DataCalificacion {
 		}
 		return calificaciones;
 	}
-	
 	public Calificacion buscarCalificacion (Calificacion buscaCalificacion) {
 		ResultSet rs = null;
 		PreparedStatement stmt=null;
@@ -99,7 +97,6 @@ public class DataCalificacion {
 		
 		return cali;
 	}
-
 	public void modificar(Calificacion cali) {
 		PreparedStatement stmt =null;
 		try {
@@ -117,13 +114,13 @@ public class DataCalificacion {
 		} finally {
 			try {
 				if (stmt!= null) {stmt.close();}
+
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
 	public void borrarCalificacion(Calificacion borraCali) {
 		
 		PreparedStatement stmt=null;
@@ -178,5 +175,3 @@ public class DataCalificacion {
 		return cali;
 	}
 }
-
-

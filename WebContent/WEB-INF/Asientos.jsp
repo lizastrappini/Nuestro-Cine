@@ -3,6 +3,10 @@
 <%@page import="entities.Persona" %>
 <%@page import="entities.Sala" %>
 <%@page import="entities.Pelicula" %>
+<%@page import="entities.ButacaFuncion" %>
+<%@page import="java.util.LinkedList"%>
+<%@page import="java.time.LocalDateTime" %>
+<%@page import="java.time.format.DateTimeFormatter" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,11 +14,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style/css/asientos.css" />
-    <title>Movie Seat Booking</title>
+    <title>Seleccionar asientos</title>
     <%
     Pelicula peli = (Pelicula)request.getAttribute("peli");
     Double costo = Double.parseDouble(request.getAttribute("costo").toString());
     String fecha = request.getAttribute("fechafuncion").toString();
+    LinkedList<ButacaFuncion> lf=(LinkedList<ButacaFuncion>)request.getAttribute("asientos");
+    ButacaFuncion bf = (ButacaFuncion)request.getAttribute("butaca");
     %>
   </head>
   <body>
@@ -37,84 +43,43 @@
         <small>Ocupado</small>
       </li>
     </ul>
-
+	 <input type="hidden" id="lista" name="lista" value="<%=lf%>" >
     <div class="container">
       <div class="screen"></div>
       <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
+        <% for ( int i=1; i<50 ; i++){ 
+//uso i-1 para empezar desde el indice 0 de la LinkedList (seria el asiento 1) sino se desconfiguraba el orden de los asientos
+        	if(lf.get((i-1)).getEstado()==0){	%> 
+       		 <div class="seat" >      		 
+       		 </div>
+ 
+       		 <%}else if(lf.get(i-1).getEstado()==1){ %>
+       		 <div class="seat occupied" id="ocupado">     		
+       		 </div>
+       		 
+       		 
+        <%}if ( (i%7)== 0){%>
+          </div>
+          <div class="row">
+        <% }} %>
       </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat "></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
       </div>
-
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat "></div>
-        <div class="seat "></div>
-      </div>
-
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat "></div>
-        <div class="seat "></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-    </div>
 
     <p class="text">
       Seleccionaste <span id="count">0</span> asientos. Precio total $<span id="total">0</span>
     </p>
     <form name="entrada" action="AdquirirEntrada" method="post">
-    <input type="hidden" id="total2" name="total2" >
-    <input type="hidden" id="count2" name="count2" >
+    
+    <input type="hidden" id="preciototal" name="preciototal" >
+    
+    <input type="hidden" name="codigopeli" value="<%=bf.getCod_pelicula()%>">
+    <input type="hidden" name="nrosala" value="<%=bf.getNro_sala()%>">
+    <input type="hidden" name="fechahora" value="<%=bf.getFecha_hora_funcion()%>">
     <input type="hidden" id="indexes" name="indexes" >
     <button type="submit"class="buttonClass"> Comprar </button>
     </form>
+    
+    
     <script src="Javascript/asiento.js"></script>
   </body>
 </html>

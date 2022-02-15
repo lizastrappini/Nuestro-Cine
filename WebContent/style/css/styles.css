@@ -75,6 +75,9 @@
   }
 }
 
+
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -226,6 +229,10 @@ table.blueTable {
   border-collapse: collapse;
 
 }
+
+
+
+
 table.blueTable td, table.blueTable th {
   border: 1px solid black;
   padding: 6px 8px;
@@ -276,7 +283,75 @@ table.blueTable thead th:first-child {
 	font-family:"Segoe UI";
 	
 	
+	
 }
+
+#borderDemo {
+margin: 75px;
+width: 900px;
+height: 300px;
+outline: 9px double #000000;
+position: static;
+background-color: #fff;
+
+}
+
+#titulo{
+  text-align:  center;
+  font-size: 30px;
+  font-family: 'Righteous', cursive;
+}
+
+#titulo2{
+  text-align:  center;
+  font-size: 40px;
+  height: 50px;
+  margin-bottom: 100px;
+  
+  font-family: 'Righteous', cursive;
+
+
+}
+#ticketMovie{
+  font-family: 'Abril Fatface', cursive;
+  font-size: 50px;
+}
+ 
+#textDni{
+  font-size: 13px;
+}
+
+#info{
+  position: static;
+  float: left;
+  height: 300px;
+  padding: 18px;
+  border-right-style: dashed;
+  font-family: 'ABeeZee', sans-serif;
+  
+}
+
+#izq{
+  text-align: left;
+  height: 100px;
+  position: static;
+  float: left;
+  padding-top: 5px;
+  padding-left: 30px;
+  font-family: 'ABeeZee', sans-serif;
+}
+
+#der{
+  text-align: left;
+  height: 100px;
+  position: static;
+  float: right;
+  padding-top: 5px;
+  padding-right: 30px;
+  font-family: 'ABeeZee', sans-serif;}
+ 
+
+
 #nombrepelicula{
 	font-family: 'Bebas Neue', cursive;
 	margin-left:10px;
@@ -364,27 +439,113 @@ table.blueTable thead th:first-child {
 .filtroGenero{
 	float:left;
 	margin-top:100px;
-	padding-right:50px;
+	padding-right:10px;
+	padding-left:10px;
 	flex-direction: row;
 	
+	
+}
+.buscar{
+	box-shadow:inset 0px 1px 0px 0px #d9fbbe;
+	background:linear-gradient(to bottom, #b8e356 5%, #a5cc52 100%);
+	background-color:#b8e356;
+	border-radius:6px;
+	border:1px solid #83c41a;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #86ae47;
+}
+.buscar:hover {
+  background:linear-gradient(to bottom, #a5cc52 5%, #b8e356 100%);
+	background-color:#a5cc52;
 }
 
+.buscar:active {
+	position:relative;
+	top:1px;
+}
+
+
+.comprarEntrada{
+	margin-left:500px;
+	box-shadow:inset 0px 1px 0px 0px #d9fbbe;
+	background:linear-gradient(to bottom, #077324 5%, #077324 100%);
+    background-color:#077324;
+	border-radius:6px;
+	border:1px solid #83c41a;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #86ae47;
+}
+.comprarEntrada:hover {
+  background:linear-gradient(to bottom, #077324 5%, #077324 100%);
+    background-color:#077324;
+}
+
+.comprarEntrada:active {
+	position:relative;
+	top:1px;
+}
 .filtroNombre{
 	margin-top:100px;
 	float:left;
-	padding-right:50px;
+	padding-right:20px;
 	padding-left:50px;
 	flex-direction: row;
 }
 
 .filtroEdad{
-	float:left;
+	float:right;
 	margin-top:100px;
+	padding-right:70px;
 	flex-direction: row;
 	
-	
-	
 }
+
+.elegirGenero{
+	background: #e9ecef;
+   border: none;
+   font-size: 14px;
+   height: 30px;
+   padding: 5px;
+   width: 250px;
+   font-family: 'ABeeZee', sans-serif;
+}
+
+
+.elegirEdad{
+	background: #e9ecef;
+   border: none;
+   font-size: 14px;
+   height: 30px;
+   padding: 5px;
+   width: 250px;
+   font-family: 'ABeeZee', sans-serif;
+}
+
+
+.elegirNombre{
+	background: #e9ecef;
+   border: none;
+   font-size: 14px;
+   height: 30px;
+   padding: 5px;
+   width: 250px;
+   font-family: 'ABeeZee', sans-serif;
+}
+
 
 .buttonFiltros {
   font-size:15px;

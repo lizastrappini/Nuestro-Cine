@@ -80,7 +80,7 @@ public class DataCostoEntrada {
 				costo = new CostoEntrada();
 				costo.setFecha_desde(rs.getObject("uv.ult_fecha", Date.class));
 				costo.setCosto(rs.getDouble("ce.costo"));
-				System.out.println(costo);
+				
 			}
 			
 		} catch (SQLException e) {

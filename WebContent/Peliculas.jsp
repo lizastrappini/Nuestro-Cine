@@ -1,5 +1,10 @@
 <%@page import="java.util.*" %>
 <%@page import="entities.Persona" %>
+<%@page import="entities.Genero" %>
+<%@page import="logic.LogicGenero" %>
+<%@page import="entities.Calificacion" %>
+<%@page import="logic.LogicCalificacion" %>
+<%@page import="java.util.LinkedList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,6 +15,9 @@ pageEncoding="UTF-8"%>
         <title>---PELICULAS---</title>
         <link href="style/css/styles.css" rel="stylesheet" />
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" >
+		<link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Abril+Fatface&family=Righteous&display=swap" rel="stylesheet">
 		 <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -35,6 +43,12 @@ pageEncoding="UTF-8"%>
 			isEmpleado = per.getHabilitado();
 		} else {isEmpleado = 0;}
 		
+		LogicGenero lg = new LogicGenero();
+		LinkedList<Genero> listaGeneros = lg.getAll();
+		
+		LogicCalificacion lc = new LogicCalificacion();
+		LinkedList<Calificacion> listaCalif = lc.getAll();
+		//LinkedList<Genero> gen=(LinkedList<Genero>)request.getAttribute("peliculas");
 		%>
 </head>
 <body>
@@ -72,43 +86,39 @@ pageEncoding="UTF-8"%>
 		<div class="filtroNombre">
 		<h1>Nombre</h1>
 		<form action="MostrarPeliculas" method="get">
-		<input name="nombre" type=text>
-		<input type="submit" value="buscar">
+		<input class="elegirNombre" name="nombre" type=text>
+		<input class="buscar" type="submit" value="buscar">
 		</form>
 		</div>
 		
+		<form method="get" action="MostrarPeliculas">	
 		<div class="filtroGenero">
-		<h1>Buscar por genero</h1>	
-		
-		<form action="MostrarPeliculas" method="get">
-			<label>Elegir genero:
-			<input list="generos" name="genero" /></label>
-			<datalist id="generos">
-			<option value="romance">Romance</option>
-			<option value="terror">Terror</option>
-			<option value="suspenso">Suspenso</option>
-			<option value="todas">Ver todas</option>
-			</datalist>
-			<input type="submit" value="buscar">
+		<h1>Buscar por genero</h1>
+		<select class="elegirGenero" name="GeneroPelicula" required="required">		
+		<% for (Genero g: listaGeneros){ %>
+        	<option value="<%= g.getDescripcion() %>" selected="selected"><%= g.getDescripcion() %></option>
+         <% } %>	
+         <option value="todas" >Ver todas</option>	
+         </select>
+         <input class="buscar" type="submit" value="buscar">
+		</div>
 		</form>
-		</div>	
 		
+		<form method="get" action="MostrarPeliculas">	
 		<div class="filtroEdad">
-		<h1>Buscar por edad</h1>	
-		<form action="MostrarPeliculas" method="get">
-			<label>Elegir edad:
-			<input list="edades" name="edad" /></label>
-			<datalist id="edades">
-			<option value="+3">+3</option>
-			<option value="+7">+7</option>
-			<option value="+16">+16</option>
-			<option value="Apta para todo publico">Apta para todo publico</option>
-			</datalist>
-			<input type="submit" value="buscar">
-		</form>
-		</div>		
+		<h1>Buscar por edad</h1>
+		<select class="elegirEdad" name="edadPelicula" required="required">		
+		<% for (Calificacion c: listaCalif){ %>
+        	<option value="<%= c.getDescripcion() %>" selected="selected"><%= c.getDescripcion() %></option>
+            	<% } %>		
+         </select>
+         <input class="buscar" type="submit" value="buscar">
+		</div>
+		</form>		
 		</div>		
 		<div style="clear:both"></div>
+		
+		
 		<%if (!(request.getAttribute("noEncontrada")==(null))){  %>
 		<script type="text/javascript">
 		Swal.fire({

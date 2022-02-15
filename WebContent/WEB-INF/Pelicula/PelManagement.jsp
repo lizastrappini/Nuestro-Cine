@@ -103,7 +103,7 @@
 	
 	<% }} %>
 
-<% for (Pelicula pel : lp){ %>
+<% if ( !(lp.isEmpty()) ) { for (Pelicula pel : lp){ %>
 	  <!-- Contenido peliculas-->
         <div class="pelicula">
           					<img class="infopelicula" id="fotopelicula" src="<%=pel.getPortada()%>" alt="Not Found"  />
@@ -120,7 +120,7 @@
                             
         </div>
         
-	<%} %>
+	<%} }%>
 	<a class="boton_volver" href="index.jsp">VOLVER </a>
 	<% if (lp.isEmpty() && request.getAttribute("estrenos")==null){ %>
 	<script type="text/javascript">

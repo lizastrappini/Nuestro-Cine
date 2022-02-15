@@ -1,7 +1,6 @@
 package logic;
 
 import java.util.LinkedList;
-
 import data.DataCalificacion;
 import entities.Calificacion;
 
