@@ -15,4 +15,7 @@ private DataButacaFuncion dbf;
 	public LinkedList<ButacaFuncion> buscar(Funcion fun) {
 		return dbf.buscarButacasPorFuncion(fun);
 	}
+	public void cambiarEstado(ButacaFuncion bf) {
+		dbf.modificarButaca(bf);
+	}
 }

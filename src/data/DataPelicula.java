@@ -59,18 +59,20 @@ public class DataPelicula {
 		LinkedList<Pelicula>peliculas= new LinkedList<>();
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("Select codigo, nombre, director, genero,calificacion, duracion, sinopsis, portada from pelicula");
+			rs= stmt.executeQuery("Select p.codigo, p.nombre, p.director, g.descripcion,c.descripcion, p.duracion, p.sinopsis, p.portada\r\n"
+					+ "from pelicula p inner join genero g on p.genero = g.idGenero\r\n"
+					+ "inner join calificacion c on p.calificacion = c.idCalificacion");
 			if (rs !=null) {
 				while (rs.next()) {
 					Pelicula p = new Pelicula();
-					p.setCodigo(rs.getInt("codigo"));
-					p.setNombre(rs.getString("nombre"));
-					p.setDirector(rs.getString("director"));
-					p.setGenero(rs.getString("genero"));
-					p.setCalificacion(rs.getString("calificacion"));
-					p.setDuracion(rs.getDouble("duracion"));
-					p.setSinopsis(rs.getString("sinopsis"));
-					p.setPortada(rs.getString("portada"));
+					p.setCodigo(rs.getInt("p.codigo"));
+					p.setNombre(rs.getString("p.nombre"));
+					p.setDirector(rs.getString("p.director"));
+					p.setGenero(rs.getString("g.descripcion"));
+					p.setCalificacion(rs.getString("c.descripcion"));
+					p.setDuracion(rs.getDouble("p.duracion"));
+					p.setSinopsis(rs.getString("p.sinopsis"));
+					p.setPortada(rs.getString("p.portada"));
 					
 					peliculas.add(p);
 				}
@@ -185,7 +187,10 @@ public class DataPelicula {
 		
 		try {
 		
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where genero = ? ");   
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(""
+					+ "select p.codigo,p.nombre,p.sinopsis, p.director, p.duracion, p.portada, p.fecha_estreno, g.descripcion, c.descripcion\r\n"
+					+ "from pelicula p inner join genero g on p.genero=g.idGenero and LOWER(g.descripcion)=LOWER(?)\n"
+					+ "inner join calificacion c on p.calificacion=c.idCalificacion");   
 			stmt.setString(1, genero);
 			
 			rs = stmt.executeQuery();
@@ -193,14 +198,14 @@ public class DataPelicula {
 			if(rs!=null ) {
 				while (rs.next()) {
 					Pelicula p = new Pelicula();
-					p.setCodigo(rs.getInt("codigo"));
-					p.setNombre(rs.getString("nombre"));
-					p.setDirector(rs.getString("director"));
-					p.setGenero(rs.getString("genero"));
-					p.setCalificacion(rs.getString("calificacion"));
-					p.setDuracion(rs.getDouble("duracion"));
-					p.setSinopsis(rs.getString("sinopsis"));
-					p.setPortada(rs.getString("portada"));
+					p.setCodigo(rs.getInt("p.codigo"));
+					p.setNombre(rs.getString("p.nombre"));
+					p.setDirector(rs.getString("p.director"));
+					p.setGenero(rs.getString("g.descripcion"));
+					p.setCalificacion(rs.getString("c.descripcion"));
+					p.setDuracion(rs.getDouble("p.duracion"));
+					p.setSinopsis(rs.getString("p.sinopsis"));
+					p.setPortada(rs.getString("p.portada"));
 					
 					
 					peliculas.add(p);
@@ -227,7 +232,10 @@ public class DataPelicula {
 		
 		try {
 		
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where calificacion = ? ");   
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(""
+					+ "select p.codigo,p.nombre,p.sinopsis,p.director,p.duracion, p.portada, p.fecha_estreno,c.descripcion, g.descripcion\n"
+					+ "from pelicula p inner join calificacion c on p.calificacion=c.idcalificacion and LOWER(c.descripcion) = LOWER(?) \n"
+					+ "inner join genero g on p.genero=g.idGenero ");   
 			stmt.setString(1, edad);
 			
 			rs = stmt.executeQuery();
@@ -235,14 +243,14 @@ public class DataPelicula {
 			if(rs!=null ) {
 				while (rs.next()) {
 					Pelicula p = new Pelicula();
-					p.setCodigo(rs.getInt("codigo"));
-					p.setNombre(rs.getString("nombre"));
-					p.setDirector(rs.getString("director"));
-					p.setGenero(rs.getString("genero"));
-					p.setCalificacion(rs.getString("calificacion"));
-					p.setDuracion(rs.getDouble("duracion"));
-					p.setSinopsis(rs.getString("sinopsis"));
-					p.setPortada(rs.getString("portada"));
+					p.setCodigo(rs.getInt("p.codigo"));
+					p.setNombre(rs.getString("p.nombre"));
+					p.setDirector(rs.getString("p.director"));
+					p.setGenero(rs.getString("g.descripcion"));
+					p.setCalificacion(rs.getString("c.descripcion"));
+					p.setDuracion(rs.getDouble("p.duracion"));
+					p.setSinopsis(rs.getString("p.sinopsis"));
+					p.setPortada(rs.getString("p.portada"));
 					
 					
 					peliculas.add(p);
@@ -269,20 +277,23 @@ public class DataPelicula {
 		
 		try {
 		
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where month(fecha_estreno) = month(current_date()) ");   
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select  p.codigo,p.nombre,p.sinopsis, p.director, p.duracion, p.portada, p.fecha_estreno, g.descripcion, c.descripcion from pelicula p\r\n"
+					+ "inner join genero g on g.idGenero=p.genero\r\n"
+					+ "inner join calificacion c on c.idcalificacion=p.calificacion\r\n"
+					+ "where month(fecha_estreno) = month(current_date())) ");   
 			rs = stmt.executeQuery();
 			
 			if(rs!=null ) {
 				while (rs.next()) {
 					Pelicula p = new Pelicula();
-					p.setCodigo(rs.getInt("codigo"));
-					p.setNombre(rs.getString("nombre"));
-					p.setDirector(rs.getString("director"));
-					p.setGenero(rs.getString("genero"));
-					p.setCalificacion(rs.getString("calificacion"));
-					p.setDuracion(rs.getDouble("duracion"));
-					p.setSinopsis(rs.getString("sinopsis"));
-					p.setPortada(rs.getString("portada"));
+					p.setCodigo(rs.getInt("p.codigo"));
+					p.setNombre(rs.getString("p.nombre"));
+					p.setDirector(rs.getString("p.director"));
+					p.setGenero(rs.getString("g.descripcion"));
+					p.setCalificacion(rs.getString("p.descripcion"));
+					p.setDuracion(rs.getDouble("p.duracion"));
+					p.setSinopsis(rs.getString("p.sinopsis"));
+					p.setPortada(rs.getString("p.portada"));
 					
 					
 					peliculas.add(p);
@@ -353,7 +364,10 @@ public class DataPelicula {
 		
 		try {
 		
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM pelicula WHERE nombre like UPPER(concat('%',concat(?,'%'))) or nombre like LOWER(concat('%',concat(?,'%'))) ");   
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT p.codigo,p.nombre, p.sinopsis, p.director, p.duracion, p.portada, p.fecha_estreno, g.descripcion, c.descripcion FROM pelicula p\r\n"
+					+ "inner join genero g on p.genero = g.idGenero\r\n"
+					+ "inner join calificacion c on p.calificacion = c.idCalificacion\r\n"
+					+ "WHERE nombre like UPPER(concat('%',concat(?,'%'))) or nombre like LOWER(concat('%',concat(?,'%'))) ");   
 			stmt.setString(1, nombre);
 			stmt.setString(2, nombre);
 			rs = stmt.executeQuery();
@@ -361,14 +375,14 @@ public class DataPelicula {
 			if(rs!=null ) {
 				while (rs.next()) {
 					Pelicula p = new Pelicula();
-					p.setCodigo(rs.getInt("codigo"));
-					p.setNombre(rs.getString("nombre"));
-					p.setDirector(rs.getString("director"));
-					p.setGenero(rs.getString("genero"));
-					p.setCalificacion(rs.getString("calificacion"));
-					p.setDuracion(rs.getDouble("duracion"));
-					p.setSinopsis(rs.getString("sinopsis"));
-					p.setPortada(rs.getString("portada"));
+					p.setCodigo(rs.getInt("p.codigo"));
+					p.setNombre(rs.getString("p.nombre"));
+					p.setDirector(rs.getString("p.director"));
+					p.setGenero(rs.getString("g.descripcion"));
+					p.setCalificacion(rs.getString("c.descripcion"));
+					p.setDuracion(rs.getDouble("p.duracion"));
+					p.setSinopsis(rs.getString("p.sinopsis"));
+					p.setPortada(rs.getString("p.portada"));
 					
 					peliculas.add(p);
 					

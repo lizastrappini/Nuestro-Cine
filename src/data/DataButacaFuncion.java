@@ -79,9 +79,10 @@ public class DataButacaFuncion {
 		PreparedStatement stmt=null;
 		try {
 			stmt= DbConnector.getInstancia().getConn().prepareStatement("update butaca_funcion "
-					+ "set numero=?, nro_sala=?, cod_pelicula=?, fecha_hora_funcion=?, estado=? "
+					+ "set estado=1 "
 					+ "where cod_pelicula=? and fecha_hora_funcion=? and nro_sala=? and numero=?");
-		
+			
+			
 			stmt.setInt(1, bf.getCod_pelicula());
 			stmt.setObject(2, bf.getFecha_hora_funcion());
 			stmt.setInt(3, bf.getNro_sala());
@@ -145,7 +146,8 @@ public class DataButacaFuncion {
 				but.setCod_pelicula(rs.getInt("cod_pelicula"));
 				but.setFecha_hora_funcion(rs.getObject("fecha_hora_funcion", LocalDateTime.class));
 				but.setNro_sala(rs.getInt("nro_sala"));
-				
+				but.setNumero(rs.getInt("numero"));
+				but.setEstado(rs.getInt("estado"));
 				butacas_funcion.add(but);
 				}
 			}

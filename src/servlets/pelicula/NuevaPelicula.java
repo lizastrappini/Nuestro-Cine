@@ -39,13 +39,13 @@ public class NuevaPelicula extends HttpServlet {
 		
 		
 		pel.setNombre(request.getParameter("nombre").toString());
-		pel.setGenero(request.getParameter("genero").toString());
-		pel.setCalificacion(request.getParameter("edad").toString());
+		pel.setGenero(request.getParameter("elegirGenero").toString());
+		pel.setCalificacion(request.getParameter("elegirCalificacion").toString());
 		pel.setSinopsis(request.getParameter("sinopsis").toString());
 		pel.setDirector(request.getParameter("director").toString());
 		pel.setDuracion(Integer.parseInt(request.getParameter("duracion").toString()));
 		pel.setPortada(request.getParameter("portada").toString());
-		String fecha1=request.getParameter("estreno").toString();
+		String fecha1=request.getParameter("fechahora").toString();
 		
 		Date fecha;
 		try {

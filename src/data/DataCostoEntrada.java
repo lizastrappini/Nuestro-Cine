@@ -69,7 +69,7 @@ public class DataCostoEntrada {
 	
 	public CostoEntrada buscarCostoActual() {
 		ResultSet rs = null;
-		Statement stmt=null;
+		PreparedStatement stmt=null;
 		CostoEntrada costo = null;
 		
 		try {
@@ -80,7 +80,7 @@ public class DataCostoEntrada {
 				costo = new CostoEntrada();
 				costo.setFecha_desde(rs.getObject("uv.ult_fecha", Date.class));
 				costo.setCosto(rs.getDouble("ce.costo"));
-				System.out.println(costo);
+				
 			}
 			
 		} catch (SQLException e) {

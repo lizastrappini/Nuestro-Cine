@@ -125,7 +125,15 @@ pageEncoding="UTF-8"%>
             <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2021</p></div>
         </footer>
     </div>  
-   
+   <%if ( request.getAttribute("entradasCompradas")!= null){%>
+   <script>
+   Swal.fire({
+		  icon: 'success',
+		  title: 'Las entradas han sido reservadas!',
+		  text: 'Las encontrara en su casilla de correo',
+		})
+   </script>
+   <%} %>
     
       
     </body>

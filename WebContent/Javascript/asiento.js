@@ -1,5 +1,5 @@
 const container = document.querySelector('.container');
-const seats = document.querySelectorAll('.row .seat:not(.occupied');
+const seats = document.querySelectorAll('.row .seat');
 const count = document.getElementById('count');
 const total = document.getElementById('total');
 const ticketPrice= document.getElementById("costo").value;
@@ -22,8 +22,8 @@ function updateSelectedCount() {
 
   count.innerText = selectedSeatsCount;
   total.innerText = selectedSeatsCount * ticketPrice;
-  document.getElementById('count2').value = selectedSeatsCount * ticketPrice;
-  document.getElementById('total2').value  = selectedSeatsCount;
+  document.getElementById('preciototal').value = (selectedSeatsCount * ticketPrice);
+ 
 }
 
 // get data from localstorage and populate ui

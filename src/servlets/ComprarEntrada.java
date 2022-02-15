@@ -15,16 +15,16 @@ import entities.ButacaFuncion;
 import logic.LogicButFun;
 
 /**
- * Servlet implementation class AquirirEntrada
+ * Servlet implementation class ComprarEntrada
  */
-@WebServlet("/AdquirirEntrada")
-public class AdquirirEntrada extends HttpServlet {
+@WebServlet("/ComprarEntrada")
+public class ComprarEntrada extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdquirirEntrada() {
+    public ComprarEntrada() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,37 +41,33 @@ public class AdquirirEntrada extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	
-		String precio = request.getParameter("preciototal").toString();
-		String index = request.getParameter("indexes").toString();
-		Integer cod = Integer.parseInt(request.getParameter("codigopeli"));
-		Integer nrosala = Integer.parseInt(request.getParameter("nrosala"));
+		String indexes = request.getParameter("listaButacas").toString();
+		Integer codPeli = Integer.parseInt(request.getParameter("codigo").toString());
+		Integer nroSala = Integer.parseInt(request.getParameter("numeroSala").toString());
 		String fecha1=request.getParameter("fechahora");
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime dateTime2 = LocalDateTime.parse(fecha1, formatter);
+		
+		LogicButFun logicbf = new LogicButFun();
+		
 
-		LogicButFun lbf = new LogicButFun();
-		LinkedList<ButacaFuncion> listaButacas = new LinkedList<>();
-		String[] split = index.split(","); //para dividir el string y recuperar cada asiento
+		String[] split = indexes.split(","); //para dividir el string y recuperar cada asiento
 		
         for (int i=0; i<split.length; i++) {
    
         	ButacaFuncion bf = new ButacaFuncion();
-        	bf.setCod_pelicula(cod);
+        	bf.setCod_pelicula(codPeli);
         	bf.setFecha_hora_funcion(dateTime2);
-        	bf.setNro_sala(nrosala);     	
-        	bf.setNumero(Integer.parseInt(split[i])+1); //le sumo 1 al index porque en la bd empiezan desde el 1
-        	
-        	//lbf.cambiarEstado(bf);
-            listaButacas.add(bf);
+        	bf.setNro_sala(nroSala);     	
+        	bf.setNumero(Integer.parseInt(split[i])+1);
+        	//sumo 1 porque viene del jsp MostrarAsientos donde el indice de los asientos empieza en 0 	
+            logicbf.cambiarEstado(bf);
+            
         }
-        
 		
-        request.setAttribute("indexes", index);
-		request.setAttribute("listaButacas", listaButacas);
-		request.getRequestDispatcher("WEB-INF/FinalizarCompra.jsp").forward(request, response);
+		request.setAttribute("entradasCompradas", "entradasCompradas");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }
