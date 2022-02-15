@@ -80,7 +80,7 @@
      <label>Calificacion</label>
         	<select name="elegirCalificacion" required="required">
         		<% for (Calificacion c: listaCalif){ %>
-        				<option value="<%= c.getId() %>" selected="selected"><%=c.getDescripcion() %></option>
+        				<option value="<%= c.getCodigo_calificacion() %>" selected="selected"><%=c.getDescripcion() %></option>
             		<% } %>
        </select>     	     	
 	<br>
