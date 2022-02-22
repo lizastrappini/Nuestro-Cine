@@ -9,9 +9,9 @@ public class DbConnector {
 	private String driver="com.mysql.cj.jdbc.Driver";
 	private String host="localhost";
 	private String port="3306";
-	private String user="root";
-	private String password="STRAPPINIliza99";
-	private String db="bd_cine";
+	private String user="java";
+	private String password="himitsu";
+	private String db="tp_java_cine";
 	private int conectados=0;
 	private Connection conn=null;
 	
