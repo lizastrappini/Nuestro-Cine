@@ -85,7 +85,7 @@ if ( !(per==null)){
 							<p class="nombrepelicula" id="nombrepelicula" ><%= pel.getNombre() %></p>
                             <p class="sinopsis" id="sinopsis"><%= pel.getSinopsis() %></p>
                             <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
-                            <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
+                            <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCodigo_calificacion() %></p>
                             <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
                             <form action="BorraPelicula" method="get" name="form">
                             <input type="hidden" name="codigo" value="<%=pel.getCodigo() %>">

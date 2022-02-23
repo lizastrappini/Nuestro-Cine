@@ -11,13 +11,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>---EDIT PELICULAS---</title>
-        <link href="style/css/styles.css" rel="stylesheet" />
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script src="Javascript/Script.js"></script>
-<title>NUEVA PELICULA</title>
+	<meta charset="utf-8" />
+	<%@ include file="/Estilo.jsp" %>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="Javascript/Script.js"></script>
+	<title>NUEVA PELICULA</title>
 
 <%  
 	LocalDateTime fecha = LocalDateTime.now();
@@ -68,6 +66,9 @@
     <br>
     <br>
 	<h1>AGREGAR PELICULA</h1>
+	<% if (request.getAttribute("cargada")!=null) {%>
+		<div class="alert alert-success">¡Pelicula creada con exito!</div>
+	<%} %>
 	<form class="addPelicula" action="NuevaPelicula" method="get" >
 	<label for="inputNombre" >Nombre de la pelicula</label>
     <input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">

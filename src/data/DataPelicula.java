@@ -16,8 +16,8 @@ public class DataPelicula {
 		ResultSet rs = null;
 		String nombre = nuevaPeli.getNombre().toUpperCase(); //para guardar los nombres en mayuscula
 		try {						
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("insert into pelicula"
-					+ "(nombre, director, genero, calificacion, duracion, sinopsis, portada, fecha_estreno) values (?,?,?,?,?,?,?,?)",
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"insert into pelicula (nombre, director, id_genero, codigo_calificacion, duracion, sinopsis, portada, fecha_estreno) values (?,?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1, nombre);

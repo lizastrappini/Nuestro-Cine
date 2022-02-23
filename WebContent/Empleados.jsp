@@ -114,14 +114,6 @@ if ( per != (null) ){
 		</script>
 		
 	<%} %>
-<% if (!(request.getAttribute("cargada")==(null)) ){  %>
-		<script >
-		Swal.fire({
-			  icon: 'success',
-			  title: 'Pelicula cargada',
-			})
-		</script>
-	<%} %>
 <% if (!(request.getAttribute("nocambio")==(null)) ){  %>
 		<script >
 		Swal.fire({

@@ -38,34 +38,17 @@ public class ControladorPeliculas extends HttpServlet {
 		
 		
 		if(! (request.getParameter("opc1")==(null)) ){
-			
-//			 String opc1 = request.getParameter("opc1"); 
-//			 request.setAttribute("opc",opc1);
-			 
 			request.getRequestDispatcher("WEB-INF/Pelicula/AgregarPelicula.jsp").forward(request, response);
 		}
 		
 		else if (! (request.getParameter("opc2")==(null))  ) {
-			
-//			 String opc2 = request.getParameter("opc2"); 
-//			 request.setAttribute("opc", opc2);
-			 
 			request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
 			
 		}
 		
 		else if (! (request.getParameter("opc3")==(null))  ) {
-//			String opc3 = request.getParameter("opc3");
-//			request.setAttribute("opc", opc3);
 			request.getRequestDispatcher("WEB-INF/Pelicula/BorrarPelicula.jsp").forward(request, response);
 		}
-		
-		
-		
-		
-		
-		
-
 	}
 
 }
