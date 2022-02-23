@@ -1,9 +1,5 @@
-.classpath
-.project
-.settings/
 build/
+src/tests/
 *.class
 *.bak
 *.tmp
-src/tests/
-
