@@ -36,51 +36,19 @@ pageEncoding="UTF-8"%>
     <!-- Custom styles for this template -->
     <link href="style/css/navbar.css" rel="stylesheet">
     <%
-		Integer isEmpleado = 0;
-		Persona per = (Persona)request.getSession().getAttribute("usuario");
-		
-		if ( !(per==null)){
-			isEmpleado = per.getHabilitado();
-		} else {isEmpleado = 0;}
-		
 		LogicGenero lg = new LogicGenero();
 		LinkedList<Genero> listaGeneros = lg.getAll();
 		
 		LogicCalificacion lc = new LogicCalificacion();
 		LinkedList<Calificacion> listaCalif = lc.getAll();
 		//LinkedList<Genero> gen=(LinkedList<Genero>)request.getAttribute("peliculas");
-		%>
+	%>
 </head>
 <body>
 
 <div id="page-top" class="fondo">
 	<header>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">	
-                    <%if ( isEmpleado==1){ %>
-                    	<li class="nav-item"><a class="nav-link" href="Empleados.jsp">EMPLEADOS</a></li> 
-                    <%} else {%>
-                    	<%} %>	 
-                        <% if ( request.getSession().getAttribute("usuario")==null ) {%>
-                        
-                        <li class="nav-item"><a class="nav-link" href="SignUp.html">Registrarse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SignIn.html" id="signin">Iniciar sesion</a></li>
-                        <%}else {%> 
-                        <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout" href="SignOut" >Cerrar sesion</a></li>
-                        
-                   		<%} %>	
-                    </ul>
-                     
-                </div>
-            </div>
-        </nav>
-           
+    	<jsp:include page="/BarraMenu.jsp" />   
 	</header>
 		
 		<div class="filtroNombre">
@@ -96,11 +64,11 @@ pageEncoding="UTF-8"%>
 		<h1>Buscar por genero</h1>
 		<select class="elegirGenero" name="GeneroPelicula" required="required">		
 		<% for (Genero g: listaGeneros){ %>
-        	<option value="<%= g.getDescripcion() %>" selected="selected"><%= g.getDescripcion() %></option>
-         <% } %>	
-         <option value="todas" >Ver todas</option>	
-         </select>
-         <input class="buscar" type="submit" value="buscar">
+        	<option value="<%= g.getId() %>" selected="selected"><%= g.getDescripcion() %></option>
+        <% } %>	
+        <option value="todas" >Ver todas</option>	
+        </select>
+        <input class="buscar" type="submit" value="buscar">
 		</div>
 		</form>
 		
@@ -109,8 +77,8 @@ pageEncoding="UTF-8"%>
 		<h1>Buscar por edad</h1>
 		<select class="elegirEdad" name="edadPelicula" required="required">		
 		<% for (Calificacion c: listaCalif){ %>
-        	<option value="<%= c.getDescripcion() %>" selected="selected"><%= c.getDescripcion() %></option>
-            	<% } %>		
+        	<option value="<%= c.getCodigo_calificacion() %>" selected="selected"><%= c.getDescripcion() %></option>
+        <% } %>		
          </select>
          <input class="buscar" type="submit" value="buscar">
 		</div>
