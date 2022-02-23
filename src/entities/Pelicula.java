@@ -1,51 +1,20 @@
 package entities;
+import java.util.Date;
 
 
-import java.io.InputStream;
-//import java.sql.Blob;
 
 public class Pelicula {
 	private Integer codigo;
 	private String nombre;
 	private String director;
-	private String genero;
-	private String calificacion;
 	private double duracion;
 	private String sinopsis;
-	//private Blob portada;
-	InputStream Foto_Usu;
-    private byte[] Recuperar_Foto_Usu;
-    private String Recuperar_Foto_Base64_Usu;
-
-    public String getRecuperar_Foto_Base64_Usu() {
-        return Recuperar_Foto_Base64_Usu;
-    }
-
-    public void setRecuperar_Foto_Base64_Usu(String Recuperar_Foto_Base64_Usu) {
-        this.Recuperar_Foto_Base64_Usu = Recuperar_Foto_Base64_Usu;
-    }
-
-    public byte[] getRecuperar_Foto_Usu() {
-        return Recuperar_Foto_Usu;
-    }
-
-    public void setRecuperar_Foto_Usu(byte[] Recuperar_Foto_Usu) {
-        this.Recuperar_Foto_Usu = Recuperar_Foto_Usu;
-    }
-    public InputStream getFoto_Usu() {
-        return Foto_Usu;
-    }
-
-    public void setFoto_Usu(InputStream Foto_Usu) {
-        this.Foto_Usu = Foto_Usu;
-    }
-
+	private String portada;
+	private Date fecha_estreno;
+	private Integer codigo_calificacion;
+	private Integer id_genero;
 	
-	@Override
-	public String toString() {
-		return "Pelicula[codigo="+codigo+",nombre="+nombre+",director="+director+",genero="+genero+",calificacion="+calificacion+
-				",duracion="+duracion+",calificacion="+calificacion+",sinopsis="+sinopsis+"]";
-	}
+	
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -65,18 +34,6 @@ public class Pelicula {
 	public void setDirector(String director) {
 		this.director = director;
 	}
-	public String getGenero() {
-		return genero;
-	}
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-	public String getCalificacion() {
-		return calificacion;
-	}
-	public void setCalificacion(String calificacion) {
-		this.calificacion = calificacion;
-	}
 	public String getSinopsis() {
 		return sinopsis;
 	}
@@ -90,13 +47,41 @@ public class Pelicula {
 	public void setSinopsis(String sinopsis) {
 		this.sinopsis = sinopsis;
 	}
-	//public Blob getPortada() {
-		//return portada;
-	//}
+	public String getPortada() {
+		return portada;
+	}
+	public void setPortada(String portada) {
+		this.portada = portada;
+	}
+	public Date getFecha_estreno() {
+		return fecha_estreno;
+	}
+	public void setFecha_estreno(Date fecha_estreno) {
+		this.fecha_estreno = fecha_estreno;
+	}
+	public Integer getCodigo_calificacion() {
+		return codigo_calificacion;
+	}
+	public void setCodigo_calificacion(Integer codigo_calificacion) {
+		this.codigo_calificacion = codigo_calificacion;
+	}
+	public Integer getId_genero() {
+		return id_genero;
+	}
+	public void setId_genero(Integer id_genero) {
+		this.id_genero = id_genero;
+	}
+	public java.sql.Date convertirFecha(Date fecha) {
+		java.util.Date utilDate = fecha;
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	    return sqlDate;
+	}
 	
-	//public void setPortada(Blob portada) {
-	//	this.portada=portada;
-	//}
-	
-	
+	@Override
+	public String toString() {
+		
+		return "Pelicula [codigo=" + codigo + ", nombre=" + nombre + ", director=" + director 
+				+ ", duracion=" + duracion + ", sinopsis=" + sinopsis + ", portada="
+				+ portada + ", fecha_estreno=" + fecha_estreno + "]";
+	}
 }

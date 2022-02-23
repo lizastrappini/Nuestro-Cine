@@ -75,6 +75,9 @@
   }
 }
 
+
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -118,45 +121,463 @@ h1, .h1 {
 }
 
 
-body{
-	background: linear-gradient(to bottom, #ff6a00, white 80%, #ffc107);
+
+.botonVer {
+
+  font-size:15px;
+  font-family:Arial;
+  width:50px;
+  height:20px;
+  border-width:1px;
+  color:#ffff;
+  background-color:#5cbf2a;
+  border-color:#18ab29;
+  font-weight:bold;
+  border-top-left-radius:28px;
+  border-top-right-radius:28px;
+  border-bottom-left-radius:28px;
+  border-bottom-right-radius:28px;
+  text-shadow: 1px 1px 0px #2f6627;
+ 
+}
+
+.botonVer:hover {
+  background: 255, 255, 255;
+}
+
+.avatar{
+  
+  margin-top: 10px;
+  margin-left:20px;
+  padding-bottom: 10px;
+  float:Top; 
+  height: auto;
+  width: auto;
+  max-height: 200px;
+  max-width: 200px;
+  min-height: 100px;
+  min-width: 200px;  
+  object-fit:contain;
+   
+  }
+.micuenta{
+  display: block;
+  margin-left:30px;
+  margin-bottom:10px;
+  margin-top:20px;
+  position:center;
+  font-family:"Segoe UI";
+  text-align: left;
+  font-weight: bold;
+  color: black;
+  text-decoration:none;
+
+}
+
+.signout{
+	display: block;
+  margin-left:30px;
+  margin-bottom:10px;
+  margin-top:20px;
+  position:center;
+  font-family:"Segoe UI";
+  text-align: left;
+  font-weight: bold;
+  color: red;
+  text-decoration:none;
+}
+.miscompras{
+  float: top;
+  margin-top: 20px;
+  padding-bottom: 30px;
+  margin-right: 110px;
+  font-family:"Segoe UI";
+  font-weight: bold;
+}
+
+.compras{
+  float: Right;
+  position: right;
+  margin-right: 100px;
+  margin-top: 10px;
+  background: #0000;
 }
 
 
+.info{
+  background-color:white;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-left: 20px;
+  margin-bottom:10px;
+  margin-top:100px;
+  margin-right:20px;
+  box-shadow: #adb5bd 2px 2px 10px 3px;
+  border-radius: 1.2em;
+  min-height: 450px;
+  max-height: 500px;
+  
+}
+
+
+table.blueTable {
+
+  background-color: #f8f9fa;
+  width: 800px;
+  height: auto;
+  text-align: center;
+  border-collapse: collapse;
+
+}
+
+
+
+
+table.blueTable td, table.blueTable th {
+  border: 1px solid black;
+  padding: 6px 8px;
+}
+table.blueTable tbody td {
+  font-size: 13px;
+  font-family:"Segoe UI";
+  width: 100px;
+
+}
+table.blueTable tr:nth-child(even) {
+  background: #EEEEEE;
+}
+table.blueTable thead {
+    border-bottom: 1.2px solid black;
+}
+table.blueTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  font-family:"Segoe UI";
+  color: #000000;
+  text-align: center;
+  border-left: 1.2px solid black;
+}
+table.blueTable thead th:first-child {
+  border-left:1px solid black;
+}
+
 .pelicula{
+
+	
+	background-color:white;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-left: 20px;
+	margin-bottom:10px;
+	margin-top:10px;
+	margin-right:20px;
+	box-shadow: #adb5bd 2px 2px 10px 3px;
+	border-radius: 1.2em;
+	padding-bottom: 10px;
+}
+
+.infopelicula{
+	display: block;
+	margin-left:5px;
+	position:center;
+	font-family:"Segoe UI";
+	
+	
+	
+}
+
+#borderDemo {
+margin: 75px;
+width: 900px;
+height: 300px;
+outline: 9px double #000000;
+position: static;
+background-color: #fff;
+
+}
+
+#titulo{
+  text-align:  center;
+  font-size: 30px;
+  font-family: 'Righteous', cursive;
+}
+
+#titulo2{
+  text-align:  center;
+  font-size: 40px;
+  height: 50px;
+  margin-bottom: 100px;
+  
+  font-family: 'Righteous', cursive;
+
+
+}
+#ticketMovie{
+  font-family: 'Abril Fatface', cursive;
+  font-size: 50px;
+}
+ 
+#textDni{
+  font-size: 13px;
+}
+
+#info{
+  position: static;
+  float: left;
+  height: 300px;
+  padding: 18px;
+  border-right-style: dashed;
+  font-family: 'ABeeZee', sans-serif;
+  
+}
+
+#izq{
+  text-align: left;
+  height: 100px;
+  position: static;
+  float: left;
+  padding-top: 5px;
+  padding-left: 30px;
+  font-family: 'ABeeZee', sans-serif;
+}
+
+#der{
+  text-align: left;
+  height: 100px;
+  position: static;
+  float: right;
+  padding-top: 5px;
+  padding-right: 30px;
+  font-family: 'ABeeZee', sans-serif;}
+ 
+
+
+#nombrepelicula{
+	font-family: 'Bebas Neue', cursive;
+	margin-left:10px;
+	font-size: 2rem;
+}
+#sinopsis{
+	margin-top:0px;
+	font-family: 'Hind', sans-serif;
+}
+#fotopelicula{
+	margin-top: 10px;
+	margin-right:10px;
+	padding-bottom: 10px;
+	float:Right; 
+	
+	height: auto;
+	width: auto;
+	max-height: 220px;
+	max-width: 180px;
+	min-height: 220px;
+	min-width: 180px;  
+	object-fit:contain;}
+	
+	
+#noEstreno{
+	position:center;
+	font-family: 'Hind', sans-serif;
+	font-size: 10rem;
+}
+	
+.funcion{
+
 	z-index:2;
 	background-color:white;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	margin-left: 20px;
-	margin-bottom:50px;
-	margin-top:50px;
+	margin-bottom:10px;
+	margin-top:10px;
 	margin-right:20px;
 	box-shadow: #adb5bd 2px 2px 10px 3px;
-	
+	border-radius: 1.2em;
 }
 
-.infopelicula{
+.infofuncion{
 	display: block;
+	margin-left:5px;
 	position:center;
 	font-family:"Segoe UI";
 	
 	
 }
-#nombrepelicula{
-	font-family: 'Bebas Neue', cursive;
+
+.botonEstreno {
+  font-size:18px;
+  font-family:Trebuchet MS;
+  width:140px;
+  height:50px;
+  border-width:1px;
+  color:rgba(0, 0, 0, 1);
+  border-color:rgba(35, 245, 35, 1);
+  font-weight:bold;
+  border-top-left-radius:42px;
+  border-top-right-radius:42px;
+  border-bottom-left-radius:42px;
+  border-bottom-right-radius:42px;
+  box-shadow: 0px 10px 14px -7px rgba(155, 155, 155, 1);
+  text-shadow: 0px 1px 0px rgba(155, 155, 155, 1);
+  background:linear-gradient(rgba(35, 245, 101, 1), rgba(28, 248, 151, 1));
 }
-#sinopsis{
+
+.botonEstreno:hover {
+  background: linear-gradient(rgba(28, 248, 151, 1), rgba(35, 245, 101, 1));
+}
+
+
+.titulo_estrenos{
+	margin-top:50px;
+	margin-bottom:20px;
+	margin-left:20px;
+	font-family: 'Anton', sans-serif;
+}
+
+
+.filtroGenero{
+	float:left;
+	margin-top:100px;
+	padding-right:10px;
+	padding-left:10px;
+	flex-direction: row;
+	
+	
+}
+.buscar{
+	box-shadow:inset 0px 1px 0px 0px #d9fbbe;
+	background:linear-gradient(to bottom, #b8e356 5%, #a5cc52 100%);
+	background-color:#b8e356;
+	border-radius:6px;
+	border:1px solid #83c41a;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #86ae47;
+}
+.buscar:hover {
+  background:linear-gradient(to bottom, #a5cc52 5%, #b8e356 100%);
+	background-color:#a5cc52;
+}
+
+.buscar:active {
+	position:relative;
+	top:1px;
+}
+
+
+.comprarEntrada{
+	margin-left:500px;
+	box-shadow:inset 0px 1px 0px 0px #d9fbbe;
+	background:linear-gradient(to bottom, #077324 5%, #077324 100%);
+    background-color:#077324;
+	border-radius:6px;
+	border:1px solid #83c41a;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #86ae47;
+}
+.comprarEntrada:hover {
+  background:linear-gradient(to bottom, #077324 5%, #077324 100%);
+    background-color:#077324;
+}
+
+.comprarEntrada:active {
+	position:relative;
+	top:1px;
+}
+.filtroNombre{
+	margin-top:100px;
+	float:left;
+	padding-right:20px;
+	padding-left:50px;
+	flex-direction: row;
+}
+
+.filtroEdad{
+	float:right;
+	margin-top:100px;
+	padding-right:70px;
+	flex-direction: row;
+	
+}
+
+.elegirGenero{
+	background: #e9ecef;
+   border: none;
+   font-size: 14px;
+   height: 30px;
+   padding: 5px;
+   width: 250px;
+   font-family: 'ABeeZee', sans-serif;
+}
+
+
+.elegirEdad{
+	background: #e9ecef;
+   border: none;
+   font-size: 14px;
+   height: 30px;
+   padding: 5px;
+   width: 250px;
+   font-family: 'ABeeZee', sans-serif;
+}
+
+
+.elegirNombre{
+	background: #e9ecef;
+   border: none;
+   font-size: 14px;
+   height: 30px;
+   padding: 5px;
+   width: 250px;
+   font-family: 'ABeeZee', sans-serif;
+}
+
+
+.buttonFiltros {
+  font-size:15px;
+  font-family:Arial;
+  width:140px;
+  height:50px;
+  border-width:1px;
+  color:#fff;
+  border-color:rgba(65, 117, 5, 1);
+  font-weight:bold;
+  border-top-left-radius:8px;
+  border-top-right-radius:8px;
+  border-bottom-left-radius:8px;
+  border-bottom-right-radius:8px;
+  box-shadow: 0px 10px 14px -7px rgba(65, 117, 5, 1);
+  text-shadow: 0px 1px 0px rgba(65, 117, 5, 1);
+  background:linear-gradient(rgba(126, 211, 33, 1), rgba(126, 211, 33, 0.49));
+}
+
+.buttonFiltros:hover {
+  background: linear-gradient(rgba(126, 211, 33, 0.49), rgba(126, 211, 33, 1));
+}
+              
+
+.addPelicula{
+	position:flex;
+	flex-direction: row;
+	margin-top:10px;
+	margin-left:5px;
 	font-family: 'Hind', sans-serif;
 }
-#fotopelicula{
-	margin-top: 30px;
-	margin-right:10px;
-	float:Right; 
-	
-	
-	
-}
+
 
 #sacarentrada {
 	margin-left: 10px;
@@ -191,8 +612,35 @@ body{
 }
 	
 .fondo{
-	background-color: #ffffff;
+	padding:2px;
+	background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+	 min-height: 100vh;
+	 
 }
+
+.buttonIniciar {
+  font-size:15px;
+  font-family:Arial;
+  width:140px;
+  height:50px;
+  border-width:1px;
+  color:#ffffff;
+  border-color:#74b807;
+  font-weight:bold;
+  border-top-left-radius:6px;
+  border-top-right-radius:6px;
+  border-bottom-left-radius:6px;
+  border-bottom-right-radius:6px;
+  box-shadow:inset 0px 1px 0px 0px #a4e271;
+  text-shadow:inset 0px 1px 0px #528009;
+  background:linear-gradient(rgba(65, 117, 5, 1), rgba(65, 117, 5, 1));
+}
+
+.buttonIniciar:hover {
+  background: linear-gradient(rgba(65, 117, 5, 1), rgba(65, 117, 5, 1));
+}
+
+
 
 .form-signin{
 	margin-left: 20px;
@@ -202,7 +650,131 @@ body{
 	font-family: 'Hind', sans-serif;
 }
 
+#inicio{
+	padding:10px;
+	height:100px;
+}
 
+
+.boton_volver{
+	margin-left:50px;
+	font-family: 'Hind', sans-serif;
+	font-weight: 100;
+	color:#000000;
+}
+
+.menu{
+	justify-content:center;
+	align-items:center;
+	padding-left:100px;
+	margin-left:250px;
+	margin-top: 70px;
+
+}
+
+.opciones{
+	margin-top:100px;
+	padding-left:50px;
+	position:flex;
+	font-family:"Segoe UI";
+	text-align: center;
+	
+}
+
+.boton{
+	text-align: center;
+  font-family: 'Bebas Neue';
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-color: #0000;
+  border: 1px solid black;
+ 
+  font-size: 1rem;
+  border-radius: 1.5em;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.buttonBorrar {
+  font-size:15px;
+  font-family:Arial;
+  width:120px;
+  height:30px;
+  border-width:1px;
+  color:#fff;
+  border-color:#d0451b;
+  border-top-left-radius:3px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+  box-shadow:inset 0px 1px 0px 0px #cf866c;
+  text-shadow:inset 0px 1px 0px #854629;
+  background:linear-gradient(#d0451b, #d0451b);
+}
+
+.buttonBorrar:hover {
+  background: linear-gradient(#d0451b, #d0451b);
+}
+
+
+.menu ul {
+		display: flex;
+		/*justify-content:center;*/
+		/*align-items:center;*/
+		padding: 0;
+		margin:0;
+		list-style: none;
+		
+	}
+	.menu a {
+		display: flex;
+		
+		padding: 2em;
+		background-color: #F9B53C;
+		text-decoration: none;
+		color: #191C26;
+	}
+	.menu a:hover {
+		background-color: #CC673B;
+	}
+	.menu ul li ul {
+		display: none;
+	}
+	.menu ul li a:hover + ul, .menu ul li ul:hover {
+		display: block;
+	}
+ 
+
+
+.buttonClass {
+  font-size:15px;
+  font-family:Arial;
+  width:120px;
+  height:30px;
+  border-width:1px;
+  color:#fff;
+  border-color:#83c41a;
+  font-weight:bold;
+  border-top-left-radius:6px;
+  border-top-right-radius:6px;
+  border-bottom-left-radius:6px;
+  border-bottom-right-radius:6px;
+  box-shadow:inset 0px 1px 0px 0px #d9fbbe;
+  text-shadow:inset 0px 1px 0px #86ae47;
+  background:linear-gradient(#b8e356, #a5cc52);
+  
+}
+
+.buttonClass:hover {
+  background: linear-gradient(#a5cc52, #b8e356);
+}
+              
+ 
+ 
 
 h2, .h2 {
   font-size: calc(1.325rem + 0.9vw);
@@ -725,6 +1297,7 @@ progress {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+  
 }
 
 @media (min-width: 576px) {
@@ -4110,13 +4683,15 @@ textarea.form-control-lg {
 }
 
 .navbar {
+	
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  height: 3rem;
 }
 .navbar > .container,
 .navbar > .container-fluid,
@@ -4591,8 +5166,8 @@ textarea.form-control-lg {
 
 .card {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: block;
+  flex-direction: row;
   min-width: 0;
   word-wrap: break-word;
   background-color: #fff;
@@ -4626,6 +5201,7 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding: 1rem 1rem;
+ 
 }
 
 .card-title {
@@ -4992,6 +5568,7 @@ textarea.form-control-lg {
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+  width: 20%;/*Agrego atributo width para cambiar el ancho */
 }
 
 .alert-heading {
@@ -11381,6 +11958,7 @@ html {
   font-size: 1rem;
   letter-spacing: 0.1rem;
   font-weight: 700;
+  color: #fff;
 }
 .navbar-custom .navbar-nav .nav-item .nav-link {
   text-transform: uppercase;
@@ -11392,9 +11970,9 @@ html {
 header.masthead {
   position: relative;
   overflow: hidden;
-  padding-top: calc(7rem + 72px);
+  padding-top: 30px;
   padding-bottom: 7rem;
-  background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%);
+  /*background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);*/
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
@@ -11405,45 +11983,16 @@ header.masthead .masthead-content {
   position: relative;
 }
 header.masthead .masthead-content .masthead-heading {
-  font-size: 4rem;
+  font-size: 2rem;
 }
 header.masthead .masthead-content .masthead-subheading {
   font-size: 2rem;
 }
-header.masthead .bg-circle {
-  z-index: 0;
-  position: absolute;
-  border-radius: 100%;
-  background: linear-gradient(0deg, #ee0979 0%, #ff6a00 100%);
-}
-header.masthead .bg-circle-1 {
-  height: 90rem;
-  width: 90rem;
-  bottom: -55rem;
-  left: -55rem;
-}
-header.masthead .bg-circle-2 {
-  height: 50rem;
-  width: 50rem;
-  top: -25rem;
-  right: -25rem;
-}
-header.masthead .bg-circle-3 {
-  height: 20rem;
-  width: 20rem;
-  bottom: -10rem;
-  right: 5%;
-}
-header.masthead .bg-circle-4 {
-  height: 30rem;
-  width: 30rem;
-  top: -5rem;
-  right: 65%;
-}
+
 
 @media (min-width: 992px) {
   header.masthead {
-    padding-top: calc(10rem + 55px);
+    padding-top: 10rem;;
     padding-bottom: 10rem;
   }
   header.masthead .masthead-content .masthead-heading {

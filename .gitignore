@@ -1,0 +1,5 @@
+build/
+src/tests/
+*.class
+*.bak
+*.tmp
