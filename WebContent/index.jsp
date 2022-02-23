@@ -1,115 +1,78 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
 <%@page import="entities.Persona" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>INICIO</title>
-        <link href="style/css/styles.css" rel="stylesheet" />
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script src="Javascript/Script.js"></script>
-		<%
-		Integer isEmpleado = 0;
-		Persona per = (Persona)request.getSession().getAttribute("usuario");
-		
-		if ( !(per==null)){
-			isEmpleado = per.getHabilitado();
-		} else {isEmpleado = 0;}
-		
-		%>
-    </head>
-    <body id="page-top">
-    <div class="fondo">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">	
-                    <%if ( isEmpleado==1){ %>
-                    	<li class="nav-item"><a class="nav-link" href="Empleados.jsp">EMPLEADOS</a></li> 
-                    <%} else {%>
-                    	<%} %>	 
-                    	<li class="nav-item"><a class="nav-link" href="Peliculas.jsp">Cartelera</a></li>
-                        
-                        <% if ( request.getSession().getAttribute("usuario")==null ) {%>
-                        
-                        <li class="nav-item"><a class="nav-link" href="SignUp.jsp">Registrarse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SignIn.jsp" id="signin">Iniciar sesion</a></li>
-                        <%}else {%> 
-                        <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link"  onclick="cerrarSesion()">Cerrar sesion</a></li>
-                        <li class="nav-item"><a class="nav-link" id="" href="MiCuenta.jsp">Mi cuenta</a></li>
-                   		<%} %>	
-                    </ul>
-                     
-                </div>
-            </div>
-        </nav>
-        <!-- Header-->
-       
-        <header class="masthead text-center text-white">
-            <div class="masthead-content">
-                <div class="container px-5">
-                  <form class="form-signin" action="MostrarPeliculas" method="post">
-                    <h1 class="masthead-heading mb-0">TODOS LOS ESTRENOS</h1>
+<html>
+<head>
+	<meta charset="utf-8" />
+    <%@ include file="/Estilo.jsp" %>
+    <title>INICIO</title>
+    <link href="style/css/styles.css" rel="stylesheet" />
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="Javascript/Script.js"></script>
+</head>
+<body id="page-top">
+<div class="fondo">
+	<jsp:include page="/BarraMenu.jsp" />
+    <header class="masthead text-center text-white">
+    	<div class="masthead-content">
+        	<div class="container px-5">
+            	<form class="form-signin" action="MostrarPeliculas" method="post">
+                	<h1 class="masthead-heading mb-0">TODOS LOS ESTRENOS</h1>
                     <h2 class="masthead-subheading mb-0">EN UN MISMO LUGAR</h2>
                     <button class="botonEstreno"  >Ver estrenos</button>
-                  </form>
-                </div>
+                </form>
             </div>
-
-            
-
-        </header>
-        <!-- Content section 1-->
-        <section id="scroll">
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/01.jpg" alt="..." /></div>
-                    </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                            <h2 class="display-4">CARACTERISTICA 1</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        </div>
+	</header>
+    <section id="scroll">
+    	<div class="container px-5">
+        	<div class="row gx-5 align-items-center">
+            	<div class="col-lg-6 order-lg-2">
+                	<div class="p-5">
+                		<img class="img-fluid rounded-circle" src="assets/img/01.jpg" alt="..." />
+                	</div>
+                </div>
+            	<div class="col-lg-6 order-lg-1">
+                	<div class="p-5">
+                    	<h2 class="display-4">CARACTERISTICA 1</h2>
+                        <p>
+                        	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                             cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Content section 2-->
-        <section>
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/02.jpg" alt="..." /></div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <h2 class="display-4">We salute you!</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-                        </div>
-                    </div>
+        </div>
+    </section>
+    <section>
+    	<div class="container px-5">
+        	<div class="row gx-5 align-items-center">
+            	<div class="col-lg-6">
+                	<div class="p-5">
+                		<img class="img-fluid rounded-circle" src="assets/img/02.jpg" alt="..." />
+                	</div>
                 </div>
-            </div>
-        </section>
-        <!-- Content section 3-->
-        <section>
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/03.jpg" alt="..." /></div>
+                <div class="col-lg-6">
+                <div class="p-5">
+                	<h2 class="display-4">We salute you!</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                </div>
+            	</div>
+        	</div>
+    	</div>
+    </section>
+    <section>
+    	<div class="container px-5">
+        	<div class="row gx-5 align-items-center">
+            	<div class="col-lg-6 order-lg-2">
+                	<div class="p-5">
+                		<img class="img-fluid rounded-circle" src="assets/img/03.jpg" alt="..." /></div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
@@ -120,11 +83,10 @@ pageEncoding="UTF-8"%>
                 </div>
             </div>
         </section>
-        <!-- Footer-->
         <footer class="py-5 bg-black">
             <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2021</p></div>
         </footer>
-    </div>  
+</div>  
    <%if ( request.getAttribute("entradasCompradas")!= null){%>
    <script>
    Swal.fire({
@@ -133,8 +95,6 @@ pageEncoding="UTF-8"%>
 		  text: 'Las encontrara en su casilla de correo',
 		})
    </script>
-   <%} %>
-    
-      
-    </body>
+   <%} %>      
+</body>
 </html>
