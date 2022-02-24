@@ -66,6 +66,9 @@
 	<%if ( (request.getAttribute("encontrada")==(null))) { %>
 	<br>
 	<br>
+	<% if (request.getAttribute("editada")!=null) {%>
+        <div class="alert alert-success">¡Pelicula editada con exito!</div>
+    <% }%>
 	<h2>Ingrese nombre de la pelicula</h2>
 	<form class="addPelicula" action="BuscarPelicula" method="post" >
     <input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">
@@ -86,7 +89,7 @@
 							<p class="nombrepelicula" id="nombrepelicula" ><%= pel.getNombre() %></p>
                             <p class="sinopsis" id="sinopsis"><%= pel.getSinopsis() %></p>
                             <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
-                            <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
+                            <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCodigo_calificacion() %></p>
                             <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
                             <form action="ActualizarPelicula" method="post">
                             <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">

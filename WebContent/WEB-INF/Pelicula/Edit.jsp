@@ -4,6 +4,11 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="entities.Persona" %>
+<%@page import="entities.Genero" %>
+<%@page import="logic.LogicGenero" %>
+<%@page import="entities.Calificacion" %>
+<%@page import="logic.LogicCalificacion" %>
+<%@page import="java.util.LinkedList"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +17,13 @@
 <link href="style/css/styles.css" rel="stylesheet" />
 <script src="style/codigo.js"></script>
 <title>EDITAR PELICULA</title>
-<% 
+<%
+LogicGenero lg = new LogicGenero();
+LinkedList<Genero> listaGeneros = lg.getAll();
+
+LogicCalificacion lc = new LogicCalificacion();
+LinkedList<Calificacion> listaCalif = lc.getAll();
+
 Pelicula peli = (Pelicula)request.getAttribute("pelicula"); 
 Integer isEmpleado = 0;
 Persona per = (Persona)request.getSession().getAttribute("usuario");
@@ -58,22 +69,18 @@ Persona per = (Persona)request.getSession().getAttribute("usuario");
 	<label for="inputNombre" >Nombre de la pelicula</label>
 	<input type="hidden" name="codigo" value="<%= peli.getCodigo() %>">
     <input id="inputNombre" name="nombre" class="form-control"  required type="text" value="<%= peli.getNombre() %>">
-    <label>Elegir genero:
-			<input list="generos" name="genero" value="<%= peli.getGenero() %>"></label>
-			<datalist id="generos">
-			<option value="romance">Romance</option>
-			<option value="terror">Terror</option>
-			<option value="suspenso">Suspenso</option>
-			<option value="todas">Comedia</option>
-			</datalist>
-	<label>Elegir calificacion:
-			<input list="edades" name="edad" value="<%= peli.getCalificacion() %>" ></label>
-			<datalist id="edades">
-			<option value="+3">+3</option>
-			<option value="+7">+7</option>
-			<option value="+16">+16</option>
-			<option value="todas">Apta para todo publico</option>
-			</datalist>
+    <label>Genero</label>
+    <select name="elegirGenero" required="required">
+        		<% for (Genero gen: listaGeneros){ %>
+        				<option value="<%= gen.getId() %>" selected="selected"><%=gen.getDescripcion() %></option>
+            	<% } %>
+     </select>
+	<label>Calificacion</label>
+        	<select name="elegirCalificacion" required="required">
+        		<% for (Calificacion c: listaCalif){ %>
+        				<option value="<%= c.getCodigo_calificacion() %>" selected="selected"><%=c.getDescripcion() %></option>
+            		<% } %>
+       </select>
 	<br>
 	<label for="inputSinopsis" >Sinopsis de la pelicula</label>
     <input id="inputSinopsis" name="sinopsis" class="form-control" placeholder="sinopsis" required type="text" value="<%= peli.getSinopsis() %>">
