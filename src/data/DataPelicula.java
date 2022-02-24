@@ -60,7 +60,7 @@ public class DataPelicula {
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
 			rs= stmt.executeQuery(
-					"Select codigo, nombre, director, id_genero, codigo_calificacion, duracion, sinopsis, portada");
+					"Select codigo, nombre, director, id_genero, codigo_calificacion, duracion, sinopsis, portada from pelicula");
 			if (rs !=null) {
 				while (rs.next()) {
 					Pelicula p = new Pelicula();
@@ -160,10 +160,17 @@ public class DataPelicula {
 		
 	}	
 	public void borrarPelicula(Pelicula borraPeli) {
+		DataFuncion df = new DataFuncion();
+		DataButacaFuncion bf = new DataButacaFuncion();
+		
+		bf.borrarButacasPorPelicula(borraPeli);
+		df.borrarFuncionesDePelicula(borraPeli);
+		
 		PreparedStatement stmt=null;
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from pelicula where codigo = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"delete from pelicula where codigo = ?");
 			stmt.setInt(1, borraPeli.getCodigo());
 			stmt.executeUpdate();
 			
@@ -314,7 +321,8 @@ public class DataPelicula {
 		
 		try {
 		
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where codigo = ? ");   
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select codigo, nombre, director, id_genero, codigo_calificacion, duracion, sinopsis, portada, fecha_estreno from pelicula where codigo = ? ");   
 			stmt.setInt(1, cod);
 			
 			rs = stmt.executeQuery();

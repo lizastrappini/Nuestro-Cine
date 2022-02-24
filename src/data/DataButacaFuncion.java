@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import entities.ButacaFuncion;
 import entities.Funcion;
 import entities.Sala;
+import entities.Pelicula;
 
 public class DataButacaFuncion {
 	
@@ -174,6 +175,28 @@ public class DataButacaFuncion {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"delete from butaca_funcion where nro_sala=?");
 			stmt.setInt(1, borraSala.getNumero());
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(stmt!=null)stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	
+	}
+	
+	public void borrarButacasPorPelicula(Pelicula pel) {
+		PreparedStatement stmt=null;
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"delete from butaca_funcion where cod_pelicula=?");
+			stmt.setInt(1, pel.getCodigo());
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
