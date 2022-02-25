@@ -24,6 +24,7 @@
     %>
   </head>
   <body>
+  	
     <input type="hidden" id="costo" name="costo" value="<%=Double.parseDouble(request.getAttribute("costo").toString())%>"> 
 	<h1><%=peli.getNombre().toUpperCase()%></h1>
 	<h2><%=fecha%></h2>
@@ -71,7 +72,7 @@
     <form name="entrada" action="AdquirirEntrada" method="post">
     
     <input type="hidden" id="preciototal" name="preciototal" >
-    
+     <input type="hidden" id="costo" name="costo" value="<%=costo%>">
     <input type="hidden" name="codigopeli" value="<%=bf.getCod_pelicula()%>">
     <input type="hidden" name="nrosala" value="<%=bf.getNro_sala()%>">
     <input type="hidden" name="fechahora" value="<%=bf.getFecha_hora_funcion()%>">

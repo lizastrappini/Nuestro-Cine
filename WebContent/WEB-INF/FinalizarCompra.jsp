@@ -10,17 +10,14 @@
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>ENTRADAS</title>
-        <link href="style/css/styles.css" rel="stylesheet" />
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script src="Javascript/Script.js"></script>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" >
-		<link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Abril+Fatface&family=Righteous&display=swap" rel="stylesheet">
+<head>
+<title>ENTRADAS</title>
+<link href="style/css/styles.css" rel="stylesheet" />
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="Javascript/Script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" >
+<link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Abril+Fatface&family=Righteous&display=swap" rel="stylesheet">
 		<%
 		Integer isEmpleado = 0;
 		Persona per = (Persona)request.getSession().getAttribute("usuario");
@@ -39,37 +36,11 @@ pageEncoding="UTF-8"%>
 		Integer nrosala = listaButacas.get(0).getNro_sala();
 		Integer codigo = listaButacas.get(0).getCod_pelicula();
 		
-		%>
-    </head>
-    <body id="page-top">
-    <div class="fondo">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">	
-                    <%if ( isEmpleado==1){ %>
-                    	<li class="nav-item"><a class="nav-link" href="Empleados.jsp">EMPLEADOS</a></li> 
-                    <%} else {%>
-                    	<%} %>	 
-                    	<li class="nav-item"><a class="nav-link" href="Peliculas.jsp">Cartelera</a></li>
-                        
-                        <% if ( request.getSession().getAttribute("usuario")==null ) {%>
-                        
-                        <li class="nav-item"><a class="nav-link" href="SignUp.jsp">Registrarse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SignIn.jsp" id="signin">Iniciar sesion</a></li>
-                        <%}else {%> 
-                        <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link"  onclick="cerrarSesion()">Cerrar sesion</a></li>
-                        <li class="nav-item"><a class="nav-link" id="" href="MiCuenta.jsp">Mi cuenta</a></li>
-                   		<%} %>	
-                    </ul>
-                     
-                </div>
-            </div>
-        </nav>
+%>
+</head>
+<body id="page-top">
+<div class="fondo">
+<jsp:include page="/BarraMenu.jsp" />
 <%for (ButacaFuncion lb : listaButacas){ %>
 	<div id="borderDemo">
 		<div id="info">

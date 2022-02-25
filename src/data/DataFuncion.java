@@ -92,7 +92,7 @@ public class DataFuncion {
 		
 		try {
 		
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from funcion where codigo_pelicula=? and (  date((fecha_hora))>=current_date() and current_time()<=DATE_SUB(time(fecha_hora), INTERVAL 30 MINUTE) )");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from funcion where codigo_pelicula=? and fecha_hora>current_timestamp()");
 			stmt.setInt(1, buscaFun.getCodigo_pelicula());
 			
 			rs = stmt.executeQuery();
