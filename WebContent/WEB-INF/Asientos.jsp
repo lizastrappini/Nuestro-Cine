@@ -47,7 +47,7 @@
     <div class="container">
       <div class="screen"></div>
       <div class="row">
-        <% for ( int i=1; i<50 ; i++){ 
+        <% for ( int i=1; i<49 ; i++){ 
 //uso i-1 para empezar desde el indice 0 de la LinkedList (seria el asiento 1) sino se desconfiguraba el orden de los asientos
         	if(lf.get((i-1)).getEstado()==0){	%> 
        		 <div class="seat" >      		 
@@ -58,7 +58,7 @@
        		 </div>
        		 
        		 
-        <%}if ( (i%7)== 0){%>
+        <%}if ( (i%8)== 0){%>
           </div>
           <div class="row">
         <% }} %>
