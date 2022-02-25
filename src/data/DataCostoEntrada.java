@@ -78,7 +78,7 @@ public class DataCostoEntrada {
 			
 			if(rs != null && rs.next()) {
 				costo = new CostoEntrada();
-				costo.setFecha_desde(rs.getObject("uv.ult_fecha", Date.class));
+				costo.setFecha_desde(rs.getObject("u.ultima", Date.class));
 				costo.setCosto(rs.getDouble("ce.costo"));
 				
 			}

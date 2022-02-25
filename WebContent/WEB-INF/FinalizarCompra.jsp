@@ -33,8 +33,7 @@ pageEncoding="UTF-8"%>
 		Pelicula p = lp.buscarPorCodigo(listaButacas.get(0).getCod_pelicula());
 		LogicCostoEntrada lce = new LogicCostoEntrada();
 		CostoEntrada ce = lce.costoActual();
-		double precio = ce.getCosto();
-		
+		System.out.println(ce);
 		String indexes = request.getAttribute("indexes").toString();
 		LocalDateTime fechahora = listaButacas.get(0).getFecha_hora_funcion();
 		Integer nrosala = listaButacas.get(0).getNro_sala();
@@ -80,7 +79,7 @@ pageEncoding="UTF-8"%>
 		<p id="numeroAsiento"><b>Asiento: <%=lb.getNumero() %></b></p>
 		<p id="fechaFuncion"><b>fecha: <%=lb.getFecha_hora_funcion() %></b> </p>
 		<p id="salaFuncion"><b>sala n°: <%=lb.getNro_sala() %></b> </p>
-		<p id="precio"><b>precio: $<%=precio %></b> </p>
+		<p id="precio"><b>precio: $<%=ce.getCosto() %></b> </p>
 		<p id="idEntrada"><b> #<%=per.getDni()%> </b></p>
 		<p id="textDni">Presente este dni para retirar la entrada en boleteria</p>
 		</div>
@@ -95,7 +94,7 @@ pageEncoding="UTF-8"%>
 		</div>
 		<div id="der">
 		<p id="salaFuncion"><b>sala n°:<%=lb.getNro_sala() %></b> </p>
-		<p id="precio"><b>precio: $<%=precio %></b></p>
+		<p id="precio"><b>precio: $<%=ce.getCosto() %></b></p>
 		</div>
 	</div></div>
 <%} %>
@@ -104,6 +103,8 @@ pageEncoding="UTF-8"%>
 <input type="hidden" name="fechahora" value="<%=fechahora%>">
 <input type="hidden" name="numeroSala" value="<%=nrosala%>">
 <input type="hidden" name="codigo" value="<%=codigo%>">
+<input type="hidden" name="precio" value="<%=ce.getCosto()%>">
+<input type="hidden" name="dni" value="<%=per.getDni()%>">
 <br>
 <br>
 <input class="comprarEntrada" type="submit" value="Comprar entradas" >

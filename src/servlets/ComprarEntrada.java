@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.ButacaFuncion;
+import entities.Entrada;
 import logic.LogicButFun;
+import logic.LogicEntrada;
 
 /**
  * Servlet implementation class ComprarEntrada
@@ -41,16 +43,18 @@ public class ComprarEntrada extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String indexes = request.getParameter("listaButacas").toString();
-		Integer codPeli = Integer.parseInt(request.getParameter("codigo").toString());
-		Integer nroSala = Integer.parseInt(request.getParameter("numeroSala").toString());
+		String indexes = request.getParameter("listaButacas");
+		Integer codPeli = Integer.parseInt(request.getParameter("codigo"));
+		Integer nroSala = Integer.parseInt(request.getParameter("numeroSala"));
+		String dni = request.getParameter("dni");
+		Double precio = Double.parseDouble(request.getParameter("precio"));
 		String fecha1=request.getParameter("fechahora");
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime dateTime2 = LocalDateTime.parse(fecha1, formatter);
 		
 		LogicButFun logicbf = new LogicButFun();
-		
+		LogicEntrada le = new LogicEntrada();
 
 		String[] split = indexes.split(","); //para dividir el string y recuperar cada asiento
 		
@@ -63,6 +67,14 @@ public class ComprarEntrada extends HttpServlet {
         	bf.setNumero(Integer.parseInt(split[i])+1);
         	//sumo 1 porque viene del jsp MostrarAsientos donde el indice de los asientos empieza en 0 	
             logicbf.cambiarEstado(bf);
+            Entrada ent = new Entrada();
+            ent.setCod_pelicula(codPeli);
+            ent.setFecha_hora_funcion(dateTime2);
+            ent.setNro_sala(nroSala);
+            ent.setNumero_butaca(Integer.parseInt(split[i])+1);
+            ent.setDni(dni);
+            ent.setTotal(precio);
+            le.cargar(ent);
             
         }
 		
