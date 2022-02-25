@@ -250,9 +250,9 @@ public class DataPelicula {
 					p.setDirector(rs.getString("director"));
 					p.setId_genero(rs.getInt("id_genero"));
 					p.setCodigo_calificacion(rs.getInt("codigo_calificacion"));
-					p.setDuracion(rs.getDouble("p.duracion"));
-					p.setSinopsis(rs.getString("p.sinopsis"));
-					p.setPortada(rs.getString("p.portada"));
+					p.setDuracion(rs.getDouble("duracion"));
+					p.setSinopsis(rs.getString("sinopsis"));
+					p.setPortada(rs.getString("portada"));
 					
 					
 					peliculas.add(p);

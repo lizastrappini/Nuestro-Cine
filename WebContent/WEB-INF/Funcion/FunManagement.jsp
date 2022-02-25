@@ -9,6 +9,7 @@
 <head>
 	<meta charset="UTF-8">
 	<%@ include file="/Estilo.jsp" %>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<title>Funciones</title>
 <% 
 	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");
@@ -36,6 +37,26 @@
                             </form>
         </div>
         
+	<%} %>
+	<% if (lf.isEmpty()){%>
+	<script type="text/javascript">
+	Swal.fire({
+		  imageUrl: 'https://images.emojiterra.com/twitter/v13.1/512px/2639.png',
+		  imageHeight: 100,
+		  text: 'No hay funciones para la pelicula elegida',
+		  timer: 2000,
+		  timerProgressBar: true,
+		  allowOutsideClick: false,
+		  didOpen: () => {
+			    Swal.showLoading()
+			    const b = Swal.getHtmlContainer().querySelector('b')
+			    timerInterval = setInterval(() => {
+			      b.textContent = Swal.getTimerLeft()
+			    }, 100)
+			  },
+		})
+		setTimeout( function() { window.location.href = "Peliculas.jsp"; }, 2000 );
+		</script>
 	<%} %>
 <a class="boton_volver" href="Peliculas.html">VOLVER </a>
 </div>
