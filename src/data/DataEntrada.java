@@ -11,23 +11,22 @@ import entities.Entrada;
 
 public class DataEntrada {
 	
-	/*public void cargarEntrada(Entrada nuevaEntrada) {
+	public void cargarEntrada(Entrada nuevaEntrada) {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().prepareStatement(
-					"insert into calificacion (descripcion) values (?)", Statement.RETURN_GENERATED_KEYS);
+					"insert into entrada (numero_butaca, nro_sala, cod_pelicula, fecha_hora_funcion, total, dni) values (?, ?, ?, ?, ?, ?)");
 			
-			stmt.setString(1, nuevaCalificacion.getDescripcion());
+			stmt.setInt(1, nuevaEntrada.getNumero_butaca());
+			stmt.setInt(2, nuevaEntrada.getNro_sala());
+			stmt.setInt(3, nuevaEntrada.getCod_pelicula());
+			stmt.setObject(4, nuevaEntrada.getFecha_hora_funcion());
+			stmt.setDouble(5, nuevaEntrada.getTotal());
+			stmt.setString(6, nuevaEntrada.getDni());
 			
 			stmt.executeUpdate();
-			
-			rs= stmt.getGeneratedKeys();
-			
-			if(rs!= null && rs.next()) {
-				nuevaCalificacion.setCodigo_calificacion(rs.getInt(1));
-			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -42,17 +41,17 @@ public class DataEntrada {
 		}
 	}
 
-	public LinkedList<Calificacion>listarCalificaciones(){
+	public LinkedList<Entrada>listarEntradas(){
 		Statement stmt= null;
 		ResultSet rs=null;
-		LinkedList<Calificacion>calificaciones = new LinkedList<>();
+		LinkedList<Entrada>entradas = new LinkedList<>();
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("Select codigo_calificacion, descripcion from calificacion");
+			rs= stmt.executeQuery("Select numero_butaca, nro_sala, cod_pelicula, fecha_hora_funcion, total, dni from entrada");
 			if (rs != null ) {
 				while (rs.next()) {
-					Calificacion c = new Calificacion();
-					c.setCodigo_calificacion(rs.getInt("codigo_calificacion"));
+					Entrada e = new Entrada();
+					e.(rs.getInt("codigo_calificacion"));
 					c.setDescripcion(rs.getString("descripcion"));
 					calificaciones.add(c);
 				}

@@ -50,7 +50,7 @@
 		<br>
 		<h1>Otras Opciones</h1>
 		<form action="ControladorOtras" method="post">
-			<button class="buttonFiltros" id="agregar" name="opc1" value="add" >Nuevo Costo de Entrada</button>
+			<button class="buttonFiltros" id="agregar" name="opc1" value="add" >Costo de Entrada</button>
 			<button class="buttonFiltros" id="verificar" name="opc2" value="veri" >Verificar Entrada</button>
 		</form>
 	</div>
