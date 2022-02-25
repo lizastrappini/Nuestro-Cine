@@ -411,7 +411,7 @@ background-color: #fff;
   width:140px;
   height:50px;
   border-width:1px;
-  color:rgba(0, 0, 0, 1);
+  color:white;
   border-color:rgba(35, 245, 35, 1);
   font-weight:bold;
   border-top-left-radius:42px;
@@ -421,6 +421,7 @@ background-color: #fff;
   box-shadow: 0px 10px 14px -7px rgba(155, 155, 155, 1);
   text-shadow: 0px 1px 0px rgba(155, 155, 155, 1);
   background:linear-gradient(rgba(35, 245, 101, 1), rgba(28, 248, 151, 1));
+  text-decoration: white;
 }
 
 .botonEstreno:hover {
