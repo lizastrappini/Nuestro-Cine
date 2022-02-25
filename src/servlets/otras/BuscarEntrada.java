@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Entrada;
 import logic.LogicEntrada;
+import java.util.LinkedList;
 
 /**
  * Servlet implementation class BuscarEntrada
@@ -34,9 +35,11 @@ public class BuscarEntrada extends HttpServlet {
 		Entrada ent = new Entrada();
 		ent.setDni(documento);
 		LogicEntrada le = new LogicEntrada();
-		ent = le.buscar(ent);
-		if (ent != null) {
+		LinkedList<Entrada> entradas = new LinkedList<Entrada>();
+		entradas = le.buscar(ent);
+		if (!(entradas.isEmpty())) {
 			request.setAttribute("encontrada", "encontrada");
+			request.setAttribute("entradas", entradas);
 			request.getRequestDispatcher("WEB-INF/Otras/FormVerificarEntrada.jsp").forward(request, response);
 		}
 		else {
