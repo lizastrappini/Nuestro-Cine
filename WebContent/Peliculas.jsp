@@ -5,20 +5,15 @@
 <%@page import="entities.Calificacion" %>
 <%@page import="logic.LogicCalificacion" %>
 <%@page import="java.util.LinkedList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>---PELICULAS---</title>
-        <link href="style/css/styles.css" rel="stylesheet" />
+        <%@ include file="/Estilo.jsp" %>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" >
-		<link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Abril+Fatface&family=Righteous&display=swap" rel="stylesheet">
-		 <style>
+	 <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
