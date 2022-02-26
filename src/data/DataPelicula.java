@@ -280,7 +280,7 @@ public class DataPelicula {
 		try {
 		
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select  codigo, nombre, sinopsis, director, duracion, portada, fecha_estreno, ig_genero, codigo_calificacion from pelicula where month(fecha_estreno) = month(current_date()))");   
+					"select  codigo, nombre, sinopsis, director, duracion, portada, fecha_estreno, id_genero, codigo_calificacion from pelicula where month(fecha_estreno) = month(current_date()) ");   
 			rs = stmt.executeQuery();
 			
 			if(rs!=null ) {

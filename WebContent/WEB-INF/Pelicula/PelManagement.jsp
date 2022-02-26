@@ -4,6 +4,8 @@
 <%@page import="java.time.Month" %>
 <%@page import="java.util.Locale" %>
 <%@page import="entities.Persona" %>
+<%@page import="entities.Calificacion" %>
+<%@page import="logic.LogicCalificacion" %>
 <%@page import="java.time.format.TextStyle" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -24,9 +26,9 @@
 		 
 		Month mes = LocalDate.now().getMonth(); //obtengo el mes
 		String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();  // convierto a mayusculas
-		
 		LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("listapeliculas");
-		
+		LogicCalificacion lc = new LogicCalificacion();
+	
 		%>
    </head>
 
@@ -73,8 +75,10 @@
                             <h2 class="infopelicula" id="nombrepelicula"><%=pel.getNombre() %></h2>
                             <p class="infopelicula" id="sinopsis"><%=pel.getSinopsis() %></p>
                             <p class="infopelicula"> <b>Director :</b> <%=pel.getDirector() %></p>
-                            <p class="infopelicula"> <b>Calificacion : </b><%=pel.getCodigo_calificacion() %></p>
-                            <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %></p> 
+                            <% Calificacion c = new Calificacion();
+                            c=  lc.buscarPorCodigo(pel.getCodigo_calificacion());%>
+                            <p class="infopelicula"> <b>Calificacion : </b><%=c.getDescripcion()%></p>
+                            <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %> min</p> 
                             <form class="infopelicula" action="Funciones" method="post">
                             <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
                             <button class="buttonClass" id="">  Comprar   </button>

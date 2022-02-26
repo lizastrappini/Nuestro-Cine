@@ -22,9 +22,7 @@ public class Login {
 	public Persona validate(Persona p) {
 		return dp.getByUser(p);
 	}
-	//public Cliente getByDocumento(Cliente cli) {
-		//return dp.getByDocumento(cli);
-	//}
+
 	public Persona search(Persona per) {
 		return dp.search(per);
 	}
@@ -32,20 +30,20 @@ public class Login {
 	public Persona newCli(Persona per) {
 		return dp.add(per);
 	}
-	//public void edit(Cliente cli) {
-	//	dp.edit(cli);
-	//}
-	//public void delete(Cliente cli) {
-		//dp.delete(cli);
-	//}
+
 	
 	public String buscarNombre(Persona per) {
 		return dp.buscaNombre(per);
 	}
 	
-	public Integer buscarPorDni(Persona per) {
+	public String buscarPorDni(Persona per) {
 		return dp.buscarPorDni(per);
 	}
+	
+	public String buscarPorMail(Persona per) {
+		return dp.buscarPorMail(per);
+	}
+	
 	
 	public String obtenerPass(Persona per) {
 		return dp.obtenerPass(per);
