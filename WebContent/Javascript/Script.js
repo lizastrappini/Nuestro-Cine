@@ -19,7 +19,7 @@ function cerrarSesion(){
 
 function cambiarContra(){
   Swal.fire({
-    title: 'Cambiar contrasenia',
+    title: 'entre 8 y 16 caracteres,al menos un dígito, al menos una minúscula y al menos una mayúscula',
     html:
     '<form name="cambio" action="CambiarPassword" method="POST" >'+
     '<input id="passoriginal" name="passoriginal" class="swal2-input" type="password" placeholder="contrasenia actual">' +
@@ -35,7 +35,7 @@ function cambiarContra(){
 }
 
   function checkPassword(valor){
-    var myregex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/; 
+    var myregex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/; 
    if(myregex.test(valor)){
        alert(valor+" es valido!");
        return true;        

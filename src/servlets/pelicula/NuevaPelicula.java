@@ -38,14 +38,14 @@ public class NuevaPelicula extends HttpServlet {
 		LogicPelicula lp = new LogicPelicula();
 		
 		
-		pel.setNombre(request.getParameter("nombre").toString());
-		pel.setGenero(request.getParameter("elegirGenero").toString());
-		pel.setCalificacion(request.getParameter("elegirCalificacion").toString());
-		pel.setSinopsis(request.getParameter("sinopsis").toString());
-		pel.setDirector(request.getParameter("director").toString());
-		pel.setDuracion(Integer.parseInt(request.getParameter("duracion").toString()));
-		pel.setPortada(request.getParameter("portada").toString());
-		String fecha1=request.getParameter("fechahora").toString();
+		pel.setNombre(request.getParameter("nombre"));
+		pel.setId_genero(Integer.parseInt(request.getParameter("elegirGenero")));
+		pel.setCodigo_calificacion(Integer.parseInt(request.getParameter("elegirCalificacion")));
+		pel.setSinopsis(request.getParameter("sinopsis"));
+		pel.setDirector(request.getParameter("director"));
+		pel.setDuracion(Integer.parseInt(request.getParameter("duracion")));
+		pel.setPortada(request.getParameter("portada"));
+		String fecha1=request.getParameter("fechahora");
 		
 		Date fecha;
 		try {
@@ -60,9 +60,8 @@ public class NuevaPelicula extends HttpServlet {
 		
 		lp.cargar(pel);
 		
-		String cargada = "cargada";
-		request.setAttribute("cargada", cargada);
-		request.getRequestDispatcher("Empleados.jsp").forward(request, response);
+		request.setAttribute("cargada", "cargada");
+		request.getRequestDispatcher("WEB-INF/Pelicula/AgregarPelicula.jsp").forward(request, response);
 		
 	}
 

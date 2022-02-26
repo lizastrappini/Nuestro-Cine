@@ -26,7 +26,7 @@
         	<label>Calificaciones</label>
         	<select name="elegircalificacion" required="required">
         		<% for (Calificacion cali: lc){ %>
-            		<option value="<%= cali.getCodigo_calificacion() %>"><%= cali.getCodigo_calificacion() %></option>
+            		<option value="<%= cali.getCodigo_calificacion() %>"><%= cali.getDescripcion() %></option>
             	<% } %>
         	</select>
     	</div>

@@ -34,19 +34,16 @@ public class BuscarPelicula extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LogicPelicula lp = new LogicPelicula();
 		
-		String nombre = request.getParameter("nombre").toString();
+		Integer codigo = Integer.parseInt(request.getParameter("elegirpelicula"));
 
+		Pelicula peli = lp.buscarPorCodigo(codigo);
 		
-		LinkedList<Pelicula> pelis = lp.buscar(nombre);
-		
-		if ( !(pelis.isEmpty()) ) {
-			String encontrada = "encontrada";
-			request.setAttribute("encontrada", encontrada);
-			request.setAttribute("peliculas", pelis);
+		if (peli != null) {
+			request.setAttribute("encontrada", "encontrada");
+			request.setAttribute("peliculaEncontrada", peli);
 			request.getRequestDispatcher("WEB-INF/Pelicula/BorrarPelicula.jsp").forward(request, response);
 		} else {
-			String noencontrada = "noencontrada";
-			request.setAttribute("noencontrada", noencontrada);
+			request.setAttribute("Noencontrada", "Noencontrada");
 			request.getRequestDispatcher("WEB-INF/Pelicula/BorrarPelicula.jsp").forward(request, response);
 		}
 	}

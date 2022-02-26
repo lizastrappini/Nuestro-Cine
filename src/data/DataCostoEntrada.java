@@ -73,12 +73,12 @@ public class DataCostoEntrada {
 		CostoEntrada costo = null;
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("call tp_java_cine.costo_actual();");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("call tp_java_cine.obtener_costo_actual();");
 			rs = stmt.executeQuery();
 			
 			if(rs != null && rs.next()) {
 				costo = new CostoEntrada();
-				costo.setFecha_desde(rs.getObject("uv.ult_fecha", Date.class));
+				costo.setFecha_desde(rs.getObject("u.ultima", Date.class));
 				costo.setCosto(rs.getDouble("ce.costo"));
 				
 			}

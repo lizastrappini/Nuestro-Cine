@@ -41,7 +41,6 @@ public class Funciones extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		Integer cod=Integer.parseInt(request.getParameter("codigo"));
 		Funcion fun = new Funcion();
@@ -58,7 +57,7 @@ public class Funciones extends HttpServlet {
 		request.setAttribute("pel", pel);
 
 		request.setAttribute("listafunciones", funciones);
-		request.getRequestDispatcher("WEB-INF/FunManagement.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/Funcion/FunManagement.jsp").forward(request, response);
 	}
 
 }

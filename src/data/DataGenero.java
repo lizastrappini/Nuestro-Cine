@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.LinkedList;
 
 import entities.Genero;
-import entities.Pelicula;
 
 public class DataGenero {
 	
@@ -153,6 +152,38 @@ public class DataGenero {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public Genero buscarPorCodigo(Integer codigo) {
+		ResultSet rs = null;
+		PreparedStatement stmt=null;
+		Genero gen = null;
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select idGenero, descripcion from genero where idGenero = ?");
+			stmt.setInt(1, codigo);
+			
+			rs = stmt.executeQuery();
+			
+			if(rs != null && rs.next()) {
+				gen = new Genero();
+				gen.setId(rs.getInt("idGenero"));
+				gen.setDescripcion(rs.getString("descripcion"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rs!= null ) {rs.close();}
+				if(stmt != null ) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return gen;
 	}
 	
 }

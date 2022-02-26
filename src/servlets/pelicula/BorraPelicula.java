@@ -1,7 +1,7 @@
 package servlets.pelicula;
 
 import java.io.IOException;
-
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,16 +31,7 @@ public class BorraPelicula extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Pelicula pel = new Pelicula();
-		LogicPelicula lp = new LogicPelicula();
 		
-		Integer cod = Integer.parseInt(request.getParameter("codigo"));
-		pel = lp.buscarPorCodigo(cod);
-		lp.delete(pel);
-		String borrada= "borrada";
-		request.setAttribute("borrada", borrada);
-		
-		request.getRequestDispatcher("Empleados.jsp").forward(request, response);
 	}
 
 	/**
@@ -48,8 +39,17 @@ public class BorraPelicula extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+		Pelicula pel = new Pelicula();
+		LogicPelicula lp = new LogicPelicula();
 		
+		LinkedList<Pelicula>peliculas= lp.getAll();
+		
+		request.setAttribute("peliculas", peliculas);
+		
+		Integer cod = Integer.parseInt(request.getParameter("codigoPel"));
+		pel = lp.buscarPorCodigo(cod);
+		lp.delete(pel);
+		request.setAttribute("borrada", "borrada");
+		request.getRequestDispatcher("WEB-INF/Pelicula/BorrarPelicula.jsp").forward(request, response);
 	}
-
 }

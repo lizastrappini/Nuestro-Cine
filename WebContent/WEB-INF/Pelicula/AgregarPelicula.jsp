@@ -11,13 +11,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>---EDIT PELICULAS---</title>
-        <link href="style/css/styles.css" rel="stylesheet" />
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script src="Javascript/Script.js"></script>
-<title>NUEVA PELICULA</title>
+	<meta charset="utf-8" />
+	<%@ include file="/Estilo.jsp" %>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="Javascript/Script.js"></script>
+	<title>NUEVA PELICULA</title>
 
 <%  
 	LocalDateTime fecha = LocalDateTime.now();
@@ -38,36 +36,13 @@
 <body>
 <%if ( per != (null) && isEmpleado==1 ){ %>
 <div class="fondo">
-<!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">	
-                    <%if ( isEmpleado==1){ %>
-                    	<li class="nav-item"><a class="nav-link" href="Empleados.jsp">EMPLEADOS</a></li> 
-                    <%} else {%>
-                    	<%} %>	 
-                    	<li class="nav-item"><a class="nav-link" href="Peliculas.jsp">Cartelera</a></li>
-                        
-                        <% if ( request.getSession().getAttribute("usuario")==null ) {%>
-                        
-                        <li class="nav-item"><a class="nav-link" href="SignUp.jsp">Registrarse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SignIn.jsp" id="signin">Iniciar sesion</a></li>
-                        <%}else {%> 
-                        <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout" onclick="cerrarSesion()" >Cerrar sesion</a></li>
-                        <li class="nav-item"><a class="nav-link" id="" href="MiCuenta.jsp">Mi cuenta</a></li>
-                   		<%} %>	
-                    </ul>
-                     
-                </div>
-            </div>
-        </nav>
+<jsp:include page="/BarraMenu.jsp" />
     <br>
     <br>
 	<h1>AGREGAR PELICULA</h1>
+	<% if (request.getAttribute("cargada")!=null) {%>
+		<div class="alert alert-success">¡Pelicula creada con exito!</div>
+	<%} %>
 	<form class="addPelicula" action="NuevaPelicula" method="get" >
 	<label for="inputNombre" >Nombre de la pelicula</label>
     <input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">

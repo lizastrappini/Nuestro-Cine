@@ -31,5 +31,8 @@ public class LogicGenero {
 	public void borrar(Genero g) {
 		dgen.borrarGenero(g);
 	}
+	public Genero buscarPorCodigo(Integer cod) {
+		return dgen.buscarPorCodigo(cod);
+	}
 }
 
