@@ -63,7 +63,6 @@ public class AdquirirEntrada extends HttpServlet {
         	bf.setFecha_hora_funcion(dateTime2);
         	bf.setNro_sala(nrosala);     	
         	bf.setNumero(Integer.parseInt(split[i])+1); //le sumo 1 al index porque en la bd empiezan desde el 1
-        	
         	//lbf.cambiarEstado(bf);
             listaButacas.add(bf);
         }

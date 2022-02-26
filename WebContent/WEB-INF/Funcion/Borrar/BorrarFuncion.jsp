@@ -48,7 +48,7 @@
 				<p class="nombrepelicula" id="nombrepelicula" ><%= peliculaEncontrada.getNombre() %></p>
                 <p class="sinopsis" id="sinopsis"><%= peliculaEncontrada.getSinopsis() %></p>
                 <p class="infopelicula"> <b>Director :</b> <%= peliculaEncontrada.getDirector() %></p>
-                <p class="infopelicula"> <b>Calificacion :</b> <%= peliculaEncontrada.getCalificacion() %></p>
+                <p class="infopelicula"> <b>Calificacion :</b> <%= peliculaEncontrada.getCodigo_calificacion() %></p>
                 <p class="infopelicula"> <b>Duracion :</b> <%= peliculaEncontrada.getDuracion() %></p>
                 <form action="BuscarFuncionesDePeliculaBorrar" method="get">
                     <input type="hidden" name="codigoPel" value="<%=peliculaEncontrada.getCodigo() %>"/>

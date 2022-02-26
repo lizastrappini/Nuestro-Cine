@@ -45,17 +45,17 @@ public class MostrarPeliculas extends HttpServlet {
 		
 		if(!(request.getParameter("GeneroPelicula")==(null))) {
 			
-			String genero = request.getParameter("GeneroPelicula");
+			String id_genero = request.getParameter("GeneroPelicula");
 			LogicPelicula lp = new LogicPelicula();
 				
 			try {
 				
-				if(genero.toString().equals("todas")) {
+				if(id_genero.equals("todas")) {
 					LinkedList<Pelicula> peliculas = lp.getAll();					
 					request.setAttribute("listapeliculas", peliculas);
 					request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);}
 				else {
-				LinkedList<Pelicula> peliculas = lp.buscarPorGenero(genero);
+				LinkedList<Pelicula> peliculas = lp.buscarPorGenero(Integer.parseInt(id_genero));
 				request.setAttribute("listapeliculas", peliculas);
 				request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);}
 										
@@ -73,7 +73,7 @@ public class MostrarPeliculas extends HttpServlet {
 			LogicPelicula lp = new LogicPelicula();
 
 			try{
-			LinkedList<Pelicula> peliculas = lp.buscarPorEdad(edad);	
+			LinkedList<Pelicula> peliculas = lp.buscarPorEdad(Integer.parseInt(edad));	
 			request.setAttribute("listapeliculas", peliculas);
 			request.getRequestDispatcher("WEB-INF/Pelicula/PelManagement.jsp").forward(request, response);
 			} catch (NullPointerException e) {

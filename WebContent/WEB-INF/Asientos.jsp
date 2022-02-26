@@ -24,6 +24,7 @@
     %>
   </head>
   <body>
+  	
     <input type="hidden" id="costo" name="costo" value="<%=Double.parseDouble(request.getAttribute("costo").toString())%>"> 
 	<h1><%=peli.getNombre().toUpperCase()%></h1>
 	<h2><%=fecha%></h2>
@@ -47,7 +48,7 @@
     <div class="container">
       <div class="screen"></div>
       <div class="row">
-        <% for ( int i=1; i<50 ; i++){ 
+        <% for ( int i=1; i<49 ; i++){ 
 //uso i-1 para empezar desde el indice 0 de la LinkedList (seria el asiento 1) sino se desconfiguraba el orden de los asientos
         	if(lf.get((i-1)).getEstado()==0){	%> 
        		 <div class="seat" >      		 
@@ -58,7 +59,7 @@
        		 </div>
        		 
        		 
-        <%}if ( (i%7)== 0){%>
+        <%}if ( (i%8)== 0){%>
           </div>
           <div class="row">
         <% }} %>
@@ -71,7 +72,7 @@
     <form name="entrada" action="AdquirirEntrada" method="post">
     
     <input type="hidden" id="preciototal" name="preciototal" >
-    
+     <input type="hidden" id="costo" name="costo" value="<%=costo%>">
     <input type="hidden" name="codigopeli" value="<%=bf.getCod_pelicula()%>">
     <input type="hidden" name="nrosala" value="<%=bf.getNro_sala()%>">
     <input type="hidden" name="fechahora" value="<%=bf.getFecha_hora_funcion()%>">

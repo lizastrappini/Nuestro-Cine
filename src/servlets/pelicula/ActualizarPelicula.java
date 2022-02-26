@@ -68,19 +68,19 @@ public class ActualizarPelicula extends HttpServlet {
 				
 				Integer codigo = Integer.parseInt(request.getParameter("codigo"));
 				
-				String nombre = request.getParameter("nombre").toString();
+				String nombre = request.getParameter("nombre");
 				
-				String genero = request.getParameter("genero").toString();
+				Integer cod_genero = Integer.parseInt(request.getParameter("elegirGenero"));
 				
-				String calificacion = request.getParameter("edad").toString();
+				Integer cod_calif = Integer.parseInt(request.getParameter("elegirCalificacion"));
 
-				String sinopsis = request.getParameter("sinopsis").toString();
+				String sinopsis = request.getParameter("sinopsis");
 
-				String director = request.getParameter("director").toString();
+				String director = request.getParameter("director");
 
 				double duracion = Double.parseDouble(request.getParameter("duracion"));
 
-				String portada = request.getParameter("portada").toString();
+				String portada = request.getParameter("portada");
 				
 				String fecha1=request.getParameter("estreno");
 				
@@ -97,8 +97,8 @@ public class ActualizarPelicula extends HttpServlet {
 				
 				pelicambiada.setCodigo(codigo);
 				pelicambiada.setNombre(nombre);
-				pelicambiada.setGenero(genero);
-				pelicambiada.setCalificacion(calificacion);
+				pelicambiada.setId_genero(cod_genero);
+				pelicambiada.setCodigo_calificacion(cod_calif);
 				pelicambiada.setSinopsis(sinopsis);
 				pelicambiada.setDirector(director);
 				pelicambiada.setDuracion(duracion);
@@ -108,14 +108,12 @@ public class ActualizarPelicula extends HttpServlet {
 				if ( !(pelianterior.equals(pelicambiada.toString())) ) {
 					
 					lp.modificar(pelicambiada);
-					String modificada = "modificada";
-					request.setAttribute("modificada", modificada);
-					request.getRequestDispatcher("Empleados.jsp").forward(request, response);
+					request.setAttribute("editada", "editada");
+					request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
 				
 				} else if ( pelianterior.equals(pelicambiada.toString()) ){ 
-					String nocambio = "nocambio";
-					request.setAttribute("nocambio", nocambio);
-					request.getRequestDispatcher("Empleados.jsp").forward(request, response);
+					request.setAttribute("nocambio", "nocambio");
+					request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
 
 				}
 				

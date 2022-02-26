@@ -14,20 +14,7 @@
 <body>
 <div class="fondo">
 
-<!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">	
-                    	<li class="nav-item"><a class="nav-link" href="Peliculas.jsp">Cartelera</a></li>
-                    	<li class="nav-item"><a class="nav-link" href="SignUp.html">Registrarse</a></li>
-                    </ul>
-                     
-                </div>
-            </div>
-        </nav>
+<jsp:include page="/BarraMenu.jsp" />
 
 
 <form class="form-signin" action="iniciarSesion" method="post" >

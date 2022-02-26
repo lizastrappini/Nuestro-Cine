@@ -1,4 +1,4 @@
-package servlets.costo;
+package servlets.otras;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.CostoEntrada;
+import logic.LogicCostoEntrada;
+
 /**
- * Servlet implementation class ControladorCostos
+ * Servlet implementation class NuevoCosto
  */
-@WebServlet({"/ControladorCostos", "/EditCostos", "/Controladorcostos"})
-public class ControladorCostos extends HttpServlet {
+@WebServlet("/NuevoCosto")
+public class NuevoCosto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControladorCostos() {
+    public NuevoCosto() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,32 +29,24 @@ public class ControladorCostos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		CostoEntrada ce = new CostoEntrada();
+		LogicCostoEntrada lce = new LogicCostoEntrada();
+		
+		ce.setCosto(Double.parseDouble(request.getParameter("costo")));
+		lce.cargar(ce);
+		
+		String cargada = "cargada";
+		request.setAttribute("cargada", cargada);
+		request.getRequestDispatcher("Empleados.jsp").forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(! (request.getParameter("opc1")==(null)) ){
-			
-			request.getRequestDispatcher("WEB-INF/Costo/AgregarCosto.jsp").forward(request, response);
-		}
-		
-		else if (! (request.getParameter("opc2")==(null))  ) {
-			 
-			request.getRequestDispatcher("WEB-INF/Sala/EditarCosto.jsp").forward(request, response);
-			
-		}
-		
-		else if (! (request.getParameter("opc3")==(null))  ) {
-
-			request.getRequestDispatcher("WEB-INF/Sala/BorrarCosto.jsp").forward(request, response);
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
-
-

@@ -33,39 +33,15 @@
 <body>
 <%if ( per != (null) && isEmpleado==1){ %>
 <div class="fondo">
-<!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">	
-                    <%if ( isEmpleado==1){ %>
-                    	<li class="nav-item"><a class="nav-link" href="Empleados.jsp">EMPLEADOS</a></li> 
-                    <%} else {%>
-                    	<%} %>	 
-                    	<li class="nav-item"><a class="nav-link" href="WPeliculas.jsp">Cartelera</a></li>
-                        
-                        <% if ( request.getSession().getAttribute("usuario")==null ) {%>
-                        
-                        <li class="nav-item"><a class="nav-link" href="SignUp.jsp">Registrarse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SignIn.jsp" id="signin">Iniciar sesion</a></li>
-                        <%}else {%> 
-                        <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link"  onclick="cerrarSesion()">Cerrar sesion</a></li>
-                        <li class="nav-item"><a class="nav-link" id="" href="MiCuenta.jsp">Mi cuenta</a></li>
-                        
-                   		<%} %>	
-                    </ul>
-                     
-                </div>
-            </div>
-        </nav>
+<jsp:include page="/BarraMenu.jsp" />
 	
 	
 	<%if ( (request.getAttribute("encontrada")==(null))) { %>
 	<br>
 	<br>
+	<% if (request.getAttribute("editada")!=null) {%>
+        <div class="alert alert-success">¡Pelicula editada con exito!</div>
+    <% }%>
 	<h2>Ingrese nombre de la pelicula</h2>
 	<form class="addPelicula" action="BuscarPelicula" method="post" >
     <input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">
@@ -86,7 +62,7 @@
 							<p class="nombrepelicula" id="nombrepelicula" ><%= pel.getNombre() %></p>
                             <p class="sinopsis" id="sinopsis"><%= pel.getSinopsis() %></p>
                             <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
-                            <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCalificacion() %></p>
+                            <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCodigo_calificacion() %></p>
                             <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
                             <form action="ActualizarPelicula" method="post">
                             <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
