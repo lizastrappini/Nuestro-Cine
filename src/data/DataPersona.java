@@ -193,8 +193,8 @@ public class DataPersona {
 		}
 		return p;
 	}
-	public Integer buscarPorDni(Persona per) {		
-		Integer d = null;
+	public String buscarPorDni(Persona per) {		
+		String d = null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
@@ -205,7 +205,7 @@ public class DataPersona {
 			
 			if(rs!=null && rs.next()) {
 					
-					d = rs.getInt("dni");
+					d = rs.getString("dni");
 					//System.out.println(p);
 					
 			}
@@ -222,6 +222,37 @@ public class DataPersona {
 		}
 		return d;
 	}
+	
+	public String buscarPorMail(Persona per) {		
+		String d = null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select email from cliente where email=?");
+			stmt.setString(1, per.getEmail());
+			rs=stmt.executeQuery();
+			
+			if(rs!=null && rs.next()) {
+					
+					d = rs.getString("email");
+					//System.out.println(p);
+					
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return d;
+	}
+	
 	public String obtenerPass(Persona per) {
 		String p="";
 		PreparedStatement stmt=null;
