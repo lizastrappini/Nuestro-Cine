@@ -1,6 +1,8 @@
 package servlets.genero.borrar;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,34 +31,34 @@ public class BorrarGenero extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer id = Integer.parseInt(request.getParameter("idGenero"));
-		LogicGenero lg = new LogicGenero();
-		Genero g = new Genero();
-		g.setId(id);
-		lg.borrar(g);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String descripcion = request.getParameter("GeneroPelicula").toString();
 		
-		Genero g = new Genero();
 		LogicGenero lg = new LogicGenero();
 		
-		g.setDescripcion(descripcion);
-		Genero gen = lg.buscar(g);
-		if( gen==null ) {
-			String noEncontrado = "noEncontrado";
-			request.setAttribute("noEncontrado", noEncontrado);
+		if (request.getParameter("bandera")==null) {
+			LinkedList<Genero> generos = lg.getAll();
+			request.setAttribute("generos", generos);
+			
+			Integer idGenero = Integer.parseInt(request.getParameter("elegirgenero"));
+			
+			Genero generoEncontrado = lg.buscarPorCodigo(idGenero);
+			request.setAttribute("generoEncontrado", generoEncontrado);
+			request.setAttribute("encontrada", "encontrada");
 			request.getRequestDispatcher("WEB-INF/Genero/Borrar/BorrarGenero.jsp").forward(request, response);
 		} else {
-			String Encontrado = "Encontrado";
-			request.setAttribute("Encontrado", Encontrado);
-			request.setAttribute("idGenero", gen.getId());
+			Integer idGenero = Integer.parseInt(request.getParameter("idgen"));
+			Genero generoEncontrado = lg.buscarPorCodigo(idGenero);
+			lg.borrar(generoEncontrado);
+			request.setAttribute("generoEncontrado", generoEncontrado);
+			request.setAttribute("encontrada", "encontrada");
+			request.setAttribute("borrada", "borrada");
 			request.getRequestDispatcher("WEB-INF/Genero/Borrar/BorrarGenero.jsp").forward(request, response);
-			
 		}
 	}
 

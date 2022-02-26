@@ -1,6 +1,8 @@
 package servlets.genero.editar;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,53 +31,37 @@ public class EditarGenero extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String descripcion = request.getParameter("descripcion");
-		Integer id = Integer.parseInt(request.getParameter("idGenero"));
 		
-		Genero g = new Genero();
-		g.setDescripcion(descripcion);
-		
-		LogicGenero lg = new LogicGenero();	
-		Genero gen = lg.buscar(g); //busco si esa descripcion del genero ya existe para no duplicarlo
-		
-		if ( gen==null) {
-		g.setId(id);
-		lg.editar(g);
-		String Cambiado = "Cambiado";
-		request.setAttribute("Cambiado", Cambiado );
-		request.getRequestDispatcher("Empleados.jsp").forward(request, response);}
-		else {
-			String noAgregado = "noAgregado";
-			request.setAttribute("noAgregado", noAgregado );
-			request.getRequestDispatcher("Empleados.jsp").forward(request, response);
-		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String descripcion = request.getParameter("GeneroPelicula");
+		
 		LogicGenero lg = new LogicGenero();
-		Genero g = new Genero();
-		g.setDescripcion(descripcion);
 		
-		Genero gen = lg.buscar(g);
-		
-		if(  gen == (null) ) {
-			String noEncontrado = "noEncontrado";
-			request.setAttribute("noEncontrado", noEncontrado );
+		if (request.getParameter("bandera")==null) {
+			LinkedList<Genero> generos = lg.getAll();
+			request.setAttribute("generos", generos);
+			
+			Integer idGenero = Integer.parseInt(request.getParameter("elegirgenero"));
+			
+			Genero generoEncontrado = lg.buscarPorCodigo(idGenero);
+			request.setAttribute("generoEncontrado", generoEncontrado);
+			request.setAttribute("encontrada", "encontrada");
 			request.getRequestDispatcher("WEB-INF/Genero/Editar/EditGenero.jsp").forward(request, response);
 		} else {
-			
-			String Encontrado = "Encontrado";
-			request.setAttribute("Encontrado", Encontrado );
-			request.setAttribute("idGenero", gen.getId() );
+			Integer idGenero = Integer.parseInt(request.getParameter("idgen"));
+			String descripcion = request.getParameter("descripcion");
+			Genero generoEncontrado = lg.buscarPorCodigo(idGenero);
+			generoEncontrado.setDescripcion(descripcion);
+			lg.editar(generoEncontrado);
+			request.setAttribute("generoEncontrado", generoEncontrado);
+			request.setAttribute("encontrada", "encontrada");
+			request.setAttribute("editada", "editada");
 			request.getRequestDispatcher("WEB-INF/Genero/Editar/EditGenero.jsp").forward(request, response);
 		}
-			
-			
-		
 	}
 
 }

@@ -33,6 +33,9 @@
     <br>
     <br>
 	<h2>AGREGAR GENERO</h2>
+	<% if (request.getAttribute("Agregado")!=null) {%>
+		<div class="alert alert-success">¡Genero creado con exito!</div>
+	<%} %>
 	<form class="addCosto" action="NuevoGenero" method="get" >
     <label for="inputGenero" >Nuevo Genero</label>
     <input id="inputCosto" name="nombre" class="form-control" placeholder="nombre del genero" required type="text">

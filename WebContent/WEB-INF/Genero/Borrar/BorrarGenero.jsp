@@ -1,108 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.time.*"%>
-<%@page import="java.time.format.*"%>
-<%@page import="entities.Persona" %>
-<%@page import="entities.Genero" %>
-<%@page import="logic.LogicGenero" %>
-<%@page import="java.util.LinkedList"%>
+<%@page import="entities.Genero"%>
+<%@page import="java.util.LinkedList" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>---AGREGAR GENERO---</title>
-<%@ include file="/Estilo.jsp" %>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<%  
-	LocalDateTime fecha = LocalDateTime.now();
-	DateTimeFormatter isoFecha = DateTimeFormatter.ISO_LOCAL_DATE;
-	String bandera = null;
-	if ( !(request.getAttribute("bandera")==(null)) ){
-	bandera = request.getAttribute("bandera").toString();}
-	
-	Integer isEmpleado = 0;
-	Persona per = (Persona)request.getSession().getAttribute("usuario");
-		
-		if ( !(per==null)){
-			isEmpleado = per.getHabilitado();
-		} else {isEmpleado = 0;}	
-		
-	LogicGenero lg = new LogicGenero();
-	LinkedList<Genero> listageneros = lg.getAll();
-	
- 
-%>
+	<meta charset="UTF-8">
+	<%@ include file="/Estilo.jsp" %>		
+	<title>BORRAR GENERO</title>
+	<%
+	LinkedList<Genero> lg=(LinkedList<Genero>)request.getAttribute("generos");
+	Genero generoEncontrado=(Genero)request.getAttribute("generoEncontrado");
+	%>
 </head>
 <body>
-	<div class="fondo">
-<!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">	
-                    <%if ( isEmpleado==1){ %>
-                    	<li class="nav-item"><a class="nav-link" href="Empleados.jsp">EMPLEADOS</a></li> 
-                    <%} else {%>
-                    	<%} %>	 
-                    	<li class="nav-item"><a class="nav-link" href="Peliculas.jsp">Cartelera</a></li>
-                        
-                        <% if ( request.getSession().getAttribute("usuario")==null ) {%>
-                        
-                        <li class="nav-item"><a class="nav-link" href="SignUp.html">Registrarse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SignIn.html" id="signin">Iniciar sesion</a></li>
-                        <%}else {%> 
-                        <li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout" href="SignOut" >Cerrar sesion</a></li>
-                        
-                   		<%} %>	
-                    </ul>
-                     
-                </div>
-            </div>
-        </nav>
-    <br>
-    <br>
-	<h2>BORRAR GENERO</h2>
-	<% if (   request.getAttribute("Encontrado")==null){ %>
-	<form class="addCosto" action="BorrarGenero" method="post" >
-    <select name="GeneroPelicula" required="required">		
-		<% for (Genero g: listageneros){ %>
-        	<option value="<%= g.getDescripcion() %>" selected="selected"><%= g.getDescripcion() %></option>
-         <% } %>	
-         </select>
-         <br>
-         <br>
-    
-    <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >BORRAR</button>
-    </form>
-   <% }  if ( request.getAttribute("Encontrado") != null ) {%>
-   		<form name="borrar" method="get" action="BorrarGenero">
-		<input type="hidden" name="idGenero" value="<%=request.getAttribute("idGenero")%>">
-		</form>
-   		
-		<script type="text/javascript">
-		Swal.fire({
-			  title: 'Estas seguro?',
-			  text: "Las peliculas que pertenezcan al genero se borraran",
-			  icon: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Si,borrar'
-			  
-			}).then((result) => {
-			  if (result.isConfirmed) {
-			    
-			    borrar.submit()
-			  }
-			})
-		</script>
-		
-		
-   <%} %>
-	</div>
-	
+<div class="fondo">
+	<jsp:include page="/BarraMenu.jsp" />	
+	<br>
+	<br>
+	<% if (request.getAttribute("encontrada")==null) {%>
+		<h2>Seleccione un Genero</h2>
+		<form class="addGenero" action="BorrarGenero" method="post" >
+			<div>
+        		<label>Generos</label>
+        		<select name="elegirgenero" required="required">
+        			<% for (Genero gen: lg){ %>
+            			<option value="<%= gen.getId() %>"><%= gen.getDescripcion() %></option>
+            		<% } %>
+        		</select>
+    		</div>
+    		<br>
+   			<button class="btn btn-lg btn-primary btn-block" type="submit" >BUSCAR</button>
+    	</form>
+    <%} %>
+    <% if (request.getAttribute("encontrada")!=null) {%>
+    	<% if (request.getAttribute("borrada")!=null) {%>
+        	<div class="alert alert-success">¡Genero borrado con exito!</div>
+    	<% }%>
+    	<div class="alert alert-warning">Al eliminar un genero se borraran las peliculas con ese genero asignado</div>
+		<div class="infocalificacion">
+			<p class="infocalificacion"> <b>Descripcion :</b> <%= generoEncontrado.getDescripcion() %></p>
+        	<form action="BorrarGenero" method="post">
+            	<input type="hidden" name="idgen" value="<%= generoEncontrado.getId() %>">
+            	<input type="hidden" name="bandera" value="borrar">
+            	<button id="botonBorrar" class="buttonBorrar" >Borrar</button>
+        	</form>
+    	</div>
+    <%} %>
+</div>
 </body>
 </html>

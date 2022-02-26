@@ -1,7 +1,6 @@
 package servlets.genero.agregar;
 
 import java.io.IOException;
-import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,15 +40,13 @@ public class NuevoGenero extends HttpServlet {
 		Genero gen = lg.buscar(g);
 		
 		if ( gen!= (null) ) {
-			String noAgregado = "noAgregado";
-			request.setAttribute("noAgregado", noAgregado );
+			request.setAttribute("noAgregado", "noAgregado" );
 			request.getRequestDispatcher("Empleados.jsp").forward(request, response);
 			
 		} else if( gen == (null) ){
 			lg.cargar(g);
-			String Agregado = "Agregado";
-			request.setAttribute("Agregado", Agregado );
-			request.getRequestDispatcher("Empleados.jsp").forward(request, response); }
+			request.setAttribute("Agregado", "Agregado" );
+			request.getRequestDispatcher("WEB-INF/Genero/Agregar/AgregarGenero.jsp").forward(request, response); }
 	}
 
 	/**
