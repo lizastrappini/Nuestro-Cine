@@ -79,4 +79,26 @@ public class DataEntrada {
 		
 		return entradas;
 	}
+	
+	public void borrarEntrada(Entrada borraEnt) {
+		
+		PreparedStatement stmt=null;
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"delete from entrada where dni = ?");
+			stmt.setString(1, borraEnt.getDni());
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(stmt!=null)stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
