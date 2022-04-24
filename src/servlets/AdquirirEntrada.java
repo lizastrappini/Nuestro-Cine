@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.ButacaFuncion;
-import logic.LogicButFun;
 
 /**
  * Servlet implementation class AquirirEntrada
@@ -42,8 +41,6 @@ public class AdquirirEntrada extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	
-		String precio = request.getParameter("preciototal").toString();
 		String index = request.getParameter("indexes").toString();
 		Integer cod = Integer.parseInt(request.getParameter("codigopeli"));
 		Integer nrosala = Integer.parseInt(request.getParameter("nrosala"));
@@ -52,7 +49,6 @@ public class AdquirirEntrada extends HttpServlet {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime dateTime2 = LocalDateTime.parse(fecha1, formatter);
 
-		LogicButFun lbf = new LogicButFun();
 		LinkedList<ButacaFuncion> listaButacas = new LinkedList<>();
 		String[] split = index.split(","); //para dividir el string y recuperar cada asiento
 		
@@ -63,7 +59,6 @@ public class AdquirirEntrada extends HttpServlet {
         	bf.setFecha_hora_funcion(dateTime2);
         	bf.setNro_sala(nrosala);     	
         	bf.setNumero(Integer.parseInt(split[i])+1); //le sumo 1 al index porque en la bd empiezan desde el 1
-        	//lbf.cambiarEstado(bf);
             listaButacas.add(bf);
         }
         

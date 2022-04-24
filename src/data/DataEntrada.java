@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 import entities.Entrada;
+import entities.ButacaFuncion;
 
 public class DataEntrada {
 	
@@ -47,7 +48,7 @@ public class DataEntrada {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select numero_butaca, nro_sala, cod_pelicula, fecha_hora_funcion, total, dni from entrada where dni=? and fecha_hora_funcion >= current_date()");
+					"select numero_butaca, nro_sala, cod_pelicula, fecha_hora_funcion, total, dni, id_entrada from entrada where dni=? and fecha_hora_funcion >= current_date()");
 			stmt.setString(1, buscaEntrada.getDni());
 			
 			rs = stmt.executeQuery();
@@ -61,6 +62,7 @@ public class DataEntrada {
 					ent.setFecha_hora_funcion(rs.getObject("fecha_hora_funcion", LocalDateTime.class));
 					ent.setTotal(rs.getDouble("total"));
 					ent.setDni(rs.getString("dni"));
+					ent.setId_entrada(rs.getInt("id_entrada"));
 					entradas.add(ent);
 				}
 			}
@@ -80,14 +82,59 @@ public class DataEntrada {
 		return entradas;
 	}
 	
+	public Entrada buscarEntradaPorId (Integer id) {
+		ResultSet rs = null;
+		PreparedStatement stmt=null;
+		Entrada ent = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select numero_butaca, nro_sala, cod_pelicula, fecha_hora_funcion, total, dni, id_entrada from entrada where id_entrada=?");
+			stmt.setInt(1, id);
+			
+			rs = stmt.executeQuery();
+			
+			if(rs != null) {
+				while (rs.next()) {
+					ent = new Entrada();
+					ent.setNumero_butaca(rs.getInt("numero_butaca"));
+					ent.setNro_sala(rs.getInt("nro_sala"));
+					ent.setCod_pelicula(rs.getInt("cod_pelicula"));
+					ent.setFecha_hora_funcion(rs.getObject("fecha_hora_funcion", LocalDateTime.class));
+					ent.setTotal(rs.getDouble("total"));
+					ent.setDni(rs.getString("dni"));
+					ent.setId_entrada(rs.getInt("id_entrada"));
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rs!= null ) {rs.close();}
+				if(stmt != null ) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return ent;
+	}
 	public void borrarEntrada(Entrada borraEnt) {
 		
+		DataButacaFuncion dbf = new DataButacaFuncion();
+		ButacaFuncion bf = new ButacaFuncion();
+		bf.setCod_pelicula(borraEnt.getCod_pelicula());
+		bf.setFecha_hora_funcion(borraEnt.getFecha_hora_funcion());
+		bf.setNro_sala(borraEnt.getNro_sala());
+		bf.setNumero(borraEnt.getNumero_butaca());
+		bf.setEstado(0);
+		dbf.modificarButaca(bf);
 		PreparedStatement stmt=null;
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"delete from entrada where dni = ?");
-			stmt.setString(1, borraEnt.getDni());
+					"delete from entrada where id_entrada = ?");
+			stmt.setInt(1, borraEnt.getId_entrada());
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {

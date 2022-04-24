@@ -33,7 +33,7 @@ if ( per != (null) ){
 %>
 
 <div class="fondo">
- <jsp:include page="/BarraMenu.jsp" />
+<jsp:include page="/BarraMenu.jsp" />
 <div class="info">
 <img class="avatar" src="https://cdn.pixabay.com/photo/2016/11/08/15/21/user-1808597_960_720.png"/>
 
@@ -42,6 +42,9 @@ if ( per != (null) ){
 
 <!-- Tabla donde se veran las compras del usuario -->
 <form action="BorrarEntrada" method="post">
+	<% if (request.getAttribute("borrada")!=null) {%>
+    	<div class="alert alert-success">¡Entrada cancelada con exito!</div>
+    <% }%>
 	<table class="blueTable">
 	<thead>
 		<tr>
@@ -55,7 +58,7 @@ if ( per != (null) ){
 		<tr>
   			<td><%=e.getFecha_hora_funcion()%></td>
   			<td><%=e.getTotal()%></td>
-  			<td><button type="button" class="btn btn-danger">CANCELAR</button></td>
+  			<td><button type="submit" name="identrada" value="<%=e.getId_entrada()%>" class="btn btn-danger">CANCELAR</button></td>
 		</tr>
 		<%} %>
 	</tbody>

@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,7 +65,8 @@ public class ComprarEntrada extends HttpServlet {
         	bf.setNro_sala(nroSala);     	
         	bf.setNumero(Integer.parseInt(split[i])+1);
         	//sumo 1 porque viene del jsp MostrarAsientos donde el indice de los asientos empieza en 0 	
-            logicbf.cambiarEstado(bf);
+            bf.setEstado(1);
+        	logicbf.cambiarEstado(bf);
             Entrada ent = new Entrada();
             ent.setCod_pelicula(codPeli);
             ent.setFecha_hora_funcion(dateTime2);

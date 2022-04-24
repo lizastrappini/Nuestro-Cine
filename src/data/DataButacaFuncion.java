@@ -81,14 +81,14 @@ public class DataButacaFuncion {
 		PreparedStatement stmt=null;
 		try {
 			stmt= DbConnector.getInstancia().getConn().prepareStatement("update butaca_funcion "
-					+ "set estado=1 "
+					+ "set estado=? "
 					+ "where cod_pelicula=? and fecha_hora_funcion=? and nro_sala=? and numero=?");
 			
-			
-			stmt.setInt(1, bf.getCod_pelicula());
-			stmt.setObject(2, bf.getFecha_hora_funcion());
-			stmt.setInt(3, bf.getNro_sala());
-			stmt.setInt(4, bf.getNumero());
+			stmt.setInt(1, bf.getEstado());
+			stmt.setInt(2, bf.getCod_pelicula());
+			stmt.setObject(3, bf.getFecha_hora_funcion());
+			stmt.setInt(4, bf.getNro_sala());
+			stmt.setInt(5, bf.getNumero());
 			
 			stmt.executeUpdate();	
 		} catch (SQLException e) {
