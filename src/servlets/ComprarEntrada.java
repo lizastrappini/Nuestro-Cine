@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.DataPersona;
 import entities.ButacaFuncion;
 import entities.Entrada;
-import entities.Persona;
 import enviodecorreo.Correo;
 import logic.LogicButFun;
 import logic.LogicEntrada;
@@ -88,8 +86,9 @@ public class ComprarEntrada extends HttpServlet {
 //		 per.setDni(dni); 						
 //		 per = dp.search(per);				
 //		 String mail = per.getEmail();			
-		 
-		 Correo c = new Correo("nuestrocinejava@hotmail.com","lizastrappini99@gmail.com","java2022");		//cambiar mi direccion de correo
+        
+        
+		 Correo c = new Correo("nuestrocinejava@hotmail.com","lizastrappini99@gmail.com","java2022"); //cambiar mi direccion de correo
 		c.envioDeCorreos();
 		
 		request.setAttribute("entradasCompradas", "entradasCompradas");
