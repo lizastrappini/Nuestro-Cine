@@ -13,3 +13,4 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" >
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 <script src="style/codigo.js"></script>
+<script src="Javascript/Script.js"></script>

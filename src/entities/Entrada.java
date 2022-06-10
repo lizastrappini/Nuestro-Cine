@@ -2,6 +2,7 @@ package entities;
 
 import java.time.LocalDateTime;
 public class Entrada {
+	private Integer id_entrada;
 	private Integer numero_butaca;
 	private Integer nro_sala;
 	private Integer cod_pelicula;
@@ -9,6 +10,12 @@ public class Entrada {
 	private Double total;
 	private String dni;
 	
+	public Integer getId_entrada() {
+		return id_entrada;
+	}
+	public void setId_entrada(Integer id_entrada) {
+		this.id_entrada = id_entrada;
+	}
 	public Integer getNumero_butaca() {
 		return numero_butaca;
 	}

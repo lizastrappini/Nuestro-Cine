@@ -75,7 +75,7 @@
         	<option value="<%= c.getCodigo_calificacion() %>" selected="selected"><%= c.getDescripcion() %></option>
         <% } %>		
          </select>
-         <input class="buscar" type="submit" value="buscar">
+        <input class="buscar" type="submit" value="buscar">
 		</div>
 		</form>		
 		</div>		

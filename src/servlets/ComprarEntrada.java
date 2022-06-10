@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.ButacaFuncion;
 import entities.Entrada;
+import enviodecorreo.Correo;
 import logic.LogicButFun;
 import logic.LogicEntrada;
 
@@ -66,7 +66,8 @@ public class ComprarEntrada extends HttpServlet {
         	bf.setNro_sala(nroSala);     	
         	bf.setNumero(Integer.parseInt(split[i])+1);
         	//sumo 1 porque viene del jsp MostrarAsientos donde el indice de los asientos empieza en 0 	
-            logicbf.cambiarEstado(bf);
+            bf.setEstado(1);
+        	logicbf.cambiarEstado(bf);
             Entrada ent = new Entrada();
             ent.setCod_pelicula(codPeli);
             ent.setFecha_hora_funcion(dateTime2);
@@ -77,6 +78,19 @@ public class ComprarEntrada extends HttpServlet {
             le.cargar(ent);
             
         }
+        
+		//para recuperar el mail de la persona
+        //(esta comentado para no mandar mails a cualquier lado)
+        
+//		 DataPersona dp = new DataPersona();   
+//		 Persona per = new Persona();
+//		 per.setDni(dni); 						
+//		 per = dp.search(per);				
+//		 String mail = per.getEmail();			
+        
+        
+		 Correo c = new Correo("nuestrocinejava@hotmail.com","lizastrappini99@gmail.com","java2022"); //cambiar mi direccion de correo
+		c.envioDeCorreos();
 		
 		request.setAttribute("entradasCompradas", "entradasCompradas");
 		request.getRequestDispatcher("index.jsp").forward(request, response);

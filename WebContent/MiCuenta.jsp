@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="entities.Persona" %>
+<%@page import="entities.Entrada" %>
+<%@page import="logic.LogicEntrada" %>
+<%@page import="java.util.LinkedList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,10 +26,14 @@ if ( !(per==null)){
 <body >
 <%
 if ( per != (null) ){
+	Entrada ent = new Entrada();
+	ent.setDni(per.getDni());
+	LogicEntrada le = new LogicEntrada();
+	LinkedList<Entrada> entradas = le.buscar(ent);
 %>
 
 <div class="fondo">
- <jsp:include page="/BarraMenu.jsp" />
+<jsp:include page="/BarraMenu.jsp" />
 <div class="info">
 <img class="avatar" src="https://cdn.pixabay.com/photo/2016/11/08/15/21/user-1808597_960_720.png"/>
 
@@ -34,24 +41,29 @@ if ( per != (null) ){
 <h1 class="miscompras">MIS COMPRAS</h1>
 
 <!-- Tabla donde se veran las compras del usuario -->
-<table class="blueTable">
-<thead>
-<tr>
-<th>Fecha</th>
-<th>Estado</th>
-<th>Total</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><button  class="botonVer">VER</button></td>
-</tr>
-</tbody>
-</table>
+<form action="BorrarEntrada" method="post">
+	<% if (request.getAttribute("borrada")!=null) {%>
+    	<div class="alert alert-success">¡Entrada cancelada con exito!</div>
+    <% }%>
+	<table class="blueTable">
+	<thead>
+		<tr>
+			<th>Fecha</th>
+			<th>Total</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<%for (Entrada e:entradas){%>
+		<tr>
+  			<td><%=e.getFecha_hora_funcion()%></td>
+  			<td><%=e.getTotal()%></td>
+  			<td><button type="submit" name="identrada" value="<%=e.getId_entrada()%>" class="btn btn-danger">CANCELAR</button></td>
+		</tr>
+		<%} %>
+	</tbody>
+	</table>
+</form>
 </div>
 <div class="micuenta"><%=(per.getNombre()+" "+per.getApellido()).toUpperCase()%></div>
 <button class="micuenta" onclick="cambiarContra()" >CAMBIAR CONTRASEÑA</button>
