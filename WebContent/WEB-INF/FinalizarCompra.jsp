@@ -30,7 +30,7 @@ pageEncoding="UTF-8"%>
 		Pelicula p = lp.buscarPorCodigo(listaButacas.get(0).getCod_pelicula());
 		LogicCostoEntrada lce = new LogicCostoEntrada();
 		CostoEntrada ce = lce.costoActual();
-		System.out.println(ce);
+		
 		String indexes = request.getAttribute("indexes").toString();
 		LocalDateTime fechahora = listaButacas.get(0).getFecha_hora_funcion();
 		Integer nrosala = listaButacas.get(0).getNro_sala();

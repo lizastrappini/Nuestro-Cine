@@ -6,7 +6,6 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-    <%@ include file="/Estilo.jsp" %>
     <title>INICIO</title>
     <link href="style/css/styles.css" rel="stylesheet" />
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

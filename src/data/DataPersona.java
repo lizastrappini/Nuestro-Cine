@@ -133,7 +133,7 @@ public class DataPersona {
 			stmt.setString(1, per.getDni());
 			rs=stmt.executeQuery();
 			
-			if(rs!=null) {
+			if (rs.next()) {
 					p = new Persona();
 					p.setDni(rs.getString("dni"));
 					p.setNombre(rs.getString("nombre"));

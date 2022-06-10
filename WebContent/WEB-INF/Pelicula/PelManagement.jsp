@@ -9,7 +9,7 @@
 <%@page import="java.time.format.TextStyle" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ include file="/Estilo.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +35,8 @@
 <body>
 
 <div class="fondo" >
-	<jsp:include page="/BarraMenu.jsp" />		
+	<jsp:include page="/BarraMenu.jsp" />
+		
 	<br>
 	<br>
 	<br>
