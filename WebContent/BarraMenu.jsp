@@ -8,6 +8,7 @@ if ( !(per==null)){
 	isEmpleado = per.getHabilitado();
 } else {isEmpleado = 0;}	 
 %>
+<script src="Javascript/Script.js"></script>
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
 	<div class="container px-5">
     	<a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
