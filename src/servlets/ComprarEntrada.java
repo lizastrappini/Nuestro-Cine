@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.ButacaFuncion;
 import entities.Entrada;
+import entities.Persona;
 import enviodecorreo.Correo;
 import logic.LogicButFun;
 import logic.LogicEntrada;
+import data.DataPersona;
 
 /**
  * Servlet implementation class ComprarEntrada
@@ -79,17 +81,15 @@ public class ComprarEntrada extends HttpServlet {
             
         }
         
-		//para recuperar el mail de la persona
-        //(esta comentado para no mandar mails a cualquier lado)
-        
-//		 DataPersona dp = new DataPersona();   
-//		 Persona per = new Persona();
-//		 per.setDni(dni); 						
-//		 per = dp.search(per);				
-//		 String mail = per.getEmail();			
+        //usar o crear un cliente con un mail nuestro ej: marisooltorrees@gmail.com 
+        DataPersona dp = new DataPersona();   
+        Persona per = new Persona();
+        per.setDni(dni); 						
+        per = dp.search(per);				
+        String mail = per.getEmail();			
         
         
-		 Correo c = new Correo("nuestrocinejava@hotmail.com","lizastrappini99@gmail.com","java2022"); //cambiar mi direccion de correo
+		Correo c = new Correo("nuestrocinejava@hotmail.com",mail,"java2022");
 		c.envioDeCorreos();
 		
 		request.setAttribute("entradasCompradas", "entradasCompradas");
