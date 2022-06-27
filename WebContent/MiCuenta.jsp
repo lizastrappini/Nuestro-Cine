@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="entities.Persona" %>
+<%@page import="entities.Compra" %>
+<%@page import="logic.Login" %>
+<%@page import="java.util.LinkedList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +20,9 @@ if ( !(per==null)){
 	isEmpleado = per.getHabilitado();
 } else {isEmpleado = 0;}
 
+String d = per.getDni();
+Login lg = new Login();
+LinkedList<Compra> compras= lg.getCompras(per);
 
 %>
 </head>
@@ -37,19 +43,23 @@ if ( per != (null) ){
 <table class="blueTable">
 <thead>
 <tr>
+<th>Pelicula</th>
 <th>Fecha</th>
-<th>Estado</th>
+<th>Hora</th>
+<th>Cantidad</th>
 <th>Total</th>
-<th></th>
 </tr>
 </thead>
 <tbody>
+<% if ( !(compras.isEmpty()) ) { for (Compra c : compras){ %>
 <tr>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><button  class="botonVer">VER</button></td>
+  <td><%=c.getNombre() %></td>
+  <td><%=c.getFecha() %></td>
+  <td><%=c.getHora() %></td>
+  <td><%=c.getCantidad() %></td>
+  <td><%=c.getTotal() %></td>
 </tr>
+<%} }%>
 </tbody>
 </table>
 </div>

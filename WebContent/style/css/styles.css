@@ -198,7 +198,7 @@ h1, .h1 {
 .compras{
   float: Right;
   position: right;
-  margin-right: 100px;
+  width: 800px;
   margin-top: 10px;
   background: #0000;
 }
@@ -220,45 +220,47 @@ h1, .h1 {
 }
 
 
-table.blueTable {
+.blueTable {
 
-  background-color: #f8f9fa;
+  background-color: #fff;
   width: 800px;
   height: auto;
   text-align: center;
   border-collapse: collapse;
 
+
 }
 
 
 
 
-table.blueTable td, table.blueTable th {
+.blueTable td, table.blueTable th {
   border: 1px solid black;
   padding: 6px 8px;
+  background-color: #fff;
 }
-table.blueTable tbody td {
+.blueTable tbody td {
   font-size: 13px;
-  font-family:"Segoe UI";
+  font-family: 'Righteous', cursive;
   width: 100px;
+  background-color: #fff;
+}
 
-}
-table.blueTable tr:nth-child(even) {
-  background: #EEEEEE;
-}
-table.blueTable thead {
+.blueTable thead {
     border-bottom: 1.2px solid black;
+    background-color: #fff;
 }
-table.blueTable thead th {
+.blueTable thead th {
   font-size: 15px;
   font-weight: bold;
-  font-family:"Segoe UI";
-  color: #000000;
+  font-family: 'Righteous', cursive;
   text-align: center;
   border-left: 1.2px solid black;
+  background-color: #fff;
 }
-table.blueTable thead th:first-child {
+.blueTable thead th:first-child {
   border-left:1px solid black;
+  background-color: #fff;
 }
 
 .pelicula{
@@ -280,11 +282,10 @@ table.blueTable thead th:first-child {
 	display: block;
 	margin-left:5px;
 	position:center;
-	font-family:"Segoe UI";
-	
-	
-	
+	font-family:"Segoe UI";	
 }
+
+
 
 #borderDemo {
 margin: 75px;
@@ -366,7 +367,6 @@ background-color: #fff;
 	margin-right:10px;
 	padding-bottom: 10px;
 	float:Right; 
-	
 	height: auto;
 	width: auto;
 	max-height: 220px;

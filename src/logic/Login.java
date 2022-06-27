@@ -53,5 +53,9 @@ public class Login {
 		dp.editPass(per);
 	}
 	
+	public LinkedList<Compra>getCompras(Persona per) {
+		return dp.getEntradas(per);
+	}
+	
 }
 

@@ -4,6 +4,10 @@
 <%@page import="entities.Pelicula"%>
 <%@page import="entities.Persona"%>
 <%@page import="java.util.LinkedList"%>
+<%@page import="java.time.LocalDate" %>
+<%@page import="java.time.Month" %>
+<%@page import="java.time.format.TextStyle" %>
+<%@page import="java.util.Locale" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +18,8 @@
 <% 
 	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");
 	Pelicula p  = (Pelicula)request.getAttribute("pel");
+	Month mes = LocalDate.now().getMonth(); //obtengo el mes
+	String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();
 %>
 </head>
 <body>
@@ -23,6 +29,7 @@
 <br>
 <br>
 <br>
+<div class="contenedor">
 	<% for (Funcion fun : lf){ %>
 	  <!-- Content section 1-->
         <div class="pelicula">
@@ -32,12 +39,13 @@
                             <p class="infopelicula" id="numerosala"><b>Sala n°:</b>  <%=fun.getNumero_sala()%></p>
                             <input type="hidden" name="nrosala" value="<%= fun.getNumero_sala() %>">
                             <input type="hidden" name="codigopeli" value="<%= p.getCodigo() %>">
-                            <br>
-                            <button class="button" id="sacarentrada">  Sacar entrada   </button>
+                            <button class="button" id="sacarentrada">  Sacar entrada   </button><br>
+                            
                             </form>
         </div>
         
 	<%} %>
+</div>
 	<% if (lf.isEmpty()){%>
 	<script type="text/javascript">
 	Swal.fire({
