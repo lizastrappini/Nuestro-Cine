@@ -22,7 +22,7 @@
         <script src="Javascript/SweetAlert.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script src="Javascript/Script.js"></script>
-		 <% 
+		<% 
 		 
 		Month mes = LocalDate.now().getMonth(); //obtengo el mes
 		String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();  // convierto a mayusculas
@@ -80,10 +80,17 @@
                             c=  lc.buscarPorCodigo(pel.getCodigo_calificacion());%>
                             <p class="infopelicula"> <b>Calificacion : </b><%=c.getDescripcion()%></p>
                             <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %> min</p> 
+                            
                             <form class="infopelicula" action="Funciones" method="post">
                             <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
                             <button class="buttonClass" id="">  Comprar   </button>
                             </form>
+                            
+                            <form class="infopelicula" action="MostrarComentarios" method="get">
+                            <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
+                            <button class="buttonClass" id="">  Ver Detalles   </button>
+                            </form>
+                            
                             
                             
         </div>
