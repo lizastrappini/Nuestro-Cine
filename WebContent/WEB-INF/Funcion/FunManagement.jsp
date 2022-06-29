@@ -8,6 +8,10 @@
 <%@page import="java.time.Month" %>
 <%@page import="java.time.format.TextStyle" %>
 <%@page import="java.util.Locale" %>
+<%@page import="java.time.LocalDateTime" %>
+<%@page import="java.time.*" %>
+<%@page import="java.time.format.DateTimeFormatter" %>
+<%@page import="java.time.format.FormatStyle" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +20,7 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<title>Funciones</title>
 <% 
+	Persona per = (Persona)request.getSession().getAttribute("usuario");
 	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");
 	Pelicula p  = (Pelicula)request.getAttribute("pel");
 	Month mes = LocalDate.now().getMonth(); //obtengo el mes
@@ -33,14 +38,25 @@
 	<% for (Funcion fun : lf){ %>
 	  <!-- Content section 1-->
         <div class="pelicula">
+        <% 
+        DateTimeFormatter FORMATTER1 = DateTimeFormatter.ofPattern("EEEE,dd 'de' MMMM ");
+        DateTimeFormatter FORMATTER2 = DateTimeFormatter.ofPattern("h:mm a");
+        LocalDateTime fechahora = fun.getFecha_hora();
+        String fecha = FORMATTER1.format(fechahora);
+        String hora = FORMATTER2.format(fechahora); %>
     						<form action="MostrarAsientos" method="get">
-                            <p class="infopelicula" id="fechahora" ><b>Fecha y hora de la funcion:</b> <%=fun.getFecha_hora() %></p>
+                            <p class="infopelicula" id="fecha" ><b>Fecha de la funcion:</b> <%=fecha %></p>
+                            <p class="infopelicula" id="hora" ><b>Hora de la funcion:</b> <%=hora %></p>
                             <input type="hidden" name="fechahora" value="<%=fun.getFecha_hora() %>">
                             <p class="infopelicula" id="numerosala"><b>Sala n°:</b>  <%=fun.getNumero_sala()%></p>
                             <input type="hidden" name="nrosala" value="<%= fun.getNumero_sala() %>">
                             <input type="hidden" name="codigopeli" value="<%= p.getCodigo() %>">
-                            <button class="button" id="sacarentrada">  Sacar entrada   </button><br>
-                            
+                            <% if ( !(per==null) ){%>
+                            <button class="buttonClass" id="">  Sacar entrada   </button><br>
+                            <%} else{ %>
+                            <button class="buttonClassDisabled" id="" disabled>  Sacar entrada   </button>
+                            <br>
+                            <%} %>
                             </form>
         </div>
         

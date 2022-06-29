@@ -7,8 +7,6 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;
-
-import entities.Compra;
 import entities.Persona;
 
 
@@ -316,46 +314,6 @@ public class DataPersona {
 		
 	}
 	
-	public LinkedList<Compra> getEntradas(Persona per) {
-		Compra c = null;
-		LinkedList<Compra>compras= new LinkedList<>();
-		PreparedStatement stmt=null;
-		ResultSet rs=null;
-		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"SELECT UPPER(p.nombre) as 'nombre', date(e.fecha_hora_funcion) as 'fecha',time(e.fecha_hora_funcion) as 'hora', sum(e.total) as 'total', count(e.cod_pelicula) as 'cantidad' FROM cliente c inner join entrada e on c.dni=e.dni\n"
-					+ "inner join pelicula p on e.cod_pelicula=p.codigo\n"
-					+ "group by e.cod_pelicula, e.fecha_hora_funcion,e.dni\n"
-					+ "having e.dni=?"
-					);
-			stmt.setString(1, per.getDni());
-			rs=stmt.executeQuery();
-			if (rs !=null) {
-				while (rs.next()) {
-				c=new Compra();
-				c.setCantidad(rs.getInt("cantidad"));
-				c.setHora(rs.getObject("hora",LocalTime.class));
-				c.setTotal(rs.getDouble("total"));
-				c.setFecha(rs.getObject("fecha",LocalDate.class));
-				c.setNombre(rs.getString("nombre"));
-				compras.add(c);
-
-			}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(rs!=null) {rs.close();}
-				if(stmt!=null) {stmt.close();}
-				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return compras;
-	}
 	
 }
 
