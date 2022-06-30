@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@page import="entities.Persona" %>
 <%@page import="entities.Pelicula" %>
-<%@page import="entities.Compra" %>
 <%@page import="logic.Login" %>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Entrada" %>
