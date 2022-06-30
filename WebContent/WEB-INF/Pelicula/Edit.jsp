@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@page import="entities.Pelicula"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -30,7 +28,9 @@ Persona per = (Persona)request.getSession().getAttribute("usuario");
 	
 	if ( !(per==null)){
 		isEmpleado = per.getHabilitado();
-	} else {isEmpleado = 0;}	 
+	} else {isEmpleado = 0;}
+	
+
 %>
 </head>
 <body>

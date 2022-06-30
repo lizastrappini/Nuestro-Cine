@@ -2,6 +2,8 @@ package logic;
 
 import data.DataComentario;
 import entities.Comentario;
+import entities.Pelicula;
+
 import java.util.LinkedList;
 
 public class LogicComentario {
@@ -18,4 +20,8 @@ public class LogicComentario {
 	public LinkedList<Comentario> buscarComentarioPorPeli(Comentario com){
 		return dc.buscarComentarioPorPeli(com);
 	}
+	public LinkedList<Comentario> listarComentarios(Pelicula pel){
+		return dc.listarComentarios(pel);
+	}
+	
 }

@@ -5,13 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<%@ include file="/Estilo.jsp" %>
-	<title>--EMPLEADOS--</title>
+<meta charset="UTF-8">
+<%@ include file="/Estilo.jsp" %>
+<script src="Javascript/Script.js"></script>
+<title>--EMPLEADOS--</title>
 </head>
 <body>
 <div class="fondo">	
-	<jsp:include page="/BarraMenu.jsp" />
+<jsp:include page="/BarraMenu.jsp" />
 	<div class="opciones">
 		<h1>Seccion peliculas</h1>
 		<form action="ControladorPeliculas" method="post">

@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="entities.Persona" %>
+<%@page import="entities.Pelicula" %>
+<%@page import="entities.Compra" %>
+<%@page import="logic.Login" %>
+<%@page import="java.util.LinkedList"%>
 <%@page import="entities.Entrada" %>
 <%@page import="logic.LogicEntrada" %>
+<%@page import="logic.LogicPelicula" %>
 <%@page import="java.util.LinkedList" %>
 <!DOCTYPE html>
 <html>
@@ -20,17 +25,15 @@ if ( !(per==null)){
 	isEmpleado = per.getHabilitado();
 } else {isEmpleado = 0;}
 
+Entrada ent = new Entrada();
+ent.setDni(per.getDni());
+LogicEntrada le = new LogicEntrada();
+LinkedList<Entrada> entradas = le.buscar(ent);
+LogicPelicula pl = new LogicPelicula();
 
 %>
 </head>
 <body >
-<%
-if ( per != (null) ){
-	Entrada ent = new Entrada();
-	ent.setDni(per.getDni());
-	LogicEntrada le = new LogicEntrada();
-	LinkedList<Entrada> entradas = le.buscar(ent);
-%>
 
 <div class="fondo">
 <jsp:include page="/BarraMenu.jsp" />
@@ -41,29 +44,38 @@ if ( per != (null) ){
 <h1 class="miscompras">MIS COMPRAS</h1>
 
 <!-- Tabla donde se veran las compras del usuario -->
-<form action="BorrarEntrada" method="post">
+
+<form name="cancelarEntrada" action="BorrarEntrada" method="post" id="cancelarEntrada" >
 	<% if (request.getAttribute("borrada")!=null) {%>
     	<div class="alert alert-success">¡Entrada cancelada con exito!</div>
     <% }%>
-	<table class="blueTable">
+	<table class="table table-bordered">
 	<thead>
 		<tr>
+			<th>Pelicula</th>
 			<th>Fecha</th>
-			<th>Total</th>
+			<th>Hora</th>
+			<th>Precio</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
-		<%for (Entrada e:entradas){%>
+		<%for (Entrada e:entradas){
+		Pelicula p = pl.buscarPorCodigo(e.getCod_pelicula());%>
 		<tr>
-  			<td><%=e.getFecha_hora_funcion()%></td>
+  			<td><%=p.getNombre()%></td>
+  			<%String[] fechaHora = e.getFecha_hora_funcion().toString().split("T"); %>
+  			<td><%=fechaHora[0]%></td>
+  			<td><%=fechaHora[1]%></td>
   			<td><%=e.getTotal()%></td>
-  			<td><button type="submit" name="identrada" value="<%=e.getId_entrada()%>" class="btn btn-danger">CANCELAR</button></td>
+  			<td><input type="hidden" name="identrada" value="<%=e.getId_entrada()%>">
+  			<input type="hidden" name="codpelicula" value="<%=e.getCod_pelicula()%>">
+  			<input type="button" name="cancelar" value="CANCELAR" class="btn btn-danger" onclick="borrarEntrada()"></td>
 		</tr>
 		<%} %>
 	</tbody>
 	</table>
-</form>
+</form> 
 </div>
 <div class="micuenta"><%=(per.getNombre()+" "+per.getApellido()).toUpperCase()%></div>
 <button class="micuenta" onclick="cambiarContra()" >CAMBIAR CONTRASEÑA</button>
@@ -86,8 +98,7 @@ if (request.getAttribute("cambioPass")!=(null) && request.getAttribute("cambioPa
 		  text: 'La contraseña ingresada no coincide con la contraseña actual'
 		})
 	</script>
-<%} } else {%>
-<jsp:forward page="index.jsp"/>
- <%}%> 
+<%}  %>
+
 </body>
 </html>

@@ -6,6 +6,10 @@
 <%@page import="logic.LogicCostoEntrada" %>
 <%@page import="entities.ButacaFuncion" %>
 <%@page import="java.time.LocalDateTime" %>
+<%@page import="java.time.LocalDateTime" %>
+<%@page import="java.time.*" %>
+<%@page import="java.time.format.DateTimeFormatter" %>
+<%@page import="java.time.format.FormatStyle" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,14 +45,18 @@ pageEncoding="UTF-8"%>
 <body id="page-top">
 <div class="fondo">
 <jsp:include page="/BarraMenu.jsp" />
-<%for (ButacaFuncion lb : listaButacas){ %>
+<%for (ButacaFuncion lb : listaButacas){ 
+	DateTimeFormatter FORMATTER1 = DateTimeFormatter.ofPattern("dd/MM/yyyy ','hh:mm a");
+    LocalDateTime fechahorafuncion = lb.getFecha_hora_funcion();
+    String fechayhora = FORMATTER1.format(fechahorafuncion);
+%>
 	<div id="borderDemo">
 		<div id="info">
 		<div id="titulo">
 			<p id="titulo"><b><%=p.getNombre().toUpperCase() %></b></p>
 		</div>
 		<p id="numeroAsiento"><b>Asiento: <%=lb.getNumero() %></b></p>
-		<p id="fechaFuncion"><b>fecha: <%=lb.getFecha_hora_funcion() %></b> </p>
+		<p id="fechaFuncion"><b>fecha y hora: <%=fechayhora %></b> </p>
 		<p id="salaFuncion"><b>sala n°: <%=lb.getNro_sala() %></b> </p>
 		<p id="precio"><b>precio: $<%=ce.getCosto() %></b> </p>
 		<p id="idEntrada"><b> #<%=per.getDni()%> </b></p>
@@ -61,7 +69,7 @@ pageEncoding="UTF-8"%>
 		</div>
 		<div id="izq">
 		<p id="numeroAsiento"><b>Asiento: <%=lb.getNumero() %></b> </p>
-		<p id="fechaFuncion"><b>fecha: <%=lb.getFecha_hora_funcion() %></b></p>
+		<p id="fechaFuncion"><b>fecha y hora: <%=fechayhora %></b> </p>
 		</div>
 		<div id="der">
 		<p id="salaFuncion"><b>sala n°:<%=lb.getNro_sala() %></b> </p>

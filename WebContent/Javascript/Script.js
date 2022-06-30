@@ -63,7 +63,22 @@ function cambiarContra(){
     
   }
   
-
+function borrarEntrada(){
+	Swal.fire({
+  title: 'Seguro que quieres cancelar la entrada?',
+  icon: 'warning',
+  showCancelButton: false,
+  confirmButtonColor: '#dc3545',
+  cancelButtonColor: '#198754',
+  confirmButtonText: 'Si, cancelar' ,
+  focusConfirm: false,
+  return:false,
+}).then((result) => {	
+  if (result.isConfirmed) {
+	document.cancelarEntrada.submit();         
+  }
+})
+};
 /**
  * 
  */
