@@ -65,4 +65,5 @@ public class Persona {
 	public void setHabilitado(Integer habilitado) {
 		this.habilitado = habilitado;
 	}
+	
 }

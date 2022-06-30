@@ -48,7 +48,7 @@ public class DataEntrada {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select numero_butaca, nro_sala, cod_pelicula, fecha_hora_funcion, total, dni, id_entrada from entrada where dni=? and fecha_hora_funcion >= current_date()");
+					"select id_entrada, numero_butaca, nro_sala, cod_pelicula, fecha_hora_funcion, total, dni from entrada where dni=? and fecha_hora_funcion >= current_date()");
 			stmt.setString(1, buscaEntrada.getDni());
 			
 			rs = stmt.executeQuery();

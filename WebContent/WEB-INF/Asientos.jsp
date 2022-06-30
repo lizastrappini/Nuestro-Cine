@@ -6,7 +6,9 @@
 <%@page import="entities.ButacaFuncion" %>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.time.LocalDateTime" %>
+<%@page import="java.time.*" %>
 <%@page import="java.time.format.DateTimeFormatter" %>
+<%@page import="java.time.format.FormatStyle" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,9 +18,17 @@
     <link rel="stylesheet" href="style/css/asientos.css" />
     <title>Seleccionar asientos</title>
     <%
+    DateTimeFormatter FORMATTER1 = DateTimeFormatter.ofPattern("EEEE,dd 'de' MMMM ");
+    DateTimeFormatter FORMATTER2 = DateTimeFormatter.ofPattern("h:mm a");
     Pelicula peli = (Pelicula)request.getAttribute("peli");
     Double costo = Double.parseDouble(request.getAttribute("costo").toString());
-    String fecha = request.getAttribute("fechafuncion").toString();
+    LocalDateTime fechahora = (LocalDateTime)request.getAttribute("fechafuncion");
+    String fecha = FORMATTER1.format(fechahora);
+    String hora = FORMATTER2.format(fechahora);
+    
+
+    
+    
     LinkedList<ButacaFuncion> lf=(LinkedList<ButacaFuncion>)request.getAttribute("asientos");
     ButacaFuncion bf = (ButacaFuncion)request.getAttribute("butaca");
     %>
@@ -28,10 +38,11 @@
     <input type="hidden" id="costo" name="costo" value="<%=Double.parseDouble(request.getAttribute("costo").toString())%>"> 
 	<h1><%=peli.getNombre().toUpperCase()%></h1>
 	<h2><%=fecha%></h2>
+	<h2><%=hora%></h2>
     <ul class="showcase">
       <li>
         <div class="seat"></div>
-        <small>N/A</small>
+        <small>Libre</small>
       </li>
 
       <li>

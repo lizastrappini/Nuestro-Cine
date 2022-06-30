@@ -75,6 +75,7 @@ public class ActualizarPelicula extends HttpServlet {
 				Integer cod_calif = Integer.parseInt(request.getParameter("elegirCalificacion"));
 
 				String sinopsis = request.getParameter("sinopsis");
+				
 
 				String director = request.getParameter("director");
 
