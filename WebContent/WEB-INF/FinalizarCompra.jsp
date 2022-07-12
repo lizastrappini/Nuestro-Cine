@@ -28,7 +28,7 @@ pageEncoding="UTF-8"%>
 	
 		if ( !(per==null)){
 			isEmpleado = per.getHabilitado();
-		} else {isEmpleado = 0;}
+			} else { isEmpleado = 0;} 
 		LinkedList<ButacaFuncion> listaButacas = (LinkedList<ButacaFuncion>)request.getAttribute("listaButacas");
 		LogicPelicula lp = new LogicPelicula();
 		Pelicula p = lp.buscarPorCodigo(listaButacas.get(0).getCod_pelicula());

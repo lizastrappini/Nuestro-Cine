@@ -18,6 +18,12 @@
     <link rel="stylesheet" href="style/css/asientos.css" />
     <title>Seleccionar asientos</title>
     <%
+    Integer isEmpleado = 0;
+    Persona per = (Persona)request.getSession().getAttribute("usuario");
+
+	if ( !(per==null)){
+		isEmpleado = per.getHabilitado();
+		} else { isEmpleado = 0;} 
     DateTimeFormatter FORMATTER1 = DateTimeFormatter.ofPattern("EEEE,dd 'de' MMMM ");
     DateTimeFormatter FORMATTER2 = DateTimeFormatter.ofPattern("h:mm a");
     Pelicula peli = (Pelicula)request.getAttribute("peli");

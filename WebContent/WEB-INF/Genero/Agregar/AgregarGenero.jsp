@@ -18,12 +18,7 @@
 	if ( !(request.getAttribute("bandera")==(null)) ){
 	bandera = request.getAttribute("bandera").toString();}
 	
-	Integer isEmpleado = 0;
-	Persona per = (Persona)request.getSession().getAttribute("usuario");
-		
-		if ( !(per==null)){
-			isEmpleado = per.getHabilitado();
-		} else {isEmpleado = 0;}	 
+
  
 %>
 </head>

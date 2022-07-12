@@ -3,6 +3,7 @@
 <%@page import="entities.Entrada" %>
 <%@page import="java.util.LinkedList" %>
 <%@page import="logic.LogicPelicula" %>
+<%@page import="entities.Persona" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,7 @@
 	<%
 	LinkedList<Entrada> entradas = (LinkedList<Entrada>)request.getAttribute("entradas");
 	LogicPelicula lp = new LogicPelicula();
+
 	%>
 </head>
 <body>

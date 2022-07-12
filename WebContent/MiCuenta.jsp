@@ -22,7 +22,10 @@ Persona per = (Persona)request.getSession().getAttribute("usuario");
 
 if ( !(per==null)){
 	isEmpleado = per.getHabilitado();
-} else {isEmpleado = 0;}
+} else {isEmpleado = 0;
+%>
+<jsp:forward page="index.jsp"></jsp:forward>
+<% }
 
 Entrada ent = new Entrada();
 ent.setDni(per.getDni());

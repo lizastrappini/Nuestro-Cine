@@ -13,7 +13,6 @@
 <head>
 <meta charset="UTF-8">
 <link href="style/css/styles.css" rel="stylesheet" />
-<script src="style/codigo.js"></script>
 <title>EDITAR PELICULA</title>
 <%
 LogicGenero lg = new LogicGenero();
@@ -26,9 +25,9 @@ Pelicula peli = (Pelicula)request.getAttribute("pelicula");
 Integer isEmpleado = 0;
 Persona per = (Persona)request.getSession().getAttribute("usuario");
 	
-	if ( !(per==null)){
-		isEmpleado = per.getHabilitado();
-	} else {isEmpleado = 0;}
+if ( !(per==null)){
+	isEmpleado = per.getHabilitado();
+	} else { isEmpleado = 0;} 
 	
 
 %>
