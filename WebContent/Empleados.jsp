@@ -9,6 +9,19 @@
 <%@ include file="/Estilo.jsp" %>
 <script src="Javascript/Script.js"></script>
 <title>--EMPLEADOS--</title>
+<%Integer isEmpleado = 0;
+Persona per = (Persona)request.getSession().getAttribute("usuario");
+
+if ( !(per==null)){
+	isEmpleado = per.getHabilitado();
+	if(isEmpleado==0){
+		%>
+		<jsp:forward page="index.jsp"></jsp:forward>
+		<% } 
+		} else { isEmpleado = 0;
+		%>
+		<jsp:forward page="index.jsp"></jsp:forward>
+		<% } %>
 </head>
 <body>
 <div class="fondo">	

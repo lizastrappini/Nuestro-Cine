@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="entities.Genero"%>
 <%@page import="java.util.LinkedList" %>
+<%@page import="entities.Persona" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,7 @@
 	<%@ include file="/Estilo.jsp" %>		
 	<title>BORRAR GENERO</title>
 	<%
+
 	LinkedList<Genero> lg=(LinkedList<Genero>)request.getAttribute("generos");
 	Genero generoEncontrado=(Genero)request.getAttribute("generoEncontrado");
 	%>

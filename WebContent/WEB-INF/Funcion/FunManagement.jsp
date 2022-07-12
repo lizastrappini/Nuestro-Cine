@@ -38,6 +38,7 @@
 	<% for (Funcion fun : lf){ %>
 	  <!-- Content section 1-->
         <div class="pelicula">
+        <br>
         <% 
         DateTimeFormatter FORMATTER1 = DateTimeFormatter.ofPattern("EEEE,dd 'de' MMMM ");
         DateTimeFormatter FORMATTER2 = DateTimeFormatter.ofPattern("h:mm a");

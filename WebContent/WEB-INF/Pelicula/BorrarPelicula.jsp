@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Pelicula"%>
+    <%@page import="entities.Persona" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,12 @@
 	<%@ include file="/Estilo.jsp" %>
 	<title>BORRAR PELICULA</title>
 	<%
+	Integer isEmpleado = 0;
+	Persona per = (Persona)request.getSession().getAttribute("usuario");
+		
+	if ( !(per==null)){
+		isEmpleado = per.getHabilitado();
+		} else { isEmpleado = 0;} 	 
 	LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
 	Pelicula peliculaEncontrada = (Pelicula)request.getAttribute("peliculaEncontrada");
 	%>

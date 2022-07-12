@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="entities.Calificacion" %>
 <%@page import="java.util.LinkedList"%>
+<%@page import="entities.Persona" %>
 
 <!DOCTYPE html>
 <html>
@@ -9,6 +10,13 @@
 	<meta charset="UTF-8">
 	<%@ include file="/Estilo.jsp" %>
 	<title>NUEVA CALIFICACION</title>
+	<%Integer isEmpleado = 0;
+	Persona per = (Persona)request.getSession().getAttribute("usuario");
+
+	if ( !(per==null)){
+		isEmpleado = per.getHabilitado();
+		} else { isEmpleado = 0;} 
+%>
 </head>
 <body>
 <div class="fondo">

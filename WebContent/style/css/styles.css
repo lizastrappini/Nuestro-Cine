@@ -76,16 +76,17 @@
 }
 
 
-/*COMENTARIOS*/
-/**
- * Oscuro: #283035
- * Azul: #03658c
- * Detalle: #c7cacb
- * Fondo: #dee1e3
- ----------------------------------*/
 
-/*PUBLICAR COMENTARIO*/
 
+.Inicio{
+	padding-left:225px;
+	padding-top:80px;
+	
+}
+.textoInicio{
+	font-size:80px;
+	color: #fff;
+}
 
 .background {
   position: fixed;
@@ -918,7 +919,8 @@ h1, .h1 {
 	margin-right:20px;
 	box-shadow: #adb5bd 2px 2px 10px 3px;
 	border-radius: 1.2em;
-	padding-bottom: 10px;
+	padding-bottom: 3%;	
+	
 }
 
 .infopelicula{
@@ -968,6 +970,7 @@ background-color: #fff;
 #info{
   position: static;
   float: left;
+  
   height: 300px;
   padding: 18px;
   border-right-style: dashed;
@@ -997,7 +1000,9 @@ background-color: #fff;
 
 
 #nombrepelicula{
+	padding-top:10px;
 	font-family: 'Bebas Neue', cursive;
+	-webkit-font-family: 'Bebas Neue', cursive;
 	margin-left:10px;
 	font-size: 2rem;
 }
@@ -1012,8 +1017,8 @@ background-color: #fff;
 	float:Right; 
 	height: auto;
 	width: auto;
-	max-height: 220px;
-	max-width: 180px;
+	max-height: 280px;
+	max-width: 200px;
 	min-height: 220px;
 	min-width: 180px;  
 	object-fit:contain;}
@@ -1049,6 +1054,8 @@ background-color: #fff;
 }
 
 .botonEstreno {
+	
+	margin-left:350px;
   font-size:18px;
   font-family:Trebuchet MS;
   width:140px;
@@ -1083,7 +1090,7 @@ background-color: #fff;
 .filtroGenero{
 	float:left;
 	margin-top:100px;
-	padding-right:10px;
+	padding-right:0px;
 	padding-left:10px;
 	flex-direction: row;
 	
@@ -1153,7 +1160,7 @@ background-color: #fff;
 .filtroEdad{
 	float:right;
 	margin-top:100px;
-	padding-right:70px;
+	padding-right:150px;
 	flex-direction: row;
 	
 }
@@ -7318,6 +7325,10 @@ textarea.form-control-lg {
   position: relative;
   width: 100%;
   overflow: hidden;
+  -webkit-transition: 0.6s ease-in-out left;
+   transition: 0.6s ease-in-out left;
+   
+   
 }
 .carousel-inner::after {
   display: block;
@@ -7331,13 +7342,16 @@ textarea.form-control-lg {
   float: left;
   width: 100%;
   margin-right: -100%;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  transition: transform 0.6s ease-in-out;
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+  -webkit-transition: transform 1s ease-in-out;
+  transition:transform 1s ease-in-out;
+  
 }
 @media (prefers-reduced-motion: reduce) {
   .carousel-item {
-    transition: none;
+  opacity:1;
+    transition: opacity;
   }
 }
 
@@ -7374,7 +7388,7 @@ textarea.form-control-lg {
 .carousel-fade .active.carousel-item-end {
   z-index: 0;
   opacity: 0;
-  transition: opacity 0s 0.6s;
+  transition: opacity 0s 0.8s;
 }
 @media (prefers-reduced-motion: reduce) {
   .carousel-fade .active.carousel-item-start,
@@ -7394,7 +7408,7 @@ textarea.form-control-lg {
   justify-content: center;
   width: 15%;
   padding: 0;
-  color: #fff;
+  color: #000;
   text-align: center;
   background: none;
   border: 0;
@@ -7410,7 +7424,7 @@ textarea.form-control-lg {
 .carousel-control-prev:hover, .carousel-control-prev:focus,
 .carousel-control-next:hover,
 .carousel-control-next:focus {
-  color: #fff;
+  color: #000;
   text-decoration: none;
   outline: 0;
   opacity: 0.9;
@@ -8985,7 +8999,7 @@ textarea.form-control-lg {
 }
 
 .text-center {
-  text-align: center !important;
+  text-align: center ;
 }
 
 .text-decoration-none {
@@ -9074,7 +9088,8 @@ textarea.form-control-lg {
 
 .text-white {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+  color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) ;
+  font-size: 20px;
 }
 
 .text-body {
@@ -12644,10 +12659,10 @@ header.masthead .masthead-content {
   position: relative;
 }
 header.masthead .masthead-content .masthead-heading {
-  font-size: 2rem;
+  font-size: 8rem;
 }
 header.masthead .masthead-content .masthead-subheading {
-  font-size: 2rem;
+  font-size: 8rem;
 }
 
 

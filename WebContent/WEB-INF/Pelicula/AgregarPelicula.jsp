@@ -23,9 +23,9 @@
 	Integer isEmpleado = 0;
 	Persona per = (Persona)request.getSession().getAttribute("usuario");
 		
-		if ( !(per==null)){
-			isEmpleado = per.getHabilitado();
-		} else {isEmpleado = 0;}	 
+	if ( !(per==null)){
+		isEmpleado = per.getHabilitado();}
+		else { isEmpleado = 0;}  
 		LogicGenero lg = new LogicGenero();
 		LinkedList<Genero> listaGeneros = lg.getAll();
 		
@@ -34,7 +34,6 @@
     %>
 </head>
 <body>
-<%if ( per != (null) && isEmpleado==1 ){ %>
 <div class="fondo">
 <jsp:include page="/BarraMenu.jsp" />
     <br>
@@ -78,8 +77,5 @@
     </form>
   
 </div>
-<%} else {%>
-<jsp:forward page="index.jsp"/>
-<%} %>
 </body>
 </html>
