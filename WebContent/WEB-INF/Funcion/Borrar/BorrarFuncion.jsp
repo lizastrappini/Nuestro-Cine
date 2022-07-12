@@ -10,6 +10,7 @@
 	<%@ include file="/Estilo.jsp" %>
 	<title>BORRAR FUNCION</title>
 	<%
+
 	LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
 	Pelicula peliculaEncontrada = (Pelicula)request.getAttribute("peliculaEncontrada");
 	%>

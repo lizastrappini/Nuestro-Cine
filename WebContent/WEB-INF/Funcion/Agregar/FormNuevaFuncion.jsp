@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@page import="entities.Pelicula" %>
 <%@page import="entities.Sala" %>
-<%@page import="java.util.LinkedList"%> 
+<%@page import="java.util.LinkedList"%>
+<%@page import="entities.Persona" %> 
    
 <!DOCTYPE html>
 <html>
@@ -10,7 +11,8 @@
 	<meta charset="UTF-8">
 	<%@ include file="/Estilo.jsp" %>
 	<title>NUEVA FUNCION</title>
-	<%	 
+	<%	
+
 	LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
 	LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");
 	Pelicula pelActual = (Pelicula)request.getAttribute("pelActual");

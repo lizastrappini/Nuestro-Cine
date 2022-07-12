@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="entities.Calificacion"%>
 <%@page import="java.util.LinkedList" %>
+<%@page import="entities.Persona" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,12 @@
 	<%@ include file="/Estilo.jsp" %>		
 	<title>BORRAR CALIFICACION</title>
 	<%
+	Integer isEmpleado = 0;
+	Persona per = (Persona)request.getSession().getAttribute("usuario");
+
+	if ( !(per==null)){
+		isEmpleado = per.getHabilitado();
+		} else { isEmpleado = 0;} 
 	LinkedList<Calificacion> lc=(LinkedList<Calificacion>)request.getAttribute("calificaciones");
 	Calificacion calificacionEncontrada=(Calificacion)request.getAttribute("calificacionEncontrada");
 	%>

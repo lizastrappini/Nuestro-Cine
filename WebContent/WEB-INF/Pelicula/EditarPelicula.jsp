@@ -24,9 +24,9 @@
 	 Integer isEmpleado = 0;
 	Persona per = (Persona)request.getSession().getAttribute("usuario");
 		
-		if ( !(per==null)){
-			isEmpleado = per.getHabilitado();
-		} else {isEmpleado = 0;}	 
+	if ( !(per==null)){
+		isEmpleado = per.getHabilitado();
+		} else { isEmpleado = 0;}
 	 
     %>
 </head>
@@ -59,8 +59,8 @@
 			<div class="pelicula">
 							<div class="infopelicula">
 							<img class="infopelicula" id="fotopelicula" src="<%=pel.getPortada()%>"  />
-							<p class="nombrepelicula" id="nombrepelicula" ><%= pel.getNombre() %></p>
-                            <p class="sinopsis" id="sinopsis"><%= pel.getSinopsis() %></p>
+							<h2 class="infopelicula" id="nombrepelicula" ><%= pel.getNombre() %></h2>
+                            <p class="infopelicula" id="sinopsis"><%= pel.getSinopsis() %></p>
                             <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
                             <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCodigo_calificacion() %></p>
                             <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>

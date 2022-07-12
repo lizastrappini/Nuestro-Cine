@@ -24,9 +24,6 @@
 		Integer isEmpleado = 0;
 		Persona per = (Persona)request.getSession().getAttribute("usuario");
 
-		if ( !(per==null)){
-			isEmpleado = per.getHabilitado();
-		} else {isEmpleado = 0;}
 		LinkedList<Comentario> listac=(LinkedList<Comentario>)request.getAttribute("listacomentarios");		
 		LogicCalificacion lc = new LogicCalificacion();
 		Pelicula pel  = (Pelicula)request.getAttribute("pel");
@@ -60,7 +57,9 @@
             <% Calificacion c = new Calificacion(); %>
             <% c = lc.buscarPorCodigo(pel.getCodigo_calificacion());%>
             <p class="infopelicula"> <b>Calificacion : </b><%=c.getDescripcion()%></p>
-            <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %> min</p>   
+            <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %> min</p>
+            <br>
+               
         </div>
 
 <h1 class="comments-container">Comentarios </h1>
