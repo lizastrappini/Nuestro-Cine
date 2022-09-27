@@ -24,7 +24,6 @@ if ( !(per==null)){
                     <li class="nav-item"><a class="nav-link" href="SignIn.jsp" id="signin">Iniciar sesion</a></li>
                 <%} else {%> 
                     	<li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout"  onclick="cerrarSesion()">Cerrar sesion</a></li>
                         <li class="nav-item"><a class="nav-link" id="micuenta" href="MiCuenta.jsp" >Mi cuenta</a></li>               
                 <%} %>	
             </ul> 
