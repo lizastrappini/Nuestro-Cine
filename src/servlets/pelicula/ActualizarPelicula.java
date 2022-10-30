@@ -42,6 +42,7 @@ public class ActualizarPelicula extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 
 		if( request.getParameter("bandera")==null ) {
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
