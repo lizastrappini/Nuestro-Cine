@@ -9,7 +9,8 @@
     <title>INICIO</title>
     <link href="style/css/styles.css" rel="stylesheet" />
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="Javascript/Script.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+	
 </head>
 <body >
 <div class="fondo">
@@ -61,15 +62,7 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" ></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" ></script>
-   <%if ( request.getAttribute("entradasCompradas")!= null){%>
-   <script>
-   Swal.fire({
-		  icon: 'success',
-		  title: 'Las entradas han sido reservadas!',
-		  text: 'Las encontrara en su casilla de correo',
-		})
-   </script>
-   <%} %>      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" ></script>    
+    <script src="Javascript/Script.js"></script>  
 </body>
 </html>

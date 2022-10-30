@@ -124,5 +124,6 @@
 </ul>
 </div>
 </div>
+<script src="Javascript/Script.js"></script>
 </body>
 </html>

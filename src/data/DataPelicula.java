@@ -135,7 +135,7 @@ public class DataPelicula {
 		PreparedStatement stmt=null;
 		try {
 			stmt= DbConnector.getInstancia().getConn().prepareStatement("update pelicula "
-					+ "set nombre=?, director=?, id_genero=?, codigo_calificacion=?, duracion=?, sinopsis=?, fecha_estreno=? where codigo=?");
+					+ "set nombre=?, director=?, id_genero=?, codigo_calificacion=?, duracion=?, sinopsis=?, fecha_estreno=?, portada=? where codigo=?");
 		
 			stmt.setString(1, peli.getNombre());
 			stmt.setString(2, peli.getDirector());
@@ -145,7 +145,8 @@ public class DataPelicula {
 			stmt.setString(6, peli.getSinopsis());
 			java.sql.Date date = peli.convertirFecha(peli.getFecha_estreno());
 			stmt.setDate(7, date);
-			stmt.setInt(8, peli.getCodigo());
+			stmt.setString(8, peli.getPortada());
+			stmt.setInt(9, peli.getCodigo());
 			stmt.executeUpdate();	
 		} catch (SQLException e) {
 			

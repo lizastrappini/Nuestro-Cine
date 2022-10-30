@@ -60,11 +60,12 @@ public class ActualizarPelicula extends HttpServlet {
 		if( !(request.getParameter("bandera")==null)) {
 			if (request.getParameter("bandera").toString().equals("cambio") ) {
 				
-				String pelianterior = request.getParameter("pelianterior");
+				String cod_pelianterior = request.getParameter("pelianterior");
+				
 				
 				Pelicula pelicambiada = new Pelicula();
 				LogicPelicula lp = new LogicPelicula();
-				
+				Pelicula anterior = lp.buscarPorCodigo(Integer.parseInt(cod_pelianterior));
 				
 				Integer codigo = Integer.parseInt(request.getParameter("codigo"));
 				
@@ -94,8 +95,6 @@ public class ActualizarPelicula extends HttpServlet {
 					e.printStackTrace();
 				}  
 				
-			
-				
 				pelicambiada.setCodigo(codigo);
 				pelicambiada.setNombre(nombre);
 				pelicambiada.setId_genero(cod_genero);
@@ -105,19 +104,24 @@ public class ActualizarPelicula extends HttpServlet {
 				pelicambiada.setDuracion(duracion);
 				pelicambiada.setPortada(portada);
 		
-				
-				if ( !(pelianterior.equals(pelicambiada.toString())) ) {
-					
+				if(
+					pelicambiada.getCodigo().toString().equals(anterior.getCodigo()) &&
+					pelicambiada.getNombre().toString().equals(anterior.getNombre()) &&
+					pelicambiada.getId_genero().toString().equals(anterior.getId_genero()) &&
+					pelicambiada.getCodigo_calificacion().toString().equals(anterior.getCodigo_calificacion()) &&
+					pelicambiada.getSinopsis().toString().equals(anterior.getSinopsis()) &&
+					pelicambiada.getDirector().toString().equals(anterior.getDirector()) &&
+					(pelicambiada.getDuracion()==(anterior.getDuracion())) &&
+					pelicambiada.getPortada().toString().equals(anterior.getPortada()) ) 
+				{
 					lp.modificar(pelicambiada);
 					request.setAttribute("editada", "editada");
 					request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
-				
-				} else if ( pelianterior.equals(pelicambiada.toString()) ){ 
+				} else {
 					request.setAttribute("nocambio", "nocambio");
 					request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
-
 				}
-				
+	
 				
 			}
 			}

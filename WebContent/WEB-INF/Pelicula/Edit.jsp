@@ -72,7 +72,7 @@ if ( !(per==null)){
        
     <br>
     <input type="hidden" name="bandera" value="cambio">
-    <input type="hidden" name="pelianterior" value="<%=peli%>">
+    <input type="hidden" name="pelianterior" value="<%=peli.getCodigo()%>">
 
     <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonEditar">EDITAR</button>
 
