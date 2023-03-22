@@ -3,6 +3,7 @@ package servlets.funcion.agregar;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 
@@ -75,7 +76,7 @@ public class NuevaFuncion extends HttpServlet {
 				
 			nuevafuncion.setCodigo_pelicula(codigo_peli);
 				
-			String str = (request.getParameter("fechahora"));
+			String strFechaUser = (request.getParameter("fechahora"));
 				
 			Sala sala = new Sala();
 			sala.setNumero(numero_sala);
@@ -89,15 +90,21 @@ public class NuevaFuncion extends HttpServlet {
 		
 			try {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-				LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-				nuevafuncion.setFecha_hora(dateTime);
-				if ( nuevafuncion.validarFuncion(nuevafuncion) ) {
-					lf.cargar(nuevafuncion);
-					request.setAttribute("cargada", "cargada");
+				LocalDateTime dateTimeUser = LocalDateTime.parse(strFechaUser, formatter);
+				nuevafuncion.setFecha_hora(dateTimeUser);
+				
+				LocalDate dateUser = LocalDate.parse(strFechaUser, formatter);
+				
+				if (dateUser.isAfter(LocalDate.now())) {
+					if ( nuevafuncion.validarFuncion(nuevafuncion) ) {
+						lf.cargar(nuevafuncion);
+						request.setAttribute("cargada", "cargada");
+					} else {
+						request.setAttribute("fechaExiste", "fechaExiste");
+					}
 				} else {
-					request.setAttribute("fechaExiste", "fechaExiste");
+					request.setAttribute("fechaInvalida", "fechaInvalida");
 				}
-			
 				request.getRequestDispatcher("WEB-INF/Funcion/Agregar/FormNuevaFuncion.jsp").forward(request, response);
 			} catch (DateTimeParseException e) {
 				e.printStackTrace();

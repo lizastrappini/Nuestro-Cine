@@ -45,6 +45,9 @@
     	<% if (request.getAttribute("errorFormatoFecha")!=null) {%>
         	<div class="alert alert-danger">Formato de fecha invalido</div>
         <%}%>
+        <% if (request.getAttribute("fechaInvalida")!=null) {%>
+        	<div class="alert alert-danger">La fecha ingresada debe ser mayor a la actual</div>
+        <%}%>
     	<input id="inputFecha" name="fechahora" class="form-control" placeholder="fechahora" required type="text">
     	<br>
     	<input type="hidden" name="bandera" value="agregar">
