@@ -66,6 +66,12 @@ public class ActualizarPelicula extends HttpServlet {
 				Integer codigo = Integer.parseInt(request.getParameter("codigo"));
 				pelicambiada.setCodigo(codigo);
 				
+				Pelicula peli = new Pelicula();
+				
+				peli = lp.buscarPorCodigo(codigo);
+
+				request.setAttribute("pelicula", peli);
+				
 				String nombre = request.getParameter("nombre");
 				pelicambiada.setNombre(nombre);
 				
@@ -86,8 +92,6 @@ public class ActualizarPelicula extends HttpServlet {
 
 				String portada = request.getParameter("portada");
 				pelicambiada.setPortada(portada);
-		
-				request.setAttribute("pelicula", pelianterior);
 				
 				String fecha1=request.getParameter("estreno");
 				
@@ -95,25 +99,23 @@ public class ActualizarPelicula extends HttpServlet {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 					LocalDate parsedDate = LocalDate.parse(fecha1, formatter);
 					pelicambiada.setFecha_estreno(parsedDate);
+					if ( !(pelianterior.equals(pelicambiada.toString())) ) {
+						
+						lp.modificar(pelicambiada);
+						request.setAttribute("editada", "editada");
+						request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
+					
+					} else if ( pelianterior.equals(pelicambiada.toString()) ){ 
+						request.setAttribute("nocambio", "nocambio");
+						request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
+
+					}
 				} catch (DateTimeException e) {
 					e.printStackTrace();
 					request.setAttribute("errorFormatoFecha", e.getMessage());
-					request.setAttribute("pelicula", pelianterior);
+					request.setAttribute("pelicula", peli);
 					request.getRequestDispatcher("WEB-INF/Pelicula/Edit.jsp").forward(request, response);
 				}  
-				
-				if ( !(pelianterior.equals(pelicambiada.toString())) ) {
-					
-					lp.modificar(pelicambiada);
-					request.setAttribute("editada", "editada");
-					request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
-				
-				} else if ( pelianterior.equals(pelicambiada.toString()) ){ 
-					request.setAttribute("nocambio", "nocambio");
-					request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
-
-				}
-				
 				
 			}
 		}

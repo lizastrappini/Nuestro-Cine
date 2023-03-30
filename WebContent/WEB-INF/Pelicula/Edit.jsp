@@ -22,7 +22,6 @@ LogicCalificacion lc = new LogicCalificacion();
 LinkedList<Calificacion> listaCalif = lc.getAll();
 
 Pelicula peli = (Pelicula)request.getAttribute("pelicula"); 
-//System.out.println(peli);
 Integer isEmpleado = 0;
 Persona per = (Persona)request.getSession().getAttribute("usuario");
 	
