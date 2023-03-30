@@ -22,6 +22,7 @@ LogicCalificacion lc = new LogicCalificacion();
 LinkedList<Calificacion> listaCalif = lc.getAll();
 
 Pelicula peli = (Pelicula)request.getAttribute("pelicula"); 
+//System.out.println(peli);
 Integer isEmpleado = 0;
 Persona per = (Persona)request.getSession().getAttribute("usuario");
 	
@@ -68,8 +69,11 @@ if ( !(per==null)){
     <input id="inputPortada" name="portada" class="form-control" placeholder="url de la portada" required type="text" value="<%= peli.getPortada() %>">
     
     <label for="inputEstreno" >Fecha de estreno</label>
-    <input type="text" id="inputestreno" name="estreno"   value="<%=peli.getFecha_estreno().toString()%>">
-       
+    <% if (request.getAttribute("errorFormatoFecha")!=null) {%>
+        	<div class="alert alert-danger">Formato de fecha invalido</div>
+    <% }%>
+    <input id="inputestreno" name="estreno" class="from-control" placeholder="fecha" required type="text" 
+    	value="<%=peli.getFecha_estreno()%>">
     <br>
     <input type="hidden" name="bandera" value="cambio">
     <input type="hidden" name="pelianterior" value="<%=peli%>">

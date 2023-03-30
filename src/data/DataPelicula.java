@@ -1,10 +1,10 @@
 package data;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 import entities.Pelicula;
@@ -27,8 +27,7 @@ public class DataPelicula {
 			stmt.setDouble(5, nuevaPeli.getDuracion());
 			stmt.setString(6, nuevaPeli.getSinopsis());
 			stmt.setString(7, nuevaPeli.getPortada());
-			java.sql.Date date = nuevaPeli.convertirFecha(nuevaPeli.getFecha_estreno());			
-			stmt.setDate(8, date);
+			stmt.setObject(8, nuevaPeli.getFecha_estreno());
 			stmt.executeUpdate();
 			
 			rs = stmt.getGeneratedKeys();
@@ -143,8 +142,7 @@ public class DataPelicula {
 			stmt.setInt(4, peli.getCodigo_calificacion());
 			stmt.setDouble(5, peli.getDuracion());
 			stmt.setString(6, peli.getSinopsis());
-			java.sql.Date date = peli.convertirFecha(peli.getFecha_estreno());
-			stmt.setDate(7, date);
+			stmt.setObject(7, peli.getFecha_estreno());
 			stmt.setInt(8, peli.getCodigo());
 			stmt.executeUpdate();	
 		} catch (SQLException e) {
@@ -338,7 +336,7 @@ public class DataPelicula {
 					p.setDuracion(rs.getDouble("duracion"));
 					p.setSinopsis(rs.getString("sinopsis"));
 					p.setPortada(rs.getString("portada"));
-					p.setFecha_estreno(rs.getObject("fecha_estreno",Date.class));
+					p.setFecha_estreno(rs.getObject("fecha_estreno", LocalDate.class));
 			
 				}}
 			

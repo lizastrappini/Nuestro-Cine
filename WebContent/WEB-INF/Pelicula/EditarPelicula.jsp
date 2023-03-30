@@ -42,6 +42,9 @@
 	<% if (request.getAttribute("editada")!=null) {%>
         <div class="alert alert-success">¡Pelicula editada con exito!</div>
     <% }%>
+    <% if (request.getAttribute("nocambio")!=null) {%>
+        <div class="alert alert-warning">No se han detectado cambios</div>
+    <% }%>
 	<h2>Ingrese nombre de la pelicula</h2>
 	<form class="addPelicula" action="BuscarPelicula" method="post" >
     <input id="inputNombre" name="nombre" class="form-control" placeholder="nombre de la pelicula" required type="text">
