@@ -1,5 +1,5 @@
 function checkPassword(valor){
-    var myregex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/; 
+    var myregex = /^(?=\w*\d)(?=\w*[a-z])\S{4,16}$/; 
    if(myregex.test(valor)){
        alert(valor+" es valido!");
        return true;        
