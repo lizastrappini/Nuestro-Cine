@@ -34,8 +34,6 @@
 <%if ( per != (null) && isEmpleado==1){ %>
 <div class="fondo">
 <jsp:include page="/BarraMenu.jsp" />
-	
-	
 	<%if ( (request.getAttribute("encontrada")==(null))) { %>
 	<br>
 	<br>

@@ -121,7 +121,15 @@ if (request.getAttribute("cambioPass")!=(null) && request.getAttribute("cambioPa
 		  text: 'La contraseña ingresada no coincide con la contraseña actual'
 		})
 	</script>
-<%}  %>
-
+<%}  
+if ( request.getAttribute("entradasCompradas")!= null){%>
+   <script>
+   Swal.fire({
+		  icon: 'success',
+		  title: 'Las entradas han sido reservadas!',
+		  text: 'Las encontrara en su casilla de correo',
+		})
+   </script>
+   <%} %> 
 </body>
 </html>

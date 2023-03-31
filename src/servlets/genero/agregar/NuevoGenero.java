@@ -41,7 +41,7 @@ public class NuevoGenero extends HttpServlet {
 		
 		if ( gen!= (null) ) {
 			request.setAttribute("noAgregado", "noAgregado" );
-			request.getRequestDispatcher("Empleados.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Genero/Agregar/AgregarGenero.jsp").forward(request, response);
 			
 		} else if( gen == (null) ){
 			lg.cargar(g);

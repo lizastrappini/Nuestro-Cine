@@ -79,7 +79,7 @@
                             <% Calificacion c = new Calificacion();
                             c=  lc.buscarPorCodigo(pel.getCodigo_calificacion());%>
                             <p class="infopelicula"> <b>Calificacion : </b><%=c.getDescripcion()%></p>
-                            <p class="infopelicula"> <b>Duracion : </b><%=pel.getDuracion() %> min</p> 
+                            <p class="infopelicula"> <b>Duracion : </b><%=(int)pel.getDuracion() %> min</p> 
                             
                             <form class="infopelicula" action="Funciones" method="post">
                             <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">

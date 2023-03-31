@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="entities.Funcion"%>
+<%@page import="logic.LogicSala"%>
+<%@page import="entities.Sala"%>
 <%@page import="entities.Pelicula"%>
 <%@page import="entities.Persona"%>
 <%@page import="java.util.LinkedList"%>
@@ -18,6 +20,9 @@
 	<meta charset="UTF-8">
 	<%@ include file="/Estilo.jsp" %>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Lato&display=swap" rel="stylesheet">
 	<title>Funciones</title>
 <% 
 	Persona per = (Persona)request.getSession().getAttribute("usuario");
@@ -35,8 +40,13 @@
 <br>
 <br>
 <div class="contenedor">
-	<% for (Funcion fun : lf){ %>
-	  <!-- Content section 1-->
+	<% for (Funcion fun : lf){ %>	  
+	   <%
+       LogicSala ls = new LogicSala();
+       Sala s = new Sala();
+       s.setNumero(fun.getNumero_sala());
+       s = ls.buscar(s);
+       %>
         <div class="pelicula">
         <br>
         <% 
@@ -49,7 +59,8 @@
                             <p class="infopelicula" id="fecha" ><b>Fecha de la funcion:</b> <%=fecha %></p>
                             <p class="infopelicula" id="hora" ><b>Hora de la funcion:</b> <%=hora %></p>
                             <input type="hidden" name="fechahora" value="<%=fun.getFecha_hora() %>">
-                            <p class="infopelicula" id="numerosala"><b>Sala n°:</b>  <%=fun.getNumero_sala()%></p>
+                            <p class="infopelicula" id="numerosala"><b>Sala n°:</b>  <%=fun.getNumero_sala()%></p>                           
+                            <div class="descsala"><p class="descsala"><%=s.getDescripcion().toUpperCase() %></p></div>
                             <input type="hidden" name="nrosala" value="<%= fun.getNumero_sala() %>">
                             <input type="hidden" name="codigopeli" value="<%= p.getCodigo() %>">
                             <% if ( !(per==null) ){%>
