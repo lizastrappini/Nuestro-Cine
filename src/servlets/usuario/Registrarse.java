@@ -66,9 +66,6 @@ public class Registrarse extends HttpServlet {
 				request.setAttribute("registro", registro);
 				request.getRequestDispatcher("SignUp.jsp").forward(request, response);
 				}
-			}
-			
-			
+			}	
 		}
-
 }
