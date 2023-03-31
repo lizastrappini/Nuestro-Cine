@@ -25,7 +25,9 @@
     <br>
     <% if (request.getAttribute("cargada")!=null) {%>
         <div class="alert alert-success">¡Funcion creada con exito!</div>
-    <% }%>
+    <% } if(request.getAttribute("fechaInvalida")!=null){%>
+    	<div class="alert alert-warning">La fecha no puede ser menor al dia de hoy</div>
+    	<%} %>
     <h1>Ingrese los datos de la nueva funcion</h1>
     <form action="NuevaFuncion" method="post">
     	<input type="hidden" name="codigoPel" value="<%= pelActual.getCodigo() %>"/>
@@ -44,6 +46,9 @@
     	<% }%>
     	<% if (request.getAttribute("errorFormatoFecha")!=null) {%>
         	<div class="alert alert-danger">Formato de fecha invalido</div>
+        <%}%>
+        <% if (request.getAttribute("fechaInvalida")!=null) {%>
+        	<div class="alert alert-danger">La fecha ingresada debe ser mayor a la actual</div>
         <%}%>
     	<input id="inputFecha" name="fechahora" class="form-control" placeholder="fechahora" required type="text">
     	<br>

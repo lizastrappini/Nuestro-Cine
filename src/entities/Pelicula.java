@@ -1,5 +1,5 @@
 package entities;
-import java.util.Date;
+import java.time.LocalDate;
 
 
 
@@ -10,7 +10,7 @@ public class Pelicula {
 	private double duracion;
 	private String sinopsis;
 	private String portada;
-	private Date fecha_estreno;
+	private LocalDate fecha_estreno;
 	private Integer codigo_calificacion;
 	private Integer id_genero;
 	
@@ -53,10 +53,10 @@ public class Pelicula {
 	public void setPortada(String portada) {
 		this.portada = portada;
 	}
-	public Date getFecha_estreno() {
+	public LocalDate getFecha_estreno() {
 		return fecha_estreno;
 	}
-	public void setFecha_estreno(Date fecha_estreno) {
+	public void setFecha_estreno(LocalDate fecha_estreno) {
 		this.fecha_estreno = fecha_estreno;
 	}
 	public Integer getCodigo_calificacion() {
@@ -70,11 +70,6 @@ public class Pelicula {
 	}
 	public void setId_genero(Integer id_genero) {
 		this.id_genero = id_genero;
-	}
-	public java.sql.Date convertirFecha(Date fecha) {
-		java.util.Date utilDate = fecha;
-		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-	    return sqlDate;
 	}
 	
 	@Override

@@ -12,24 +12,9 @@
 <meta charset="utf-8" />
         <title>---PELICULAS---</title>
         <%@ include file="/Estilo.jsp" %>
+        <script src="Javascript/Script.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	 <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-    <!-- Custom styles for this template -->
-    <link href="style/css/navbar.css" rel="stylesheet">
     <%
 		LogicGenero lg = new LogicGenero();
 		LinkedList<Genero> listaGeneros = lg.getAll();

@@ -8,11 +8,11 @@ if ( !(per==null)){
 	isEmpleado = per.getHabilitado();
 } else {isEmpleado = 0;}	 
 %>
-<script src="Javascript/Script.js"></script>
+
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
 	<div class="container px-5">
     	<a class="navbar-brand" href="index.jsp">NUESTRO CINE</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="true" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
         	<ul class="navbar-nav ms-auto">	
             	<%if ( isEmpleado==1){ %>
@@ -24,10 +24,10 @@ if ( !(per==null)){
                     <li class="nav-item"><a class="nav-link" href="SignIn.jsp" id="signin">Iniciar sesion</a></li>
                 <%} else {%> 
                     	<li class="nav-item"><a class="nav-link">HOLA, <%=per.getNombre().toUpperCase()%>!</a></li>
-                        <li class="nav-item"><a class="nav-link" id="signout"  onclick="cerrarSesion()">Cerrar sesion</a></li>
                         <li class="nav-item"><a class="nav-link" id="micuenta" href="MiCuenta.jsp" >Mi cuenta</a></li>               
                 <%} %>	
             </ul> 
         </div>
     </div>
 </nav>
+<script src="Javascript/Script.js"></script>

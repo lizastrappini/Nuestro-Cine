@@ -1,10 +1,9 @@
 package servlets.pelicula;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,21 +46,19 @@ public class NuevaPelicula extends HttpServlet {
 		pel.setPortada(request.getParameter("portada"));
 		String fecha1=request.getParameter("fechahora");
 		
-		Date fecha;
 		try {
-			fecha = new SimpleDateFormat("yyyy-MM-dd").parse(fecha1);
-			pel.setFecha_estreno(fecha);
-		} catch (ParseException e) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate parsedDate = LocalDate.parse(fecha1, formatter);
+			pel.setFecha_estreno(parsedDate);
+			lp.cargar(pel);
+			request.setAttribute("cargada", "cargada");
+			request.getRequestDispatcher("WEB-INF/Pelicula/AgregarPelicula.jsp").forward(request, response);
+		} catch (DateTimeParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			request.setAttribute("errorFormatoFecha", e.getMessage());
+			request.getRequestDispatcher("WEB-INF/Pelicula/AgregarPelicula.jsp").forward(request, response);
 		}  
-		
-		
-		
-		lp.cargar(pel);
-		
-		request.setAttribute("cargada", "cargada");
-		request.getRequestDispatcher("WEB-INF/Pelicula/AgregarPelicula.jsp").forward(request, response);
 		
 	}
 

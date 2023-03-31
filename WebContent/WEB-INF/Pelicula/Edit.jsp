@@ -68,11 +68,14 @@ if ( !(per==null)){
     <input id="inputPortada" name="portada" class="form-control" placeholder="url de la portada" required type="text" value="<%= peli.getPortada() %>">
     
     <label for="inputEstreno" >Fecha de estreno</label>
-    <input type="text" id="inputestreno" name="estreno"   value="<%=peli.getFecha_estreno().toString()%>">
-       
+    <% if (request.getAttribute("errorFormatoFecha")!=null) {%>
+        	<div class="alert alert-danger">Formato de fecha invalido</div>
+    <% }%>
+    <input id="inputestreno" name="estreno" class="from-control" placeholder="fecha" required type="text" 
+    	value="<%=peli.getFecha_estreno()%>">
     <br>
     <input type="hidden" name="bandera" value="cambio">
-    <input type="hidden" name="pelianterior" value="<%=peli%>">
+    <input type="hidden" name="pelianterior" value="<%=peli.getCodigo()%>">
 
     <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonEditar">EDITAR</button>
 

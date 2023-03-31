@@ -93,7 +93,7 @@ public class ComprarEntrada extends HttpServlet {
 		c.envioDeCorreos();
 		
 		request.setAttribute("entradasCompradas", "entradasCompradas");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("MiCuenta.jsp").forward(request, response);
 	}
 
 }
