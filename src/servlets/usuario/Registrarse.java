@@ -51,11 +51,8 @@ public class Registrarse extends HttpServlet {
 			per.setEdad(Integer.parseInt(request.getParameter("edad").toString()));
 			per.setTelefono(request.getParameter("tel").toString());
 			per.setHabilitado(Integer.parseInt(request.getParameter("habilitado")));
-			System.out.println(per);
 			String existeDni = ctrl.buscarPorDni(per);
-			System.out.println(existeDni);
 			String existeEmail = ctrl.buscarPorMail(per);
-			System.out.println(existeEmail);
 			if ( existeDni == null && existeEmail ==null) {
 					ctrl.newCli(per);
 					String registro = "registrado";
