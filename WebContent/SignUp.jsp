@@ -21,7 +21,7 @@
       <h1 class="h3 mb-3 font-weight-normal">Complete todos sus datos</h1>
       <label for="inputEmail" >Email</label>
       <input id="inputEmail" name="email" class="form-control" placeholder="Email address" required  type="email">
-      <label for="inputPassword" >Contraseña (entre 8 y 16 caracteres,al menos un dígito, al menos una minúscula y al menos una mayúscula)</label>
+      <label for="inputPassword" >Contraseña (entre 4 y 8 caracteres y al menos un dígito)</label>
       <input id="inputPassword" name="pwd1" class="form-control" placeholder="Password"  type="password" required title="Debe tener al menos una mayúscula, una minúscula y un dígito">
       <label for="inputPassword" >Vuelva a ingresar la contraseña</label>
       <input id="inputPassword" name="pwd2" class="form-control" placeholder="Password" required type="password">

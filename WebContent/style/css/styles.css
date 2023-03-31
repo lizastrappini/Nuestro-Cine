@@ -75,11 +75,25 @@
   }
 }
 
-
+.descsala{
+	background: rgb(103,232,170);
+	background: radial-gradient(circle, rgba(103,232,170,1) 0%, rgba(148,187,233,1) 100%);
+	font-family: 'Alfa Slab One', cursive;
+	-webkit-font-family: 'Alfa Slab One', cursive;
+	min-width:100px;
+	max-width:500px;
+	color:#495057;
+	margin-left:10px;
+	text-align: center;
+}
+.descsala p{	
+	padding-left:10px;
+	padding-right:10px;
+}
 
 
 .Inicio{
-	padding-left:225px;
+	padding-left:200px;
 	padding-top:80px;
 	
 }

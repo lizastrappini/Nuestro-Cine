@@ -3,6 +3,8 @@
 <%@page import="entities.Funcion"%>
 <%@page import="entities.Pelicula"%>
 <%@page import="entities.Persona"%>
+<%@page import="entities.ButacaFuncion"%>
+<%@page import="logic.LogicButFun"%>
 <%@page import="java.util.LinkedList"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +13,7 @@
 	<%@ include file="/Estilo.jsp" %>	
 	<title>FUNCIONES</title>
 	<% 
+	
 	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");
 	%>
 </head>
@@ -33,6 +36,12 @@
             	<input type="hidden" name="nrosala" value="<%= fun.getNumero_sala() %>">
             	<input type="hidden" name="codigopeli" value="<%= fun.getCodigo_pelicula() %>">
             	<br>
+            	
+            	<%
+            		LogicButFun lbf = new LogicButFun();
+            		LinkedList<ButacaFuncion> butacas = lbf.buscar(fun);
+	            	
+            	%>
             	<button class="button" id="sacarentrada">Borrar Funcion</button>
             </form>
         </div>   
