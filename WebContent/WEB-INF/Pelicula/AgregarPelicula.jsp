@@ -63,7 +63,7 @@
     <label for="inputDirector" >Director de la pelicula</label>
     <input id="inputDirector" name="director" class="form-control" placeholder="director" required type="text">
     <label for="inputDuracion" >Duracion de la pelicula</label>
-    <input id="inputDuracion" name="duracion" class="form-control" placeholder="duracion" required type="text">
+    <input id="inputDuracion" name="duracion" class="form-control" placeholder="duracion" required type="number">
     <label for="inputPortada" >Portada de la pelicula</label>
     <input id="inputPortada" name="portada" class="form-control" placeholder="url de la portada" required type="text">
     <label for="inputEstreno" >Fecha de estreno</label>

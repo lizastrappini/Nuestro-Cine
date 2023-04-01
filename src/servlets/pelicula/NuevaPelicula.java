@@ -42,7 +42,7 @@ public class NuevaPelicula extends HttpServlet {
 		pel.setCodigo_calificacion(Integer.parseInt(request.getParameter("elegirCalificacion")));
 		pel.setSinopsis(request.getParameter("sinopsis"));
 		pel.setDirector(request.getParameter("director"));
-		pel.setDuracion(Integer.parseInt(request.getParameter("duracion")));
+		pel.setDuracion(Double.parseDouble(request.getParameter("duracion")));
 		pel.setPortada(request.getParameter("portada"));
 		String fecha1=request.getParameter("fechahora");
 		
