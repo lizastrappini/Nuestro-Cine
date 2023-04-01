@@ -43,7 +43,7 @@
 	<h2>AGREGAR COSTO</h2>
 	<form class="addCosto" action="NuevoCosto" method="get" >
     <label for="inputCosto" >Nuevo Costo</label>
-    <input id="inputCosto" name="costo" class="form-control" placeholder="costo" required type="text">
+    <input id="inputCosto" name="costo" class="form-control" placeholder="costo" required type="number" step=0.1>
     <br>
     <button class="btn btn-lg btn-primary btn-block" type="submit" id="botonAgregar" >AGREGAR</button>
     </form>
