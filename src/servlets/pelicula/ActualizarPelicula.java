@@ -58,19 +58,17 @@ public class ActualizarPelicula extends HttpServlet {
 		if( !(request.getParameter("bandera")==null)) {
 			if (request.getParameter("bandera").toString().equals("cambio") ) {
 				
-				String pelianterior = request.getParameter("pelianterior");
-				
 				Pelicula pelicambiada = new Pelicula();
 				LogicPelicula lp = new LogicPelicula();
 				
 				Integer codigo = Integer.parseInt(request.getParameter("codigo"));
 				pelicambiada.setCodigo(codigo);
 				
-				Pelicula peli = new Pelicula();
+				Pelicula pelianterior = new Pelicula();
 				
-				peli = lp.buscarPorCodigo(codigo);
+				pelianterior = lp.buscarPorCodigo(codigo);
 
-				request.setAttribute("pelicula", peli);
+				request.setAttribute("pelicula", pelianterior);
 				
 				String nombre = request.getParameter("nombre");
 				pelicambiada.setNombre(nombre);
@@ -99,13 +97,13 @@ public class ActualizarPelicula extends HttpServlet {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 					LocalDate parsedDate = LocalDate.parse(fecha1, formatter);
 					pelicambiada.setFecha_estreno(parsedDate);
-					if ( !(pelianterior.equals(pelicambiada.toString())) ) {
+					if ( !(pelianterior.toString().equals(pelicambiada.toString())) ) {
 						
 						lp.modificar(pelicambiada);
 						request.setAttribute("editada", "editada");
 						request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
 					
-					} else if ( pelianterior.equals(pelicambiada.toString()) ){ 
+					} else { 
 						request.setAttribute("nocambio", "nocambio");
 						request.getRequestDispatcher("WEB-INF/Pelicula/EditarPelicula.jsp").forward(request, response);
 
@@ -113,7 +111,7 @@ public class ActualizarPelicula extends HttpServlet {
 				} catch (DateTimeException e) {
 					e.printStackTrace();
 					request.setAttribute("errorFormatoFecha", e.getMessage());
-					request.setAttribute("pelicula", peli);
+					request.setAttribute("pelicula", pelianterior);
 					request.getRequestDispatcher("WEB-INF/Pelicula/Edit.jsp").forward(request, response);
 				}  
 				
