@@ -62,7 +62,7 @@ if ( !(per==null)){
     <input id="inputDirector" name= "director" class="form-control" placeholder="director" required type="text" value="<%= peli.getDirector() %>">
     
     <label for="inputDuracion" >Duracion de la pelicula</label>
-    <input id="inputDuracion" name="duracion" class="form-control" placeholder="duracion" required type="text" value="<%= peli.getDuracion() %>">
+    <input id="inputDuracion" name="duracion" class="form-control" placeholder="duracion" required type="number" value="<%= peli.getDuracion() %>">
     
     <label for="inputPortada" >Portada de la pelicula</label>
     <input id="inputPortada" name="portada" class="form-control" placeholder="url de la portada" required type="text" value="<%= peli.getPortada() %>">
