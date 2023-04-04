@@ -1,7 +1,9 @@
 package servlets.funcion.editar;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
@@ -86,31 +88,38 @@ public class ActualizarFuncion extends HttpServlet {
 			Integer codigo_peli = Integer.parseInt(request.getParameter("elegirpelicula"));
 			nuevafuncion.setCodigo_pelicula(codigo_peli);
 				
-			String str2 = (request.getParameter("fechahora"));
+			String strFechaUser = (request.getParameter("fechahora"));
 			try {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-				LocalDateTime dateTime2 = LocalDateTime.parse(str2, formatter);
-				nuevafuncion.setFecha_hora(dateTime2);
+				LocalDateTime dateTimeUser = LocalDateTime.parse(strFechaUser, formatter);
+				nuevafuncion.setFecha_hora(dateTimeUser);
+				
+				System.out.println(funcionActual);
+				System.out.println(nuevafuncion);
+				
+				LocalDate dateUser = LocalDate.parse(strFechaUser, formatter);
+				
+				if ( !(funcionActual.equals(nuevafuncion)) ) {
+					if ( dateUser.isAfter(LocalDate.now(ZoneId.of("America/Argentina/Buenos_Aires")))) {	
+						if (nuevafuncion.validarFuncion(nuevafuncion)) {
+							LogicFuncion lf = new LogicFuncion();
+							lf.modificar(nuevafuncion, funcionActual);
+							request.setAttribute("modificada", "modificada");
+						} else {
+							request.setAttribute("fechaExiste", "fechaExiste");
+						}
+					} else {
+						request.setAttribute("fechaInvalida", "fechaInvalida");
+						}	
+				}
+				
+				request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
+				
 			} catch (DateTimeParseException e) {
 				e.printStackTrace();
 				request.setAttribute("errorFormatoFecha", e.getMessage());
 				request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
 			}
-				
-			if ( !(funcionActual.equals(nuevafuncion)) ) {
-					
-				if (nuevafuncion.validarFuncion(nuevafuncion)) {
-					LogicFuncion lf = new LogicFuncion();
-					lf.modificar(nuevafuncion, funcionActual);
-					request.setAttribute("modificada", "modificada");
-				} else {
-					request.setAttribute("fechaExiste", "fechaExiste");
-				}
-				
-				request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
-				
-			}
-			request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
 		}
 	}
 }
