@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;
+
+import entities.Pelicula;
 import entities.Persona;
 
 
@@ -314,6 +316,61 @@ public class DataPersona {
 		
 	}
 	
+	
+	public void borrarPersona(Persona per) {
+		PreparedStatement stmt=null;
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"delete from cliente where dni = ?");
+			stmt.setString(1, per.getDni());
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(stmt!=null)stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void editPersona(Persona p) {
+		PreparedStatement stmt= null;
+		ResultSet keyResultSet=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().
+					prepareStatement(
+							"update cliente set nombre=?,apellido=?,edad=?,telefono=? where dni=?",
+							PreparedStatement.RETURN_GENERATED_KEYS
+							);
+			stmt.setString(1, p.getNombre());
+			stmt.setString(2, p.getApellido());
+			stmt.setInt(3, p.getEdad());
+			stmt.setString(4, p.getTelefono());
+			stmt.setString(5, p.getDni());
+			stmt.executeUpdate();
+			
+			keyResultSet=stmt.getGeneratedKeys();
+      
+            
+			
+		} catch (SQLException e) {
+            e.printStackTrace();
+		} finally {
+            try {
+                if(keyResultSet!=null)keyResultSet.close();
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+		
+	}
 	
 }
 

@@ -94,7 +94,7 @@
     <input type="hidden" name="nrosala" value="<%=bf.getNro_sala()%>">
     <input type="hidden" name="fechahora" value="<%=bf.getFecha_hora_funcion()%>">
     <input type="hidden" id="indexes" name="indexes" >
-    <button type="submit"class="buttonClass"> Comprar </button>
+    <button type="submit" id="comprarentrada" class="buttonClass"> Comprar </button>
     </form>
     
     

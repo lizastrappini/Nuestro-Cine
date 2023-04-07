@@ -5,7 +5,6 @@ const total = document.getElementById('total');
 const ticketPrice= document.getElementById("costo").value;
 
 
-
 // update total and count
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .seat.selected');
@@ -23,6 +22,14 @@ function updateSelectedCount() {
   count.innerText = selectedSeatsCount;
   total.innerText = selectedSeatsCount * ticketPrice;
   document.getElementById('preciototal').value = (selectedSeatsCount * ticketPrice);
+ console.log(selectedSeats.length);
+  if (selectedSeats.length == 0){
+  console.log(selectedSeats.length);
+  	document.getElementById('comprarentrada').disabled=true;
+  	document.getElementById('comprarentrada').style.background = 'gray';
+  } else {document.getElementById('comprarentrada').disabled=false;
+  document.getElementById('comprarentrada').style.background = 'linear-gradient(#599bb3, #408c99)';}
+  
  
 }
 
@@ -36,6 +43,7 @@ function populateUI() {
       }
     });
   }
+  
 
 }
 
@@ -45,10 +53,12 @@ function populateUI() {
 container.addEventListener('click', (e) => {
   if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
     e.target.classList.toggle('selected');
-
     updateSelectedCount();
   }
 });
 
 // intial count and total
 updateSelectedCount();
+
+
+

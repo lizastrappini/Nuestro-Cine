@@ -3,7 +3,9 @@
 <%@page import="java.time.*"%>
 <%@page import="java.time.format.*"%>
 <%@page import="entities.Pelicula"%>
+<%@page import="entities.Calificacion"%>
 <%@page import="logic.LogicPelicula"%>
+<%@page import="logic.LogicCalificacion"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Persona"%>
 
@@ -27,6 +29,7 @@
 	if ( !(per==null)){
 		isEmpleado = per.getHabilitado();
 		} else { isEmpleado = 0;}
+	LogicCalificacion lc = new LogicCalificacion();
 	 
     %>
 </head>
@@ -63,7 +66,12 @@
 							<h2 class="infopelicula" id="nombrepelicula" ><%= pel.getNombre() %></h2>
                             <p class="infopelicula" id="sinopsis"><%= pel.getSinopsis() %></p>
                             <p class="infopelicula"> <b>Director :</b> <%= pel.getDirector() %></p>
-                            <p class="infopelicula"> <b>Calificacion :</b> <%= pel.getCodigo_calificacion() %></p>
+                            <%
+                            Calificacion c = new Calificacion();
+                            c.setCodigo_calificacion(pel.getCodigo_calificacion());
+                           	Calificacion calif = lc.buscar(c);
+                            %>
+                            <p class="infopelicula"> <b>Calificacion :</b> <%= calif.getDescripcion() %></p>
                             <p class="infopelicula"> <b>Duracion :</b> <%= pel.getDuracion() %></p>
                             <form action="ActualizarPelicula" method="post">
                             <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
