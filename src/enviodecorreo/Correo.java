@@ -222,7 +222,6 @@ public class Correo {
           t.connect(correoDeOrigen,contrasenia16Digitos);
           t.sendMessage(mensaje, mensaje.getAllRecipients());
           t.close();
-          System.out.println("Mensaje enviado");
           } catch (MessagingException e) {
            
         }
