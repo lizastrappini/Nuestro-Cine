@@ -101,8 +101,12 @@ LogicPelicula pl = new LogicPelicula();
 </form> 
 </div>
 <div class="micuenta"><%=(per.getNombre()+" "+per.getApellido()).toUpperCase()%></div>
-<button class="micuenta" onclick="cambiarContra()" >CAMBIAR CONTRASEÑA</button>
-<button class="signout"  onclick="cerrarSesion()" >CERRAR SESION</button>
+<button class="signout" onclick="cambiarContra()" >CAMBIAR CONTRASEÑA</button>
+<button class="signout2"  onclick="cerrarSesion()" >CERRAR SESION</button>
+<% if (per.getHabilitado()==0){  %>
+<button class="signout" onclick="editarPersona()" >EDITAR DATOS</button>
+<button class="signout2" onclick="borrarCuenta()" >BORRAR CUENTA</button>
+<%} %>
 </div>
 </div>
 <%
@@ -131,5 +135,34 @@ if ( request.getAttribute("entradasCompradas")!= null){%>
 		})
    </script>
    <%} %> 
+
+<%
+if (request.getAttribute("cambio")!=(null) && request.getAttribute("cambio").equals("datoscambiados")){%>
+	<script>
+	Swal.fire({
+		  icon: 'success',
+		  title: 'Datos cambiados con exito'
+		})
+	</script>   
+<%} %>  
+<script>
+function editarPersona(){
+	  Swal.fire({
+	    title: 'Editar datos',
+	    html:
+	    '<form name="cambio" action="EditarDatos" method="POST" >'+
+	    '<input id="nombre" name="nombre" class="swal2-input" type="text" placeholder="nombre" value="<%=per.getNombre()%>">' +
+	    '<input id="apellido" name="apellido" class="swal2-input" type="text" placeholder="apellido" value="<%=per.getApellido()%>">' +
+	     '<input id="telefono" name="telefono" class="swal2-input" type="number" placeholder="telefono" value="<%=per.getTelefono()%>">'+
+	     '<input id="edad" name="edad" class="swal2-input" type="number" placeholder="edad" value="<%=per.getEdad()%>">'+
+	     '</form>',
+	      focusConfirm: false,   
+	  }).then((result) => {
+	  if(result.isConfirmed){
+		cambio.submit();   
+	    }
+	    })
+	}
+</script>   
 </body>
 </html>

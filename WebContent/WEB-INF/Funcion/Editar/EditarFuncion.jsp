@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@page import="entities.Persona"%>
 <%@page import="java.util.LinkedList"%>
+<%@page import="logic.LogicCalificacion"%>
+<%@page import="entities.Calificacion"%>
 <%@page import="entities.Pelicula"%> 
 <!DOCTYPE html>
 <html>
@@ -11,6 +13,7 @@
 	<%
 	LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
 	Pelicula peliculaEncontrada = (Pelicula)request.getAttribute("peliculaEncontrada");
+	LogicCalificacion lc = new LogicCalificacion();
 	%>
 	<title>EDITAR FUNCION</title>
 </head>
@@ -48,7 +51,12 @@
 				<p class="nombrepelicula" id="nombrepelicula" ><%= peliculaEncontrada.getNombre() %></p>
                 <p class="sinopsis" id="sinopsis"><%= peliculaEncontrada.getSinopsis() %></p>
                 <p class="infopelicula"> <b>Director :</b> <%= peliculaEncontrada.getDirector() %></p>
-                <p class="infopelicula"> <b>Calificacion :</b> <%= peliculaEncontrada.getCodigo_calificacion() %></p>
+                <%
+                            Calificacion c = new Calificacion();
+                            c.setCodigo_calificacion(peliculaEncontrada.getCodigo_calificacion());
+                           	Calificacion calif = lc.buscar(c);
+                            %>
+                            <p class="infopelicula"> <b>Calificacion :</b> <%= calif.getDescripcion() %></p>
                 <p class="infopelicula"> <b>Duracion :</b> <%= peliculaEncontrada.getDuracion() %></p>
                 <form action="BuscarFuncionesDePeliculaEditar" method="get">
                     <input type="hidden" name="codigoPel" value="<%=peliculaEncontrada.getCodigo() %>"/>

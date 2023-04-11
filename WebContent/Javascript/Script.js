@@ -34,6 +34,43 @@ function cambiarContra(){
     })
 }
 
+
+
+function borrarCuenta(){
+	Swal.fire({
+  title: 'Seguro que quieres borrar tu cuenta?',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#dc3545',
+  cancelButtonColor: '#198754',
+  confirmButtonText: 'Si, borrar'
+  
+}).then((result) => {
+  if (result.isConfirmed) {
+  Swal.fire({
+    title: 'ingrese su contraseña',
+    html:
+    '<form name="cambio" action="BorrarPersona" method="POST" >'+
+    '<input id="pass" name="pass" class="swal2-input" type="password" placeholder="contrasenia">' +
+     '</form>',
+      focusConfirm: false,   
+  }).then((result) => {
+  if(result.isConfirmed){
+	cambio.submit();
+    }
+    }) 
+  }
+})
+};
+
+
+
+
+
+
+
+
+
   function checkPassword(valor){
     var myregex = /^(?=\w*\d)(?=\w*[a-z])\S{4,8}$/; 
    if(myregex.test(valor)){
