@@ -64,6 +64,9 @@
     	<% if (request.getAttribute("fechaExiste")!=null) {%>
         	<div class="alert alert-danger">Ya existe una funcion en esa sala a ese horario</div>
     	<% }%>
+    	<% if (request.getAttribute("fechaInvalida")!=null) {%>
+        	<div class="alert alert-warning">La fecha no puede ser menor al dia de hoy</div>
+        <%}%>
     	<input id="inputFechaHora" name="fechahora" class="form-control" 
     		placeholder="fechahora" required type="text" value="<%= funcionActual.getFecha_hora() %>">
     	<br>

@@ -3,6 +3,8 @@
 <%@page import="entities.Persona" %>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Pelicula"%>
+<%@page import="logic.LogicCalificacion"%>
+<%@page import="entities.Calificacion"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +15,7 @@
 
 	LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
 	Pelicula peliculaEncontrada = (Pelicula)request.getAttribute("peliculaEncontrada");
+	LogicCalificacion lc = new LogicCalificacion();
 	%>
 </head>
 <body>
@@ -49,7 +52,12 @@
 				<p class="nombrepelicula" id="nombrepelicula" ><%= peliculaEncontrada.getNombre() %></p>
                 <p class="sinopsis" id="sinopsis"><%= peliculaEncontrada.getSinopsis() %></p>
                 <p class="infopelicula"> <b>Director :</b> <%= peliculaEncontrada.getDirector() %></p>
-                <p class="infopelicula"> <b>Calificacion :</b> <%= peliculaEncontrada.getCodigo_calificacion() %></p>
+                <%
+                 	Calificacion c = new Calificacion();
+                    c.setCodigo_calificacion(peliculaEncontrada.getCodigo_calificacion());
+                    Calificacion calif = lc.buscar(c);
+                 %>
+                <p class="infopelicula"> <b>Calificacion :</b> <%= calif.getDescripcion() %></p>
                 <p class="infopelicula"> <b>Duracion :</b> <%= peliculaEncontrada.getDuracion() %></p>
                 <form action="BuscarFuncionesDePeliculaBorrar" method="get">
                     <input type="hidden" name="codigoPel" value="<%=peliculaEncontrada.getCodigo() %>"/>

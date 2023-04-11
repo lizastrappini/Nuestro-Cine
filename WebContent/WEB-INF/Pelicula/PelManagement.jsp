@@ -96,7 +96,7 @@
         </div>
         
 	<%} }%>
-	<a class="boton_volver" href="index.jsp">VOLVER </a>
+	<a class="boton_volver" href="Peliculas.jsp">VOLVER </a>
 	<% if (lp.isEmpty() && request.getAttribute("estrenos")==null){ %>
 	<script type="text/javascript">
 	Swal.fire({
