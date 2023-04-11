@@ -29,6 +29,9 @@
     <% if (request.getAttribute("modificada")!=null) {%>
     	<div class="alert alert-success">¡Funcion actualizada con exito!</div>
     <% } %>
+    <% if (request.getAttribute("nocambio")!=null) {%>
+    	<div class="alert alert-warning">No se detectaron cambios</div>
+    <% } %>
 	<h1>Edite la funcion</h1>
 	<form class="addFuncion" action="ActualizarFuncion" method="post" >
 		<div>
