@@ -818,6 +818,7 @@ h1, .h1 {
   margin-left:30px;
   margin-bottom:10px;
   margin-top:20px;
+  border-radius:3px;
   position:center;
   font-family:"Segoe UI";
   text-align: left;
@@ -828,6 +829,22 @@ h1, .h1 {
 }
 
 .signout{
+
+  display: block;
+  margin-left:30px;
+  margin-bottom:10px;
+  margin-top:20px;
+  position:center;
+  font-family:"Segoe UI";
+  text-align: left;
+  color: #ffffff;
+  background:#00ff80;
+  text-decoration:none;
+  border-radius: 10px;
+  border:none
+}
+
+.signout2{
 	display: block;
   margin-left:30px;
   margin-bottom:10px;
@@ -835,10 +852,13 @@ h1, .h1 {
   position:center;
   font-family:"Segoe UI";
   text-align: left;
-  font-weight: bold;
-  color: red;
+  color: #ffffff;
+  background:#ff8080;
   text-decoration:none;
+  border-radius: 10px;
+  border:none;
 }
+
 .miscompras{
   float: top;
   margin-top: 20px;

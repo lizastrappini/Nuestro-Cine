@@ -52,6 +52,11 @@ public class Login {
 	public void actualizarPass(Persona per) {
 		dp.editPass(per);
 	}
-	
+	public void borrar(Persona per) {
+		dp.borrarPersona(per);
+	}
+	public void editar(Persona per) {
+		dp.editPersona(per);
+	}
 }
 

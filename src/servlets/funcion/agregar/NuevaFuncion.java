@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 
@@ -95,7 +96,7 @@ public class NuevaFuncion extends HttpServlet {
 				
 				LocalDate dateUser = LocalDate.parse(strFechaUser, formatter);
 				
-				if (dateUser.isAfter(LocalDate.now())) {
+				if (dateUser.isAfter(LocalDate.now(ZoneId.of("America/Argentina/Buenos_Aires")))) {
 					if ( nuevafuncion.validarFuncion(nuevafuncion) ) {
 						lf.cargar(nuevafuncion);
 						request.setAttribute("cargada", "cargada");
