@@ -94,12 +94,9 @@ public class ActualizarFuncion extends HttpServlet {
 				LocalDateTime dateTimeUser = LocalDateTime.parse(strFechaUser, formatter);
 				nuevafuncion.setFecha_hora(dateTimeUser);
 				
-				System.out.println(funcionActual);
-				System.out.println(nuevafuncion);
-				
 				LocalDate dateUser = LocalDate.parse(strFechaUser, formatter);
 				
-				if ( !(funcionActual.equals(nuevafuncion)) ) {
+				if ( !(funcionActual.toString().equals(nuevafuncion.toString())) ) {
 					if ( dateUser.isAfter(LocalDate.now(ZoneId.of("America/Argentina/Buenos_Aires")))) {	
 						if (nuevafuncion.validarFuncion(nuevafuncion)) {
 							LogicFuncion lf = new LogicFuncion();
@@ -110,7 +107,9 @@ public class ActualizarFuncion extends HttpServlet {
 						}
 					} else {
 						request.setAttribute("fechaInvalida", "fechaInvalida");
-						}	
+					}	
+				} else {
+					request.setAttribute("nocambio", "nocambio");
 				}
 				
 				request.getRequestDispatcher("WEB-INF/Funcion/Editar/FormActualizarFuncion.jsp").forward(request, response);
