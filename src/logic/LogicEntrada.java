@@ -2,6 +2,8 @@ package logic;
 
 import data.DataEntrada;
 import entities.Entrada;
+import entities.Funcion;
+
 import java.util.LinkedList;
 
 public class LogicEntrada {
@@ -23,5 +25,8 @@ public class LogicEntrada {
 	}
 	public Entrada buscarPorId(Integer id) {
 		return de.buscarEntradaPorId(id);
+	}
+	public int contarEntradasPorFuncion(Funcion f) {
+		return de.contarEntradasPorFuncion(f);
 	}
 }
