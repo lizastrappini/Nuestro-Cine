@@ -45,14 +45,20 @@ if ( !(per==null)){
     <label>Genero</label>
     <select name="elegirGenero" required="required">
         		<% for (Genero gen: listaGeneros){ %>
+        		<%if(gen.getId()==peli.getId_genero()){ %>
         				<option value="<%= gen.getId() %>" selected="selected"><%=gen.getDescripcion() %></option>
-            	<% } %>
+        		<%}else{ %>
+        			<option value="<%= gen.getId() %>" ><%=gen.getDescripcion() %></option>
+            	<% } }%>
      </select>
 	<label>Calificacion</label>
         	<select name="elegirCalificacion" required="required">
         		<% for (Calificacion c: listaCalif){ %>
+        		<%if(c.getCodigo_calificacion()==peli.getCodigo_calificacion()){ %>
         				<option value="<%= c.getCodigo_calificacion() %>" selected="selected"><%=c.getDescripcion() %></option>
-            		<% } %>
+            		<%}else{ %>
+        			<option value="<%= c.getCodigo_calificacion() %>" ><%=c.getDescripcion() %></option>
+            	<% } }%>
        </select>
 	<br>
 	<label for="inputSinopsis" >Sinopsis de la pelicula</label>
