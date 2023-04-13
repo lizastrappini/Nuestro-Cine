@@ -97,6 +97,7 @@ public class ActualizarPelicula extends HttpServlet {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 					LocalDate parsedDate = LocalDate.parse(fecha1, formatter);
 					pelicambiada.setFecha_estreno(parsedDate);
+					
 					if ( !(pelianterior.toString().equals(pelicambiada.toString())) ) {
 						
 						lp.modificar(pelicambiada);

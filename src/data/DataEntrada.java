@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 import entities.Entrada;
+import entities.Funcion;
 import entities.ButacaFuncion;
+import entities.Calificacion;
 
 public class DataEntrada {
 	
@@ -147,5 +149,35 @@ public class DataEntrada {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	
+	public int contarEntradasPorFuncion(Funcion f) {
+		PreparedStatement stmt=null;
+		ResultSet rs = null;
+		int cantidad = 0;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select count(*) from entrada e inner join funcion f on e.fecha_hora_funcion=f.fecha_hora\r\n"
+					+ "where e.fecha_hora_funcion=? ");
+			stmt.setObject(1, f.getFecha_hora());
+			rs = stmt.executeQuery();
+			
+			if(rs != null && rs.next()) {
+				cantidad = rs.getInt("count(*)");
+			}
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(stmt!=null)stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+	}
+		return cantidad;
 	}
 }

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="entities.Funcion"%>
 <%@page import="logic.LogicSala"%>
+<%@page import="logic.LogicEntrada"%>
 <%@page import="entities.Sala"%>
 <%@page import="entities.Pelicula"%>
 <%@page import="entities.Persona"%>
@@ -30,6 +31,7 @@
 	Pelicula p  = (Pelicula)request.getAttribute("pel");
 	Month mes = LocalDate.now().getMonth(); //obtengo el mes
 	String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();
+	LogicEntrada le = new LogicEntrada();
 %>
 </head>
 <body>
@@ -46,6 +48,8 @@
        Sala s = new Sala();
        s.setNumero(fun.getNumero_sala());
        s = ls.buscar(s);
+       int cantidad = le.contarEntradasPorFuncion(fun);
+       
        %>
         <div class="pelicula">
         <br>
@@ -63,11 +67,15 @@
                             <div class="descsala"><p class="descsala"><%=s.getDescripcion().toUpperCase() %></p></div>
                             <input type="hidden" name="nrosala" value="<%= fun.getNumero_sala() %>">
                             <input type="hidden" name="codigopeli" value="<%= p.getCodigo() %>">
-                            <% if ( !(per==null) ){%>
+                            <% if ( !(per==null) && cantidad <48 ){%>
                             <button class="buttonClass" id="">  Sacar entrada   </button><br>
-                            <%} else{ %>
+                            <%} else{  %>
                             <button class="buttonClassDisabled" id="" disabled>  Sacar entrada   </button>
-                            <br>
+                            <%
+                            if (cantidad==48){%>
+                            <p class="entradasAgotadas">¡Entradas agotadas!</p>
+                            <% }  %>
+                            
                             <%} %>
                             </form>
         </div>
@@ -94,7 +102,7 @@
 		setTimeout( function() { window.location.href = "Peliculas.jsp"; }, 2000 );
 		</script>
 	<%} %>
-<a class="boton_volver" href="Peliculas.html">VOLVER </a>
+<a class="boton_volver" href="Peliculas.jsp">VOLVER </a>
 </div>
 </body>
 </html>
