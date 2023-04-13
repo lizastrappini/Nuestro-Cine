@@ -47,13 +47,13 @@ if ( !(per==null)){
         		<% for (Genero gen: listaGeneros){ %>
         				<option value="<%= gen.getId() %>" selected="selected"><%=gen.getDescripcion() %></option>
             	<% } %>
-     </select>
+    </select>
 	<label>Calificacion</label>
         	<select name="elegirCalificacion" required="required">
         		<% for (Calificacion c: listaCalif){ %>
         				<option value="<%= c.getCodigo_calificacion() %>" selected="selected"><%=c.getDescripcion() %></option>
-            		<% } %>
-       </select>
+            	<% } %>
+       		</select>
 	<br>
 	<label for="inputSinopsis" >Sinopsis de la pelicula</label>
     <input id="inputSinopsis" name="sinopsis" class="form-control" placeholder="sinopsis" required type="text" value="<%= peli.getSinopsis() %>">
