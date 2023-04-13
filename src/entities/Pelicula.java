@@ -79,5 +79,6 @@ public class Pelicula {
 				+ ", duracion=" + duracion + ", sinopsis=" + sinopsis + ", portada="
 				+ portada + ", fecha_estreno=" + fecha_estreno + ", id_genero=" + id_genero 
 				+ ", codigo_calif=" + codigo_calificacion + "]";
+
 	}
 }
