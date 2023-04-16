@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
+<%@page import="java.sql.*" %>
+<%@page import="javax.servlet.http.HttpSession" %>
 <%@page import="entities.Persona" %>
+<%@page import="data.DbConnector" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +20,37 @@
 <div class="fondo">
 	<jsp:include page="/BarraMenu.jsp" />	
 	<div class="Inicio">	
+	
+<%-- Crear una instancia de DbConnector para establecer la conexión con la base de datos MySQL --%>
+<% DbConnector dbConnector= new DbConnector(); %>
+ <%-- Obtener la sesión actual --%>
+<% HttpSession sesion= request.getSession(); %>
+<%-- Verificar si el mensaje ya ha sido mostrado anteriormente --%>
+<%if(sesion.getAttribute("conexionExitosa") == null){ %>
+<%-- Establecer la conexión --%>
+<% Connection conexionExitosa= dbConnector.getConn(); %>
+
+<script>
+<%if (conexionExitosa != null && !conexionExitosa.isClosed()) {%>
+Swal.fire({
+	title:'¡Conexión Exitosa!',
+    text: 'La conexión con la base de datos MySQL fue exitosa.',
+})
+</script>
+<%} else{ %>
+<script>
+ Swal.fire({
+     icon:  'error',
+     title:'¡Error de Conexión!',
+     text: 'Por favor, intente más tarde.',   
+ })
+ <%} %>
+ </script>
+  <%-- Marcar la variable de sesión para indicar que el mensaje ya ha sido mostrado --%>
+ <% sesion.setAttribute("conexionExitosa", true); %>
+<%} %>
+
+	
             	<form class="form-signin" action="MostrarPeliculas" method="post">
                 	<h1 class="textoInicio">TODOS LOS ESTRENOS</h1>
                     <h2 class="textoInicio">EN UN MISMO LUGAR</h2>
@@ -57,6 +92,9 @@
             </div>
         </div>
         
+        
+
+
 </div>
   <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
