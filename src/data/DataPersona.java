@@ -24,7 +24,7 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select nombre from cliente where dni=?;"
+					"select nombre from persona where dni=?;"
 					);
 			stmt.setString(1, per.getDni());
 			rs=stmt.executeQuery();
@@ -55,7 +55,7 @@ public class DataPersona {
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select dni,nombre,apellido,email,edad,telefono from cliente");
+			rs= stmt.executeQuery("select dni,nombre,apellido,email,edad,telefono from persona");
 			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {
@@ -94,7 +94,7 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select nombre,apellido,dni,email,telefono,edad,habilitado from cliente where (email=? and password=?);"
+					"select nombre,apellido,dni,email,telefono,edad,habilitado from persona where (email=? and password=?);"
 					);
 			stmt.setString(1, per.getEmail());
 			stmt.setString(2, per.getPassword());
@@ -131,7 +131,7 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select dni,nombre,apellido,email,telefono from cliente where dni=?");
+					"select dni,nombre,apellido,email,telefono from persona where dni=?");
 			stmt.setString(1, per.getDni());
 			rs=stmt.executeQuery();
 			
@@ -165,7 +165,7 @@ public class DataPersona {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into cliente"+"(dni,nombre, apellido, email, password,edad, telefono,habilitado) values(?,?,?,?,?,?,?,?)",
+							"insert into persona"+"(dni,nombre, apellido, email, password,edad, telefono,habilitado) values(?,?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, p.getDni());
@@ -201,7 +201,7 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select dni from cliente where dni=?");
+					"select dni from persona where dni=?");
 			stmt.setString(1, per.getDni());
 			rs=stmt.executeQuery();
 			
@@ -231,7 +231,7 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select email from cliente where email=?");
+					"select email from persona where email=?");
 			stmt.setString(1, per.getEmail());
 			rs=stmt.executeQuery();
 			
@@ -261,7 +261,7 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select password from cliente where email=?");
+					"select password from persona where email=?");
 			stmt.setString(1, per.getEmail());
 			rs=stmt.executeQuery();
 			
@@ -291,7 +291,7 @@ public class DataPersona {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"update cliente set password=? where email=?",
+							"update persona set password=? where email=?",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, p.getPassword());
@@ -322,7 +322,7 @@ public class DataPersona {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"delete from cliente where dni = ?");
+					"delete from persona where dni = ?");
 			stmt.setString(1, per.getDni());
 			stmt.executeUpdate();
 			
@@ -344,7 +344,7 @@ public class DataPersona {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"update cliente set nombre=?,apellido=?,edad=?,telefono=? where dni=?",
+							"update persona set nombre=?,apellido=?,edad=?,telefono=? where dni=?",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, p.getNombre());
