@@ -186,7 +186,7 @@ public class DataPelicula {
 		}
 	}
 	
-	public LinkedList<Pelicula> buscarPorGenero (Integer codigo) {
+	public LinkedList<Pelicula> buscarPorGenero (Integer id_genero) {
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		LinkedList<Pelicula>peliculas= new LinkedList<>();
@@ -195,7 +195,7 @@ public class DataPelicula {
 		
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"select codigo, nombre, director, id_genero, codigo_calificacion, duracion, sinopsis, portada from pelicula where id_genero=?");   
-			stmt.setInt(1, codigo);
+			stmt.setInt(1, id_genero);
 			
 			rs = stmt.executeQuery();
 			

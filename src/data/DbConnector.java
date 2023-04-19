@@ -2,6 +2,7 @@ package data;
 
 import java.sql.*;
 
+
 public class DbConnector {
 
 	private static DbConnector instancia;
@@ -15,10 +16,12 @@ public class DbConnector {
 	private int conectados=0;
 	private Connection conn=null;
 	
-	private DbConnector() {
+	
+	public DbConnector() {
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
+			System.out.println("Error al cargar el driver");
 			e.printStackTrace();
 		}
 	}
@@ -30,13 +33,15 @@ public class DbConnector {
 		return instancia;
 	}
 	
-	public Connection getConn() {
+	public Connection getConn(){ 
+			
 		try {
 			if(conn==null || conn.isClosed()) {
-				conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, password);
+				conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, password); //se crea la conexion a la BBDD
 				conectados=0;
 			}
 		} catch (SQLException e) {
+			System.out.println("Error en la conexion");
 			e.printStackTrace();
 		}
 		conectados++;
@@ -47,11 +52,13 @@ public class DbConnector {
 		conectados--;
 		try {
 			if (conectados<=0) {
-				conn.close();
+				conn.close(); //cierro conexion con la BBDD
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 }
+
