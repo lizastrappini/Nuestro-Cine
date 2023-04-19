@@ -37,16 +37,16 @@ public class Pelicula {
 	public String getSinopsis() {
 		return sinopsis;
 	}
-	
+	public void setSinopsis(String sinopsis) {
+		this.sinopsis = sinopsis;
+	}
 	public double getDuracion() {
 		return duracion;
 	}
 	public void setDuracion(double duracion) {
 		this.duracion = duracion;
 	}
-	public void setSinopsis(String sinopsis) {
-		this.sinopsis = sinopsis;
-	}
+	
 	public String getPortada() {
 		return portada;
 	}
