@@ -75,6 +75,69 @@
   }
 }
 
+/*paginas de error*/
+
+.contenedor{
+	margin-left:25%;
+	padding:2%;
+	
+	width:50%;
+	border-radius:10px;
+	margin-top:7%;
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows:10px 400px 40px;
+	grid-template-areas: "textoError"
+						  "fotoError"
+						  "botonIndex"; 
+}
+
+.myButton {
+	box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(rgba(35, 245, 101, 1), rgba(28, 248, 151, 1));
+	background-color:#599bb3;
+	border-top-left-radius:42px;
+  	border-top-right-radius:42px;
+  	border-bottom-left-radius:42px;
+  	border-bottom-right-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+	grid-area:botonIndex;
+	justify-self:center;
+	align-self:center;
+}
+.myButton:hover {
+	background:linear-gradient(rgba(35, 245, 101, 1), rgba(28, 248, 151, 1));
+	background-color:black;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.fotoError{
+	min-width:300px;
+	min-height:300px;
+	grid-area:fotoError;
+	justify-self:center;
+	align-self:center;
+}
+
+.textoError{
+	font-size:20px;
+	padding-top:20px;
+	grid-area:textoError;
+	justify-self:center;
+	align-self:end;
+}
+
 .descsala{
 	background: rgb(103,232,170);
 	background: radial-gradient(circle, rgba(103,232,170,1) 0%, rgba(148,187,233,1) 100%);
