@@ -32,9 +32,6 @@
     String fecha = FORMATTER1.format(fechahora);
     String hora = FORMATTER2.format(fechahora);
     
-
-    
-    
     LinkedList<ButacaFuncion> lf=(LinkedList<ButacaFuncion>)request.getAttribute("asientos");
     ButacaFuncion bf = (ButacaFuncion)request.getAttribute("butaca");
     %>

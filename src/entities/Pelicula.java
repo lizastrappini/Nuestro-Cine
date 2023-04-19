@@ -77,7 +77,13 @@ public class Pelicula {
 		
 		return "Pelicula [codigo=" + codigo + ", nombre=" + nombre + ", director=" + director 
 				+ ", duracion=" + duracion + ", sinopsis=" + sinopsis + ", portada="
+<<<<<<< HEAD
 				+ portada + ", fecha_estreno=" + fecha_estreno  +", id_genero=" 
 				+ id_genero + ", codigo_calificacion=" + codigo_calificacion + "+]";
+=======
+				+ portada + ", fecha_estreno=" + fecha_estreno + ", id_genero=" + id_genero 
+				+ ", codigo_calif=" + codigo_calificacion + "]";
+
+>>>>>>> 713ed5035909c711f9a4ebfdea9a9fa279ce79f5
 	}
 }
