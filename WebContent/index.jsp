@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
+<%@page import="java.sql.*" %>
+<%@page import="javax.servlet.http.HttpSession" %>
 <%@page import="entities.Persona" %>
+<%@page import="data.DbConnector" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +20,8 @@
 <div class="fondo">
 	<jsp:include page="/BarraMenu.jsp" />	
 	<div class="Inicio">	
+	
+	
             	<form class="form-signin" action="MostrarPeliculas" method="post">
                 	<h1 class="textoInicio">TODOS LOS ESTRENOS</h1>
                     <h2 class="textoInicio">EN UN MISMO LUGAR</h2>
@@ -57,6 +63,9 @@
             </div>
         </div>
         
+        
+
+
 </div>
   <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

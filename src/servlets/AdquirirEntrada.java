@@ -41,7 +41,7 @@ public class AdquirirEntrada extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String index = request.getParameter("indexes").toString();
+		String index = request.getParameter("indexes").toString(); // indexes --> asientos elegidos
 		Integer cod = Integer.parseInt(request.getParameter("codigopeli"));
 		Integer nrosala = Integer.parseInt(request.getParameter("nrosala"));
 		String fecha1=request.getParameter("fechahora");
