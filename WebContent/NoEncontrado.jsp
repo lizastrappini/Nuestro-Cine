@@ -12,7 +12,7 @@
 <body>
 	<div class="fondo">
 	<jsp:include page="/BarraMenu.jsp" />
-	<div class="contenedor">
+	<div class="contenedorError">
 	<h1 class="textoError">Ups..pagina no encontrada</h1>
 	<img alt="" src="./style/assets/img/404.png" class="fotoError">
 	<br>
