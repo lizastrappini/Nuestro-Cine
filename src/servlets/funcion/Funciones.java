@@ -1,6 +1,8 @@
 package servlets.funcion;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import data.DataFuncion;
 import entities.Funcion;
 import entities.Pelicula;
+import logic.LogicFuncion;
 import logic.LogicPelicula;
 
 
@@ -41,25 +44,39 @@ public class Funciones extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*TRAE LA FECHA DEL JSP PELMANAGMENT Y LA CONVIERTE A LOCALDATETIME PARA BUSCARLA EN LA BASE
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		String fechaTraida=request.getParameter("elegirFecha");
+		LocalDateTime fecha= LocalDateTime.parse(fechaTraida, formatter);
 		
+		//LinkedList<String> dias= new LinkedList<String>();
+		//System.out.println(fecha); */
 		Integer cod=Integer.parseInt(request.getParameter("codigo"));
+		LogicFuncion lf= new LogicFuncion();
 		Funcion fun = new Funcion();
 
 		Pelicula pel = new Pelicula();
 		LogicPelicula lp = new LogicPelicula();
 		
-		fun.setCodigo_pelicula(cod);
+		fun.setCodigo_pelicula(cod);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 		DataFuncion df= new DataFuncion();
 		
 		LinkedList<Funcion> funciones = df.buscarFuncionPorPeli(fun);
 		
+		/* RECORRE LAS FUNCIONES QUE SE TRAJO CON EL CODIGO DE LA PELICULA PARA SELECCIONAR LAS DEL DIA
+		 * for (Funcion f: funciones) {
+
+			lf.buscarFuncionPorfecha(f,fecha);
+			System.out.println(fecha);
+			} */
 		pel = lp.buscarPorCodigo(cod);
 		request.setAttribute("pel", pel);
-
+		//request.setAttribute("funDelDia",dias);
 		request.setAttribute("listafunciones", funciones);
 		request.getRequestDispatcher("WEB-INF/Funcion/FunManagement.jsp").forward(request, response);
 	}
-
+		
+		
 }
 
 
