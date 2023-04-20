@@ -87,15 +87,17 @@
                             <p class="infopelicula"> <b>Duracion : </b><%=(int)pel.getDuracion() %> min</p> 
                            
                             <form class="infopelicula" action="Funciones" method="post">
-                        <!-- ACA SE ELIGE LA FECHA EN LA QUE QUIERO CONSULTAR LAS FUNCIONES  
+                        <!-- ACA SE ELIGE LA FECHA EN LA QUE QUIERO CONSULTAR LAS FUNCIONES --> 
                         	 < </select>
 						     <label>Elegir Fecha:</label>
 						    		<select name="elegirFecha" required="required">
 						        		<% for (Funcion f: listafun){ %>
-						        			<%String fecha= (f.getFecha_hora().toString().split("T")[0]); %>
-						        				<option value="<%=f.getFecha_hora()%>" selected="selected"><%=fecha %></option>
+						        			<% if (f.getCodigo_pelicula() == pel.getCodigo()){ %>
+						        				<%String fecha= (f.getFecha_hora().toString().split("T")[0]); %>
+						        					<option value="<%=f.getFecha_hora()%>" selected="selected"><%=fecha %></option>
 						            		<% } %>
-						    		</select> -->	
+						            	<% } %>
+						    		</select> 	
                             <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
                             <button class="buttonClass" id="">  Comprar   </button>
                             </form>

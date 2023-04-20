@@ -257,7 +257,7 @@ public class DataFuncion {
 			}
 		}
 	}
-	/* CONSULTA A LA BASE Y SE TRAE LOS DEL DIA PEDIDO
+	/* CONSULTA A LA BASE Y SE TRAE LOS DEL DIA PEDIDO*/
 	public LinkedList<Funcion> buscarPorFecha(Funcion f,LocalDateTime fecha) {
 		ResultSet rs = null;
 		PreparedStatement stmt=null;
@@ -292,5 +292,5 @@ public class DataFuncion {
 		}
 		
 		return fun;
-	}*/
+	}
 }
