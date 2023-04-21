@@ -9,6 +9,7 @@
 <%@page import="logic.LogicCalificacion" %>
 <%@page import="logic.LogicFuncion" %>
 <%@page import="java.time.format.TextStyle" %>
+<%@page import="java.time.ZoneId" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/Estilo.jsp" %>
@@ -28,7 +29,7 @@
 		LogicFuncion lf = new LogicFuncion();
 		LinkedList <Funcion> listafun= lf.listar();
 		
-		Month mes = LocalDate.now().getMonth(); //obtengo el mes
+		Month mes = LocalDate.now(ZoneId.of("America/Argentina/Buenos_Aires")).getMonth(); //obtengo el mes
 		String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();  // convierto a mayusculas
 		LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("listapeliculas");
 		LogicCalificacion lc = new LogicCalificacion();

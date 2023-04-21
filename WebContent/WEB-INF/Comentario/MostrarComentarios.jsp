@@ -88,8 +88,7 @@
           <%} %>
     </div>
 </form>
-		
-		
+	
 			<!-- Contenedor Principal -->
     		<div class="comments-container">
         <ul id="comments-list" class="comments-list">
@@ -101,8 +100,6 @@
         LocalDateTime fechahorafuncion = com.getFecha_hora();
         String fechayhora = FORMATTER1.format(fechahorafuncion);    	
     	%>
-    			<!--<form action="MostrarAsientos" method="get"> -->
-    			
             	<li>
                 <div class="comment-main-level">
                     <!-- Avatar -->
@@ -119,10 +116,6 @@
                     </div>
                 </div> 
                 <li>
-                
-				
-				
-                <!--</form> -->
 	   <%} %>
 	   
 </ul>

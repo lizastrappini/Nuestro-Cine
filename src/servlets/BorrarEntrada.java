@@ -40,9 +40,7 @@ public class BorrarEntrada extends HttpServlet {
 		LogicEntrada le = new LogicEntrada();
 			
 		Integer idEntrada = Integer.parseInt(request.getParameter("identrada"));
-		Integer codpeli = Integer.parseInt(request.getParameter("codpelicula"));
 		Entrada entradaEncontrada = le.buscarPorId(idEntrada);
-		//entradaEncontrada.setCod_pelicula(codpeli);
 		le.borrar(entradaEncontrada);
 		request.setAttribute("borrada", "borrada");
 		request.getRequestDispatcher("MiCuenta.jsp").forward(request, response);

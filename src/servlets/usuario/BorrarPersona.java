@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entities.Persona;
 import logic.Login;
@@ -39,9 +40,11 @@ public class BorrarPersona extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Persona user = (Persona)request.getSession().getAttribute("usuario");
+		HttpSession sesion = request.getSession(true);
 		Login lp = new Login();
 		String password = lp.obtenerPass(user);
 		if(request.getParameter("pass").toString().equals(password)) {
+			sesion.invalidate();
 			lp.borrar(user);
 			
 			//Redirecciono a index.jsp

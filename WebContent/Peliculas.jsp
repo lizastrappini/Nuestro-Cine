@@ -21,7 +21,6 @@
 		
 		LogicCalificacion lc = new LogicCalificacion();
 		LinkedList<Calificacion> listaCalif = lc.getAll();
-		//LinkedList<Genero> gen=(LinkedList<Genero>)request.getAttribute("peliculas");
 	%>
 </head>
 <body>

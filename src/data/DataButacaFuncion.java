@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
-
 import entities.ButacaFuncion;
 import entities.Funcion;
 import entities.Sala;

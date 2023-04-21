@@ -4,21 +4,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.LinkedList;
-
-import entities.Pelicula;
 import entities.Persona;
-
-
-
 
 public class DataPersona {
 	
 	
 	public String buscaNombre (Persona per) {
-		//Persona p=null;
 		String n = null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -28,7 +20,7 @@ public class DataPersona {
 					);
 			stmt.setString(1, per.getDni());
 			rs=stmt.executeQuery();
-			if(rs!=null /*&& rs.next()*/) { 
+			if(rs!=null) { 
 				n=(rs.getString("nombre"));
 
 			}
@@ -208,8 +200,7 @@ public class DataPersona {
 			if(rs!=null && rs.next()) {
 					
 					d = rs.getString("dni");
-					//System.out.println(p);
-					
+
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -238,7 +229,7 @@ public class DataPersona {
 			if(rs!=null && rs.next()) {
 					
 					d = rs.getString("email");
-					//System.out.println(p);
+
 					
 			}
 		} catch (SQLException e){
@@ -267,7 +258,7 @@ public class DataPersona {
 			
 			if(rs!=null && rs.next()) {
 					p=rs.getString("password");
-					//System.out.println(p);
+
 
 					
 			}

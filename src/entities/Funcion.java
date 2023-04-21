@@ -76,7 +76,7 @@ public class Funcion {
 	}
 	
 	public String formatearFecha(LocalDateTime fecha) {
-		DateTimeFormatter esDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
+		DateTimeFormatter esDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		String nuevaFecha = fecha.format(esDateFormat);
 		return nuevaFecha;
 	}
