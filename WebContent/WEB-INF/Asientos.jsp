@@ -6,6 +6,7 @@
 <%@page import="entities.ButacaFuncion" %>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.time.LocalDateTime" %>
+<%@page import="java.util.Locale" %>
 <%@page import="java.time.*" %>
 <%@page import="java.time.format.DateTimeFormatter" %>
 <%@page import="java.time.format.FormatStyle" %>
@@ -29,6 +30,8 @@
     Pelicula peli = (Pelicula)request.getAttribute("peli");
     Double costo = Double.parseDouble(request.getAttribute("costo").toString());
     LocalDateTime fechahora = (LocalDateTime)request.getAttribute("fechafuncion");
+    Locale locale = new Locale ( "es" , "ES" );
+    FORMATTER1 = FORMATTER1.withLocale ( locale );
     String fecha = FORMATTER1.format(fechahora);
     String hora = FORMATTER2.format(fechahora);
     
