@@ -59,6 +59,8 @@
         DateTimeFormatter FORMATTER1 = DateTimeFormatter.ofPattern("EEEE,dd 'de' MMMM ");
         DateTimeFormatter FORMATTER2 = DateTimeFormatter.ofPattern("h:mm a");
         LocalDateTime fechahora = fun.getFecha_hora();
+        Locale locale = new Locale ( "es" , "ES" );
+        FORMATTER1 = FORMATTER1.withLocale ( locale );
         String fecha = FORMATTER1.format(fechahora);
         String hora = FORMATTER2.format(fechahora); %>
     						<form action="MostrarAsientos" method="get">
