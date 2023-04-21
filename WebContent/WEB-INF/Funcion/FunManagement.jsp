@@ -27,21 +27,13 @@
 	<title>Funciones</title>
 <% 
 
-	//LinkedList<String> funDelDia=(LinkedList<String>)request.getAttribute("funDelDia");
-
 	Persona per = (Persona)request.getSession().getAttribute("usuario");
-	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");
-	System.out.println(lf);
+	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");	
 	Pelicula p  = (Pelicula)request.getAttribute("pel");
 	Month mes = LocalDate.now().getMonth(); //obtengo el mes
 	String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();
 	LogicEntrada le = new LogicEntrada();
-	
-	/* NO DEBERIA NECESITAR ESTO, ERA CUANDO BUSCABA LOS DIAS SIN RECURRIR A LA BASE
-	LinkedList<Funcion> listfun= new LinkedList<Funcion>();
-	for(Funcion f: lf) for (String dia: funDelDia) { if (dia==f.getFecha_hora().toString().split(" ")[0])
-		listfun.add(f);
-	}*/
+
 %>
 </head>
 <body>
@@ -53,7 +45,6 @@
 <br>
 <div class="contenedor">
 	<% for (Funcion fun : lf){ %>	  
-	<!--< % for (Funcion fun : listafun){ % >	-->
 	   <%
        LogicSala ls = new LogicSala();
        Sala s = new Sala();
@@ -94,7 +85,6 @@
 	<%} %>
 </div>
 	<% if (lf.isEmpty()){%>
-	<!-- < % if (listfun.isEmpty()){%> -->
 	<script type="text/javascript">
 	Swal.fire({
 		  imageUrl: 'https://images.emojiterra.com/twitter/v13.1/512px/2639.png',

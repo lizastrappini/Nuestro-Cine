@@ -25,7 +25,6 @@
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script src="Javascript/Script.js"></script>
 		<% 
-		//LocalDateTime fecha_hora;
 		LogicFuncion lf = new LogicFuncion();
 		LinkedList <Funcion> listafun= lf.listar();
 		
@@ -88,7 +87,7 @@
                            
                             <form class="infopelicula" action="Funciones" method="post">
                         <!-- ACA SE ELIGE LA FECHA EN LA QUE QUIERO CONSULTAR LAS FUNCIONES --> 
-                        	 < </select>
+                        	 
 						     <label> Elegir Fecha:</label>
 						    		<select name="elegirFecha" required="required">
 						        		<% for (Funcion f: listafun){ %>

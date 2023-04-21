@@ -6,6 +6,8 @@
 <%@page import="entities.Sala" %>
 <%@page import="java.util.LinkedList"%>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +18,6 @@
 	Funcion funcionActual = (Funcion)request.getAttribute("funcionActual");
 
 	Pelicula pelActual = (Pelicula)request.getAttribute("pelActual");
-
 	LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("peliculas");
 	LinkedList<Sala> ls=(LinkedList<Sala>)request.getAttribute("salas");	 
 	%>
@@ -71,7 +72,7 @@
         	<div class="alert alert-warning">La fecha no puede ser menor al dia de hoy</div>
         <%}%>
     	<input id="inputFechaHora" name="fechahora" class="form-control" 
-    		placeholder="fechahora" required type="text" value="<%= funcionActual.getFecha_hora() %>">
+    		placeholder="fechahora" required type="text" value="<%=funcionActual.formatearFecha(funcionActual.getFecha_hora())%>">
     	<br>
     	<input type="hidden" name="codigoPelAct" value="<%=funcionActual.getCodigo_pelicula()%>">
     	<input type="hidden" name="numSalaAct" value="<%=funcionActual.getNumero_sala()%>">

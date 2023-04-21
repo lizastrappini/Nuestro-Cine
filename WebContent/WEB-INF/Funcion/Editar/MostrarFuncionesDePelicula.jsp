@@ -25,7 +25,7 @@
 		<% for (Funcion fun : lf){ %>
 			<div class="pelicula">
     			<form action="ActualizarFuncion" method="post">
-            		<p class="infopelicula" id="fechahora" ><b>Fecha y hora de la funcion:</b> <%=fun.getFecha_hora() %></p>
+            		<p class="infopelicula" id="fechahora" ><b>Fecha y hora de la funcion:</b> <%=fun.formatearFecha(fun.getFecha_hora()) %></p>
                 	<input type="hidden" name="fechaHoraAct" value="<%=fun.getFecha_hora() %>">
                 	<p class="infopelicula" id="numerosala"><b>Sala n°:</b>  <%=fun.getNumero_sala()%></p>
                 	<input type="hidden" name="numSalaAct" value="<%= fun.getNumero_sala() %>">

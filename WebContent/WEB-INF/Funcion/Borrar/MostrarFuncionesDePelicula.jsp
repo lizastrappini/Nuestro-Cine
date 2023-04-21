@@ -30,7 +30,7 @@
 	<% for (Funcion fun : lf){ %>
         <div class="funcion">
     		<form action="BorrarFuncion" method="post">
-            	<p class="infopelicula" id="fechahora" ><b>Fecha y hora de la funcion:</b> <%=fun.getFecha_hora() %></p>
+            	<p class="infopelicula" id="fechahora" ><b>Fecha y hora de la funcion:</b> <%=fun.formatearFecha(fun.getFecha_hora()) %></p>
             	<input type="hidden" name="fechahora" value="<%=fun.getFecha_hora() %>">
             	<p class="infopelicula" id="numerosala"><b>Sala n°:</b>  <%=fun.getNumero_sala()%></p>
             	<input type="hidden" name="nrosala" value="<%= fun.getNumero_sala() %>">
