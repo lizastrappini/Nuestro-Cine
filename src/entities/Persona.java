@@ -54,16 +54,17 @@ public class Persona {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	@Override
-	public String toString() {
-		return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
-				+ ", password=" + password + ", edad=" + edad + ", telefono=" + telefono + "]";
-	}
 	public Integer getHabilitado() {
 		return habilitado;
 	}
 	public void setHabilitado(Integer habilitado) {
 		this.habilitado = habilitado;
 	}
+	@Override
+	public String toString() {
+		return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+				+ ", password=" + password + ", edad=" + edad + ", telefono=" + telefono + "]";
+	}
+	
 	
 }

@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>---INICIAR SESION---</title>
         <link href="style/css/styles.css" rel="stylesheet" />
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 		
 </head>
 

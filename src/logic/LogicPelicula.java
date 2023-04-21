@@ -17,12 +17,12 @@ public class LogicPelicula {
 		return dpel.listarPeliculas();
 	}	
 	
-	public LinkedList<Pelicula> buscarPorGenero(Integer cod) {
-		return dpel.buscarPorGenero(cod);
+	public LinkedList<Pelicula> buscarPorGenero(Integer id_genero) {
+		return dpel.buscarPorGenero(id_genero);
 	}	
 	
-	public LinkedList<Pelicula> buscarPorEdad(Integer genero) {
-		return dpel.buscarPorEdad(genero);
+	public LinkedList<Pelicula> buscarPorEdad(Integer edad) {
+		return dpel.buscarPorEdad(edad);
 	}	
 	
 	public LinkedList<Pelicula> buscar(String nombre) {
