@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import data.DataComentario;
 import entities.Comentario;
 import entities.Pelicula;
+import logic.LogicComentario;
 import logic.LogicPelicula;
 
 /**
@@ -36,14 +37,13 @@ public class MostrarComentarios extends HttpServlet {
 		
 		Integer cod=Integer.parseInt(request.getParameter("codigo"));
 		Comentario com = new Comentario();
+		LogicComentario lcom = new LogicComentario();
 
 		Pelicula pel = new Pelicula();
 		LogicPelicula lp = new LogicPelicula();
 		
 		com.setCodigo_pel(cod);
-		DataComentario dc= new DataComentario();
-		
-		LinkedList<Comentario> comentarios = dc.buscarComentarioPorPeli(com);
+		LinkedList<Comentario> comentarios = lcom.buscarComentarioPorPeli(com);
 		
 		pel = lp.buscarPorCodigo(cod);
 		request.setAttribute("pel", pel);

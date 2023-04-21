@@ -62,7 +62,7 @@ public class DataFuncion {
 		LinkedList<Funcion>funciones= new LinkedList<>();
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("Select codigo_pelicula, fecha_hora, numero_sala from funcion");
+			rs= stmt.executeQuery("Select codigo_pelicula, fecha_hora, numero_sala from funcion where date(fecha_hora)>=current_date() group by (date(fecha_hora))");
 			if (rs !=null) {
 				while (rs.next()) {
 					Funcion f = new Funcion();
@@ -256,5 +256,40 @@ public class DataFuncion {
 				e.printStackTrace();
 			}
 		}
+	}
+	/* CONSULTA A LA BASE Y SE TRAE LAS FUNCIONES DEL DIA PEDIDO*/
+	public LinkedList<Funcion> buscarPorFecha(Funcion f,LocalDateTime fecha) {
+		ResultSet rs = null;
+		PreparedStatement stmt=null;
+		LinkedList<Funcion> fun = new LinkedList<Funcion>();
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select * from funcion where codigo_pelicula = ? and date(fecha_hora) = date(?)");
+			stmt.setInt(1, f.getCodigo_pelicula());
+			stmt.setObject(2, fecha);
+			
+			rs = stmt.executeQuery();
+			
+			if(rs != null ) {
+				while(rs.next()) {
+				Funcion funf = new Funcion();
+				funf.setCodigo_pelicula(rs.getInt("codigo_pelicula"));
+				funf.setNumero_sala(rs.getInt("numero_sala"));
+				funf.setFecha_hora(rs.getObject("fecha_hora", LocalDateTime.class));
+				fun.add(funf);
+			}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rs!= null ) {rs.close();}
+				if(stmt != null ) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return fun;
 	}
 }

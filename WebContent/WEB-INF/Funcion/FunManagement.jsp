@@ -26,12 +26,14 @@
 	<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Lato&display=swap" rel="stylesheet">
 	<title>Funciones</title>
 <% 
+
 	Persona per = (Persona)request.getSession().getAttribute("usuario");
-	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");
+	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");	
 	Pelicula p  = (Pelicula)request.getAttribute("pel");
 	Month mes = LocalDate.now().getMonth(); //obtengo el mes
 	String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();
 	LogicEntrada le = new LogicEntrada();
+
 %>
 </head>
 <body>

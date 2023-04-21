@@ -24,7 +24,7 @@ public class Funcion {
 	}
 	public LocalDateTime getFecha_hora() {
 		return fecha_hora;
-	}
+	}	
 	public void setFecha_hora(LocalDateTime fecha_hora) {
 		this.fecha_hora = fecha_hora;
 	}
@@ -54,7 +54,7 @@ public class Funcion {
 				LocalDateTime fh_inicio1 = fun.getFecha_hora();
 				pel = lp.buscarPorCodigo(fun.getCodigo_pelicula());
 				LocalDateTime fh_fin1 = fun.getFecha_hora().plusMinutes((long)pel.getDuracion());
-				
+				 
 				LocalDateTime fh_inicio2 = f.getFecha_hora();
 				pel = lp.buscarPorCodigo(f.getCodigo_pelicula());
 				LocalDateTime fh_fin2 = f.getFecha_hora().plusMinutes((long)pel.getDuracion());
@@ -73,6 +73,12 @@ public class Funcion {
 		}
 
 		return true;
+	}
+	
+	public String formatearFecha(LocalDateTime fecha) {
+		DateTimeFormatter esDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
+		String nuevaFecha = fecha.format(esDateFormat);
+		return nuevaFecha;
 	}
 }
 

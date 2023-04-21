@@ -2,6 +2,8 @@ package logic;
 
 import data.DataFuncion;
 import entities.Funcion;
+
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class LogicFuncion {
@@ -28,5 +30,10 @@ private DataFuncion df;
 	}
 	public LinkedList<Funcion> buscarFuncionesPorPeli(Funcion fun){
 		return df.buscarFuncionPorPeli(fun);
+	}
+
+	public LinkedList<Funcion> buscarFuncionPorfecha(Funcion f, LocalDateTime fecha) {
+		return df.buscarPorFecha(f,fecha);
+		
 	}
 }

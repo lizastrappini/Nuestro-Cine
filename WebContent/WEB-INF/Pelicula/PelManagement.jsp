@@ -1,4 +1,5 @@
 <%@page import="entities.Pelicula"%>
+<%@page import="entities.Funcion"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.time.LocalDate" %>
 <%@page import="java.time.Month" %>
@@ -6,6 +7,7 @@
 <%@page import="entities.Persona" %>
 <%@page import="entities.Calificacion" %>
 <%@page import="logic.LogicCalificacion" %>
+<%@page import="logic.LogicFuncion" %>
 <%@page import="java.time.format.TextStyle" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -23,7 +25,9 @@
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script src="Javascript/Script.js"></script>
 		<% 
-		 
+		LogicFuncion lf = new LogicFuncion();
+		LinkedList <Funcion> listafun= lf.listar();
+		
 		Month mes = LocalDate.now().getMonth(); //obtengo el mes
 		String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();  // convierto a mayusculas
 		LinkedList<Pelicula> lp=(LinkedList<Pelicula>)request.getAttribute("listapeliculas");
@@ -80,8 +84,19 @@
                             c=  lc.buscarPorCodigo(pel.getCodigo_calificacion());%>
                             <p class="infopelicula"> <b>Calificacion : </b><%=c.getDescripcion()%></p>
                             <p class="infopelicula"> <b>Duracion : </b><%=(int)pel.getDuracion() %> min</p> 
-                            
+                           
                             <form class="infopelicula" action="Funciones" method="post">
+                        <!-- ACA SE ELIGE LA FECHA EN LA QUE QUIERO CONSULTAR LAS FUNCIONES --> 
+                        	 
+						     <label> Elegir Fecha:</label>
+						    		<select name="elegirFecha" required="required">
+						        		<% for (Funcion f: listafun){ %>
+						        			<% if (f.getCodigo_pelicula() == pel.getCodigo()){ %>
+						        				<%String fecha= (f.getFecha_hora().toString().split("T")[0]); %>
+						        					<option value="<%= f.getFecha_hora() %>" selected="selected"><%=fecha %></option>
+						            		<% } %>
+						            	<% } %>
+						    		</select> 	
                             <input type="hidden" name="codigo" value="<%= pel.getCodigo() %>">
                             <button class="buttonClass" id="">  Comprar   </button>
                             </form>

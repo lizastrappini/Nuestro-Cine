@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import entities.Entrada;
 import entities.Funcion;
 import entities.ButacaFuncion;
-import entities.Calificacion;
 
 public class DataEntrada {
 	
