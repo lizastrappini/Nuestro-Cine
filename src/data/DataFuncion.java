@@ -62,7 +62,7 @@ public class DataFuncion {
 		LinkedList<Funcion>funciones= new LinkedList<>();
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("Select codigo_pelicula, fecha_hora, numero_sala from funcion where fecha_hora>=current_timestamp() group by (date(fecha_hora))");
+			rs= stmt.executeQuery("Select distinct codigo_pelicula, fecha_hora, numero_sala from funcion where fecha_hora>=current_timestamp() group by date(fecha_hora),codigo_pelicula");
 			if (rs !=null) {
 				while (rs.next()) {
 					Funcion f = new Funcion();
@@ -70,6 +70,9 @@ public class DataFuncion {
 					f.setFecha_hora(rs.getObject("fecha_hora", LocalDateTime.class));
 					f.setNumero_sala(rs.getInt("numero_sala"));
 					funciones.add(f);
+					System.out.println(f);
+					System.out.println('\n');
+					System.out.println(funciones.size());
 				}
 			}
 		} catch(SQLException e) {
