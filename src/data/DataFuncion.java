@@ -257,12 +257,12 @@ public class DataFuncion {
 			}
 		}
 	}
-	/* CONSULTA A LA BASE Y SE TRAE LOS DEL DIA PEDIDO*/
+	/* CONSULTA A LA BASE Y SE TRAE LAS FUNCIONES DEL DIA PEDIDO*/
 	public LinkedList<Funcion> buscarPorFecha(Funcion f,LocalDateTime fecha) {
 		ResultSet rs = null;
 		PreparedStatement stmt=null;
 		LinkedList<Funcion> fun = new LinkedList<Funcion>();
-		
+		System.out.println(fecha);
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"select * from funcion where codigo_pelicula = ? and day(fecha_hora) = day(?)");
@@ -290,7 +290,7 @@ public class DataFuncion {
 				e.printStackTrace();
 			}
 		}
-		
+		System.out.println(fun);
 		return fun;
 	}
 }

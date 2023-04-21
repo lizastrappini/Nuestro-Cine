@@ -31,6 +31,7 @@
 
 	Persona per = (Persona)request.getSession().getAttribute("usuario");
 	LinkedList<Funcion> lf=(LinkedList<Funcion>)request.getAttribute("listafunciones");
+	System.out.println(lf);
 	Pelicula p  = (Pelicula)request.getAttribute("pel");
 	Month mes = LocalDate.now().getMonth(); //obtengo el mes
 	String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase();

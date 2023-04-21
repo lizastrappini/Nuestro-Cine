@@ -47,8 +47,7 @@ public class Funciones extends HttpServlet {
 		System.out.println(fechaTraida);
 		LocalDateTime fecha= LocalDateTime.parse(fechaTraida);
 		
-		//LinkedList<String> dias= new LinkedList<String>();
-		System.out.println(fecha); 
+		//LinkedList<String> dias= new LinkedList<String>(); 
 		Integer cod=Integer.parseInt(request.getParameter("codigo"));
 		LogicFuncion lf= new LogicFuncion();
 		Funcion fun = new Funcion();
@@ -61,8 +60,7 @@ public class Funciones extends HttpServlet {
 		/* RECORRE LAS FUNCIONES QUE SE TRAJO CON EL CODIGO DE LA PELICULA PARA SELECCIONAR LAS DEL DIA*/
 
 		LinkedList<Funcion> funciones= lf.buscarFuncionPorfecha(fun,fecha);
-		System.out.println(fecha);
-	
+		
 		pel = lp.buscarPorCodigo(cod);
 		request.setAttribute("pel", pel);
 		//request.setAttribute("funDelDia",dias);
