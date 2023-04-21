@@ -73,8 +73,8 @@ public class IniciarSesion extends HttpServlet {
 			request.getRequestDispatcher("SignIn.jsp").forward(request, response);
 		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			request.setAttribute("mensaje", e.getMessage());
+			String mensaje ="noencontrado";
+			request.setAttribute("mensaje", mensaje);
 			request.getRequestDispatcher("SignIn.jsp").forward(request, response);
 			
 			
