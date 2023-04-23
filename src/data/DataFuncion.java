@@ -70,9 +70,6 @@ public class DataFuncion {
 					f.setFecha_hora(rs.getObject("fecha_hora", LocalDateTime.class));
 					f.setNumero_sala(rs.getInt("numero_sala"));
 					funciones.add(f);
-					System.out.println(f);
-					System.out.println('\n');
-					System.out.println(funciones.size());
 				}
 			}
 		} catch(SQLException e) {

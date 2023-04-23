@@ -43,22 +43,34 @@ public class Funciones extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String fechaTraida=request.getParameter("elegirFecha").toString();
-		LocalDateTime fecha= LocalDateTime.parse(fechaTraida);
-		Integer cod=Integer.parseInt(request.getParameter("codigo"));
 		LogicFuncion lf= new LogicFuncion();
 		Funcion fun = new Funcion();
 		Pelicula pel = new Pelicula();
 		LogicPelicula lp = new LogicPelicula();
+		Integer cod=Integer.parseInt(request.getParameter("codigo"));
+		fun.setCodigo_pelicula(cod);  
+		pel = lp.buscarPorCodigo(cod);
 		
-		fun.setCodigo_pelicula(cod);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+		if(request.getParameter("elegirFecha")!=(null)) {
+		String fechaTraida=request.getParameter("elegirFecha").toString();
+		LocalDateTime fecha= LocalDateTime.parse(fechaTraida);
+		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 		
 		/* RECORRE LAS FUNCIONES QUE SE TRAJO CON EL CODIGO DE LA PELICULA PARA SELECCIONAR LAS DEL DIA*/
 		LinkedList<Funcion> funciones= lf.buscarFuncionPorfecha(fun,fecha);		
-		pel = lp.buscarPorCodigo(cod);
+		
 		request.setAttribute("pel", pel);
 		request.setAttribute("listafunciones", funciones);
 		request.getRequestDispatcher("WEB-INF/Funcion/FunManagement.jsp").forward(request, response);
+		
+	} else {
+
+		LinkedList<Funcion> funciones = lf.buscarFuncionesPorPeli(fun);
+		
+		request.setAttribute("pel", pel);
+		request.setAttribute("listafunciones", funciones);
+		request.getRequestDispatcher("WEB-INF/Funcion/FunManagement.jsp").forward(request, response);
+	}
 	}
 		
 		
